@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+.venv/
+
+# Environment Variables
+.env
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Python packaging
+*.egg-info/
+
+# Static build files
+staticfiles/
+
+# Media (only if stored locally)
+media/
+
+# Logs
+*.log
+
+# Database (if SQLite is ever used)
+db.sqlite3
