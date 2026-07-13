@@ -29,3 +29,6 @@ media/
 
 # Database (if SQLite is ever used)
 db.sqlite3
+
+# VS Code Local History
+.history/
