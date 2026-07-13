@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Oliverde — Property Management Services{% endblock %}</title>
+<meta name="description" content="{% block meta_description %}Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.{% endblock %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+{% include "includes/nav.html" %}
+{% block content %}{% endblock %}
+{% include "includes/footer.html" %}
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
