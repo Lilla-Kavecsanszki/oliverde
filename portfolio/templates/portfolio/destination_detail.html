@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ destination.name }} — Oliverde{% endblock %}
+
+{% block content %}
+<section class="dest-hero">
+  {% if destination.cover_image %}
+    <img class="ph" src="{{ destination.cover_image.url }}" alt="{{ destination.name }}">
+  {% endif %}
+  <div class="dest-hero-content wrap">
+    <a class="textlink-dark" href="{% url 'portfolio:list' %}">&larr; Back to Portfolio</a>
+    <p class="eyebrow" style="margin-top:18px;">Tuscany</p>
+    <h1 class="serif">{{ destination.name }}</h1>
+    <p class="dest-hero-text">{{ destination.tagline|default:destination.description }}</p>
+  </div>
+</section>
+
+<section class="properties">
+  <div class="wrap">
+    <div class="prop-head reveal">
+      <h2 class="serif">Homes in {{ destination.name }}</h2>
+    </div>
+    <div class="dest-prop-grid reveal">
+      {% for property in properties %}
+        <a href="{{ property.get_absolute_url }}" class="dest-prop-card">
+          <img class="ph" src="{{ property.cover_image.url }}" alt="{{ property.title }}">
+          <p class="eyebrow" style="margin-top:16px;">{{ property.get_property_type_display }}</p>
+          <h3 class="serif">{{ property.title }}</h3>
+          <span class="textlink">View property &rarr;</span>
+        </a>
+      {% empty %}
+        <p>No properties in this destination yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if testimonial %}
+<section class="intro">
+  <div class="wrap">
+    <blockquote class="serif" style="font-size:22px; font-style:italic; max-width:600px; margin:0 auto; text-align:center;">
+      "{{ testimonial.quote }}"
+      <footer style="font-family:'Inter',sans-serif; font-size:12px; margin-top:16px; text-transform:uppercase; letter-spacing:0.08em; color:var(--taupe);">
+        — {{ testimonial.author_name }}
+      </footer>
+    </blockquote>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

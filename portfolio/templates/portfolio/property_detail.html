@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ property.title }} — Oliverde{% endblock %}
+
+{% block content %}
+<section class="property-detail">
+  <div class="wrap" style="padding-top:140px;">
+    <a class="textlink" href="{{ property.destination.get_absolute_url }}">&larr; Back to {{ property.destination.name }}</a>
+
+    <div class="property-header reveal">
+      <img class="prop-hero-img" src="{{ property.cover_image.url }}" alt="{{ property.title }}">
+      <div>
+        <h1 class="serif">{{ property.title }}</h1>
+        <p class="eyebrow" style="margin-top:8px;">{{ property.destination.name }}, Tuscany</p>
+        <p style="margin-top:18px; color:var(--taupe); line-height:1.8;">{{ property.description }}</p>
+
+        <div class="property-facts">
+          {% if property.bedrooms %}<div><span class="num serif">{{ property.bedrooms }}</span><span class="label">Bedrooms</span></div>{% endif %}
+          {% if property.bathrooms %}<div><span class="num serif">{{ property.bathrooms }}</span><span class="label">Bathrooms</span></div>{% endif %}
+          {% if property.sleeps %}<div><span class="num serif">{{ property.sleeps }}</span><span class="label">Sleeps</span></div>{% endif %}
+        </div>
+
+        <a class="btn btn-primary" href="#" style="margin-top:30px;">Enquire about this property</a>
+      </div>
+    </div>
+
+    {% if gallery %}
+    <div class="property-gallery reveal">
+      {% for img in gallery %}
+        <img src="{{ img.image.url }}" alt="{{ img.caption|default:property.title }}">
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if services %}
+<section class="services">
+  <div class="wrap">
+    <div class="services-head reveal">
+      <p class="eyebrow">Our management services</p>
+      <h2 class="serif">Comprehensive care for this property</h2>
+    </div>
+    <div class="services-grid reveal">
+      {% for service in services %}
+        <div class="service">
+          <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+          <h3 class="serif">{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if related_properties %}
+<section class="properties">
+  <div class="wrap">
+    <div class="prop-head reveal">
+      <h2 class="serif">You may also like</h2>
+    </div>
+    <div class="dest-prop-grid reveal">
+      {% for rp in related_properties %}
+        <a href="{{ rp.get_absolute_url }}" class="dest-prop-card">
+          <img class="ph" src="{{ rp.cover_image.url }}" alt="{{ rp.title }}">
+          <p class="eyebrow" style="margin-top:16px;">{{ rp.destination.name }}</p>
+          <h3 class="serif">{{ rp.title }}</h3>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Portfolio — Oliverde{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div class="wrap">
+    <p class="eyebrow reveal">Portfolio</p>
+    <h1 class="serif reveal">Exceptional Homes.<br>Curated with Care.</h1>
+    <p class="page-intro-text reveal">From the vineyards of Montepulciano to the hills surrounding Cortona and Lake Trasimeno, discover a collection of exceptional homes we are privileged to care for.</p>
+  </div>
+</section>
+
+<section class="destinations">
+  <div class="wrap">
+    <h2 class="serif reveal" style="margin-bottom:32px;">Browse by Destination</h2>
+    <div class="destination-grid reveal">
+      {% for destination in destinations %}
+        <a href="{{ destination.get_absolute_url }}" class="destination-card">
+          {% if destination.cover_image %}
+            <img class="ph" src="{{ destination.cover_image.url }}" alt="{{ destination.name }}">
+          {% else %}
+            <div class="ph" style="background:linear-gradient(150deg,#8d9a67 0%,#4c5730 100%);"></div>
+          {% endif %}
+          <div class="prop-tag"><div class="name serif">{{ destination.name }}</div></div>
+        </a>
+      {% empty %}
+        <p>No destinations yet — add some in the admin.</p>
+      {% endfor %}
+    </div>
+    <div style="text-align:center; margin-top:48px;">
+      <a class="btn btn-primary" href="{% url 'portfolio:all_properties' %}">View all properties</a>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="why-head reveal">
+      <h2 class="serif">Why owners choose Oliverde</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <p class="eyebrow" style="margin-bottom:8px;">Local expertise</p>
+        <p>Deep regional knowledge and trusted supplier relationships.</p>
+      </div>
+      <div class="why-item">
+        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <p class="eyebrow" style="margin-bottom:8px;">Personal service</p>
+        <p>Direct communication and tailored solutions.</p>
+      </div>
+      <div class="why-item">
+        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <p class="eyebrow" style="margin-bottom:8px;">Discretion &amp; trust</p>
+        <p>Your privacy and peace of mind are our priority.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
