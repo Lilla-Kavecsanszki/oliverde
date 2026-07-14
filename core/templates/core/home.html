@@ -76,11 +76,11 @@
   <div class="wrap">
     <div class="services-head reveal">
       <p class="eyebrow">How we care for your home</p>
-      <h2 class="serif">A dedicated team, four disciplines</h2>
+      <h2 class="serif">A dedicated team, every detail covered</h2>
     </div>
-    <div class="services-grid reveal">
-      {% for service in nav_services|slice:":4" %}
-        <a href="{% url 'services:list' %}#{{ service.slug }}" class="service">
+    <div class="services-grid property-services-grid reveal">
+      {% for service in nav_services %}
+        <a href="{{ service.get_absolute_url }}" class="service">
           <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
           <h3 class="serif">{{ service.title }}</h3>
           <p>{{ service.description|truncatewords:12 }}</p>

@@ -496,3 +496,98 @@ footer{background:var(--olive-900); color:rgba(255,255,255,0.7); padding:34px 0;
   .property-services-grid{grid-template-columns:1fr;}
   .property-services-grid .service{border-left:none !important;}
 }
+
+/* ---------- CONTACT HERO ---------- */
+.contact-hero{position:relative; height:56vh; min-height:420px; display:flex; align-items:center;}
+.contact-hero .ph{
+  position:absolute; inset:0;
+  background:linear-gradient(120deg, #3a3320 0%, #6b5b39 35%, #8f9a67 65%, #333c20 100%);
+}
+.contact-hero-overlay{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(20,24,12,0.55) 0%, rgba(20,24,12,0.25) 50%, rgba(20,24,12,0.65) 100%);
+}
+.contact-hero-content{position:relative; z-index:2; padding-top:60px;}
+.contact-hero h1{font-size:clamp(32px,4.5vw,54px); font-weight:400; color:#fff; line-height:1.12; margin-top:10px;}
+.contact-hero-text{max-width:440px; color:rgba(255,255,255,0.82); margin-top:18px; line-height:1.7;}
+
+/* ---------- CONTACT BODY / FORM LAYOUT ---------- */
+.contact-body{background:var(--cream); padding:0 0 120px;}
+.contact-grid{
+  display:grid; grid-template-columns:1.3fr 0.8fr; gap:0;
+  margin-top:-70px; position:relative; z-index:3;
+}
+.contact-form-card{
+  background:#fff; padding:56px 52px; box-shadow:0 30px 60px rgba(35,42,23,0.14);
+}
+.contact-info{
+  background:var(--olive-900); color:#fff; padding:56px 44px;
+  display:flex; flex-direction:column; gap:34px;
+}
+@media (max-width:900px){
+  .contact-grid{grid-template-columns:1fr; margin-top:-40px;}
+  .contact-form-card{padding:40px 28px;}
+  .contact-info{padding:40px 28px;}
+}
+
+/* ---------- FORM FIELDS (underline style) ---------- */
+.form-row{margin-bottom:28px;}
+.form-row-split{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+.form-row label{
+  display:block; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--taupe); margin-bottom:10px;
+}
+.form-row label .optional{text-transform:none; letter-spacing:0; color:var(--hairline);}
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row input[type="tel"],
+.form-row select,
+.form-row textarea{
+  width:100%; border:none; border-bottom:1px solid var(--hairline);
+  background:transparent; padding:10px 2px; font-family:'Inter',sans-serif; font-size:15px;
+  color:var(--charcoal); transition:border-color 0.25s ease;
+}
+.form-row select{appearance:none; -webkit-appearance:none; cursor:pointer;}
+.form-row textarea{resize:vertical; line-height:1.6;}
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus{outline:none; border-bottom-color:var(--rust);}
+.form-row input::placeholder, .form-row textarea::placeholder{color:#B8B2A3;}
+.form-error{font-size:12px; color:var(--rust); margin-top:6px;}
+.form-success{
+  background:var(--stone); color:var(--olive-900); padding:16px 20px; font-size:14px;
+  margin-bottom:28px; border-left:2px solid var(--rust);
+}
+@media (max-width:560px){ .form-row-split{grid-template-columns:1fr;} }
+
+/* ---------- CONTACT INFO PANEL ---------- */
+.contact-info-block .sprig path{stroke:var(--rust-soft);}
+.contact-info-block .eyebrow{color:rgba(255,255,255,0.55);}
+.contact-info-value{
+  font-family:'Cormorant Garamond',serif; font-size:19px; color:#fff; display:block; margin-top:2px;
+}
+a.contact-info-value:hover{color:var(--rust-soft);}
+.contact-response-note{
+  margin-top:auto; padding-top:20px; border-top:1px solid rgba(255,255,255,0.15);
+  font-size:12px; color:rgba(255,255,255,0.55); line-height:1.6;
+}
+
+/* ---------- SERVICE SUMMARY CARD (list page, links to detail page) ---------- */
+.service-block-link{display:grid; text-decoration:none; transition:opacity 0.25s ease;}
+.service-block-link:hover{opacity:0.72;}
+.service-block-link .textlink{
+  display:inline-block; margin-top:14px; font-size:12px;
+  border-bottom:1px solid var(--olive-900); padding-bottom:2px;
+}
+
+/* ---------- FIX 1: mobile nav needs to scroll if content exceeds viewport height ---------- */
+.mobile-nav{
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* ---------- FIX 2: property quick-facts row can overflow on narrow phones ---------- */
+.property-facts{
+  flex-wrap:wrap;
+  row-gap:20px;
+}

@@ -25,8 +25,12 @@ class Service(models.Model):
     description = models.TextField()
     icon = models.CharField(max_length=50, blank=True)
 
+    def get_absolute_url(self):
+        return reverse("services:detail", kwargs={"slug": self.slug})
+
     def __str__(self):
         return self.title
+
 
 class ServiceFeature(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="features")
@@ -38,6 +42,7 @@ class ServiceFeature(models.Model):
 
     def __str__(self):
         return self.text
+
 
 class Property(models.Model):
     PROPERTY_TYPES = [

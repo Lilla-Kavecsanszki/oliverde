@@ -20,12 +20,12 @@
         {% if nav_services %}
         <div class="submenu">
           {% for service in nav_services %}
-            <a href="{% url 'services:list' %}#{{ service.slug }}">{{ service.title }}</a>
+            <a href="{{ service.get_absolute_url }}">{{ service.title }}</a>
           {% endfor %}
         </div>
         {% endif %}
       </li>
-      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="#">About</a></li>
       <li><a href="#">Contact</a></li>
     </ul></nav>
 
@@ -59,16 +59,17 @@
       {% if nav_services %}
       <div class="mobile-submenu">
         {% for service in nav_services %}
-          <a href="{% url 'services:list' %}#{{ service.slug }}">{{ service.title }}</a>
+          <a href="{{ service.get_absolute_url }}">{{ service.title }}</a>
         {% endfor %}
       </div>
       {% endif %}
     </li>
-    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="#">About</a></li>
     <li><a href="#">Contact</a></li>
   </ul>
   <a class="btn btn-primary" href="#" style="margin-top:30px;">Schedule a consultation</a>
   <div class="mobile-social">
+    <a href="#">Instagram</a>
     <a href="#">LinkedIn</a>
   </div>
 </div>
