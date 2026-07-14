@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Services — Oliverde{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div class="wrap">
+    <p class="eyebrow reveal">Services</p>
+    <h1 class="serif reveal">Comprehensive Care for Your Home</h1>
+    <p class="page-intro-text reveal">Every property in our care benefits from the same dedicated team, across four disciplines.</p>
+  </div>
+</section>
+
+<section class="services-detail">
+  <div class="wrap">
+    {% for service in services %}
+      <div class="service-block reveal" id="{{ service.slug }}">
+        <div class="service-block-icon">
+          <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        </div>
+        <div>
+          <h2 class="serif">{{ service.title }}</h2>
+          <p class="service-block-desc">{{ service.description }}</p>
+          {% if service.features.all %}
+          <ul class="service-features">
+            {% for feature in service.features.all %}
+              <li>{{ feature.text }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <p>No services added yet — add some in the admin.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap cta-row">
+    <div>
+      <h2 class="serif">Let's discuss your property.</h2>
+      <p>Whether you live abroad or visit seasonally, we'll tailor a management solution for your home.</p>
+    </div>
+    <a class="btn btn-primary" href="#">Schedule a consultation</a>
+  </div>
+</section>
+{% endblock %}

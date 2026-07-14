@@ -28,6 +28,16 @@ class Service(models.Model):
     def __str__(self):
         return self.title
 
+class ServiceFeature(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="features")
+    text = models.CharField(max_length=150)
+    order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return self.text
 
 class Property(models.Model):
     PROPERTY_TYPES = [

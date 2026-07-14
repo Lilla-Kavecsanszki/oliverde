@@ -15,7 +15,16 @@
         </div>
         {% endif %}
       </li>
-      <li><a href="#">Services</a></li>
+      <li class="has-submenu">
+        <a href="{% url 'services:list' %}">Services</a>
+        {% if nav_services %}
+        <div class="submenu">
+          {% for service in nav_services %}
+            <a href="{% url 'services:list' %}#{{ service.slug }}">{{ service.title }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </li>
       <li><a href="#">About</a></li>
       <li><a href="#">Contact</a></li>
     </ul></nav>
@@ -45,7 +54,16 @@
       </div>
       {% endif %}
     </li>
-    <li><a href="#">Services</a></li>
+    <li class="mobile-has-submenu">
+      <button class="mobile-submenu-toggle">Services <span>+</span></button>
+      {% if nav_services %}
+      <div class="mobile-submenu">
+        {% for service in nav_services %}
+          <a href="{% url 'services:list' %}#{{ service.slug }}">{{ service.title }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </li>
     <li><a href="#">About</a></li>
     <li><a href="#">Contact</a></li>
   </ul>

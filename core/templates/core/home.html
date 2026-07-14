@@ -10,7 +10,7 @@
     <p>Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="#">Schedule a consultation</a>
-      <a class="textlink" href="#">View our portfolio</a>
+      <a class="textlink" href="{% url 'portfolio:list' %}">View our portfolio</a>
     </div>
   </div>
   <div class="scroll-cue"><div class="line"></div><span>Scroll</span></div>
@@ -44,6 +44,86 @@
         <p>Proactive care and expert oversight that preserves beauty and value.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="properties">
+  <div class="wrap">
+    <div class="prop-head reveal">
+      <div>
+        <p class="eyebrow">A selection under our care</p>
+        <h2 class="serif" style="margin-top:14px;">Exceptional properties, expertly managed</h2>
+      </div>
+      <a href="{% url 'portfolio:all_properties' %}">View all properties →</a>
+    </div>
+    <div class="prop-grid reveal">
+      {% for property in featured_properties %}
+        <div class="prop-card {% if forloop.first %}prop-large{% else %}prop-small{% endif %}" onclick="window.location='{{ property.get_absolute_url }}'" style="cursor:pointer;">
+          <img class="ph" src="{{ property.cover_image.url }}" alt="{{ property.title }}, {{ property.destination.name }}">
+          <div class="prop-tag">
+            <div class="name serif">{{ property.title }}</div>
+            <div class="loc">{{ property.destination.name }}</div>
+          </div>
+        </div>
+      {% empty %}
+        <p>No featured properties yet — mark some as "featured" in the admin.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="wrap">
+    <div class="services-head reveal">
+      <p class="eyebrow">How we care for your home</p>
+      <h2 class="serif">A dedicated team, four disciplines</h2>
+    </div>
+    <div class="services-grid reveal">
+      {% for service in nav_services|slice:":4" %}
+        <a href="{% url 'services:list' %}#{{ service.slug }}" class="service">
+          <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+          <h3 class="serif">{{ service.title }}</h3>
+          <p>{{ service.description|truncatewords:12 }}</p>
+        </a>
+      {% empty %}
+        <p>No services added yet — add some in the admin.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="founder">
+  <div class="wrap founder-grid">
+    <div class="founder-photo reveal">
+      <div class="frame"></div>
+      <div class="ph"></div>
+    </div>
+    <div class="founder-text reveal">
+      <p class="eyebrow">A personal commitment</p>
+      <div class="bigquote">"</div>
+      <h2 class="serif">I founded Oliverde on one simple belief: your home deserves the same care you would give it yourself.</h2>
+      <p>For nearly two decades, we've built lasting relationships with homeowners who trust us to protect what matters most.</p>
+      <div class="founder-sig">Oliver de Manussis<span>Founder</span></div>
+    </div>
+
+    {% if testimonials %}
+    <div class="testimonial-card reveal" id="testimonialCard">
+      <div class="testimonial-bigquote">"</div>
+      {% for t in testimonials %}
+        <div class="testimonial-slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
+          <p class="serif">{{ t.quote }}</p>
+          <span>— {{ t.author_name }}</span>
+        </div>
+      {% endfor %}
+      {% if testimonials|length > 1 %}
+      <div class="testimonial-dots">
+        {% for t in testimonials %}
+          <button class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}" aria-label="Show testimonial {{ forloop.counter }}"></button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
   </div>
 </section>
 
