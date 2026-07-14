@@ -26,6 +26,9 @@
           <img class="ph" src="{{ property.cover_image.url }}" alt="{{ property.title }}">
           <p class="eyebrow" style="margin-top:16px;">{{ property.get_property_type_display }}</p>
           <h3 class="serif">{{ property.title }}</h3>
+          {% if property.bedrooms %}
+            <p class="dest-prop-meta">{{ property.bedrooms }} Bedroom{{ property.bedrooms|pluralize }}</p>
+          {% endif %}
           <span class="textlink">View property &rarr;</span>
         </a>
       {% empty %}

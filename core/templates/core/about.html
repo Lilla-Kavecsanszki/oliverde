@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}About — Oliverde{% endblock %}
+
+{% block content %}
+
+<section class="about-hero">
+  <div class="wrap about-hero-grid">
+    <div class="reveal">
+      <p class="eyebrow">About Oliverde</p>
+      <h1 class="serif">A boutique property management company with deep local expertise and a personal approach.</h1>
+      <p class="about-hero-text">Founded in 2006, Oliverde was created on one simple belief: your home deserves exceptional care. We combine local knowledge, trusted relationships and a hands-on approach to deliver complete peace of mind for property owners.</p>
+      <a class="textlink" href="#team">Meet the team &rarr;</a>
+    </div>
+    <div class="about-hero-photo reveal">
+      <div class="ph"></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-row">
+    <div class="stat"><div class="num serif">19+</div><div class="label">Years of<br>experience</div></div>
+    <div class="stat"><div class="num serif">12+</div><div class="label">Dedicated<br>specialists</div></div>
+    <div class="stat"><div class="num serif">€25M+</div><div class="label">In property<br>value</div></div>
+    <div class="stat"><div class="num serif">100%</div><div class="label">Discretion</div></div>
+  </div>
+</section>
+
+<section class="about-story">
+  <div class="wrap about-story-grid">
+    <div class="about-story-photo reveal">
+      <div class="ph"></div>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">Local expertise, trusted relationships</p>
+      <h2 class="serif">Rooted in Tuscany, built on trust.</h2>
+      <p class="about-story-text">We live and work here. Our local knowledge and long-standing relationships with trusted suppliers — from restoration craftsmen to gardeners to reliable local staff — mean every property in our care is looked after by people we know and vouch for personally, not a rotating cast of subcontractors.</p>
+      <p class="about-story-text">For homeowners living abroad, that difference matters: it's the reason a small issue gets caught before it becomes a large one, and why the same faces greet you and your guests, visit after visit.</p>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="team">
+  <div class="wrap">
+    <div class="why-head reveal">
+      <p class="eyebrow" style="justify-content:center; display:flex; margin-bottom:14px;">Meet the team</p>
+      <h2 class="serif">A dedicated team behind every property</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <p class="eyebrow" style="margin-bottom:8px;">Oliver de Manussis</p>
+        <p>Founder &amp; Managing Director</p>
+      </div>
+      <div class="why-item">
+        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <p class="eyebrow" style="margin-bottom:8px;">Estate &amp; Guest Services</p>
+        <p>12 local specialists across Tuscany, Umbria and Lazio.</p>
+      </div>
+      <div class="why-item">
+        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <p class="eyebrow" style="margin-bottom:8px;">Trusted partners</p>
+        <p>A vetted network of craftsmen and suppliers, built over two decades.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap cta-row">
+    <div>
+      <h2 class="serif">Let's discuss your property.</h2>
+      <p>Whether you live abroad or visit seasonally, we'll tailor a management solution for your home.</p>
+    </div>
+    <a class="btn btn-primary" href="#">Schedule a consultation</a>
+  </div>
+</section>
+
+{% endblock %}

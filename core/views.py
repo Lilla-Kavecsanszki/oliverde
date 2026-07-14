@@ -14,3 +14,7 @@ class HomeView(TemplateView):
             featured_on_homepage=True
         )[:4]
         return context
+
+
+class AboutView(TemplateView):
+    template_name = "core/about.html"
