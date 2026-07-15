@@ -1,6 +1,6 @@
 <header>
   <div class="wrap navrow">
-    <div class="logo">OLIVERDE<span>Property Management Services</span></div>
+    <a href="{% url 'home' %}" class="logo">OLIVERDE<span>Property Management Services</span></a>
 
     <nav class="desktop-nav"><ul>
       <li><a href="{% url 'home' %}">Home</a></li>
@@ -25,12 +25,12 @@
         </div>
         {% endif %}
       </li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul></nav>
 
     <div class="navright">
-      <a class="btn btn-outline" href="#">Schedule a consultation</a>
+      <a class="btn btn-outline" href="{% url 'contact' %}">Schedule a consultation</a>
     </div>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
@@ -64,12 +64,11 @@
       </div>
       {% endif %}
     </li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
   </ul>
-  <a class="btn btn-primary" href="#" style="margin-top:30px;">Schedule a consultation</a>
+  <a class="btn btn-primary" href="{% url 'contact' %}" style="margin-top:30px;">Schedule a consultation</a>
   <div class="mobile-social">
-    <a href="#">Instagram</a>
     <a href="#">LinkedIn</a>
   </div>
 </div>

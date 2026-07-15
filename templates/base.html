@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,36 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+<!-- Favicons -->
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="{% static 'favicon/apple-touch-icon.png' %}"
+>
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="{% static 'favicon/favicon-32x32.png' %}"
+>
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="{% static 'favicon/favicon-16x16.png' %}"
+>
+
+<link
+  rel="manifest"
+  href="{% static 'favicon/site.webmanifest' %}"
+>
+
+<meta name="theme-color" content="#232A17">
+
+<meta name="theme-color" content="#232A17">
 </head>
 <body>
 {% include "includes/nav.html" %}
