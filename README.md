@@ -40,12 +40,14 @@ Oliverde is a bespoke property management website for a boutique company caring 
 
 The ideal client for this business is:
 
-- An international homeowner — typically based in the UK or elsewhere in Europe — who owns a property in Tuscany, Umbria, or Lazio but doesn't live there full-time
+- An international homeowner — typically based in the US, UK or elsewhere in Europe — who owns a property in Tuscany, Umbria, or Lazio but doesn't live there full-time
 - Someone who visits seasonally or a few times a year, rather than living on-site
 - Values discretion, personal relationships, and craftsmanship over the lowest price
 - Wants a single trusted point of contact rather than personally coordinating cleaners, gardeners, and contractors from abroad
 
 A full persona profile for this client (James Calloway) was developed separately using a design-thinking persona template, covering goals, pain points, and likes/dislikes in more detail.
+
+[Client Persona Profile](staticfiles/README_docs/oliverde_client_persona.pdf "client_persona")
 
 Visitors to the Oliverde website are seeking:
 
