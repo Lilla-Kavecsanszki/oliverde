@@ -1,6 +1,31 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Oliverde Property Management Services",
+  "legalName": "Oliverde Property Services di Manussis Oliver Beresford",
+  "description": "Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.",
+  "email": "hello@oliverde.com",
+  "telephone": "+39 0575 606086",
+  "vatID": "IT02366120513",
+  "areaServed": ["Tuscany", "Umbria", "Lazio"],
+  "url": "{{ site_url }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Loc. Santa Maria Nuova, Cs. 58",
+    "addressLocality": "Cortona",
+    "addressRegion": "AR",
+    "postalCode": "52044",
+    "addressCountry": "IT"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 
 <section class="hero">

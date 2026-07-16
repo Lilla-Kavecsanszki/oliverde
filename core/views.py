@@ -1,49 +1,74 @@
-from django.views.generic import TemplateView, FormView
 from django.contrib import messages
+from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views.generic import FormView, TemplateView
+
 from portfolio.models import Property, Testimonial
+
 from .forms import ContactForm
 
 
+def custom_404(request, exception):
+    """Render the custom 404 page."""
+    return render(request, "404.html", status=404)
+
+
+class RobotsView(TemplateView):
+    """Serves the site's robots.txt file."""
+
+    template_name = "robots.txt"
+    content_type = "text/plain"
+
+
 class HomeView(TemplateView):
+    """Homepage."""
+
     template_name = "core/home.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context["featured_properties"] = Property.objects.filter(
-            published=True, featured=True
+            published=True,
+            featured=True,
         )[:3]
+
         context["testimonials"] = Testimonial.objects.filter(
             featured_on_homepage=True
         )[:4]
+
         return context
 
 
 class AboutView(TemplateView):
+    """About page."""
+
     template_name = "core/about.html"
 
 
 class ContactView(FormView):
+    """Contact page."""
+
     template_name = "core/contact.html"
     form_class = ContactForm
     success_url = reverse_lazy("contact")
 
     def form_valid(self, form):
-        # TODO: wire up MailerSend here once API credentials are in .env.
-        # For now this validates and confirms — no email is actually sent yet.
-        #
-        # Example once MailerSend is configured:
-        # from mailersend import emails
-        # mailer = emails.NewEmail(os.environ.get("MAILERSEND_API_KEY"))
-        # mail_body = {}
-        # mailer.set_mail_from({"email": "hello@oliverde.com"}, mail_body)
-        # mailer.set_mail_to([{"email": "hello@oliverde.com"}], mail_body)
-        # mailer.set_subject(f"New enquiry from {form.cleaned_data['name']}", mail_body)
-        # mailer.set_plaintext_content(form.cleaned_data['message'], mail_body)
-        # mailer.send(mail_body)
+        """
+        Validate the contact form.
+
+        MailerSend integration will be added once production
+        API credentials have been configured.
+        """
+
+        # TODO:
+        # Send the enquiry using MailerSend once the production
+        # API credentials are available.
 
         messages.success(
             self.request,
-            "Thank you — your message has been received. We'll be in touch shortly."
+            "Thank you — your message has been received. "
+            "We'll be in touch shortly.",
         )
+
         return super().form_valid(form)

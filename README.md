@@ -12,6 +12,7 @@ Oliverde is a bespoke property management website for a boutique company caring 
     - [Ideal Client](#ideal-client)
 - [Planning](#planning)
 - [Design](#design)
+    - [Brand Identity](#brand-identity)
     - [Site Map](#site-map)
     - [App Architecture](#app-architecture)
     - [Theme](#theme)
@@ -69,6 +70,15 @@ A content-collection template (Word document) was built to gather final copy, im
 [Back to top](#contents)
 
 # Design
+
+### Brand Identity
+
+- custom logo
+- favicon suite
+- email signature logo
+- colour palette
+- typography
+- iconography
 
 ### Site Map
 
@@ -133,7 +143,7 @@ Both sourced from Google Fonts.
 
 ### Iconography
 
-A custom single-line "sprig" (olive branch) SVG icon is used consistently across the site in place of generic circle-outline icons, tying the icon system directly to the brand's olive-grove imagery rather than a default template pattern.
+A bespoke "O" monogram incorporating a subtle keyhole motif has been developed as the primary brand mark. This identity is used consistently across the favicon, website branding, email signature, and supporting visual assets, reinforcing Oliverde's focus on trust, security, and discreet property stewardship.
 
 [Back to top](#contents)
 
@@ -159,6 +169,7 @@ A custom single-line "sprig" (olive branch) SVG icon is used consistently across
 - **Git** & **GitHub** — version control
 - **Visual Studio Code** — development environment
 - **Mermaid** — architecture and site-map diagrams (this README, `ARCHITECTURE.md`)
+- MailerSend
 
 [Back to top](#contents)
 

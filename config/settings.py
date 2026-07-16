@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
 
     # Third-party applications
     "cloudinary_storage",
@@ -91,6 +92,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "core.context_processors.nav_destinations",
+                "core.context_processors.site_url",
             ],
         },
     },
@@ -205,3 +207,5 @@ MEDIA_URL = "/media/"
 # -------------------------------------------------------------------
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SITE_URL = os.environ.get("SITE_URL", "https://oliverdepropertymanagement.com")
