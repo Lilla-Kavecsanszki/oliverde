@@ -26,13 +26,25 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-# DEBUG = False
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.environ.get("ALLOWED_HOSTS", "").split(",")
+    for host in os.environ.get(
+        "ALLOWED_HOSTS",
+        "localhost,127.0.0.1",
+    ).split(",")
     if host.strip()
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "CSRF_TRUSTED_ORIGINS",
+        "",
+    ).split(",")
+    if origin.strip()
+]
+
 
 # -------------------------------------------------------------------
 # Applications
@@ -46,11 +58,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
-    
-    "ckeditor",
-    "ckeditor_uploader",
 
     # Third-party applications
+    "django_ckeditor_5",
     "cloudinary_storage",
     "cloudinary",
 
@@ -62,7 +72,74 @@ INSTALLED_APPS = [
     "journal",
 ]
 
-CKEDITOR_UPLOAD_PATH = "journal/uploads/"
+
+# -------------------------------------------------------------------
+# CKEditor 5
+# -------------------------------------------------------------------
+
+CKEDITOR_5_UPLOAD_PATH = "journal/uploads/"
+
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": [
+            "heading",
+            "|",
+            "bold",
+            "italic",
+            "link",
+            "bulletedList",
+            "numberedList",
+            "blockQuote",
+            "|",
+            "insertImage",
+            "|",
+            "undo",
+            "redo",
+        ],
+        "heading": {
+            "options": [
+                {
+                    "model": "paragraph",
+                    "title": "Paragraph",
+                    "class": "ck-heading_paragraph",
+                },
+                {
+                    "model": "heading2",
+                    "view": "h2",
+                    "title": "Heading 2",
+                    "class": "ck-heading_heading2",
+                },
+                {
+                    "model": "heading3",
+                    "view": "h3",
+                    "title": "Heading 3",
+                    "class": "ck-heading_heading3",
+                },
+            ],
+        },
+        "image": {
+            "toolbar": [
+                "imageTextAlternative",
+                "|",
+                "imageStyle:alignLeft",
+                "imageStyle:alignCenter",
+                "imageStyle:alignRight",
+            ],
+            "styles": [
+                "alignLeft",
+                "alignCenter",
+                "alignRight",
+            ],
+        },
+        "link": {
+            "addTargetToExternalLinks": True,
+            "defaultProtocol": "https://",
+        },
+    },
+}
+
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
+
 
 # -------------------------------------------------------------------
 # Middleware
@@ -70,6 +147,7 @@ CKEDITOR_UPLOAD_PATH = "journal/uploads/"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -200,7 +278,8 @@ STORAGES = {
     },
     "staticfiles": {
         "BACKEND": (
-            "django.contrib.staticfiles.storage.StaticFilesStorage"
+            "whitenoise.storage."
+            "CompressedManifestStaticFilesStorage"
         ),
     },
 }
@@ -222,6 +301,30 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 X_FRAME_OPTIONS = "DENY"
 
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+    SECURE_PROXY_SSL_HEADER = (
+        "HTTP_X_FORWARDED_PROTO",
+        "https",
+    )
+
+    SECURE_HSTS_SECONDS = int(
+        os.environ.get(
+            "SECURE_HSTS_SECONDS",
+            "0",
+        )
+    )
+
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = (
+        SECURE_HSTS_SECONDS > 0
+    )
+
+    SECURE_HSTS_PRELOAD = False
 
 
 # -------------------------------------------------------------------

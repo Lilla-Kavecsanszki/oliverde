@@ -17,8 +17,10 @@ from core.views import (
     PrivacyPolicyView,
     RobotsView,
 )
+
 from .sitemaps import (
     DestinationSitemap,
+    JournalSitemap,
     PropertySitemap,
     ServiceSitemap,
     StaticViewSitemap,
@@ -30,36 +32,71 @@ sitemaps = {
     "properties": PropertySitemap,
     "destinations": DestinationSitemap,
     "services": ServiceSitemap,
+    "journal": JournalSitemap,
 }
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path(
+        "admin/",
+        admin.site.urls,
+    ),
 
-    path("", HomeView.as_view(), name="home"),
-    path("about/", AboutView.as_view(), name="about"),
-    path("contact/", ContactView.as_view(), name="contact"),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('journal/', include('journal.urls')),
+    path(
+        "",
+        HomeView.as_view(),
+        name="home",
+    ),
+
+    path(
+        "about/",
+        AboutView.as_view(),
+        name="about",
+    ),
+
+    path(
+        "contact/",
+        ContactView.as_view(),
+        name="contact",
+    ),
+
+    path(
+        "ckeditor5/",
+        include("django_ckeditor_5.urls"),
+    ),
+
+    path(
+        "journal/",
+        include("journal.urls"),
+    ),
 
     path(
         "privacy-policy/",
         PrivacyPolicyView.as_view(),
         name="privacy_policy",
     ),
+
     path(
         "cookie-policy/",
         CookiePolicyView.as_view(),
         name="cookie_policy",
     ),
+
     path(
         "legal-notice/",
         LegalNoticeView.as_view(),
         name="legal_notice",
     ),
 
-    path("portfolio/", include("portfolio.urls")),
-    path("services/", include("services.urls")),
+    path(
+        "portfolio/",
+        include("portfolio.urls"),
+    ),
+
+    path(
+        "services/",
+        include("services.urls"),
+    ),
 
     path(
         "sitemap.xml",
@@ -67,6 +104,7 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="sitemap",
     ),
+
     path(
         "robots.txt",
         RobotsView.as_view(),
