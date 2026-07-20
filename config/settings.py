@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
+    
+    "ckeditor",
+    "ckeditor_uploader",
 
     # Third-party applications
     "cloudinary_storage",
@@ -56,8 +59,10 @@ INSTALLED_APPS = [
     "core",
     "portfolio",
     "services",
+    "journal",
 ]
 
+CKEDITOR_UPLOAD_PATH = "journal/uploads/"
 
 # -------------------------------------------------------------------
 # Middleware

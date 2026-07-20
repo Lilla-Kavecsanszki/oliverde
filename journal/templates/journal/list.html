@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Journal — Oliverde{% endblock %}
+{% block meta_description %}Stories, guides, and updates from Oliverde — life and property ownership in Tuscany, Umbria and Lazio.{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div class="wrap">
+    <p class="eyebrow reveal">Journal</p>
+    <h1 class="serif reveal">Stories from Italy</h1>
+    <p class="page-intro-text reveal">Notes on property, place, and the details that make owning a home in Italy its own kind of pleasure.</p>
+  </div>
+</section>
+
+<section class="properties" style="padding-top:0;">
+  <div class="wrap">
+    <div class="journal-grid reveal">
+      {% for post in posts %}
+        <a href="{{ post.get_absolute_url }}" class="journal-card">
+          <img class="ph" src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+          <p class="eyebrow" style="margin-top:16px;">{{ post.published_at|date:"F Y" }}</p>
+          <h3 class="serif">{{ post.title }}</h3>
+          <p class="journal-excerpt">{{ post.excerpt }}</p>
+          <span class="textlink">Read more &rarr;</span>
+        </a>
+      {% empty %}
+        <p>No journal posts published yet.</p>
+      {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">&larr; Previous</a>
+      {% endif %}
+      <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next &rarr;</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

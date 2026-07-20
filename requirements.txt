@@ -3,7 +3,9 @@ certifi==2026.6.17
 charset-normalizer==3.4.9
 cloudinary==1.45.0
 Django==6.0.7
+django-ckeditor==6.7.3
 django-cloudinary-storage==0.3.0
+django-js-asset==4.0.1
 idna==3.18
 pillow==12.3.0
 psycopg==3.3.4

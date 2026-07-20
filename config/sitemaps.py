@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
+from journal.models import JournalPost
 from portfolio.models import Destination, Property, Service
 
 
@@ -30,7 +31,11 @@ class PropertySitemap(Sitemap):
     changefreq = "weekly"
 
     def items(self):
-        return Property.objects.filter(published=True)
+        return (
+            Property.objects
+            .filter(published=True)
+            .order_by("-updated_at")
+        )
 
     def lastmod(self, obj):
         return obj.updated_at
@@ -41,11 +46,17 @@ class DestinationSitemap(Sitemap):
     changefreq = "monthly"
 
     def items(self):
-        return Destination.objects.all()
+        return (
+            Destination.objects
+            .filter(properties__published=True)
+            .distinct()
+            .order_by("name")
+        )
 
     def lastmod(self, obj):
         latest = (
-            obj.properties.filter(published=True)
+            obj.properties
+            .filter(published=True)
             .order_by("-updated_at")
             .first()
         )
@@ -58,3 +69,23 @@ class ServiceSitemap(Sitemap):
 
     def items(self):
         return Service.objects.all()
+
+    # Uncomment if your Service model has an updated_at field.
+    #
+    # def lastmod(self, obj):
+    #     return obj.updated_at
+
+
+class JournalSitemap(Sitemap):
+    priority = 0.5
+    changefreq = "monthly"
+
+    def items(self):
+        return (
+            JournalPost.objects
+            .filter(is_published=True)
+            .order_by("-published_at")
+        )
+
+    def lastmod(self, obj):
+        return obj.updated_at
