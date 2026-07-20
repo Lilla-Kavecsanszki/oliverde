@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Page Not Found — Oliverde{% endblock %}
+
+{% block content %}
+<section class="error-page">
+  <div class="wrap error-content">
+    <p class="eyebrow">404</p>
+    <h1 class="serif">This page seems to have wandered off.</h1>
+    <p class="error-text">The page you're looking for doesn't exist, may have moved, or the link may be out of date.</p>
+    <div class="error-actions">
+      <a class="btn btn-primary" href="{% url 'home' %}">Return home</a>
+      <a class="textlink" href="{% url 'portfolio:list' %}">Browse the portfolio</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
