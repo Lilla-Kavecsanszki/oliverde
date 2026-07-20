@@ -8,13 +8,25 @@ from portfolio.models import Property, Testimonial
 from .forms import ContactForm
 
 
+class PrivacyPolicyView(TemplateView):
+    template_name = "legal/privacy_policy.html"
+
+
+class CookiePolicyView(TemplateView):
+    template_name = "legal/cookie_policy.html"
+
+
+class LegalNoticeView(TemplateView):
+    template_name = "legal/legal_notice.html"
+
+
 def custom_404(request, exception):
     """Render the custom 404 page."""
     return render(request, "404.html", status=404)
 
 
 class RobotsView(TemplateView):
-    """Serves the site's robots.txt file."""
+    """Serve the site's robots.txt file."""
 
     template_name = "robots.txt"
     content_type = "text/plain"
@@ -34,7 +46,7 @@ class HomeView(TemplateView):
         )[:3]
 
         context["testimonials"] = Testimonial.objects.filter(
-            featured_on_homepage=True
+            featured_on_homepage=True,
         )[:4]
 
         return context
@@ -62,8 +74,8 @@ class ContactView(FormView):
         """
 
         # TODO:
-        # Send the enquiry using MailerSend once the production
-        # API credentials are available.
+        # Save the enquiry and send it through MailerSend once the
+        # production integration has been configured.
 
         messages.success(
             self.request,

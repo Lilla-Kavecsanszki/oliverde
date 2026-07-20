@@ -5,7 +5,7 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "PropertyManagementCompany",
+  "@type": "RealEstateAgent",
   "name": "Oliverde Property Management Services",
   "legalName": "Oliverde Property Services di Manussis Oliver Beresford",
   "description": "Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.",
@@ -34,7 +34,7 @@
     <h1 class="serif">Managing Exceptional <br><em>Homes</em> Across Italy.</h1>
     <p>Discreet property management, estate and concierge care for international homeowners throughout Tuscany, Umbria and Lazio.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#">Schedule a consultation</a>
+      <a class="btn btn-primary" href="{% url 'contact' %}">Schedule a consultation</a>
       <a class="textlink" href="{% url 'portfolio:list' %}">View our portfolio</a>
     </div>
   </div>
@@ -144,7 +144,7 @@
       <div class="bigquote">"</div>
       <h2 class="serif">I founded Oliverde on one simple belief: your home deserves the same care you would give it yourself.</h2>
       <p>For nearly two decades, we've built lasting relationships with homeowners who trust us to protect what matters most.</p>
-      <div class="founder-sig">Oliver de Manussis<span>Founder</span></div>
+      <div class="founder-sig">Oliver Manussis Beresford<span>Founder</span></div>
     </div>
 
     {% if testimonials %}
@@ -199,7 +199,7 @@
       <h2 class="serif">Let's discuss your property.</h2>
       <p>Whether you live abroad or visit seasonally, we'll tailor a management solution for your home.</p>
     </div>
-    <a class="btn btn-primary" href="#">Schedule a consultation</a>
+    <a class="btn btn-primary" href="{% url 'contact' %}">Schedule a consultation</a>
   </div>
 </section>
 

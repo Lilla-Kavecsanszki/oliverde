@@ -16,6 +16,9 @@ class StaticViewSitemap(Sitemap):
             "portfolio:list",
             "portfolio:all_properties",
             "services:list",
+            "privacy_policy",
+            "cookie_policy",
+            "legal_notice",
         ]
 
     def location(self, item):
@@ -41,7 +44,11 @@ class DestinationSitemap(Sitemap):
         return Destination.objects.all()
 
     def lastmod(self, obj):
-        latest = obj.properties.filter(published=True).order_by("-updated_at").first()
+        latest = (
+            obj.properties.filter(published=True)
+            .order_by("-updated_at")
+            .first()
+        )
         return latest.updated_at if latest else None
 
 

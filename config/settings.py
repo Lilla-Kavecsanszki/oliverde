@@ -209,4 +209,21 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-SITE_URL = os.environ.get("SITE_URL", "https://oliverdepropertymanagement.com")
+
+# -------------------------------------------------------------------
+# Security
+# -------------------------------------------------------------------
+
+X_FRAME_OPTIONS = "DENY"
+
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
+
+# -------------------------------------------------------------------
+# Site URL
+# -------------------------------------------------------------------
+
+SITE_URL = os.environ.get(
+    "SITE_URL",
+    "https://oliverdepropertymanagement.com",
+)

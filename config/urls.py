@@ -11,7 +11,10 @@ from django.urls import include, path
 from core.views import (
     AboutView,
     ContactView,
+    CookiePolicyView,
     HomeView,
+    LegalNoticeView,
+    PrivacyPolicyView,
     RobotsView,
 )
 from .sitemaps import (
@@ -37,6 +40,22 @@ urlpatterns = [
     path("about/", AboutView.as_view(), name="about"),
     path("contact/", ContactView.as_view(), name="contact"),
 
+    path(
+        "privacy-policy/",
+        PrivacyPolicyView.as_view(),
+        name="privacy_policy",
+    ),
+    path(
+        "cookie-policy/",
+        CookiePolicyView.as_view(),
+        name="cookie_policy",
+    ),
+    path(
+        "legal-notice/",
+        LegalNoticeView.as_view(),
+        name="legal_notice",
+    ),
+
     path("portfolio/", include("portfolio.urls")),
     path("services/", include("services.urls")),
 
@@ -46,7 +65,6 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="sitemap",
     ),
-
     path(
         "robots.txt",
         RobotsView.as_view(),
