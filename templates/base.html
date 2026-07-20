@@ -2,46 +2,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>{% block title %}Oliverde — Property Management Services | Tuscany, Umbria & Lazio{% endblock %}</title>
-<meta name="description" content="{% block meta_description %}Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.{% endblock %}">
-<link rel="canonical" href="{% block canonical_url %}{{ site_url }}{{ request.path }}{% endblock %}">
+  <title>
+    {% block title %}
+      Oliverde — Property Management Services | Tuscany, Umbria & Lazio
+    {% endblock %}
+  </title>
 
-<!-- Open Graph (Facebook, LinkedIn, WhatsApp link previews) -->
-<meta property="og:type" content="{% block og_type %}website{% endblock %}">
-<meta property="og:site_name" content="Oliverde">
-<meta property="og:title" content="{% block og_title %}Oliverde — Property Management Services{% endblock %}">
-<meta property="og:description" content="{% block og_description %}Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.{% endblock %}">
-<meta property="og:image" content="{% block og_image %}{{ site_url }}{% static 'images/og-default.png' %}{% endblock %}">
-<meta property="og:url" content="{{ site_url }}{{ request.path }}">
+  <meta
+    name="description"
+    content="{% block meta_description %}Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.{% endblock %}"
+  >
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{% block twitter_title %}Oliverde — Property Management Services{% endblock %}">
-<meta name="twitter:description" content="{% block twitter_description %}Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.{% endblock %}">
-<meta name="twitter:image" content="{% block twitter_image %}{{ site_url }}{% static 'images/og-default.png' %}{% endblock %}">
+  <link
+    rel="canonical"
+    href="{% block canonical_url %}{{ site_url }}{{ request.path }}{% endblock %}"
+  >
 
-<meta name="theme-color" content="#232A17">
+  <!-- Open Graph -->
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:site_name" content="Oliverde">
 
-<!-- Google Search Console verification — paste Oliver's real verification code here once available -->
-<!-- <meta name="google-site-verification" content="PASTE_CODE_HERE"> -->
+  <meta
+    property="og:title"
+    content="{% block og_title %}Oliverde — Property Management Services{% endblock %}"
+  >
 
-{% block structured_data %}{% endblock %}
+  <meta
+    property="og:description"
+    content="{% block og_description %}Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.{% endblock %}"
+  >
 
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="{% static 'favicon/favicon.svg' %}">
-<link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
-<link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
-<link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/favicon-180x180.png' %}">
+  <meta
+    property="og:image"
+    content="{% block og_image %}{{ site_url }}{% static 'images/og-default.png' %}{% endblock %}"
+  >
 
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <meta
+    property="og:url"
+    content="{% block og_url %}{{ site_url }}{{ request.path }}{% endblock %}"
+  >
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta
+    name="twitter:title"
+    content="{% block twitter_title %}Oliverde — Property Management Services{% endblock %}"
+  >
+
+  <meta
+    name="twitter:description"
+    content="{% block twitter_description %}Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.{% endblock %}"
+  >
+
+  <meta
+    name="twitter:image"
+    content="{% block twitter_image %}{{ site_url }}{% static 'images/og-default.png' %}{% endblock %}"
+  >
+
+  <meta name="theme-color" content="#232A17">
+
+  <!-- Google Search Console verification -->
+  <!--
+  <meta name="google-site-verification" content="PASTE_CODE_HERE">
+  -->
+
+  {% block structured_data %}{% endblock %}
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="{% static 'favicon/favicon.svg' %}"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="{% static 'favicon/favicon-32x32.png' %}"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="{% static 'favicon/favicon-16x16.png' %}"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="{% static 'favicon/favicon-180x180.png' %}"
+  >
+
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
-<body>
-{% include "includes/nav.html" %}
-{% block content %}{% endblock %}
-{% include "includes/footer.html" %}
-<script src="{% static 'js/main.js' %}"></script>
+
+<body class="{% block body_class %}{% endblock %}">
+  {% include "includes/nav.html" %}
+
+  {% block content %}{% endblock %}
+
+  {% include "includes/footer.html" %}
+
+  <script src="{% static 'js/main.js' %}" defer></script>
 </body>
 </html>
