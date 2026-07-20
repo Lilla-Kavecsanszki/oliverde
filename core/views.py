@@ -79,7 +79,7 @@ class ContactView(FormView):
 
         messages.success(
             self.request,
-            "Thank you — your message has been received. "
+            "Thank you! Your message has been received. "
             "We'll be in touch shortly.",
         )
 

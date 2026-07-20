@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block title %}Contact — Oliverde{% endblock %}
 
 {% block content %}
@@ -7,10 +8,21 @@
 <section class="contact-hero">
   <div class="ph"></div>
   <div class="contact-hero-overlay"></div>
+
   <div class="wrap contact-hero-content">
-    <p class="eyebrow" style="color:rgba(255,255,255,0.75);">Get in touch</p>
-    <h1 class="serif">Let's discuss<br>your property.</h1>
-    <p class="contact-hero-text">Whether you're considering a property in Tuscany, already own one, or simply want to understand how we work — we'd love to hear from you.</p>
+    <p class="eyebrow" style="color: rgba(255,255,255,0.75);">
+      Get in touch
+    </p>
+
+    <h1 class="serif">
+      Let's discuss<br>
+      your property.
+    </h1>
+
+    <p class="contact-hero-text">
+      Whether you're considering a property in Tuscany, already own one,
+      or simply want to understand how we work — we'd love to hear from you.
+    </p>
   </div>
 </section>
 
@@ -18,64 +30,209 @@
   <div class="wrap contact-grid">
 
     <div class="contact-form-card reveal">
+
       {% if messages %}
-        {% for message in messages %}
-          <div class="form-success">{{ message }}</div>
-        {% endfor %}
+        <div class="form-messages" aria-live="polite">
+          {% for message in messages %}
+            <div
+              class="form-message {{ message.tags|default:'info' }}"
+              role="{% if 'error' in message.tags %}alert{% else %}status{% endif %}"
+            >
+              <span class="message-icon" aria-hidden="true">
+                {% if "success" in message.tags %}
+                  ✓
+                {% elif "error" in message.tags %}
+                  !
+                {% elif "warning" in message.tags %}
+                  !
+                {% else %}
+                  i
+                {% endif %}
+              </span>
+
+              <span class="message-text">
+                {{ message }}
+              </span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if form.non_field_errors %}
+        <div class="form-message error" role="alert">
+          <span class="message-icon" aria-hidden="true">!</span>
+
+          <div class="message-text">
+            {% for error in form.non_field_errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        </div>
       {% endif %}
 
       <form method="post" novalidate>
         {% csrf_token %}
+
         <div class="form-row">
-          <label for="{{ form.name.id_for_label }}">Full name</label>
+          <label for="{{ form.name.id_for_label }}">
+            Full name
+          </label>
+
           {{ form.name }}
-          {% if form.name.errors %}<p class="form-error">{{ form.name.errors.0 }}</p>{% endif %}
+
+          {% if form.name.errors %}
+            <p class="form-error" id="{{ form.name.id_for_label }}-error">
+              {{ form.name.errors.0 }}
+            </p>
+          {% endif %}
         </div>
 
         <div class="form-row-split">
           <div class="form-row">
-            <label for="{{ form.email.id_for_label }}">Email</label>
+            <label for="{{ form.email.id_for_label }}">
+              Email
+            </label>
+
             {{ form.email }}
-            {% if form.email.errors %}<p class="form-error">{{ form.email.errors.0 }}</p>{% endif %}
+
+            {% if form.email.errors %}
+              <p class="form-error" id="{{ form.email.id_for_label }}-error">
+                {{ form.email.errors.0 }}
+              </p>
+            {% endif %}
           </div>
+
           <div class="form-row">
-            <label for="{{ form.phone.id_for_label }}">Phone <span class="optional">(optional)</span></label>
+            <label for="{{ form.phone.id_for_label }}">
+              Phone
+              <span class="optional">(optional)</span>
+            </label>
+
             {{ form.phone }}
+
+            {% if form.phone.errors %}
+              <p class="form-error" id="{{ form.phone.id_for_label }}-error">
+                {{ form.phone.errors.0 }}
+              </p>
+            {% endif %}
           </div>
         </div>
 
         <div class="form-row">
-          <label for="{{ form.property_interest.id_for_label }}">This enquiry is about</label>
+          <label for="{{ form.property_interest.id_for_label }}">
+            This enquiry is about
+          </label>
+
           {{ form.property_interest }}
+
+          {% if form.property_interest.errors %}
+            <p
+              class="form-error"
+              id="{{ form.property_interest.id_for_label }}-error"
+            >
+              {{ form.property_interest.errors.0 }}
+            </p>
+          {% endif %}
         </div>
 
         <div class="form-row">
-          <label for="{{ form.message.id_for_label }}">Message</label>
+          <label for="{{ form.message.id_for_label }}">
+            Message
+          </label>
+
           {{ form.message }}
-          {% if form.message.errors %}<p class="form-error">{{ form.message.errors.0 }}</p>{% endif %}
+
+          {% if form.message.errors %}
+            <p class="form-error" id="{{ form.message.id_for_label }}-error">
+              {{ form.message.errors.0 }}
+            </p>
+          {% endif %}
         </div>
 
-        <button type="submit" class="btn btn-primary" style="margin-top:8px;">Send enquiry</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="margin-top: 8px;"
+        >
+          Send enquiry
+        </button>
+
+        <p class="form-privacy-note">
+          By submitting this form, you acknowledge that your personal data
+          will be processed in accordance with our
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a>.
+        </p>
       </form>
     </div>
 
     <div class="contact-info reveal">
+
       <div class="contact-info-block">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
-        <p class="eyebrow" style="margin-bottom:8px;">Email</p>
-        <a href="mailto:hello@oliverde.com" class="contact-info-value">hello@oliverde.com</a>
+        <svg
+          class="sprig"
+          viewBox="0 0 22 26"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
+        <p class="eyebrow" style="margin-bottom: 8px;">
+          Email
+        </p>
+
+        <a
+          href="mailto:oliverdepropertyservices@gmail.com"
+          class="contact-info-value"
+        >
+          oliverdepropertyservices@gmail.com
+        </a>
       </div>
+
       <div class="contact-info-block">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
-        <p class="eyebrow" style="margin-bottom:8px;">Phone</p>
-        <a href="tel:+390575606086" class="contact-info-value">+39 0575 606086</a>
+        <svg
+          class="sprig"
+          viewBox="0 0 22 26"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
+        <p class="eyebrow" style="margin-bottom: 8px;">
+          Phone
+        </p>
+
+        <a
+          href="tel:+393663174740"
+          class="contact-info-value"
+        >
+          +39 366 317 4740
+        </a>
       </div>
+
       <div class="contact-info-block">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
-        <p class="eyebrow" style="margin-bottom:8px;">Regions</p>
-        <p class="contact-info-value">Tuscany · Umbria · Lazio</p>
+        <svg
+          class="sprig"
+          viewBox="0 0 22 26"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
+        <p class="eyebrow" style="margin-bottom: 8px;">
+          Regions
+        </p>
+
+        <p class="contact-info-value">
+          Tuscany · Umbria · Lazio
+        </p>
       </div>
-      <p class="contact-response-note">We typically respond within one business day.</p>
+
+      <p class="contact-response-note">
+        We typically respond within one business day.
+      </p>
     </div>
 
   </div>
