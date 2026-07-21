@@ -40,14 +40,20 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["featured_properties"] = Property.objects.filter(
-            published=True,
-            featured=True,
-        )[:3]
+        context["featured_properties"] = (
+            Property.objects
+            .filter(
+                published=True,
+                featured=True,
+            )
+            .select_related("destination")
+            .order_by("title")[:4]
+        )
 
-        context["testimonials"] = Testimonial.objects.filter(
-            featured_on_homepage=True,
-        )[:4]
+        context["testimonials"] = (
+            Testimonial.objects
+            .filter(featured_on_homepage=True)[:4]
+        )
 
         return context
 

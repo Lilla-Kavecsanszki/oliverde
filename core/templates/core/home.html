@@ -43,6 +43,15 @@
   <div class="scroll-cue"><div class="line"></div><span>Scroll</span></div>
 </section>
 
+<section class="stats">
+  <div class="wrap stats-row">
+    <div class="stat"><div class="num serif">19+</div><div class="label">Years managing<br>Italian properties</div></div>
+    <div class="stat"><div class="num serif">€25M+</div><div class="label">Property portfolio<br>managed</div></div>
+    <div class="stat"><div class="num serif">12+</div><div class="label">Specialists supporting<br>every property</div></div>
+    <div class="stat"><div class="num serif">3</div><div class="label">Regions — Tuscany,<br>Umbria, Lazio</div></div>
+  </div>
+</section>
+
 <section class="intro">
   <div class="wrap">
     <div class="intro-centered reveal">
@@ -74,44 +83,97 @@
   </div>
 </section>
 
-<section class="stats">
-  <div class="wrap stats-row">
-    <div class="stat"><div class="num serif">19+</div><div class="label">Years managing<br>Italian properties</div></div>
-    <div class="stat"><div class="num serif">€25M+</div><div class="label">Property portfolio<br>managed</div></div>
-    <div class="stat"><div class="num serif">12+</div><div class="label">Specialists supporting<br>every property</div></div>
-    <div class="stat"><div class="num serif">3</div><div class="label">Regions — Tuscany,<br>Umbria, Lazio</div></div>
-  </div>
-</section>
-
 <section class="properties">
   <div class="wrap">
+
     <div class="prop-head reveal">
-      <div>
-        <p class="eyebrow">A selection under our care</p>
-        <h2 class="serif" style="margin-top:14px;">Exceptional properties, expertly managed</h2>
+
+      <div class="prop-heading">
+        <p class="eyebrow">
+          A selection under our care
+        </p>
+
+        <h2 class="serif">
+          Exceptional properties,<br>
+          expertly managed
+        </h2>
+
+        <span class="prop-heading-line" aria-hidden="true"></span>
       </div>
-      <svg viewBox="0 0 200 90" class="olive-branch-small">
-        <path d="M6 78 Q70 70 100 40 Q130 12 190 8"/>
-        <ellipse cx="35" cy="72" rx="10" ry="5.5" transform="rotate(-18 35 72)"/>
-        <ellipse cx="75" cy="52" rx="10" ry="5.5" transform="rotate(-30 75 52)"/>
-        <ellipse cx="120" cy="26" rx="10" ry="5.5" transform="rotate(-38 120 26)"/>
-        <ellipse cx="165" cy="12" rx="10" ry="5.5" transform="rotate(-15 165 12)"/>
-      </svg>
-      <a href="{% url 'portfolio:all_properties' %}">View all properties →</a>
+
+      <div class="prop-head-aside">
+
+        <img
+          src="{% static 'images/olive-branch.png' %}"
+          alt=""
+          class="olive-branch-photo"
+          aria-hidden="true"
+        >
+
+        <a
+          href="{% url 'portfolio:all_properties' %}"
+          class="prop-all-link"
+        >
+          View all properties →
+        </a>
+
+      </div>
+
     </div>
+
     <div class="prop-grid reveal">
-      {% for property in featured_properties %}
-        <div class="prop-card {% if forloop.first %}prop-large{% else %}prop-small{% endif %}" onclick="window.location='{{ property.get_absolute_url }}'" style="cursor:pointer;">
-          <img class="ph" src="{{ property.cover_image.url }}" alt="{{ property.title }}, {{ property.destination.name }}">
+
+      {% for property in featured_properties|slice:":4" %}
+
+        <a
+          href="{{ property.get_absolute_url }}"
+          class="
+            prop-card
+            {% if forloop.counter == 1 %}
+              prop-card-large
+            {% elif forloop.counter == 4 %}
+              prop-card-wide
+            {% else %}
+              prop-card-small
+            {% endif %}
+          "
+        >
+
+          <img
+            class="ph"
+            src="{{ property.cover_image.url }}"
+            alt="{{ property.title }}, {{ property.destination.name }}"
+          >
+
+          <div class="prop-overlay"></div>
+
           <div class="prop-tag">
-            <div class="name serif">{{ property.title }}</div>
-            <div class="loc">{{ property.destination.name }}</div>
+
+            <div class="prop-name serif">
+              {{ property.title }}
+            </div>
+
+            <div class="prop-location">
+              {{ property.destination.name }}
+            </div>
+
+            <span class="prop-card-line" aria-hidden="true"></span>
+
           </div>
-        </div>
+
+        </a>
+
       {% empty %}
-        <p>No featured properties yet — mark some as "featured" in the admin.</p>
+
+        <p class="empty-properties">
+          No featured properties yet — mark four properties as featured in the
+          admin.
+        </p>
+
       {% endfor %}
+
     </div>
+
   </div>
 </section>
 
