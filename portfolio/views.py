@@ -1,6 +1,6 @@
 from collections import OrderedDict
 
-from django.db.models import Prefetch
+from django.db.models import Case, IntegerField, Prefetch, When
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 
@@ -171,6 +171,29 @@ class PropertyDetailView(DetailView):
     context_object_name = "property"
 
     def get_queryset(self):
+        gallery_queryset = (
+            PropertyImage.objects
+            .annotate(
+                section_position=Case(
+                    When(section="arrival", then=0),
+                    When(section="exterior", then=1),
+                    When(section="living", then=2),
+                    When(section="bedrooms", then=3),
+                    When(section="outdoors", then=4),
+                    When(section="gardens", then=5),
+                    When(section="details", then=6),
+                    When(section="views", then=7),
+                    default=99,
+                    output_field=IntegerField(),
+                )
+            )
+            .order_by(
+                "section_position",
+                "order",
+                "pk",
+            )
+        )
+
         return (
             Property.objects
             .filter(published=True)
@@ -178,11 +201,7 @@ class PropertyDetailView(DetailView):
             .prefetch_related(
                 Prefetch(
                     "gallery",
-                    queryset=PropertyImage.objects.order_by(
-                        "section",
-                        "order",
-                        "pk",
-                    ),
+                    queryset=gallery_queryset,
                 ),
                 "services",
                 "amenities",
@@ -216,13 +235,19 @@ class PropertyDetailView(DetailView):
                 permanent=True,
             )
 
-        context = self.get_context_data(object=self.object)
+        context = self.get_context_data(
+            object=self.object,
+        )
+
         return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        gallery_images = list(self.object.gallery.all())
+        gallery_images = list(
+            self.object.gallery.all()
+        )
+
         gallery_sections = OrderedDict()
 
         editorial_titles = {
@@ -236,7 +261,9 @@ class PropertyDetailView(DetailView):
             "views": "Views",
         }
 
-        section_labels = dict(PropertyImage.Section.choices)
+        section_labels = dict(
+            PropertyImage.Section.choices
+        )
 
         for image in gallery_images:
             if image.section not in gallery_sections:
@@ -252,15 +279,23 @@ class PropertyDetailView(DetailView):
                     "images": [],
                 }
 
-            gallery_sections[image.section]["images"].append(image)
+            gallery_sections[image.section]["images"].append(
+                image
+            )
 
         context["gallery"] = gallery_images
+
         context["gallery_sections"] = list(
             gallery_sections.values()
         )
 
-        context["services"] = self.object.services.all()
-        context["amenities"] = self.object.amenities.all()
+        context["services"] = (
+            self.object.services.all()
+        )
+
+        context["amenities"] = (
+            self.object.amenities.all()
+        )
 
         context["related_properties"] = (
             Property.objects

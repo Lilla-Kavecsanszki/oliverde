@@ -27,6 +27,7 @@ class PropertyImageInline(admin.TabularInline):
     ordering = (
         "section",
         "order",
+        "pk",
     )
 
 
@@ -41,6 +42,7 @@ class ServiceFeatureInline(admin.TabularInline):
 
     ordering = (
         "order",
+        "pk",
     )
 
 
@@ -57,6 +59,7 @@ class ServiceImageInline(admin.TabularInline):
 
     ordering = (
         "order",
+        "pk",
     )
 
 
@@ -72,7 +75,12 @@ class PropertyAdmin(admin.ModelAdmin):
         "pool",
         "available_for_rental",
         "featured",
+        "featured_order",
         "published",
+    )
+
+    list_editable = (
+        "featured_order",
     )
 
     list_filter = (
@@ -89,7 +97,7 @@ class PropertyAdmin(admin.ModelAdmin):
     search_fields = (
         "title",
         "public_title",
-        "public_id",
+        "=public_id",
         "slug",
         "description",
         "air_conditioning_details",
@@ -100,6 +108,10 @@ class PropertyAdmin(admin.ModelAdmin):
         "-featured",
         "featured_order",
         "title",
+    )
+
+    list_select_related = (
+        "destination",
     )
 
     inlines = [
@@ -314,4 +326,9 @@ class TestimonialAdmin(admin.ModelAdmin):
         "quote",
         "property__title",
         "property__public_title",
+    )
+
+    list_select_related = (
+        "destination",
+        "property",
     )

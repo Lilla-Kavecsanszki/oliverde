@@ -71,8 +71,16 @@ class ServiceImage(models.Model):
         on_delete=models.CASCADE,
         related_name="gallery",
     )
-    image = models.ImageField(upload_to="services/gallery/")
-    caption = models.CharField(max_length=255, blank=True)
+
+    image = models.ImageField(
+        upload_to="services/gallery/",
+    )
+
+    caption = models.CharField(
+        max_length=255,
+        blank=True,
+    )
+
     alt_text = models.CharField(
         max_length=255,
         blank=True,
@@ -81,10 +89,18 @@ class ServiceImage(models.Model):
             "search engines."
         ),
     )
-    order = models.PositiveSmallIntegerField(default=0)
+
+    order = models.PositiveSmallIntegerField(
+        default=0,
+    )
 
     class Meta:
-        ordering = ["order", "pk"]
+        ordering = (
+            "order",
+            "pk",
+        )
+        verbose_name = "service image"
+        verbose_name_plural = "service images"
 
     def __str__(self):
         return f"{self.service.title} — image {self.order or self.pk}"

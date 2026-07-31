@@ -1,33 +1,108 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block title %}{{ service.title }} — Oliverde{% endblock %}
 {% block meta_description %}{{ service.description|truncatewords:25 }}{% endblock %}
 
 {% block content %}
+
 <section class="page-intro">
   <div class="wrap">
-    <a class="textlink" href="{% url 'services:list' %}" style="margin-bottom:20px; display:inline-block;">&larr; All services</a>
-    <p class="eyebrow reveal">Services</p>
-    <h1 class="serif reveal">{{ service.title }}</h1>
-    <p class="page-intro-text reveal">{{ service.description }}</p>
+
+    <a
+      class="textlink"
+      href="{% url 'services:list' %}"
+      style="margin-bottom:20px; display:inline-block;"
+    >
+      ← All services
+    </a>
+
+    <p class="eyebrow reveal">
+      Services
+    </p>
+
+    <h1 class="serif reveal">
+      {{ service.title }}
+    </h1>
+
+    <p class="page-intro-text reveal">
+      {{ service.description }}
+    </p>
+
   </div>
 </section>
 
 {% if service.features.all %}
 <section class="services-detail" style="padding-top:0;">
   <div class="wrap">
+
     <div class="service-block reveal" style="border-bottom:none;">
+
       <div class="service-block-icon">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <svg
+          class="sprig"
+          viewBox="0 0 22 26"
+          aria-hidden="true"
+        >
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
       </div>
+
       <div>
         <ul class="service-features">
+
           {% for feature in service.features.all %}
             <li>{{ feature.text }}</li>
           {% endfor %}
+
         </ul>
       </div>
+
     </div>
+
+  </div>
+</section>
+{% endif %}
+
+{% if service.gallery.all %}
+<section class="service-gallery">
+  <div class="wrap">
+
+    <div class="service-gallery-layout reveal">
+
+      {% for image in service.gallery.all|slice:":4" %}
+
+        <figure
+          class="
+            service-gallery-item
+            {% if forloop.first %}
+              service-gallery-main
+            {% else %}
+              service-gallery-secondary
+            {% endif %}
+          "
+        >
+
+          {% if image.image %}
+            <img
+              src="{{ image.image.url }}"
+              alt="{{ image.alt_text|default:service.title }}"
+              loading="lazy"
+            >
+          {% endif %}
+
+          {% if image.caption %}
+            <figcaption>
+              {{ image.caption }}
+            </figcaption>
+          {% endif %}
+
+        </figure>
+
+      {% endfor %}
+
+    </div>
+
   </div>
 </section>
 {% endif %}
@@ -35,29 +110,83 @@
 {% if related_properties %}
 <section class="properties" style="padding-top:0;">
   <div class="wrap">
+
     <div class="prop-head reveal">
-      <h2 class="serif">Properties with this service</h2>
+      <h2 class="serif">
+        Properties with this service
+      </h2>
     </div>
+
     <div class="dest-prop-grid reveal">
+
       {% for property in related_properties %}
-        <a href="{{ property.get_absolute_url }}" class="dest-prop-card">
-          <img class="ph" src="{{ property.cover_image.url }}" alt="{{ property.title }}">
-          <p class="eyebrow" style="margin-top:16px;">{{ property.destination.name }}</p>
-          <h3 class="serif">{{ property.title }}</h3>
+
+        <a
+          href="{{ property.get_absolute_url }}"
+          class="dest-prop-card"
+        >
+
+          {% if property.cover_image %}
+            <img
+              class="ph"
+              src="{{ property.cover_image.url }}"
+              alt="{{ property.display_title }}, {{ property.destination.name }}"
+              loading="lazy"
+            >
+          {% else %}
+            <div
+              class="ph property-image-placeholder"
+              role="img"
+              aria-label="{{ property.display_title }}, {{ property.destination.name }}"
+            ></div>
+          {% endif %}
+
+          {% if property.display_rental_banner %}
+            <p class="property-rental-label">
+              {{ property.rental_banner_text|default:"Available for private rental" }}
+            </p>
+          {% endif %}
+
+          <p class="eyebrow" style="margin-top:16px;">
+            {{ property.destination.name }}
+          </p>
+
+          <h3 class="serif">
+            {{ property.display_title }}
+          </h3>
+
         </a>
+
       {% endfor %}
+
     </div>
+
   </div>
 </section>
 {% endif %}
 
 <section class="cta">
   <div class="wrap cta-row">
+
     <div>
-      <h2 class="serif">Let's discuss your property.</h2>
-      <p>Whether you live abroad or visit seasonally, we'll tailor a management solution for your home.</p>
+      <h2 class="serif">
+        Let's discuss your property.
+      </h2>
+
+      <p>
+        Whether you live abroad or visit seasonally, we'll tailor a management
+        solution for your home.
+      </p>
     </div>
-    <a class="btn btn-primary" href="{% url 'contact' %}">Schedule a consultation</a>
+
+    <a
+      class="btn btn-primary"
+      href="{% url 'contact' %}"
+    >
+      Schedule a consultation
+    </a>
+
   </div>
 </section>
+
 {% endblock %}

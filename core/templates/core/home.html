@@ -32,31 +32,85 @@
 
 <section class="hero">
   <div class="hero-frame"></div>
+
   <div class="wrap hero-content">
-    <h1 class="serif">Managing Exceptional <br><em>Homes</em> Across Italy.</h1>
-    <p>Discreet property management, estate and concierge care for international homeowners throughout Tuscany, Umbria and Lazio.</p>
+    <h1 class="serif">
+      Managing Exceptional <br>
+      <em>Homes</em> Across Italy.
+    </h1>
+
+    <p>
+      Discreet property management, estate and concierge care for international
+      homeowners throughout Tuscany, Umbria and Lazio.
+    </p>
+
     <div class="hero-actions">
-      <a class="btn btn-primary" href="{% url 'contact' %}">Schedule a consultation</a>
-      <a class="textlink" href="{% url 'portfolio:list' %}">View our portfolio</a>
+      <a class="btn btn-primary" href="{% url 'contact' %}">
+        Schedule a consultation
+      </a>
+
+      <a class="textlink" href="{% url 'portfolio:list' %}">
+        View our portfolio
+      </a>
     </div>
   </div>
-  <div class="scroll-cue"><div class="line"></div><span>Scroll</span></div>
+
+  <div class="scroll-cue">
+    <div class="line"></div>
+    <span>Scroll</span>
+  </div>
 </section>
 
 <section class="stats">
   <div class="wrap stats-row">
-    <div class="stat"><div class="num serif">19+</div><div class="label">Years managing<br>Italian properties</div></div>
-    <div class="stat"><div class="num serif">€25M+</div><div class="label">Property portfolio<br>managed</div></div>
-    <div class="stat"><div class="num serif">12+</div><div class="label">Specialists supporting<br>every property</div></div>
-    <div class="stat"><div class="num serif">3</div><div class="label">Regions — Tuscany,<br>Umbria, Lazio</div></div>
+
+    <div class="stat">
+      <div class="num serif">19+</div>
+      <div class="label">
+        Years managing<br>
+        Italian properties
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="num serif">€25M+</div>
+      <div class="label">
+        Property portfolio<br>
+        managed
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="num serif">12+</div>
+      <div class="label">
+        Specialists supporting<br>
+        every property
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="num serif">3</div>
+      <div class="label">
+        Regions — Tuscany,<br>
+        Umbria, Lazio
+      </div>
+    </div>
+
   </div>
 </section>
 
 <section class="intro">
   <div class="wrap">
     <div class="intro-centered reveal">
-      <h2 class="serif">Owning in Italy should be a <em>pleasure</em>, not another responsibility.</h2>
-      <p style="margin-top:18px; color:var(--taupe);">We take care of every detail, so you can simply enjoy what matters most.</p>
+
+      <h2 class="serif">
+        Owning in Italy should be a <em>pleasure</em>, not another responsibility.
+      </h2>
+
+      <p style="margin-top:18px; color:var(--taupe);">
+        We take care of every detail, so you can simply enjoy what matters most.
+      </p>
+
     </div>
   </div>
 </section>
@@ -64,21 +118,43 @@
 <section class="pillars">
   <div class="wrap">
     <div class="pillars-grid">
+
       <div class="pillar reveal">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
         <h3 class="serif">Your home, protected</h3>
-        <p>We oversee every detail with care and discretion, all year round.</p>
+
+        <p>
+          We oversee every detail with care and discretion, all year round.
+        </p>
       </div>
+
       <div class="pillar reveal">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
         <h3 class="serif">Your guests, welcomed</h3>
-        <p>Seamless arrivals, five-star hospitality and unforgettable stays.</p>
+
+        <p>
+          Seamless arrivals, five-star hospitality and unforgettable stays.
+        </p>
       </div>
+
       <div class="pillar reveal">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
+        <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
         <h3 class="serif">Your investment, maintained</h3>
-        <p>Proactive care and expert oversight that preserves beauty and value.</p>
+
+        <p>
+          Proactive care and expert oversight that preserves beauty and value.
+        </p>
       </div>
+
     </div>
   </div>
 </section>
@@ -139,18 +215,32 @@
           "
         >
 
-          <img
-            class="ph"
-            src="{{ property.cover_image.url }}"
-            alt="{{ property.title }}, {{ property.destination.name }}"
-          >
+          {% if property.cover_image %}
+            <img
+              class="ph"
+              src="{{ property.cover_image.url }}"
+              alt="{{ property.display_title }}, {{ property.destination.name }}"
+            >
+          {% else %}
+            <div
+              class="ph property-image-placeholder"
+              role="img"
+              aria-label="{{ property.display_title }}, {{ property.destination.name }}"
+            ></div>
+          {% endif %}
 
           <div class="prop-overlay"></div>
 
           <div class="prop-tag">
 
+            {% if property.display_rental_banner %}
+              <div class="prop-rental-banner">
+                {{ property.rental_banner_text|default:"Available for private rental" }}
+              </div>
+            {% endif %}
+
             <div class="prop-name serif">
-              {{ property.title }}
+              {{ property.display_title }}
             </div>
 
             <div class="prop-location">
@@ -179,91 +269,213 @@
 
 <section class="services">
   <div class="wrap">
+
     <div class="services-head reveal">
-      <p class="eyebrow">How we care for your home</p>
-      <h2 class="serif">A dedicated team, every detail covered</h2>
+      <p class="eyebrow">
+        How we care for your home
+      </p>
+
+      <h2 class="serif">
+        A dedicated team, every detail covered
+      </h2>
     </div>
+
     <div class="services-grid property-services-grid reveal">
+
       {% for service in nav_services %}
+
         <a href="{{ service.get_absolute_url }}" class="service">
-          <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
-          <h3 class="serif">{{ service.title }}</h3>
-          <p>{{ service.description|truncatewords:12 }}</p>
+
+          <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
+            <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+          </svg>
+
+          <h3 class="serif">
+            {{ service.title }}
+          </h3>
+
+          <p>
+            {{ service.description|truncatewords:12 }}
+          </p>
+
         </a>
+
       {% empty %}
-        <p>No services added yet — add some in the admin.</p>
+
+        <p>
+          No services added yet — add some in the admin.
+        </p>
+
       {% endfor %}
+
     </div>
+
   </div>
 </section>
 
 <section class="founder">
   <div class="wrap founder-grid">
+
     <div class="founder-photo reveal">
       <div class="frame"></div>
       <div class="ph"></div>
     </div>
+
     <div class="founder-text reveal">
-      <p class="eyebrow">A personal commitment</p>
-      <div class="bigquote">"</div>
-      <h2 class="serif">I founded Oliverde on one simple belief: your home deserves the same care you would give it yourself.</h2>
-      <p>For nearly two decades, we've built lasting relationships with homeowners who trust us to protect what matters most.</p>
-      <div class="founder-sig">Oliver Manussis Beresford<span>Founder</span></div>
+
+      <p class="eyebrow">
+        A personal commitment
+      </p>
+
+      <div class="bigquote" aria-hidden="true">"</div>
+
+      <h2 class="serif">
+        I founded Oliverde on one simple belief: your home deserves the same
+        care you would give it yourself.
+      </h2>
+
+      <p>
+        For nearly two decades, we've built lasting relationships with homeowners
+        who trust us to protect what matters most.
+      </p>
+
+      <div class="founder-sig">
+        Oliver Manussis Beresford
+        <span>Founder</span>
+      </div>
+
     </div>
 
     {% if testimonials %}
-    <div class="testimonial-card reveal" id="testimonialCard">
-      <div class="testimonial-bigquote">"</div>
-      {% for t in testimonials %}
-        <div class="testimonial-slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
-          <p class="serif">{{ t.quote }}</p>
-          <span>— {{ t.author_name }}</span>
-        </div>
-      {% endfor %}
-      {% if testimonials|length > 1 %}
-      <div class="testimonial-dots">
+
+      <div class="testimonial-card reveal" id="testimonialCard">
+
+        <div class="testimonial-bigquote" aria-hidden="true">"</div>
+
         {% for t in testimonials %}
-          <button class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}" aria-label="Show testimonial {{ forloop.counter }}"></button>
+
+          <div
+            class="testimonial-slide {% if forloop.first %}active{% endif %}"
+            data-index="{{ forloop.counter0 }}"
+          >
+            <p class="serif">
+              {{ t.quote }}
+            </p>
+
+            <span>
+              — {{ t.author_name }}
+            </span>
+          </div>
+
         {% endfor %}
+
+        {% if testimonials|length > 1 %}
+
+          <div class="testimonial-dots">
+
+            {% for t in testimonials %}
+
+              <button
+                class="dot {% if forloop.first %}active{% endif %}"
+                data-index="{{ forloop.counter0 }}"
+                aria-label="Show testimonial {{ forloop.counter }}"
+              ></button>
+
+            {% endfor %}
+
+          </div>
+
+        {% endif %}
+
       </div>
-      {% endif %}
-    </div>
+
     {% endif %}
+
   </div>
 </section>
 
 <section class="why">
   <div class="wrap">
+
     <div class="why-head reveal">
-      <h2 class="serif">Why international owners choose Oliverde</h2>
+      <h2 class="serif">
+        Why international owners choose Oliverde
+      </h2>
     </div>
+
     <div class="why-grid reveal">
+
       <div class="why-item">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
-        <p class="eyebrow" style="margin-bottom:8px;">Local expertise</p>
-        <p>Deep regional knowledge and trusted supplier relationships.</p>
+
+        <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
+        <p class="eyebrow" style="margin-bottom:8px;">
+          Local expertise
+        </p>
+
+        <p>
+          Deep regional knowledge and trusted supplier relationships.
+        </p>
+
       </div>
+
       <div class="why-item">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
-        <p class="eyebrow" style="margin-bottom:8px;">Transparent reporting</p>
-        <p>Detailed digital updates and financial visibility.</p>
+
+        <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
+        <p class="eyebrow" style="margin-bottom:8px;">
+          Transparent reporting
+        </p>
+
+        <p>
+          Detailed digital updates and financial visibility.
+        </p>
+
       </div>
+
       <div class="why-item">
-        <svg class="sprig" viewBox="0 0 22 26"><path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/></svg>
-        <p class="eyebrow" style="margin-bottom:8px;">Personal service</p>
-        <p>Direct communication and tailored solutions.</p>
+
+        <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
+        <p class="eyebrow" style="margin-bottom:8px;">
+          Personal service
+        </p>
+
+        <p>
+          Direct communication and tailored solutions.
+        </p>
+
       </div>
+
     </div>
+
   </div>
 </section>
 
 <section class="cta">
   <div class="wrap cta-row">
+
     <div>
-      <h2 class="serif">Let's discuss your property.</h2>
-      <p>Whether you live abroad or visit seasonally, we'll tailor a management solution for your home.</p>
+      <h2 class="serif">
+        Let's discuss your property.
+      </h2>
+
+      <p>
+        Whether you live abroad or visit seasonally, we'll tailor a management
+        solution for your home.
+      </p>
     </div>
-    <a class="btn btn-primary" href="{% url 'contact' %}">Schedule a consultation</a>
+
+    <a class="btn btn-primary" href="{% url 'contact' %}">
+      Schedule a consultation
+    </a>
+
   </div>
 </section>
 

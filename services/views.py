@@ -1,4 +1,5 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView, ListView
+
 from portfolio.models import Service
 
 
@@ -8,7 +9,10 @@ class ServiceListView(ListView):
     context_object_name = "services"
 
     def get_queryset(self):
-        return Service.objects.prefetch_related("features")
+        return Service.objects.prefetch_related(
+            "features",
+            "gallery",
+        )
 
 
 class ServiceDetailView(DetailView):
@@ -17,11 +21,19 @@ class ServiceDetailView(DetailView):
     context_object_name = "service"
 
     def get_queryset(self):
-        return Service.objects.prefetch_related("features")
+        return Service.objects.prefetch_related(
+            "features",
+            "gallery",
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["related_properties"] = self.object.properties.filter(
-            published=True
-        )[:3]
+
+        context["related_properties"] = (
+            self.object.properties
+            .filter(published=True)
+            .select_related("destination")
+            [:3]
+        )
+
         return context
