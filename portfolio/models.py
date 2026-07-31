@@ -211,8 +211,8 @@ class Property(models.Model):
     )
     sleeps = models.PositiveSmallIntegerField(null=True, blank=True)
     land_size_hectares = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
+        max_digits=8,
+        decimal_places=3,
         null=True,
         blank=True,
     )
