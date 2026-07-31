@@ -7,8 +7,8 @@ Django 6.0.7.
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
 import dj_database_url
+from dotenv import load_dotenv
 
 
 # -------------------------------------------------------------------
@@ -196,7 +196,7 @@ if os.environ.get("DATABASE_URL"):
             conn_max_age=600,
             conn_health_checks=True,
             ssl_require=not DEBUG,
-        )
+        ),
     }
 else:
     DATABASES = {
@@ -207,7 +207,7 @@ else:
             "PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
             "HOST": os.environ.get("DATABASE_HOST", "localhost"),
             "PORT": os.environ.get("DATABASE_PORT", "5432"),
-        }
+        },
     }
 
 # -------------------------------------------------------------------
