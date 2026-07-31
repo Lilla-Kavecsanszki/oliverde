@@ -11,12 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const image = lightbox.querySelector(".lightbox-image");
   const caption = lightbox.querySelector(".lightbox-caption");
-  const section = lightbox.querySelector(".lightbox-section");
   const counter = lightbox.querySelector(".lightbox-counter");
 
   const closeButton = lightbox.querySelector(".lightbox-close");
   const previousButton = lightbox.querySelector(".lightbox-previous");
   const nextButton = lightbox.querySelector(".lightbox-next");
+
+  if (!image || !closeButton) {
+    return;
+  }
 
   let currentIndex = 0;
   let lastFocusedElement = null;
@@ -27,15 +30,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const trigger = triggers[currentIndex];
     const imageUrl = trigger.dataset.galleryImage;
     const imageCaption = trigger.dataset.galleryCaption || "";
-    const imageSection = trigger.dataset.gallerySection || "";
 
-    image.classList.remove("is-loaded");
+    if (!imageUrl) {
+      return;
+    }
 
     image.src = imageUrl;
     image.alt = imageCaption;
-    caption.textContent = imageCaption;
-    section.textContent = imageSection;
-    counter.textContent = `${currentIndex + 1} / ${triggers.length}`;
+
+    if (caption) {
+      caption.textContent = imageCaption;
+    }
+
+    if (counter) {
+      counter.textContent =
+        `${currentIndex + 1} / ${triggers.length}`;
+    }
   }
 
   function openLightbox(index) {
@@ -55,7 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
     lightbox.setAttribute("aria-hidden", "true");
     document.body.classList.remove("lightbox-open");
 
-    if (lastFocusedElement) {
+    if (
+      lastFocusedElement &&
+      typeof lastFocusedElement.focus === "function"
+    ) {
       lastFocusedElement.focus();
     }
   }
@@ -69,19 +82,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   triggers.forEach((trigger, index) => {
-    trigger.addEventListener("click", () => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
       openLightbox(index);
     });
   });
 
   closeButton.addEventListener("click", closeLightbox);
-  previousButton.addEventListener("click", showPrevious);
-  nextButton.addEventListener("click", showNext);
 
-  /*
-   * Clicking the enlarged photograph again closes the viewer.
-   * It never advances or starts an automatic slideshow.
-   */
+  if (previousButton) {
+    previousButton.addEventListener("click", showPrevious);
+  }
+
+  if (nextButton) {
+    nextButton.addEventListener("click", showNext);
+  }
+
   image.addEventListener("click", closeLightbox);
 
   lightbox.addEventListener("click", (event) => {
@@ -108,10 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /*
-   * Subtle staggered appearance as each chapter enters the viewport.
-   */
-  const revealItems = document.querySelectorAll(".gallery-reveal");
+  const revealItems = document.querySelectorAll(
+    ".gallery-reveal"
+  );
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
@@ -130,7 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     );
 
-    revealItems.forEach((item) => observer.observe(item));
+    revealItems.forEach((item) => {
+      observer.observe(item);
+    });
   } else {
     revealItems.forEach((item) => {
       item.classList.add("is-visible");

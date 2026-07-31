@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{{ service.title }} — Oliverde{% endblock %}
-{% block meta_description %}{{ service.description|truncatewords:25 }}{% endblock %}
+{% block title %}
+  {{ service.title }} — Oliverde
+{% endblock %}
+
+{% block meta_description %}
+  {{ service.description|truncatewords:25 }}
+{% endblock %}
+
 
 {% block content %}
 
@@ -32,11 +38,18 @@
   </div>
 </section>
 
+
 {% if service.features.all %}
-<section class="services-detail" style="padding-top:0;">
+<section
+  class="services-detail"
+  style="padding-top:0;"
+>
   <div class="wrap">
 
-    <div class="service-block reveal" style="border-bottom:none;">
+    <div
+      class="service-block reveal"
+      style="border-bottom:none;"
+    >
 
       <div class="service-block-icon">
         <svg
@@ -44,7 +57,9 @@
           viewBox="0 0 22 26"
           aria-hidden="true"
         >
-          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+          <path
+            d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"
+          />
         </svg>
       </div>
 
@@ -52,7 +67,9 @@
         <ul class="service-features">
 
           {% for feature in service.features.all %}
-            <li>{{ feature.text }}</li>
+            <li>
+              {{ feature.text }}
+            </li>
           {% endfor %}
 
         </ul>
@@ -64,17 +81,31 @@
 </section>
 {% endif %}
 
+
 {% if service.gallery.all %}
 <section class="service-gallery">
   <div class="wrap">
 
-    <div class="service-gallery-layout reveal">
+    <div class="service-gallery-heading reveal">
 
-      {% for image in service.gallery.all|slice:":4" %}
+      <p class="eyebrow">
+        A closer look
+      </p>
+
+      <h2 class="serif">
+        The service in practice
+      </h2>
+
+    </div>
+
+    <div class="service-gallery-layout">
+
+      {% for image in service.gallery.all %}
 
         <figure
           class="
             service-gallery-item
+            reveal
             {% if forloop.first %}
               service-gallery-main
             {% else %}
@@ -84,11 +115,45 @@
         >
 
           {% if image.image %}
-            <img
-              src="{{ image.image.url }}"
-              alt="{{ image.alt_text|default:service.title }}"
-              loading="lazy"
+
+            <button
+              type="button"
+              class="
+                service-gallery-trigger
+                property-gallery-trigger
+              "
+              data-gallery-image="{{ image.image.url }}"
+              data-gallery-caption="{{ image.caption|default:image.alt_text|default:service.title }}"
+              aria-label="Open image {{ forloop.counter }}"
             >
+
+              <img
+                src="{{ image.image.url }}"
+                alt="{{ image.alt_text|default:service.title }}"
+                loading="lazy"
+              >
+
+              <span
+                class="gallery-view-hint"
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="10.5"
+                    cy="10.5"
+                    r="6.5"
+                  />
+                  <path d="M15.5 15.5 21 21" />
+                </svg>
+
+                View
+              </span>
+
+            </button>
+
           {% endif %}
 
           {% if image.caption %}
@@ -105,16 +170,84 @@
 
   </div>
 </section>
+
+
+<div
+  class="property-lightbox"
+  id="property-lightbox"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="{{ service.title }} image gallery"
+>
+
+  <button
+    type="button"
+    class="lightbox-close"
+    aria-label="Close image viewer"
+  >
+    ×
+  </button>
+
+  <button
+    type="button"
+    class="lightbox-arrow lightbox-previous"
+    aria-label="Previous image"
+  >
+    ←
+  </button>
+
+  <div class="lightbox-content">
+
+    <img
+      class="lightbox-image"
+      src=""
+      alt=""
+    >
+
+    <div class="lightbox-meta">
+
+      <p class="lightbox-caption"></p>
+
+      <p class="lightbox-counter"></p>
+
+    </div>
+
+  </div>
+
+  <button
+    type="button"
+    class="lightbox-arrow lightbox-next"
+    aria-label="Next image"
+  >
+    →
+  </button>
+
+</div>
 {% endif %}
 
+
 {% if related_properties %}
-<section class="properties" style="padding-top:0;">
+<section
+  class="properties"
+  style="padding-top:0;"
+>
   <div class="wrap">
 
     <div class="prop-head reveal">
-      <h2 class="serif">
-        Properties with this service
-      </h2>
+
+      <div class="prop-heading">
+
+        <p class="eyebrow">
+          Selected properties
+        </p>
+
+        <h2 class="serif">
+          Properties with this service
+        </h2>
+
+      </div>
+
     </div>
 
     <div class="dest-prop-grid reveal">
@@ -127,18 +260,22 @@
         >
 
           {% if property.cover_image %}
+
             <img
               class="ph"
               src="{{ property.cover_image.url }}"
               alt="{{ property.display_title }}, {{ property.destination.name }}"
               loading="lazy"
             >
+
           {% else %}
+
             <div
               class="ph property-image-placeholder"
               role="img"
               aria-label="{{ property.display_title }}, {{ property.destination.name }}"
             ></div>
+
           {% endif %}
 
           {% if property.display_rental_banner %}
@@ -147,7 +284,10 @@
             </p>
           {% endif %}
 
-          <p class="eyebrow" style="margin-top:16px;">
+          <p
+            class="eyebrow"
+            style="margin-top:16px;"
+          >
             {{ property.destination.name }}
           </p>
 
@@ -165,10 +305,12 @@
 </section>
 {% endif %}
 
+
 <section class="cta">
   <div class="wrap cta-row">
 
     <div>
+
       <h2 class="serif">
         Let's discuss your property.
       </h2>
@@ -177,6 +319,7 @@
         Whether you live abroad or visit seasonally, we'll tailor a management
         solution for your home.
       </p>
+
     </div>
 
     <a
@@ -188,5 +331,13 @@
 
   </div>
 </section>
+
+
+{% if service.gallery.all %}
+  <script
+    src="{% static 'js/property-gallery.js' %}"
+    defer
+  ></script>
+{% endif %}
 
 {% endblock %}

@@ -1,5 +1,3 @@
-from collections import OrderedDict
-
 from django.db.models import Case, IntegerField, Prefetch, When
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
@@ -171,6 +169,13 @@ class PropertyDetailView(DetailView):
     context_object_name = "property"
 
     def get_queryset(self):
+        """
+        Return published properties with their related content prefetched.
+
+        Gallery categories remain available in the CMS and determine the
+        editorial image order, but the public template displays the images
+        as one continuous gallery.
+        """
         gallery_queryset = (
             PropertyImage.objects
             .annotate(
@@ -244,49 +249,8 @@ class PropertyDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        gallery_images = list(
+        context["gallery"] = list(
             self.object.gallery.all()
-        )
-
-        gallery_sections = OrderedDict()
-
-        editorial_titles = {
-            "arrival": "Arrival",
-            "exterior": "The House",
-            "living": "Living Spaces",
-            "bedrooms": "Private Retreats",
-            "outdoors": "Outdoor Living",
-            "gardens": "Gardens & Grounds",
-            "details": "Architectural Details",
-            "views": "Views",
-        }
-
-        section_labels = dict(
-            PropertyImage.Section.choices
-        )
-
-        for image in gallery_images:
-            if image.section not in gallery_sections:
-                gallery_sections[image.section] = {
-                    "key": image.section,
-                    "title": editorial_titles.get(
-                        image.section,
-                        section_labels.get(
-                            image.section,
-                            image.section.title(),
-                        ),
-                    ),
-                    "images": [],
-                }
-
-            gallery_sections[image.section]["images"].append(
-                image
-            )
-
-        context["gallery"] = gallery_images
-
-        context["gallery_sections"] = list(
-            gallery_sections.values()
         )
 
         context["services"] = (
