@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+import dj_database_url
 
 
 # -------------------------------------------------------------------
@@ -189,17 +190,25 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # -------------------------------------------------------------------
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ["DATABASE_NAME"],
-        "USER": os.environ["DATABASE_USER"],
-        "PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
-        "HOST": os.environ.get("DATABASE_HOST", "localhost"),
-        "PORT": os.environ.get("DATABASE_PORT", "5432"),
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=not DEBUG,
+        )
     }
-}
-
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ["DATABASE_NAME"],
+            "USER": os.environ["DATABASE_USER"],
+            "PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
+            "HOST": os.environ.get("DATABASE_HOST", "localhost"),
+            "PORT": os.environ.get("DATABASE_PORT", "5432"),
+        }
+    }
 
 # -------------------------------------------------------------------
 # Authentication
