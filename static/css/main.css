@@ -209,6 +209,10 @@ body.home-hero .site-header.nav-scrolled {
   gap: 28px;
 }
 
+.mobile-nav-cta {
+  margin-top: 30px;
+}
+
 /* ---------- LOGO ---------- */
 
 .logo {

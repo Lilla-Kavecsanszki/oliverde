@@ -1,76 +1,128 @@
 <header class="site-header">
   <div class="wrap navrow">
 
-    <a href="{% url 'home' %}" class="logo">
+    <a
+      href="{% url 'home' %}"
+      class="logo"
+      aria-label="Oliverde Property Management Services — Home"
+    >
       OLIVERDE
       <span>Property Management Services</span>
     </a>
 
-    <nav class="desktop-nav" aria-label="Primary navigation">
+    <nav
+      class="desktop-nav"
+      aria-label="Primary navigation"
+    >
       <ul>
 
         <li>
-          <a href="{% url 'home' %}"
-             class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+          <a
+            href="{% url 'home' %}"
+            {% if request.resolver_match.url_name == "home" %}
+              class="active"
+              aria-current="page"
+            {% endif %}
+          >
             Home
           </a>
         </li>
 
         <li class="has-submenu">
-          <a href="{% url 'portfolio:list' %}"
-             class="{% if request.resolver_match.namespace == 'portfolio' %}active{% endif %}">
+
+          <a
+            href="{% url 'portfolio:list' %}"
+            {% if request.resolver_match.namespace == "portfolio" %}
+              class="active"
+              aria-current="page"
+            {% endif %}
+          >
             Portfolio
           </a>
 
-          {% if nav_destinations %}
           <div class="submenu">
+
+            <a href="{% url 'portfolio:list' %}">
+              Portfolio overview
+            </a>
+
             {% for destination in nav_destinations %}
               <a href="{{ destination.get_absolute_url }}">
                 {{ destination.name }}
               </a>
             {% endfor %}
 
-            <a href="{% url 'portfolio:all_properties' %}" class="submenu-all">
+            <a
+              href="{% url 'portfolio:all_properties' %}"
+              class="submenu-all"
+            >
               View all properties
             </a>
+
           </div>
-          {% endif %}
+
         </li>
 
         <li class="has-submenu">
-          <a href="{% url 'services:list' %}"
-             class="{% if request.resolver_match.namespace == 'services' %}active{% endif %}">
+
+          <a
+            href="{% url 'services:list' %}"
+            {% if request.resolver_match.namespace == "services" %}
+              class="active"
+              aria-current="page"
+            {% endif %}
+          >
             Services
           </a>
 
-          {% if nav_services %}
           <div class="submenu">
+
+            <a href="{% url 'services:list' %}">
+              Services overview
+            </a>
+
             {% for service in nav_services %}
               <a href="{{ service.get_absolute_url }}">
                 {{ service.title }}
               </a>
             {% endfor %}
+
           </div>
-          {% endif %}
+
         </li>
 
         <li>
-          <a href="{% url 'about' %}"
-             class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-            About
-          </a>
-        </li>
-
-        <li>
-          <a href="{% url 'journal:list' %}"
-             class="{% if request.resolver_match.namespace == 'journal' %}active{% endif %}">
+          <a
+            href="{% url 'journal:list' %}"
+            {% if request.resolver_match.namespace == "journal" %}
+              class="active"
+              aria-current="page"
+            {% endif %}
+          >
             Journal
           </a>
         </li>
 
         <li>
-          <a href="{% url 'contact' %}"
-             class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+          <a
+            href="{% url 'about' %}"
+            {% if request.resolver_match.url_name == "about" %}
+              class="active"
+              aria-current="page"
+            {% endif %}
+          >
+            About
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="{% url 'contact' %}"
+            {% if request.resolver_match.url_name == "contact" %}
+              class="active"
+              aria-current="page"
+            {% endif %}
+          >
             Contact
           </a>
         </li>
@@ -79,7 +131,10 @@
     </nav>
 
     <div class="navright">
-      <a class="btn btn-outline" href="{% url 'contact' %}">
+      <a
+        class="btn btn-outline"
+        href="{% url 'contact' %}"
+      >
         Schedule a consultation
       </a>
     </div>
@@ -90,122 +145,185 @@
       type="button"
       aria-label="Open menu"
       aria-controls="mobileNav"
-      aria-expanded="false">
-      <span></span>
-      <span></span>
+      aria-expanded="false"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
     </button>
 
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+
+<div
+  class="mobile-nav"
+  id="mobileNav"
+  aria-hidden="true"
+>
 
   <button
     class="menu-close"
     id="menuClose"
     type="button"
-    aria-label="Close menu">
-    &times;
+    aria-label="Close menu"
+  >
+    <span aria-hidden="true">&times;</span>
   </button>
 
-  <ul class="mobile-nav-list">
+  <nav aria-label="Mobile navigation">
 
-    <li>
-      <a href="{% url 'home' %}"
-         class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-        Home
-      </a>
-    </li>
+    <ul class="mobile-nav-list">
 
-    <li class="mobile-has-submenu">
-
-      <button
-        class="mobile-submenu-toggle"
-        type="button"
-        aria-expanded="false">
-        Portfolio
-        <span aria-hidden="true">+</span>
-      </button>
-
-      {% if nav_destinations %}
-      <div class="mobile-submenu">
-
-        <a href="{% url 'portfolio:list' %}">
-          Portfolio overview
+      <li>
+        <a
+          href="{% url 'home' %}"
+          {% if request.resolver_match.url_name == "home" %}
+            class="active"
+            aria-current="page"
+          {% endif %}
+        >
+          Home
         </a>
+      </li>
 
-        {% for destination in nav_destinations %}
-          <a href="{{ destination.get_absolute_url }}">
-            {{ destination.name }}
+      <li class="mobile-has-submenu">
+
+        <button
+          class="
+            mobile-submenu-toggle
+            {% if request.resolver_match.namespace == 'portfolio' %}
+              active
+            {% endif %}
+          "
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobilePortfolioSubmenu"
+        >
+          Portfolio
+
+          <span aria-hidden="true">
+            +
+          </span>
+        </button>
+
+        <div
+          class="mobile-submenu"
+          id="mobilePortfolioSubmenu"
+        >
+
+          <a href="{% url 'portfolio:list' %}">
+            Portfolio overview
           </a>
-        {% endfor %}
 
-        <a href="{% url 'portfolio:all_properties' %}">
-          View all properties
-        </a>
+          {% for destination in nav_destinations %}
+            <a href="{{ destination.get_absolute_url }}">
+              {{ destination.name }}
+            </a>
+          {% endfor %}
 
-      </div>
-      {% endif %}
-
-    </li>
-
-    <li class="mobile-has-submenu">
-
-      <button
-        class="mobile-submenu-toggle"
-        type="button"
-        aria-expanded="false">
-        Services
-        <span aria-hidden="true">+</span>
-      </button>
-
-      {% if nav_services %}
-      <div class="mobile-submenu">
-
-        <a href="{% url 'services:list' %}">
-          Services overview
-        </a>
-
-        {% for service in nav_services %}
-          <a href="{{ service.get_absolute_url }}">
-            {{ service.title }}
+          <a href="{% url 'portfolio:all_properties' %}">
+            View all properties
           </a>
-        {% endfor %}
 
-      </div>
-      {% endif %}
+        </div>
 
-    </li>
+      </li>
 
-    <li>
-      <a href="{% url 'about' %}"
-         class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
-        About
-      </a>
-    </li>
+      <li class="mobile-has-submenu">
 
-    <li>
-      <a href="{% url 'journal:list' %}"
-         class="{% if request.resolver_match.namespace == 'journal' %}active{% endif %}">
-        Journal
-      </a>
-    </li>
+        <button
+          class="
+            mobile-submenu-toggle
+            {% if request.resolver_match.namespace == 'services' %}
+              active
+            {% endif %}
+          "
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobileServicesSubmenu"
+        >
+          Services
 
-    <li>
-      <a href="{% url 'contact' %}"
-         class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
-        Contact
-      </a>
-    </li>
+          <span aria-hidden="true">
+            +
+          </span>
+        </button>
 
-  </ul>
+        <div
+          class="mobile-submenu"
+          id="mobileServicesSubmenu"
+        >
 
-  <a class="btn btn-primary" href="{% url 'contact' %}" style="margin-top:30px;">
+          <a href="{% url 'services:list' %}">
+            Services overview
+          </a>
+
+          {% for service in nav_services %}
+            <a href="{{ service.get_absolute_url }}">
+              {{ service.title }}
+            </a>
+          {% endfor %}
+
+        </div>
+
+      </li>
+
+      <li>
+        <a
+          href="{% url 'journal:list' %}"
+          {% if request.resolver_match.namespace == "journal" %}
+            class="active"
+            aria-current="page"
+          {% endif %}
+        >
+          Journal
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="{% url 'about' %}"
+          {% if request.resolver_match.url_name == "about" %}
+            class="active"
+            aria-current="page"
+          {% endif %}
+        >
+          About
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="{% url 'contact' %}"
+          {% if request.resolver_match.url_name == "contact" %}
+            class="active"
+            aria-current="page"
+          {% endif %}
+        >
+          Contact
+        </a>
+      </li>
+
+    </ul>
+
+  </nav>
+
+  <a
+    class="btn btn-primary mobile-nav-cta"
+    href="{% url 'contact' %}"
+  >
     Schedule a consultation
   </a>
 
   <div class="mobile-social">
-    <a href="#">LinkedIn</a>
+
+    <a
+      href="#"
+      aria-label="Oliverde on LinkedIn"
+    >
+      LinkedIn
+    </a>
+
   </div>
 
 </div>
