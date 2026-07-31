@@ -2030,6 +2030,62 @@ body.lightbox-open {
   }
 }
 
+.page-intro-note {
+  max-width: 760px;
+  margin-top: 20px;
+
+  font-size: 0.94rem;
+  line-height: 1.75;
+
+  opacity: 0.72;
+}
+
+.section-heading {
+  margin-bottom: 32px;
+}
+
+.section-heading .eyebrow {
+  margin-bottom: 10px;
+}
+
+.portfolio-all-properties {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.portfolio-discretion {
+  padding: 96px 0;
+  background: #f3efe6;
+}
+
+.portfolio-discretion-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.portfolio-discretion-inner h2 {
+  margin: 12px 0 24px;
+}
+
+.portfolio-discretion-inner p {
+  max-width: 680px;
+  margin: 0 auto 16px;
+
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.destination-note {
+  max-width: 640px;
+  margin-top: 24px;
+
+  font-size: 0.94rem;
+  line-height: 1.75;
+
+  opacity: 0.72;
+}
+
 /* ---------- SERVICES DETAIL PAGE ---------- */
 .services-detail{padding:20px 0 100px; background:var(--cream);}
 .service-block{

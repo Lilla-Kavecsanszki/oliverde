@@ -1,6 +1,7 @@
 from collections import OrderedDict
 
 from django.db.models import Prefetch
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 
 from .models import (
@@ -27,7 +28,12 @@ class PortfolioLandingView(ListView):
                 published=True,
                 featured=True,
             )
-            .select_related("destination")[:6]
+            .select_related("destination")
+            .order_by(
+                "featured_order",
+                "public_title",
+                "title",
+            )[:6]
         )
 
         return context
@@ -42,10 +48,25 @@ class PropertyListAllView(ListView):
     paginate_by = 12
 
     allowed_sort_options = {
-        "featured": ("-featured", "title"),
-        "name": ("title",),
-        "-name": ("-title",),
-        "destination": ("destination__name", "title"),
+        "featured": (
+            "-featured",
+            "featured_order",
+            "public_title",
+            "title",
+        ),
+        "name": (
+            "public_title",
+            "title",
+        ),
+        "-name": (
+            "-public_title",
+            "-title",
+        ),
+        "destination": (
+            "destination__name",
+            "public_title",
+            "title",
+        ),
     }
 
     def get_queryset(self):
@@ -67,7 +88,7 @@ class PropertyListAllView(ListView):
 
         if destination_slug:
             queryset = queryset.filter(
-                destination__slug=destination_slug
+                destination__slug=destination_slug,
             )
 
         ordering = self.allowed_sort_options.get(
@@ -112,6 +133,8 @@ class PropertyListAllView(ListView):
 
 
 class DestinationDetailView(DetailView):
+    """A destination page with its published properties."""
+
     model = Destination
     template_name = "portfolio/destination_detail.html"
     context_object_name = "destination"
@@ -123,6 +146,12 @@ class DestinationDetailView(DetailView):
             self.object.properties
             .filter(published=True)
             .select_related("destination")
+            .order_by(
+                "-featured",
+                "featured_order",
+                "public_title",
+                "title",
+            )
         )
 
         context["testimonial"] = (
@@ -135,6 +164,8 @@ class DestinationDetailView(DetailView):
 
 
 class PropertyDetailView(DetailView):
+    """A public property page identified securely by its UUID."""
+
     model = Property
     template_name = "portfolio/property_detail.html"
     context_object_name = "property"
@@ -154,8 +185,39 @@ class PropertyDetailView(DetailView):
                     ),
                 ),
                 "services",
+                "amenities",
             )
         )
+
+    def get_object(self, queryset=None):
+        """
+        Retrieve the property using its random public UUID.
+
+        The slug is deliberately not used for the database lookup.
+        """
+        queryset = queryset or self.get_queryset()
+
+        return get_object_or_404(
+            queryset,
+            public_id=self.kwargs["public_id"],
+        )
+
+    def get(self, request, *args, **kwargs):
+        """
+        Redirect an incorrect or outdated slug to the canonical URL.
+
+        The UUID remains stable even when the editorial slug changes.
+        """
+        self.object = self.get_object()
+
+        if kwargs.get("slug") != self.object.slug:
+            return redirect(
+                self.object.get_absolute_url(),
+                permanent=True,
+            )
+
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -177,7 +239,6 @@ class PropertyDetailView(DetailView):
         section_labels = dict(PropertyImage.Section.choices)
 
         for image in gallery_images:
-
             if image.section not in gallery_sections:
                 gallery_sections[image.section] = {
                     "key": image.section,
@@ -199,6 +260,7 @@ class PropertyDetailView(DetailView):
         )
 
         context["services"] = self.object.services.all()
+        context["amenities"] = self.object.amenities.all()
 
         context["related_properties"] = (
             Property.objects
@@ -208,7 +270,12 @@ class PropertyDetailView(DetailView):
             )
             .exclude(pk=self.object.pk)
             .select_related("destination")
-            .order_by("-featured", "title")[:3]
+            .order_by(
+                "-featured",
+                "featured_order",
+                "public_title",
+                "title",
+            )[:3]
         )
 
         return context

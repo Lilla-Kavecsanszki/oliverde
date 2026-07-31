@@ -1,38 +1,59 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}All Properties — Oliverde{% endblock %}
+{% block title %}Our Property Portfolio — Oliverde{% endblock %}
 
 {% block content %}
 
 <section class="page-intro">
   <div class="wrap">
-    <p class="eyebrow reveal">Portfolio</p>
+
+    <p class="eyebrow reveal">
+      Portfolio
+    </p>
 
     <h1 class="serif reveal">
-      All Properties
+      Homes Under Our Care
     </h1>
 
     <p class="page-intro-text reveal">
-      Every home currently under our care across Tuscany, Umbria and Lazio.
+      A considered selection of private estates, villas and country
+      homes managed by Oliverde across Tuscany, Umbria and Lazio.
     </p>
+
+    <p class="page-intro-note reveal">
+      In keeping with our commitment to discretion, some properties
+      are presented under privacy-safe editorial names and without
+      precise location details.
+    </p>
+
   </div>
 </section>
 
-<section class="properties" style="padding-top:0;">
+
+<section
+  class="properties"
+  style="padding-top:0;"
+>
   <div class="wrap">
 
-    <form class="property-filters reveal" method="get">
+    <form
+      class="property-filters reveal"
+      method="get"
+      action="{% url 'portfolio:all_properties' %}"
+    >
 
       <div class="property-results">
         Showing
         <strong>{{ page_obj.paginator.count }}</strong>
-        property{{ page_obj.paginator.count|pluralize }}
+        propert{{ page_obj.paginator.count|pluralize:"y,ies" }}
       </div>
+
 
       <div class="property-filter-group">
 
         <div class="filter-item">
+
           <label for="destination">
             Destination
           </label>
@@ -42,9 +63,13 @@
             name="destination"
             onchange="this.form.submit()"
           >
-            <option value="">All Destinations</option>
+
+            <option value="">
+              All Destinations
+            </option>
 
             {% for destination in destinations %}
+
               <option
                 value="{{ destination.slug }}"
                 {% if destination.slug == selected_destination %}
@@ -53,11 +78,16 @@
               >
                 {{ destination.name }}
               </option>
+
             {% endfor %}
+
           </select>
+
         </div>
 
+
         <div class="filter-item">
+
           <label for="sort">
             Sort
           </label>
@@ -67,46 +97,59 @@
             name="sort"
             onchange="this.form.submit()"
           >
+
             <option
               value="featured"
-              {% if selected_sort == "featured" %}selected{% endif %}
+              {% if selected_sort == "featured" %}
+                selected
+              {% endif %}
             >
               Featured First
             </option>
 
             <option
               value="name"
-              {% if selected_sort == "name" %}selected{% endif %}
+              {% if selected_sort == "name" %}
+                selected
+              {% endif %}
             >
               Property Name (A–Z)
             </option>
 
             <option
               value="-name"
-              {% if selected_sort == "-name" %}selected{% endif %}
+              {% if selected_sort == "-name" %}
+                selected
+              {% endif %}
             >
               Property Name (Z–A)
             </option>
 
             <option
               value="destination"
-              {% if selected_sort == "destination" %}selected{% endif %}
+              {% if selected_sort == "destination" %}
+                selected
+              {% endif %}
             >
               Destination (A–Z)
             </option>
 
           </select>
+
         </div>
 
       </div>
 
+
       {% if selected_destination or selected_sort != "featured" %}
+
         <a
           href="{% url 'portfolio:all_properties' %}"
           class="filter-reset"
         >
           Reset filters
         </a>
+
       {% endif %}
 
     </form>
@@ -116,34 +159,76 @@
 
       {% for property in properties %}
 
-        <a
-          href="{{ property.get_absolute_url }}"
-          class="dest-prop-card"
-        >
+        <article class="dest-prop-card">
 
-          <img
-            class="ph"
-            src="{{ property.cover_image.url }}"
-            alt="{{ property.title }}"
+          <a
+            href="{{ property.get_absolute_url }}"
+            class="dest-prop-card-link"
+            aria-label="View {{ property.display_title }}"
           >
 
-          <p class="eyebrow" style="margin-top:16px;">
-            {{ property.destination.name }}
-          </p>
+            <div class="dest-prop-image">
 
-          <h3 class="serif">
-            {{ property.title }}
-          </h3>
+              {% if property.cover_image %}
 
-          <span class="textlink">
-            View property →
-          </span>
+                <img
+                  class="ph"
+                  src="{{ property.cover_image.url }}"
+                  alt="{{ property.display_title }} in {{ property.destination.name }}"
+                  loading="lazy"
+                >
 
-        </a>
+              {% else %}
+
+                <div
+                  class="ph property-card-placeholder"
+                  aria-hidden="true"
+                ></div>
+
+              {% endif %}
+
+              {% if property.available_for_rental %}
+
+                <div class="rental-card-banner">
+                  {{ property.display_rental_banner }}
+                </div>
+
+              {% endif %}
+
+            </div>
+
+
+            <div class="dest-prop-content">
+
+              <p
+                class="eyebrow"
+                style="margin-top:16px;"
+              >
+                {{ property.destination.name }}
+              </p>
+
+              <h2 class="serif">
+                {{ property.display_title }}
+              </h2>
+
+              <p class="property-management-label">
+                Managed by Oliverde
+              </p>
+
+              <span class="textlink">
+                View property →
+              </span>
+
+            </div>
+
+          </a>
+
+        </article>
 
       {% empty %}
 
         <div class="empty-properties">
+
           <h2 class="serif">
             No properties found
           </h2>
@@ -158,33 +243,51 @@
           >
             View all properties
           </a>
+
         </div>
 
       {% endfor %}
 
     </div>
 
+
     {% if is_paginated %}
 
-      <div class="pagination">
+      <nav
+        class="pagination"
+        aria-label="Property portfolio pages"
+      >
 
         {% if page_obj.has_previous %}
-          <a href="?{% if pagination_query %}{{ pagination_query }}&{% endif %}page={{ page_obj.previous_page_number }}">
+
+          <a
+            href="?{% if pagination_query %}{{ pagination_query }}&amp;{% endif %}page={{ page_obj.previous_page_number }}"
+            rel="prev"
+          >
             ← Previous
           </a>
+
         {% endif %}
+
 
         <span>
-          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+          Page {{ page_obj.number }}
+          of {{ page_obj.paginator.num_pages }}
         </span>
 
+
         {% if page_obj.has_next %}
-          <a href="?{% if pagination_query %}{{ pagination_query }}&{% endif %}page={{ page_obj.next_page_number }}">
+
+          <a
+            href="?{% if pagination_query %}{{ pagination_query }}&amp;{% endif %}page={{ page_obj.next_page_number }}"
+            rel="next"
+          >
             Next →
           </a>
+
         {% endif %}
 
-      </div>
+      </nav>
 
     {% endif %}
 

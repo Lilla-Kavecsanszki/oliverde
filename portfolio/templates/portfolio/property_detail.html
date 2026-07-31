@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{{ property.title }} — Oliverde{% endblock %}
+{% block title %}{{ property.display_title }} — Oliverde{% endblock %}
 
 {% block content %}
 
@@ -15,25 +15,53 @@
       &larr; Back to {{ property.destination.name }}
     </a>
 
+
     <div class="property-header reveal">
 
       <div class="property-hero-media">
-        <img
-          class="prop-hero-img"
-          src="{{ property.cover_image.url }}"
-          alt="{{ property.title }} in {{ property.destination.name }}"
-        >
+
+        {% if property.cover_image %}
+
+          <img
+            class="prop-hero-img"
+            src="{{ property.cover_image.url }}"
+            alt="{{ property.display_title }} in {{ property.destination.name }}"
+          >
+
+        {% else %}
+
+          <div
+            class="prop-hero-img property-hero-placeholder"
+            aria-hidden="true"
+          ></div>
+
+        {% endif %}
+
+        {% if property.available_for_rental %}
+          <div class="property-rental-banner">
+            <span>
+              {{ property.display_rental_banner }}
+            </span>
+          </div>
+        {% endif %}
+
       </div>
 
-      <div class="property-header-content">
 
-        <h1 class="serif">
-          {{ property.title }}
-        </h1>
+      <div class="property-header-content">
 
         <p class="eyebrow property-location">
           {{ property.destination.name }}
         </p>
+
+        <h1 class="serif">
+          {{ property.display_title }}
+        </h1>
+
+        <p class="property-management-label">
+          Managed by Oliverde
+        </p>
+
 
         {% if property.description %}
           <div class="property-description">
@@ -41,11 +69,16 @@
           </div>
         {% endif %}
 
-        {% if property.bedrooms or property.bathrooms or property.sleeps or property.land_size_hectares %}
-          <div class="property-facts">
+
+        {% if property.show_property_highlights %}
+
+          {% if property.bedrooms or property.bathrooms or property.sleeps or property.land_size_hectares %}
+
+            <div class="property-facts">
 
             {% if property.bedrooms %}
               <div class="fact">
+
                 <svg
                   class="fact-icon"
                   viewBox="0 0 24 24"
@@ -62,11 +95,14 @@
                 <span class="label">
                   Bedroom{{ property.bedrooms|pluralize }}
                 </span>
+
               </div>
             {% endif %}
 
+
             {% if property.bathrooms %}
               <div class="fact">
+
                 <svg
                   class="fact-icon"
                   viewBox="0 0 24 24"
@@ -83,11 +119,14 @@
                 <span class="label">
                   Bathroom{{ property.bathrooms|pluralize }}
                 </span>
+
               </div>
             {% endif %}
 
+
             {% if property.sleeps %}
               <div class="fact">
+
                 <svg
                   class="fact-icon"
                   viewBox="0 0 24 24"
@@ -105,11 +144,14 @@
                 <span class="label">
                   Sleeps
                 </span>
+
               </div>
             {% endif %}
 
+
             {% if property.land_size_hectares %}
               <div class="fact">
+
                 <svg
                   class="fact-icon"
                   viewBox="0 0 24 24"
@@ -126,26 +168,54 @@
                 <span class="label">
                   Hectare{{ property.land_size_hectares|pluralize }}
                 </span>
+
               </div>
             {% endif %}
 
-          </div>
+            </div>
+
+          {% endif %}
+
         {% endif %}
 
-        <a
-          class="btn btn-primary property-enquiry-button"
-          href="{% url 'contact' %}?property={{ property.title|urlencode }}"
-        >
-          Enquire about this property
-        </a>
+
+        {% if property.available_for_rental %}
+
+          <div class="property-rental-enquiry">
+
+            {% if property.rental_intro %}
+              <div class="property-rental-intro">
+                {{ property.rental_intro|linebreaks }}
+              </div>
+            {% else %}
+              <p class="property-rental-intro">
+                This estate is available for private rental. Every stay
+                is personally arranged to provide a seamless and discreet
+                experience.
+              </p>
+            {% endif %}
+
+            <a
+              class="btn btn-primary property-enquiry-button"
+              href="{% url 'contact' %}?property={{ property.display_title|urlencode }}"
+            >
+              Enquire About This Estate
+            </a>
+
+          </div>
+
+        {% endif %}
 
       </div>
     </div>
 
+
     {% if gallery_sections %}
+
       <section class="property-tour">
 
         <div class="property-tour-intro reveal">
+
           <p class="eyebrow">
             A closer look
           </p>
@@ -159,12 +229,16 @@
             details, discover the spaces that define this exceptional
             Italian home.
           </p>
+
         </div>
 
+
         {% for section in gallery_sections %}
+
           <section class="property-gallery-chapter">
 
             <div class="property-chapter-heading reveal">
+
               <span class="property-chapter-number">
                 {{ forloop.counter|stringformat:"02d" }}
               </span>
@@ -172,11 +246,14 @@
               <h3 class="serif">
                 {{ section.title }}
               </h3>
+
             </div>
+
 
             <div class="property-gallery">
 
               {% for img in section.images %}
+
                 <figure
                   class="property-gallery-item gallery-reveal"
                   style="--gallery-delay: {{ forloop.counter0 }};"
@@ -186,17 +263,22 @@
                     class="property-gallery-trigger"
                     type="button"
                     data-gallery-image="{{ img.image.url }}"
-                    data-gallery-caption="{{ img.caption|default:property.title }}"
+                    data-gallery-caption="{% firstof img.caption img.alt_text property.display_title %}"
                     data-gallery-section="{{ section.title }}"
-                    aria-label="Enlarge {{ img.caption|default:property.title }}"
+                    aria-label="Enlarge {% firstof img.alt_text img.caption property.display_title %}"
                   >
+
                     <img
                       src="{{ img.image.url }}"
-                      alt="{{ img.caption|default:property.title }}"
+                      alt="{% firstof img.alt_text img.caption property.display_title %}"
                       loading="lazy"
                     >
 
-                    <span class="gallery-view-hint" aria-hidden="true">
+                    <span
+                      class="gallery-view-hint"
+                      aria-hidden="true"
+                    >
+
                       <svg viewBox="0 0 24 24">
                         <circle cx="11" cy="11" r="6"></circle>
                         <path d="m16 16 4 4"></path>
@@ -204,8 +286,11 @@
                       </svg>
 
                       View larger
+
                     </span>
+
                   </button>
+
 
                   {% if img.caption %}
                     <figcaption>
@@ -214,13 +299,17 @@
                   {% endif %}
 
                 </figure>
+
               {% endfor %}
 
             </div>
+
           </section>
+
         {% endfor %}
 
       </section>
+
 
       <div
         class="property-lightbox"
@@ -230,23 +319,31 @@
         aria-modal="true"
         aria-label="Property image viewer"
       >
+
         <button
           class="lightbox-close"
           type="button"
           aria-label="Close enlarged image"
         >
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">
+            &times;
+          </span>
         </button>
+
 
         <button
           class="lightbox-arrow lightbox-previous"
           type="button"
           aria-label="Previous image"
         >
-          <span aria-hidden="true">&larr;</span>
+          <span aria-hidden="true">
+            &larr;
+          </span>
         </button>
 
+
         <div class="lightbox-content">
+
           <img
             class="lightbox-image"
             src=""
@@ -254,33 +351,44 @@
           >
 
           <div class="lightbox-meta">
+
             <div>
               <p class="lightbox-section"></p>
               <p class="lightbox-caption"></p>
             </div>
 
             <span class="lightbox-counter"></span>
+
           </div>
+
         </div>
+
 
         <button
           class="lightbox-arrow lightbox-next"
           type="button"
           aria-label="Next image"
         >
-          <span aria-hidden="true">&rarr;</span>
+          <span aria-hidden="true">
+            &rarr;
+          </span>
         </button>
+
       </div>
+
     {% endif %}
 
   </div>
 </section>
 
+
 {% if services %}
+
   <section class="services">
     <div class="wrap">
 
       <div class="services-head reveal">
+
         <p class="eyebrow">
           Our management services
         </p>
@@ -288,11 +396,18 @@
         <h2 class="serif">
           Comprehensive care of your home, so it is always exactly as you expect
         </h2>
+
       </div>
 
+
       <div class="services-grid property-services-grid reveal">
+
         {% for service in services %}
-          <div class="service">
+
+          <a
+            href="{{ service.get_absolute_url }}"
+            class="service property-service-card"
+          >
 
             <svg
               class="sprig"
@@ -311,19 +426,29 @@
               {{ service.description|truncatewords:18 }}
             </p>
 
-          </div>
+            <span class="textlink">
+              Explore service &rarr;
+            </span>
+
+          </a>
+
         {% endfor %}
+
       </div>
 
     </div>
   </section>
+
 {% endif %}
 
+
 {% if related_properties %}
+
   <section class="properties">
     <div class="wrap">
 
       <div class="prop-head reveal">
+
         <p class="eyebrow">
           Continue exploring
         </p>
@@ -331,42 +456,91 @@
         <h2 class="serif">
           Discover Another Home
         </h2>
+
       </div>
 
-      <div class="dest-prop-grid reveal">
-        {% for rp in related_properties %}
-          <a
-            href="{{ rp.get_absolute_url }}"
-            class="dest-prop-card"
-          >
 
-            <img
-              class="ph"
-              src="{{ rp.cover_image.url }}"
-              alt="{{ rp.title }} in {{ rp.destination.name }}"
-              loading="lazy"
+      <div class="dest-prop-grid reveal">
+
+        {% for rp in related_properties %}
+
+          <article class="dest-prop-card">
+
+            <a
+              href="{{ rp.get_absolute_url }}"
+              class="dest-prop-card-link"
+              aria-label="View {{ rp.display_title }}"
             >
 
-            <p class="eyebrow" style="margin-top: 16px;">
-              {{ rp.destination.name }}
-            </p>
+              <div class="dest-prop-image">
 
-            <h3 class="serif">
-              {{ rp.title }}
-            </h3>
+                {% if rp.cover_image %}
 
-            <span class="textlink">
-              View property &rarr;
-            </span>
+                  <img
+                    class="ph"
+                    src="{{ rp.cover_image.url }}"
+                    alt="{{ rp.display_title }} in {{ rp.destination.name }}"
+                    loading="lazy"
+                  >
 
-          </a>
+                {% else %}
+
+                  <div
+                    class="ph property-card-placeholder"
+                    aria-hidden="true"
+                  ></div>
+
+                {% endif %}
+
+                {% if rp.available_for_rental %}
+                  <div class="rental-card-banner">
+                    {{ rp.display_rental_banner }}
+                  </div>
+                {% endif %}
+
+              </div>
+
+
+              <div class="dest-prop-content">
+
+                <p
+                  class="eyebrow"
+                  style="margin-top:16px;"
+                >
+                  {{ rp.destination.name }}
+                </p>
+
+                <h3 class="serif">
+                  {{ rp.display_title }}
+                </h3>
+
+                <p class="property-management-label">
+                  Managed by Oliverde
+                </p>
+
+                <span class="textlink">
+                  View property &rarr;
+                </span>
+
+              </div>
+
+            </a>
+
+          </article>
+
         {% endfor %}
+
       </div>
 
     </div>
   </section>
+
 {% endif %}
 
-<script src="{% static 'js/property-gallery.js' %}" defer></script>
+
+<script
+  src="{% static 'js/property-gallery.js' %}"
+  defer
+></script>
 
 {% endblock %}
