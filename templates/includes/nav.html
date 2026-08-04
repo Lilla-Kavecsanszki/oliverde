@@ -43,21 +43,28 @@
           <div class="submenu">
 
             <a href="{% url 'portfolio:list' %}">
-              Portfolio overview
+              Portfolio Overview
             </a>
+
+            <a href="{% url 'portfolio:all_properties' %}">
+              Our Collection
+            </a>
+
+            <a href="{% url 'portfolio:holiday_rentals' %}">
+              Holiday Rentals
+            </a>
+
+            <hr class="submenu-divider">
+
+            <p class="submenu-heading">
+              Browse by Destination
+            </p>
 
             {% for destination in nav_destinations %}
               <a href="{{ destination.get_absolute_url }}">
                 {{ destination.name }}
               </a>
             {% endfor %}
-
-            <a
-              href="{% url 'portfolio:all_properties' %}"
-              class="submenu-all"
-            >
-              View all properties
-            </a>
 
           </div>
 
@@ -78,7 +85,7 @@
           <div class="submenu">
 
             <a href="{% url 'services:list' %}">
-              Services overview
+              Services Overview
             </a>
 
             {% for service in nav_services %}
@@ -93,18 +100,6 @@
 
         <li>
           <a
-            href="{% url 'journal:list' %}"
-            {% if request.resolver_match.namespace == "journal" %}
-              class="active"
-              aria-current="page"
-            {% endif %}
-          >
-            Journal
-          </a>
-        </li>
-
-        <li>
-          <a
             href="{% url 'about' %}"
             {% if request.resolver_match.url_name == "about" %}
               class="active"
@@ -112,6 +107,18 @@
             {% endif %}
           >
             About
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="{% url 'journal:list' %}"
+            {% if request.resolver_match.namespace == "journal" %}
+              class="active"
+              aria-current="page"
+            {% endif %}
+          >
+            Journal
           </a>
         </li>
 
@@ -212,18 +219,26 @@
         >
 
           <a href="{% url 'portfolio:list' %}">
-            Portfolio overview
+            Portfolio Overview
           </a>
+
+          <a href="{% url 'portfolio:all_properties' %}">
+            Our Collection
+          </a>
+
+          <a href="{% url 'portfolio:holiday_rentals' %}">
+            Holiday Rentals
+          </a>
+
+          <div class="mobile-submenu-heading">
+            Browse by Destination
+          </div>
 
           {% for destination in nav_destinations %}
             <a href="{{ destination.get_absolute_url }}">
               {{ destination.name }}
             </a>
           {% endfor %}
-
-          <a href="{% url 'portfolio:all_properties' %}">
-            View all properties
-          </a>
 
         </div>
 
@@ -255,7 +270,7 @@
         >
 
           <a href="{% url 'services:list' %}">
-            Services overview
+            Services Overview
           </a>
 
           {% for service in nav_services %}
@@ -270,18 +285,6 @@
 
       <li>
         <a
-          href="{% url 'journal:list' %}"
-          {% if request.resolver_match.namespace == "journal" %}
-            class="active"
-            aria-current="page"
-          {% endif %}
-        >
-          Journal
-        </a>
-      </li>
-
-      <li>
-        <a
           href="{% url 'about' %}"
           {% if request.resolver_match.url_name == "about" %}
             class="active"
@@ -289,6 +292,18 @@
           {% endif %}
         >
           About
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="{% url 'journal:list' %}"
+          {% if request.resolver_match.namespace == "journal" %}
+            class="active"
+            aria-current="page"
+          {% endif %}
+        >
+          Journal
         </a>
       </li>
 
