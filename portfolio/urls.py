@@ -16,6 +16,11 @@ urlpatterns = [
         name="all_properties",
     ),
     path(
+        "holiday-rentals/",
+        views.HolidayRentalListView.as_view(),
+        name="holiday_rentals",
+    ),
+    path(
         "destination/<slug:slug>/",
         views.DestinationDetailView.as_view(),
         name="destination_detail",
