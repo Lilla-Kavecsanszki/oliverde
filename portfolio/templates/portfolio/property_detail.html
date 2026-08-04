@@ -10,9 +10,9 @@
 
     <a
       class="textlink property-back-link"
-      href="{{ property.destination.get_absolute_url }}"
+      href="{% url 'portfolio:all_properties' %}"
     >
-      &larr; Back to {{ property.destination.name }}
+      &larr; Back to Our Collection
     </a>
 
 
@@ -205,9 +205,9 @@
             {% else %}
 
               <p class="property-rental-intro">
-                This estate is available for private rental. Every stay
-                is personally arranged to provide a seamless and discreet
-                experience.
+                This home is available for private rental. Every stay is
+                personally arranged by Oliverde to provide a seamless,
+                discreet and memorable experience.
               </p>
 
             {% endif %}
@@ -216,7 +216,7 @@
               class="btn btn-primary property-enquiry-button"
               href="{% url 'contact' %}?property={{ property.display_title|urlencode }}"
             >
-              Enquire About This Estate
+              Enquire About Staying
             </a>
 
           </div>
@@ -239,7 +239,7 @@
           </p>
 
           <h2 class="serif">
-            Explore the Property
+            Explore the Estate
           </h2>
 
           <p>
@@ -448,7 +448,7 @@
         </p>
 
         <h2 class="serif">
-          Discover Another Home
+          More Homes Under Our Care
         </h2>
 
       </div>

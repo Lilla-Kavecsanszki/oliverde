@@ -1,19 +1,31 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}{{ destination.name }} — Oliverde{% endblock %}
+{% block title %}
+  {{ destination.name }} — Oliverde
+{% endblock %}
 
 {% block content %}
 
 <section class="dest-hero">
 
   {% if destination.cover_image %}
+
     <img
       class="ph"
       src="{{ destination.cover_image.url }}"
-      alt="{{ destination.name }}"
+      alt="Landscape and homes in {{ destination.name }}"
     >
+
+  {% else %}
+
+    <div
+      class="ph destination-hero-placeholder"
+      aria-hidden="true"
+    ></div>
+
   {% endif %}
+
 
   <div class="dest-hero-content wrap">
 
@@ -35,15 +47,25 @@
       {{ destination.name }}
     </h1>
 
-    <p class="dest-hero-text">
-      {{ destination.tagline|default:destination.description }}
-    </p>
+    {% if destination.tagline %}
+
+      <p class="dest-hero-text">
+        {{ destination.tagline }}
+      </p>
+
+    {% elif destination.description %}
+
+      <p class="dest-hero-text">
+        {{ destination.description|truncatewords:28 }}
+      </p>
+
+    {% endif %}
 
     <p class="destination-note">
-      Discover a curated selection of homes managed by Oliverde in
-      {{ destination.name }}. Some residences are presented using
-      editorial names in keeping with our commitment to client
-      privacy.
+      Discover homes under Oliverde's care in {{ destination.name }}.
+      In keeping with our commitment to discretion, some private
+      residences are presented under editorial names and without
+      precise location details.
     </p>
 
   </div>
@@ -57,13 +79,40 @@
 
     <div class="prop-head reveal">
 
-      <p class="eyebrow">
-        Managed Properties
-      </p>
+      <div class="prop-heading">
 
-      <h2 class="serif">
-        Homes in {{ destination.name }}
-      </h2>
+        <p class="eyebrow">
+          Our Collection
+        </p>
+
+        <h2 class="serif">
+          Homes in {{ destination.name }}
+        </h2>
+
+        <p class="section-heading-text">
+          Every property shown here is managed by Oliverde. Selected homes
+          may also be available for private rental.
+        </p>
+
+      </div>
+
+      <div class="prop-head-aside">
+
+        <a
+          href="{% url 'portfolio:all_properties' %}?destination={{ destination.slug }}"
+          class="textlink"
+        >
+          View in Our Collection &rarr;
+        </a>
+
+        <a
+          href="{% url 'portfolio:holiday_rentals' %}?destination={{ destination.slug }}"
+          class="textlink"
+        >
+          View Holiday Rentals &rarr;
+        </a>
+
+      </div>
 
     </div>
 
@@ -82,17 +131,31 @@
 
             <div class="dest-prop-image">
 
-              <img
-                class="ph"
-                src="{{ property.cover_image.url }}"
-                alt="Exterior of {{ property.display_title }}"
-                loading="lazy"
-              >
+              {% if property.cover_image %}
+
+                <img
+                  class="ph"
+                  src="{{ property.cover_image.url }}"
+                  alt="{{ property.display_title }} in {{ destination.name }}"
+                  loading="lazy"
+                >
+
+              {% else %}
+
+                <div
+                  class="ph property-card-placeholder"
+                  aria-hidden="true"
+                ></div>
+
+              {% endif %}
+
 
               {% if property.available_for_rental %}
+
                 <div class="rental-card-banner">
                   {{ property.display_rental_banner }}
                 </div>
+
               {% endif %}
 
             </div>
@@ -115,11 +178,31 @@
                 Managed by Oliverde
               </p>
 
-              {% if property.bedrooms %}
-                <p class="dest-prop-meta">
-                  {{ property.bedrooms }}
-                  Bedroom{{ property.bedrooms|pluralize }}
-                </p>
+              {% if property.show_property_highlights %}
+
+                {% if property.bedrooms or property.sleeps %}
+
+                  <p class="dest-prop-meta">
+
+                    {% if property.bedrooms %}
+
+                      {{ property.bedrooms }}
+                      Bedroom{{ property.bedrooms|pluralize }}
+
+                    {% endif %}
+
+                    {% if property.bedrooms and property.sleeps %}
+                      <span aria-hidden="true"> · </span>
+                    {% endif %}
+
+                    {% if property.sleeps %}
+                      Sleeps {{ property.sleeps }}
+                    {% endif %}
+
+                  </p>
+
+                {% endif %}
+
               {% endif %}
 
               <span class="textlink">
@@ -134,9 +217,25 @@
 
       {% empty %}
 
-        <p>
-          No properties are currently displayed for this destination.
-        </p>
+        <div class="empty-properties">
+
+          <h2 class="serif">
+            No homes are currently displayed
+          </h2>
+
+          <p>
+            Oliverde's portfolio in {{ destination.name }} is currently
+            being prepared.
+          </p>
+
+          <a
+            href="{% url 'portfolio:all_properties' %}"
+            class="btn btn-outline"
+          >
+            View Our Collection
+          </a>
+
+        </div>
 
       {% endfor %}
 
@@ -153,29 +252,20 @@
 
   <div class="wrap">
 
-    <blockquote
-      class="serif"
-      style="
-        font-size:22px;
-        font-style:italic;
-        max-width:650px;
-        margin:0 auto;
-        text-align:center;
-      "
-    >
+    <blockquote class="destination-testimonial reveal">
 
-      "{{ testimonial.quote }}"
-
-      <footer
-        style="
-          font-family:'Inter',sans-serif;
-          font-size:12px;
-          margin-top:16px;
-          text-transform:uppercase;
-          letter-spacing:0.08em;
-          color:var(--taupe);
-        "
+      <span
+        class="destination-testimonial-mark"
+        aria-hidden="true"
       >
+        “
+      </span>
+
+      <p class="serif">
+        {{ testimonial.quote }}
+      </p>
+
+      <footer>
         — {{ testimonial.author_name }}
       </footer>
 
@@ -186,5 +276,45 @@
 </section>
 
 {% endif %}
+
+
+<section class="cta">
+
+  <div class="wrap cta-row">
+
+    <div>
+
+      <h2 class="serif">
+        Looking for a home in {{ destination.name }}?
+      </h2>
+
+      <p>
+        Explore Oliverde's full collection or contact us to discuss property
+        management, private stays, or local support in the area.
+      </p>
+
+    </div>
+
+    <div class="destination-cta-actions">
+
+      <a
+        class="btn btn-primary"
+        href="{% url 'portfolio:all_properties' %}?destination={{ destination.slug }}"
+      >
+        View Our Collection
+      </a>
+
+      <a
+        class="btn btn-outline"
+        href="{% url 'contact' %}"
+      >
+        Contact Oliverde
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
 
 {% endblock %}

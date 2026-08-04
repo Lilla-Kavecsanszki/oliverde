@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Portfolio — Oliverde{% endblock %}
+{% block title %}
+  Portfolio — Oliverde
+{% endblock %}
 
 {% block content %}
 
@@ -18,17 +20,102 @@
     </h1>
 
     <p class="page-intro-text reveal">
-      From the vineyards of Montepulciano to the hills surrounding
-      Cortona and Lake Trasimeno, discover a considered collection
-      of exceptional homes entrusted to Oliverde.
+      Discover a considered collection of private estates, villas and
+      country homes entrusted to Oliverde across Tuscany, Umbria and Lazio.
     </p>
 
     <p class="page-intro-note reveal">
-      Every property shown here is managed by Oliverde. In keeping
-      with our commitment to discretion, some private residences are
-      presented under editorial names and without precise location
-      details. Selected homes are also available for private rental.
+      Every property shown here is managed by Oliverde. In keeping with our
+      commitment to discretion, some private residences are presented under
+      editorial names and without precise location details. Selected homes
+      are also available for private rental.
     </p>
+
+  </div>
+</section>
+
+
+<section class="portfolio-pathways">
+  <div class="wrap">
+
+    <div class="section-heading reveal">
+
+      <p class="eyebrow">
+        Explore the portfolio
+      </p>
+
+      <h2 class="serif">
+        Homes Under Our Care
+      </h2>
+
+      <p class="section-heading-text">
+        Browse Oliverde's complete collection of managed homes or discover
+        the selected properties currently available for private stays.
+      </p>
+
+    </div>
+
+
+    <div class="portfolio-pathway-grid reveal">
+
+      <a
+        href="{% url 'portfolio:all_properties' %}"
+        class="portfolio-pathway-card"
+      >
+
+        <div class="portfolio-pathway-content">
+
+          <p class="eyebrow">
+            The complete portfolio
+          </p>
+
+          <h3 class="serif">
+            Our Collection
+          </h3>
+
+          <p>
+            Explore the private estates, villas and country homes managed
+            by Oliverde throughout Tuscany, Umbria and Lazio.
+          </p>
+
+          <span class="textlink">
+            View Our Collection &rarr;
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <a
+        href="{% url 'portfolio:holiday_rentals' %}"
+        class="portfolio-pathway-card portfolio-pathway-card-rentals"
+      >
+
+        <div class="portfolio-pathway-content">
+
+          <p class="eyebrow">
+            Available to stay
+          </p>
+
+          <h3 class="serif">
+            Holiday Rentals
+          </h3>
+
+          <p>
+            Discover selected homes under Oliverde's care that are also
+            available for private and thoughtfully arranged stays.
+          </p>
+
+          <span class="textlink">
+            Explore Holiday Rentals &rarr;
+          </span>
+
+        </div>
+
+      </a>
+
+    </div>
 
   </div>
 </section>
@@ -46,6 +133,11 @@
       <h2 class="serif">
         Browse by Destination
       </h2>
+
+      <p class="section-heading-text">
+        Discover homes through the landscapes, towns and regions in which
+        Oliverde works.
+      </p>
 
     </div>
 
@@ -72,12 +164,7 @@
           {% else %}
 
             <div
-              class="ph"
-              style="background:linear-gradient(
-                150deg,
-                #8d9a67 0%,
-                #4c5730 100%
-              );"
+              class="ph destination-card-placeholder"
               aria-hidden="true"
             ></div>
 
@@ -90,15 +177,31 @@
               {{ destination.name }}
             </div>
 
+            {% if destination.tagline %}
+
+              <div class="destination-tagline">
+                {{ destination.tagline }}
+              </div>
+
+            {% endif %}
+
           </div>
 
         </a>
 
       {% empty %}
 
-        <p>
-          No destinations yet — add some in the admin.
-        </p>
+        <div class="empty-properties">
+
+          <h2 class="serif">
+            Destinations coming soon
+          </h2>
+
+          <p>
+            Oliverde's regional portfolio is currently being prepared.
+          </p>
+
+        </div>
 
       {% endfor %}
 
@@ -111,7 +214,14 @@
         class="btn btn-primary"
         href="{% url 'portfolio:all_properties' %}"
       >
-        Browse All Properties
+        View Our Collection
+      </a>
+
+      <a
+        class="btn btn-outline"
+        href="{% url 'portfolio:holiday_rentals' %}"
+      >
+        Explore Holiday Rentals
       </a>
 
     </div>
@@ -130,19 +240,19 @@
       </p>
 
       <h2 class="serif">
-        Privacy is part of the service
+        Privacy Is Part of the Service
       </h2>
 
       <p>
-        Many of the homes under our care are private family
-        residences. Property names, precise locations and identifying
-        details are shared publicly only with the owner's permission.
+        Many of the homes under our care are private family residences.
+        Property names, precise locations and identifying details are shared
+        publicly only with the owner's permission.
       </p>
 
       <p>
-        Our portfolio is intended to demonstrate the standard and
-        range of Oliverde's work while protecting the privacy of every
-        owner, guest and residence.
+        Our portfolio is intended to demonstrate the standard and range of
+        Oliverde's work while protecting the privacy of every owner, guest
+        and residence.
       </p>
 
     </div>
@@ -188,8 +298,8 @@
         </p>
 
         <p>
-          Deep regional knowledge and long-standing relationships
-          with trusted local professionals.
+          Deep regional knowledge and long-standing relationships with
+          trusted local professionals.
         </p>
 
       </div>
@@ -214,8 +324,8 @@
         </p>
 
         <p>
-          Direct communication, thoughtful oversight and solutions
-          tailored to the needs of each home.
+          Direct communication, thoughtful oversight and solutions tailored
+          to the needs of each home.
         </p>
 
       </div>
@@ -240,8 +350,8 @@
         </p>
 
         <p>
-          Complete respect for the privacy of owners, guests and
-          the homes entrusted to our care.
+          Complete respect for the privacy of owners, guests and the homes
+          entrusted to our care.
         </p>
 
       </div>

@@ -37,13 +37,26 @@ class PortfolioLandingView(ListView):
         return context
 
 
-class PropertyListAllView(ListView):
-    """Full property grid with destination filtering and sorting."""
+class PropertyCollectionView(ListView):
+    """
+    Base property-grid view.
+
+    Subclasses may apply additional restrictions, such as displaying only
+    properties that are available for private rental.
+    """
 
     model = Property
     template_name = "portfolio/property_list.html"
     context_object_name = "properties"
     paginate_by = 12
+
+    page_title = "Our Collection"
+    page_eyebrow = "Portfolio"
+    page_description = (
+        "A considered collection of private estates, villas and country "
+        "homes managed by Oliverde across Tuscany, Umbria and Lazio."
+    )
+    collection_type = "all"
 
     allowed_sort_options = {
         "featured": (
@@ -67,11 +80,26 @@ class PropertyListAllView(ListView):
         ),
     }
 
-    def get_queryset(self):
-        queryset = (
+    def get_base_queryset(self):
+        """Return the initial published-property queryset."""
+        return (
             Property.objects
             .filter(published=True)
             .select_related("destination")
+        )
+
+    def apply_collection_filter(self, queryset):
+        """
+        Apply collection-specific filtering.
+
+        The default collection contains every published property managed by
+        Oliverde.
+        """
+        return queryset
+
+    def get_queryset(self):
+        queryset = self.apply_collection_filter(
+            self.get_base_queryset()
         )
 
         destination_slug = self.request.GET.get(
@@ -96,6 +124,26 @@ class PropertyListAllView(ListView):
 
         return queryset.order_by(*ordering)
 
+    def get_available_destinations(self):
+        """
+        Return destinations represented in the current collection.
+
+        The rental page therefore lists only destinations that contain at
+        least one published rental property.
+        """
+        property_queryset = self.apply_collection_filter(
+            Property.objects.filter(published=True)
+        )
+
+        return (
+            Destination.objects
+            .filter(
+                properties__in=property_queryset,
+            )
+            .distinct()
+            .order_by("name")
+        )
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -112,15 +160,14 @@ class PropertyListAllView(ListView):
         if selected_sort not in self.allowed_sort_options:
             selected_sort = "featured"
 
-        context["destinations"] = (
-            Destination.objects
-            .filter(properties__published=True)
-            .distinct()
-            .order_by("name")
-        )
-
+        context["destinations"] = self.get_available_destinations()
         context["selected_destination"] = selected_destination
         context["selected_sort"] = selected_sort
+
+        context["page_title"] = self.page_title
+        context["page_eyebrow"] = self.page_eyebrow
+        context["page_description"] = self.page_description
+        context["collection_type"] = self.collection_type
 
         query_parameters = self.request.GET.copy()
         query_parameters.pop("page", None)
@@ -128,6 +175,35 @@ class PropertyListAllView(ListView):
         context["pagination_query"] = query_parameters.urlencode()
 
         return context
+
+
+class PropertyListAllView(PropertyCollectionView):
+    """Display every published property managed by Oliverde."""
+
+    page_title = "Our Collection"
+    page_eyebrow = "Homes Under Our Care"
+    page_description = (
+        "A considered collection of private estates, villas and country "
+        "homes managed by Oliverde across Tuscany, Umbria and Lazio."
+    )
+    collection_type = "all"
+
+
+class HolidayRentalListView(PropertyCollectionView):
+    """Display published managed properties available for private rental."""
+
+    page_title = "Holiday Rentals"
+    page_eyebrow = "Stay with Oliverde"
+    page_description = (
+        "Discover a private selection of homes under Oliverde's care that "
+        "are also available for exceptional stays in Italy."
+    )
+    collection_type = "rentals"
+
+    def apply_collection_filter(self, queryset):
+        return queryset.filter(
+            available_for_rental=True,
+        )
 
 
 class DestinationDetailView(DetailView):
@@ -170,7 +246,7 @@ class PropertyDetailView(DetailView):
 
     def get_queryset(self):
         """
-        Return published properties with their related content prefetched.
+        Return published properties with related content prefetched.
 
         Gallery categories remain available in the CMS and determine the
         editorial image order, but the public template displays the images

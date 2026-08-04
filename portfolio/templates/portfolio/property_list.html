@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Our Property Portfolio — Oliverde{% endblock %}
+{% block title %}
+  {{ page_title }} — Oliverde
+{% endblock %}
 
 {% block content %}
 
@@ -9,16 +11,15 @@
   <div class="wrap">
 
     <p class="eyebrow reveal">
-      Portfolio
+      {{ page_eyebrow }}
     </p>
 
     <h1 class="serif reveal">
-      Homes Under Our Care
+      {{ page_title }}
     </h1>
 
     <p class="page-intro-text reveal">
-      A considered selection of private estates, villas and country
-      homes managed by Oliverde across Tuscany, Umbria and Lazio.
+      {{ page_description }}
     </p>
 
     <p class="page-intro-note reveal">
@@ -26,6 +27,30 @@
       are presented under privacy-safe editorial names and without
       precise location details.
     </p>
+
+    <div class="collection-switch reveal">
+
+      <a
+        href="{% url 'portfolio:all_properties' %}"
+        class="{% if collection_type == 'all' %}active{% endif %}"
+        {% if collection_type == "all" %}
+          aria-current="page"
+        {% endif %}
+      >
+        Our Collection
+      </a>
+
+      <a
+        href="{% url 'portfolio:holiday_rentals' %}"
+        class="{% if collection_type == 'rentals' %}active{% endif %}"
+        {% if collection_type == "rentals" %}
+          aria-current="page"
+        {% endif %}
+      >
+        Holiday Rentals
+      </a>
+
+    </div>
 
   </div>
 </section>
@@ -40,13 +65,27 @@
     <form
       class="property-filters reveal"
       method="get"
-      action="{% url 'portfolio:all_properties' %}"
+      action="{{ request.path }}"
     >
 
       <div class="property-results">
+
         Showing
-        <strong>{{ page_obj.paginator.count }}</strong>
-        propert{{ page_obj.paginator.count|pluralize:"y,ies" }}
+
+        <strong>
+          {{ page_obj.paginator.count }}
+        </strong>
+
+        {% if collection_type == "rentals" %}
+
+          holiday rental{{ page_obj.paginator.count|pluralize }}
+
+        {% else %}
+
+          propert{{ page_obj.paginator.count|pluralize:"y,ies" }}
+
+        {% endif %}
+
       </div>
 
 
@@ -144,7 +183,7 @@
       {% if selected_destination or selected_sort != "featured" %}
 
         <a
-          href="{% url 'portfolio:all_properties' %}"
+          href="{{ request.path }}"
           class="filter-reset"
         >
           Reset filters
@@ -229,20 +268,41 @@
 
         <div class="empty-properties">
 
-          <h2 class="serif">
-            No properties found
-          </h2>
+          {% if collection_type == "rentals" %}
 
-          <p>
-            Try changing your destination or sorting options.
-          </p>
+            <h2 class="serif">
+              No holiday rentals found
+            </h2>
 
-          <a
-            href="{% url 'portfolio:all_properties' %}"
-            class="btn btn-outline"
-          >
-            View all properties
-          </a>
+            <p>
+              Try changing your destination or viewing our full collection.
+            </p>
+
+            <a
+              href="{% url 'portfolio:all_properties' %}"
+              class="btn btn-outline"
+            >
+              View Our Collection
+            </a>
+
+          {% else %}
+
+            <h2 class="serif">
+              No properties found
+            </h2>
+
+            <p>
+              Try changing your destination or sorting options.
+            </p>
+
+            <a
+              href="{{ request.path }}"
+              class="btn btn-outline"
+            >
+              Reset filters
+            </a>
+
+          {% endif %}
 
         </div>
 
