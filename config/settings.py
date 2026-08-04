@@ -344,3 +344,135 @@ SITE_URL = os.environ.get(
     "SITE_URL",
     "https://oliverdepropertymanagement.com",
 )
+
+# -------------------------------------------------------------------
+# Contact-form security
+# -------------------------------------------------------------------
+
+TURNSTILE_SITE_KEY = os.environ.get(
+    "TURNSTILE_SITE_KEY",
+    "",
+)
+
+TURNSTILE_SECRET_KEY = os.environ.get(
+    "TURNSTILE_SECRET_KEY",
+    "",
+)
+
+TURNSTILE_EXPECTED_HOSTNAME = os.environ.get(
+    "TURNSTILE_EXPECTED_HOSTNAME",
+    "",
+)
+
+TURNSTILE_EXPECTED_ACTION = os.environ.get(
+    "TURNSTILE_EXPECTED_ACTION",
+    "contact",
+)
+
+TURNSTILE_TIMEOUT = int(
+    os.environ.get(
+        "TURNSTILE_TIMEOUT",
+        "10",
+    )
+)
+
+CONTACT_RATE_LIMIT = int(
+    os.environ.get(
+        "CONTACT_RATE_LIMIT",
+        "5",
+    )
+)
+
+CONTACT_RATE_LIMIT_WINDOW = int(
+    os.environ.get(
+        "CONTACT_RATE_LIMIT_WINDOW",
+        "3600",
+    )
+)
+
+# -------------------------------------------------------------------
+# Cache
+# -------------------------------------------------------------------
+
+CACHES = {
+    "default": {
+        "BACKEND": (
+            "django.core.cache.backends.db.DatabaseCache"
+        ),
+        "LOCATION": "django_cache",
+        "TIMEOUT": 3600,
+        "OPTIONS": {
+            "MAX_ENTRIES": 10000,
+        },
+    },
+}
+
+
+# -------------------------------------------------------------------
+# Email and contact enquiries
+# -------------------------------------------------------------------
+
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.smtp.EmailBackend",
+)
+
+EMAIL_HOST = os.environ.get(
+    "EMAIL_HOST",
+    "smtp.gmail.com",
+)
+
+EMAIL_PORT = int(
+    os.environ.get(
+        "EMAIL_PORT",
+        "587",
+    )
+)
+
+EMAIL_USE_TLS = (
+    os.environ.get(
+        "EMAIL_USE_TLS",
+        "True",
+    ).lower()
+    == "true"
+)
+
+EMAIL_USE_SSL = (
+    os.environ.get(
+        "EMAIL_USE_SSL",
+        "False",
+    ).lower()
+    == "true"
+)
+
+EMAIL_HOST_USER = os.environ.get(
+    "EMAIL_HOST_USER",
+    "",
+)
+
+EMAIL_HOST_PASSWORD = os.environ.get(
+    "EMAIL_HOST_PASSWORD",
+    "",
+)
+
+EMAIL_TIMEOUT = int(
+    os.environ.get(
+        "EMAIL_TIMEOUT",
+        "15",
+    )
+)
+
+DEFAULT_FROM_EMAIL = os.environ.get(
+    "DEFAULT_FROM_EMAIL",
+    EMAIL_HOST_USER,
+)
+
+CONTACT_RECIPIENT_EMAIL = os.environ.get(
+    "CONTACT_RECIPIENT_EMAIL",
+    "oliverdepropertyservices@gmail.com",
+)
+
+if EMAIL_USE_TLS and EMAIL_USE_SSL:
+    raise ValueError(
+        "EMAIL_USE_TLS and EMAIL_USE_SSL cannot both be enabled."
+    )

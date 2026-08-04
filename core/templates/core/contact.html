@@ -1,16 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Contact — Oliverde{% endblock %}
+{% block title %}
+  Contact — Oliverde
+{% endblock %}
 
 {% block content %}
 
 <section class="contact-hero">
+
   <div class="ph"></div>
   <div class="contact-hero-overlay"></div>
 
   <div class="wrap contact-hero-content">
-    <p class="eyebrow" style="color: rgba(255,255,255,0.75);">
+
+    <p
+      class="eyebrow"
+      style="color:rgba(255,255,255,0.75);"
+    >
       Get in touch
     </p>
 
@@ -23,22 +30,37 @@
       Whether you're considering a property in Tuscany, already own one,
       or simply want to understand how we work — we'd love to hear from you.
     </p>
+
   </div>
+
 </section>
 
+
 <section class="contact-body">
+
   <div class="wrap contact-grid">
 
     <div class="contact-form-card reveal">
 
       {% if messages %}
-        <div class="form-messages" aria-live="polite">
+
+        <div
+          class="form-messages"
+          aria-live="polite"
+        >
+
           {% for message in messages %}
+
             <div
               class="form-message {{ message.tags|default:'info' }}"
               role="{% if 'error' in message.tags %}alert{% else %}status{% endif %}"
             >
-              <span class="message-icon" aria-hidden="true">
+
+              <span
+                class="message-icon"
+                aria-hidden="true"
+              >
+
                 {% if "success" in message.tags %}
                   ✓
                 {% elif "error" in message.tags %}
@@ -48,32 +70,103 @@
                 {% else %}
                   i
                 {% endif %}
+
               </span>
 
               <span class="message-text">
                 {{ message }}
               </span>
+
             </div>
+
           {% endfor %}
+
         </div>
+
       {% endif %}
 
+
       {% if form.non_field_errors %}
-        <div class="form-message error" role="alert">
-          <span class="message-icon" aria-hidden="true">!</span>
+
+        <div
+          class="form-message error"
+          role="alert"
+        >
+
+          <span
+            class="message-icon"
+            aria-hidden="true"
+          >
+            !
+          </span>
 
           <div class="message-text">
+
             {% for error in form.non_field_errors %}
               <p>{{ error }}</p>
             {% endfor %}
+
           </div>
+
         </div>
+
       {% endif %}
 
-      <form method="post" novalidate>
+
+      {% if selected_property %}
+
+        <div class="contact-property-summary">
+
+          <p class="eyebrow">
+            Holiday rental enquiry
+          </p>
+
+          <h2 class="serif">
+            {{ selected_property.display_title }}
+          </h2>
+
+          <p>
+            {{ selected_property.destination.name }}
+          </p>
+
+          <a
+            href="{{ selected_property.get_absolute_url }}"
+            class="textlink"
+          >
+            View property &rarr;
+          </a>
+
+        </div>
+
+      {% endif %}
+
+
+      <form
+        method="post"
+        id="contactForm"
+        novalidate
+      >
+
         {% csrf_token %}
 
+        {{ form.property_id }}
+
+        <div
+          class="contact-honeypot"
+          aria-hidden="true"
+        >
+
+          <label for="{{ form.website.id_for_label }}">
+            Website
+          </label>
+
+          {{ form.website }}
+
+        </div>
+
+
         <div class="form-row">
+
           <label for="{{ form.name.id_for_label }}">
             Full name
           </label>
@@ -81,14 +174,23 @@
           {{ form.name }}
 
           {% if form.name.errors %}
-            <p class="form-error" id="{{ form.name.id_for_label }}-error">
+
+            <p
+              class="form-error"
+              id="{{ form.name.id_for_label }}-error"
+            >
               {{ form.name.errors.0 }}
             </p>
+
           {% endif %}
+
         </div>
 
+
         <div class="form-row-split">
+
           <div class="form-row">
+
             <label for="{{ form.email.id_for_label }}">
               Email
             </label>
@@ -96,46 +198,77 @@
             {{ form.email }}
 
             {% if form.email.errors %}
-              <p class="form-error" id="{{ form.email.id_for_label }}-error">
+
+              <p
+                class="form-error"
+                id="{{ form.email.id_for_label }}-error"
+              >
                 {{ form.email.errors.0 }}
               </p>
+
             {% endif %}
+
           </div>
 
+
           <div class="form-row">
+
             <label for="{{ form.phone.id_for_label }}">
               Phone
-              <span class="optional">(optional)</span>
+              <span class="optional">
+                (optional)
+              </span>
             </label>
 
             {{ form.phone }}
 
+            <p
+              class="form-field-help"
+              id="{{ form.phone.id_for_label }}-help"
+            >
+              Include the international country code, such as +39 or +44.
+            </p>
+
             {% if form.phone.errors %}
-              <p class="form-error" id="{{ form.phone.id_for_label }}-error">
+
+              <p
+                class="form-error"
+                id="{{ form.phone.id_for_label }}-error"
+              >
                 {{ form.phone.errors.0 }}
               </p>
+
             {% endif %}
+
           </div>
+
         </div>
 
+
         <div class="form-row">
-          <label for="{{ form.property_interest.id_for_label }}">
+
+          <label for="{{ form.enquiry_type.id_for_label }}">
             This enquiry is about
           </label>
 
-          {{ form.property_interest }}
+          {{ form.enquiry_type }}
 
-          {% if form.property_interest.errors %}
+          {% if form.enquiry_type.errors %}
+
             <p
               class="form-error"
-              id="{{ form.property_interest.id_for_label }}-error"
+              id="{{ form.enquiry_type.id_for_label }}-error"
             >
-              {{ form.property_interest.errors.0 }}
+              {{ form.enquiry_type.errors.0 }}
             </p>
+
           {% endif %}
+
         </div>
 
+
         <div class="form-row">
+
           <label for="{{ form.message.id_for_label }}">
             Message
           </label>
@@ -143,31 +276,100 @@
           {{ form.message }}
 
           {% if form.message.errors %}
-            <p class="form-error" id="{{ form.message.id_for_label }}-error">
+
+            <p
+              class="form-error"
+              id="{{ form.message.id_for_label }}-error"
+            >
               {{ form.message.errors.0 }}
             </p>
+
           {% endif %}
+
         </div>
+
+
+        <div class="contact-security">
+
+          <p class="form-field-help">
+            Please complete the security check before sending your enquiry.
+          </p>
+
+          {% if turnstile_site_key %}
+
+            <div
+              class="cf-turnstile"
+              data-sitekey="{{ turnstile_site_key }}"
+              data-action="contact"
+              data-theme="light"
+            ></div>
+
+          {% else %}
+
+            <div
+              class="form-message warning"
+              role="status"
+            >
+
+              <span
+                class="message-icon"
+                aria-hidden="true"
+              >
+                !
+              </span>
+
+              <span class="message-text">
+                The security check is not currently configured.
+              </span>
+
+            </div>
+
+          {% endif %}
+
+        </div>
+
 
         <button
           type="submit"
-          class="btn btn-primary"
-          style="margin-top: 8px;"
+          class="btn btn-primary contact-submit"
+          id="contactSubmit"
+          {% if not turnstile_site_key %}
+            disabled
+          {% endif %}
         >
-          Send enquiry
+
+          <span class="contact-submit-default">
+            Send enquiry
+          </span>
+
+          <span
+            class="contact-submit-loading"
+            hidden
+          >
+            Sending…
+          </span>
+
         </button>
 
+
         <p class="form-privacy-note">
-          By submitting this form, you acknowledge that your personal data
-          will be processed in accordance with our
-          <a href="{% url 'privacy_policy' %}">Privacy Policy</a>.
+          By submitting this form, you acknowledge that the information
+          you provide will be processed for the purpose of responding to
+          your enquiry, as described in our
+          <a href="{% url 'privacy_policy' %}">
+            Privacy Policy
+          </a>.
         </p>
+
       </form>
+
     </div>
+
 
     <div class="contact-info reveal">
 
       <div class="contact-info-block">
+
         <svg
           class="sprig"
           viewBox="0 0 22 26"
@@ -177,7 +379,10 @@
           <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
         </svg>
 
-        <p class="eyebrow" style="margin-bottom: 8px;">
+        <p
+          class="eyebrow"
+          style="margin-bottom:8px;"
+        >
           Email
         </p>
 
@@ -187,9 +392,12 @@
         >
           oliverdepropertyservices@gmail.com
         </a>
+
       </div>
 
+
       <div class="contact-info-block">
+
         <svg
           class="sprig"
           viewBox="0 0 22 26"
@@ -199,7 +407,10 @@
           <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
         </svg>
 
-        <p class="eyebrow" style="margin-bottom: 8px;">
+        <p
+          class="eyebrow"
+          style="margin-bottom:8px;"
+        >
           Phone
         </p>
 
@@ -209,9 +420,12 @@
         >
           +39 366 317 4740
         </a>
+
       </div>
 
+
       <div class="contact-info-block">
+
         <svg
           class="sprig"
           viewBox="0 0 22 26"
@@ -221,21 +435,71 @@
           <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
         </svg>
 
-        <p class="eyebrow" style="margin-bottom: 8px;">
+        <p
+          class="eyebrow"
+          style="margin-bottom:8px;"
+        >
           Regions
         </p>
 
         <p class="contact-info-value">
           Tuscany · Umbria · Lazio
         </p>
+
       </div>
+
 
       <p class="contact-response-note">
         We typically respond within one business day.
       </p>
+
     </div>
 
   </div>
+
 </section>
+
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contactForm");
+    const submitButton = document.getElementById("contactSubmit");
+
+    if (!form || !submitButton) {
+      return;
+    }
+
+    form.addEventListener("submit", function () {
+      if (submitButton.disabled) {
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-busy", "true");
+
+      const defaultText = submitButton.querySelector(
+        ".contact-submit-default"
+      );
+
+      const loadingText = submitButton.querySelector(
+        ".contact-submit-loading"
+      );
+
+      if (defaultText) {
+        defaultText.hidden = true;
+      }
+
+      if (loadingText) {
+        loadingText.hidden = false;
+      }
+    });
+  });
+</script>
 
 {% endblock %}
