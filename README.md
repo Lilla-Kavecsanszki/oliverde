@@ -39,7 +39,8 @@ The final Oliverde custom domain will be connected before the official public la
   - [Production](#production)
   - [Media](#media)
   - [Development](#development)
-  - [Planned Integration](#planned-integration)
+  - [Email](#email)
+  - [Security](#security)
 - [Features](#features)
   - [Home](#home)
   - [Portfolio](#portfolio-1)
@@ -353,9 +354,16 @@ The visual system includes:
 - Mermaid
 - PostgreSQL local development database
 
-## Planned Integration
+## Email
 
-- MailerSend for production contact-form delivery
+- Gmail SMTP
+- Google App Password authentication
+
+## Security
+
+- Cloudflare Turnstile
+- Django CSRF protection
+- Database-backed cache rate limiting
 
 [Back to top](#contents)
 
@@ -488,16 +496,24 @@ The five core services are:
 
 ## Contact
 
-- Enquiry form.
-- Name, email, phone, enquiry type, and message fields.
-- Server-side form validation.
-- Property-specific enquiry parameters.
-- Django success and error messages.
-- Privacy Policy notice.
-- Direct email and telephone details.
-- Regions-served information.
-
-MailerSend delivery remains to be connected before the final public launch.
+- Public enquiry form
+- Property-specific rental enquiries
+- Name, email, phone, enquiry type and message fields
+- International telephone validation
+- Server-side validation
+- Property UUID validation
+- Rental-only property validation
+- Cloudflare Turnstile protection
+- Honeypot spam protection
+- Cache-backed rate limiting
+- Gmail SMTP notifications
+- Database persistence
+- Django Admin integration
+- Accessible validation messages
+- Loading state during submission
+- Privacy Policy notice
+- Direct email and telephone details
+- Regions-served information
 
 ## Site-wide Features
 
@@ -646,6 +662,11 @@ Current role choices are:
 
 Property privacy is a central architectural requirement.
 
+Public rental enquiries reference properties using their public UUID rather
+than editable slugs or titles. Every submitted enquiry is validated server-side
+to ensure the referenced property is both published and available for private
+rental before it is linked to the enquiry record.
+
 The platform distinguishes between:
 
 - an internal property name used by Oliverde staff;
@@ -669,8 +690,6 @@ This approach:
 The UUID is not treated as a substitute for authentication. Any future private documents, owner dashboards, or confidential reports will require proper access controls.
 
 [Back to top](#contents)
-
----
 
 # Administration
 
@@ -696,6 +715,8 @@ Administrative features include:
 - testimonials;
 - journal publishing;
 - custom user roles.
+- contact enquiry management
+- linked rental property enquiries;
 
 The admin separates private operational information from public editorial information to reduce the risk of exposing sensitive property details.
 
@@ -773,7 +794,7 @@ The application is deployed to Heroku using:
 The production `Procfile` contains:
 
 ```text
-release: python manage.py migrate
+release: python manage.py migrate && python manage.py createcachetable
 web: gunicorn config.wsgi
 ```
 
@@ -803,6 +824,25 @@ CLOUDINARY_CLOUD_NAME
 CLOUDINARY_API_KEY
 CLOUDINARY_API_SECRET
 SECURE_HSTS_SECONDS
+
+EMAIL_BACKEND
+EMAIL_HOST
+EMAIL_PORT
+EMAIL_USE_TLS
+EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD
+EMAIL_TIMEOUT
+DEFAULT_FROM_EMAIL
+CONTACT_RECIPIENT_EMAIL
+
+TURNSTILE_SITE_KEY
+TURNSTILE_SECRET_KEY
+TURNSTILE_EXPECTED_HOSTNAME
+TURNSTILE_EXPECTED_ACTION
+TURNSTILE_TIMEOUT
+
+CONTACT_RATE_LIMIT
+CONTACT_RATE_LIMIT_WINDOW
 ```
 
 `DATABASE_URL` is managed automatically by Heroku Postgres.
@@ -871,6 +911,10 @@ Apply migrations:
 python manage.py migrate
 ```
 
+```bash
+python manage.py createcachetable
+```
+
 Create an administrator:
 
 ```bash
@@ -905,7 +949,31 @@ python manage.py collectstatic --noinput
 
 # Testing
 
-*Not yet formally tested. Planned before launch:*
+Completed testing includes:
+
+- Django system checks
+- Database migrations
+- Property routing
+- Canonical URL redirects
+- Contact form validation
+- International phone validation
+- Email validation
+- Property UUID validation
+- Rental-only enquiry validation
+- Gmail SMTP notifications
+- Cloudflare Turnstile verification
+- Honeypot spam protection
+- Cache-backed rate limiting
+- Database persistence
+- Django Admin integration
+- Responsive manual testing
+
+Further work before launch:
+
+- Cross-browser testing
+- Lighthouse audit
+- W3C validation
+- Automated Django tests
 
 - Manual click-through testing of every page and link
 - Form validation testing on the Contact page (including the missing spam protection noted below)
@@ -917,8 +985,7 @@ python manage.py collectstatic --noinput
 
 # Known Limitations
 
-- The contact form validates and displays feedback, but production email delivery is not yet connected to MailerSend.
-- No spam-prevention mechanism has yet been added to the contact form.
+- Contact notifications currently use Gmail SMTP. A dedicated transactional email service may be adopted in the future if higher email volumes require it.
 - The production content database is still being populated.
 - The custom Oliverde domain and `www` domain are not yet connected.
 - Automated Certificate Management (ACM) for the custom domain is not yet enabled.
@@ -946,7 +1013,7 @@ Immediate priorities are:
 2. Test Cloudinary uploads in production.
 3. Populate the five core services.
 4. Add destinations, amenities, testimonials, and initial properties.
-5. Connect MailerSend.
+5. Monitor contact-form delivery in production.
 6. Complete the final production legal review.
 7. Connect the custom domain and enable SSL.
 8. Perform full production QA.
