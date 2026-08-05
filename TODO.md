@@ -140,9 +140,23 @@
 - [x] Django Messages
 - [x] Success and error message styling
 - [x] Privacy Policy notice
-- [ ] MailerSend integration
-- [ ] Production email testing
-- [ ] Test failed-delivery handling
+- [x] Gmail SMTP integration
+- [x] Google App Password authentication
+- [x] Property-specific enquiry parameters
+- [x] UUID-based rental property routing
+- [x] Rental-only property validation
+- [x] Server-side form validation
+- [x] International telephone validation
+- [x] Django Messages
+- [x] Success and error message styling
+- [x] Cloudflare Turnstile protection
+- [x] Honeypot spam protection
+- [x] Cache-backed rate limiting
+- [x] Database persistence
+- [x] Django Admin integration
+- [x] Internal email notifications
+- [x] Friendly failed-email handling
+- [x] Production email testing
 - [ ] Confirm final enquiry recipient addresses
 
 ---
@@ -221,6 +235,12 @@
 - [x] Frame protection
 - [x] Referrer policy
 - [x] Production environment variables
+- [x] Gmail SMTP credentials
+- [x] Google App Password authentication
+- [x] Cloudflare Turnstile configuration
+- [x] Database cache configuration
+- [x] Cache-backed rate limiting
+- [x] Honeypot spam protection
 - [x] Production database credentials managed by Heroku
 - [x] Final production deployment check
 - [x] Private GitHub repository
@@ -302,6 +322,7 @@
 - [x] Add Gunicorn
 - [x] Add Procfile
 - [x] Add release-phase migrations
+- [x] Configure database cache table
 - [x] Configure `.python-version`
 - [x] Run production migrations
 - [x] Run production `collectstatic`
@@ -334,16 +355,18 @@
 - [ ] Test image replacement
 - [ ] Test image deletion
 
-## MailerSend
+## Gmail SMTP
 
-- [ ] Verify sending domain
-- [ ] Configure DNS records
-- [ ] Add production API credentials
-- [ ] Email integration
-- [ ] Contact-form emails
-- [ ] Test successful delivery
-- [ ] Test failed-delivery handling
+- [x] Configure Gmail SMTP
+- [x] Enable Google 2-Step Verification
+- [x] Create Google App Password
+- [x] Configure SMTP environment variables
+- [x] Email integration
+- [x] Contact-form emails
+- [x] Test successful delivery
+- [x] Test failed-delivery handling
 - [ ] Confirm production sender and reply-to addresses
+- [ ] Review migration to a dedicated transactional email provider if future email volume requires it
 
 ## Production Content
 
@@ -368,7 +391,9 @@
 - [ ] Test filtering and sorting
 - [ ] Test property galleries
 - [ ] Test service galleries
-- [ ] Test contact form
+- [x] Test contact form
+- [x] Test rental-property enquiries
+- [x] Test Gmail notifications
 - [ ] Test Journal publishing
 - [ ] Test production 404 page
 - [x] Test production 500 page
@@ -404,6 +429,10 @@
 - [ ] Add robots.txt test
 - [ ] Add custom error-page tests
 - [ ] Add admin configuration tests where appropriate
+- [ ] Add Turnstile verification tests
+- [ ] Add cache rate-limiting tests
+- [ ] Add rental-property enquiry tests
+- [ ] Add international telephone validation tests
 
 ## Database and Backups
 
@@ -416,7 +445,8 @@
 
 - [ ] Add production error monitoring
 - [ ] Review Heroku logs after launch
-- [ ] Monitor failed contact-form deliveries
+- [ ] Monitor Gmail SMTP delivery
+- [ ] Monitor failed contact-form notifications
 - [ ] Monitor Cloudinary usage
 - [ ] Monitor Heroku Postgres usage
 - [ ] Monitor Eco dyno-hour allowance
@@ -424,7 +454,7 @@
 ## Documentation
 
 - [ ] Update README deployment instructions
-- [ ] Document production environment variables
+- [x] Document production environment variables
 - [ ] Document content-entry workflow
 - [ ] Document property privacy rules
 - [ ] Document backup and restore process
