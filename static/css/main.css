@@ -3173,10 +3173,10 @@ Overrides the base .services-grid 4-column border pattern, which would
 
 .contact-hero {
   position: relative;
-  min-height: 520px;
+  min-height: 480px;
   display: flex;
   align-items: center;
-  padding: 70px 0 110px;
+  padding: 60px 0 90px;
 }
 
 
@@ -3230,8 +3230,8 @@ Overrides the base .services-grid 4-column border pattern, which would
 
 @media (max-width: 720px) {
   .contact-hero {
-    min-height: 460px;
-    padding: 56px 0 90px;
+    min-height: 440px;
+    padding: 50px 0 76px;
   }
 
   .contact-hero-text {
@@ -3239,38 +3239,43 @@ Overrides the base .services-grid 4-column border pattern, which would
   }
 }
 
+
 /* ---------- CONTACT BODY / FORM LAYOUT ---------- */
 
 .contact-body {
   background: var(--cream);
-  padding: 0 0 120px;
+  padding: 0 0 72px;
 }
 
+
 .contact-grid {
+  position: relative;
+  z-index: 3;
   display: grid;
   grid-template-columns: 1.3fr 0.8fr;
   gap: 0;
   margin-top: -70px;
-  position: relative;
-  z-index: 3;
 }
 
+
 .contact-form-card {
-  background: #fff;
   padding: 56px 52px;
+  background: #fff;
   box-shadow: 0 30px 60px rgba(35, 42, 23, 0.14);
 }
 
+
 .contact-info {
-  background: var(--olive-900);
-  color: #fff;
-  padding: 56px 44px;
   display: flex;
   flex-direction: column;
   gap: 34px;
+  padding: 56px 44px;
+  color: #fff;
+  background: var(--olive-900);
 }
 
-@media (max-width:900px) {
+
+@media (max-width: 900px) {
   .contact-grid {
     grid-template-columns: 1fr;
     margin-top: -40px;
@@ -3282,6 +3287,10 @@ Overrides the base .services-grid 4-column border pattern, which would
 
   .contact-info {
     padding: 40px 28px;
+  }
+
+  .contact-body {
+    padding-bottom: 56px;
   }
 }
 
