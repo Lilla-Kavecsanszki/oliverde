@@ -40,38 +40,45 @@
 
 
 {% if service.features.all %}
-
-<div
-  class="service-block reveal"
-  style="border-bottom:none;"
+<section
+  class="services-detail"
+  style="padding-top:0;"
 >
+  <div class="wrap">
 
-  <div class="service-block-icon">
-    <svg
-      class="sprig"
-      viewBox="0 0 22 26"
-      aria-hidden="true"
+    <div
+      class="service-block reveal"
+      style="border-bottom:none;"
     >
-      <path
-        d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"
-      />
-    </svg>
+
+      <div class="service-block-icon">
+        <svg
+          class="sprig"
+          viewBox="0 0 22 26"
+          aria-hidden="true"
+        >
+          <path
+            d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"
+          />
+        </svg>
+      </div>
+
+      <div>
+        <ul class="service-features">
+
+          {% for feature in service.features.all %}
+            <li>
+              {{ feature.text }}
+            </li>
+          {% endfor %}
+
+        </ul>
+      </div>
+
+    </div>
+
   </div>
-
-  <div>
-    <ul class="service-features">
-
-      {% for feature in service.features.all %}
-        <li>
-          {{ feature.text }}
-        </li>
-      {% endfor %}
-
-    </ul>
-  </div>
-
-</div>
-
+</section>
 {% endif %}
 
 
