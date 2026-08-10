@@ -43,28 +43,32 @@
 
 <section class="service-detail-features reveal">
 
-  <p class="eyebrow service-detail-features-label">
-    What we do
-  </p>
+  <div class="wrap">
 
-  <div class="service-feature-grid">
+    <p class="eyebrow service-detail-features-label">
+      What we do
+    </p>
 
-    {% for feature in service.features.all %}
+    <div class="service-feature-grid">
 
-      <div class="service-feature-item">
+      {% for feature in service.features.all %}
 
-        <span
-          class="service-feature-bullet"
-          aria-hidden="true"
-        ></span>
+        <div class="service-feature-item">
 
-        <p>
-          {{ feature.text }}
-        </p>
+          <span
+            class="service-feature-bullet"
+            aria-hidden="true"
+          ></span>
 
-      </div>
+          <p>
+            {{ feature.text }}
+          </p>
 
-    {% endfor %}
+        </div>
+
+      {% endfor %}
+
+    </div>
 
   </div>
 
