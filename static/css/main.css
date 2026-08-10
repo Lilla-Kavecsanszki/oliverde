@@ -3173,43 +3173,70 @@ Overrides the base .services-grid 4-column border pattern, which would
 
 .contact-hero {
   position: relative;
-  height: 56vh;
-  min-height: 420px;
+  min-height: 520px;
   display: flex;
   align-items: center;
+  padding: 70px 0 110px;
 }
+
 
 .contact-hero .ph {
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, #3a3320 0%, #6b5b39 35%, #8f9a67 65%, #333c20 100%);
+  background: linear-gradient(
+    120deg,
+    #3a3320 0%,
+    #6b5b39 35%,
+    #8f9a67 65%,
+    #333c20 100%
+  );
 }
+
 
 .contact-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(20, 24, 12, 0.55) 0%, rgba(20, 24, 12, 0.25) 50%, rgba(20, 24, 12, 0.65) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(20, 24, 12, 0.55) 0%,
+    rgba(20, 24, 12, 0.25) 50%,
+    rgba(20, 24, 12, 0.65) 100%
+  );
 }
+
 
 .contact-hero-content {
   position: relative;
   z-index: 2;
-  padding-top: 60px;
 }
 
+
 .contact-hero h1 {
+  margin-top: 10px;
+  color: #fff;
   font-size: clamp(32px, 4.5vw, 54px);
   font-weight: 400;
-  color: #fff;
   line-height: 1.12;
-  margin-top: 10px;
 }
+
 
 .contact-hero-text {
   max-width: 440px;
-  color: rgba(255, 255, 255, 0.82);
   margin-top: 18px;
+  color: rgba(255, 255, 255, 0.82);
   line-height: 1.7;
+}
+
+
+@media (max-width: 720px) {
+  .contact-hero {
+    min-height: 460px;
+    padding: 56px 0 90px;
+  }
+
+  .contact-hero-text {
+    max-width: 100%;
+  }
 }
 
 /* ---------- CONTACT BODY / FORM LAYOUT ---------- */
