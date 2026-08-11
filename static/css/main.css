@@ -1423,6 +1423,7 @@ body.home-hero .site-header.nav-scrolled {
 
 /* ---------- FOUNDER / TESTIMONIAL ---------- */
 
+
 .founder {
   background: var(--stone);
   padding: 0;
@@ -1431,30 +1432,33 @@ body.home-hero .site-header.nav-scrolled {
 
 .founder-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  gap: 0;
+  grid-template-columns: 1fr 1fr;
   align-items: stretch;
+  width: 100%;
 }
 
 
-/* ---------- TESTIMONIAL PANEL ---------- */
+/* ---------- TESTIMONIAL SIDE ---------- */
+
 
 .testimonial-frame-wrap {
   position: relative;
-  isolation: isolate;
-  min-height: 620px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  padding: 110px 72px 110px max(7vw, 48px);
   background: var(--olive-900);
 }
 
 
 .testimonial-frame {
   position: absolute;
-  top: 28px;
-  right: 28px;
-  bottom: 28px;
-  left: 28px;
-  z-index: 0;
-  border: 1px solid rgba(199, 205, 174, 0.45);
+  top: 86px;
+  right: 48px;
+  bottom: 86px;
+  left: max(5vw, 28px);
+  border: 1px solid rgba(199, 205, 174, 0.55);
   pointer-events: none;
 }
 
@@ -1462,13 +1466,10 @@ body.home-hero .site-header.nav-scrolled {
 .testimonial-card {
   position: relative;
   z-index: 1;
-  display: flex;
-  min-height: 620px;
-  flex-direction: column;
-  justify-content: center;
-  padding: 72px 78px;
-  background: transparent;
-  color: #fff;
+  width: 100%;
+  max-width: 540px;
+  padding: 46px 48px;
+  background: var(--olive-900);
 }
 
 
@@ -1479,13 +1480,13 @@ body.home-hero .site-header.nav-scrolled {
 
 
 .testimonial-bigquote {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: var(--rust-soft);
   font-family: "Cormorant Garamond", serif;
-  font-size: 60px;
+  font-size: 52px;
   font-style: italic;
-  line-height: 0.55;
-  opacity: 0.55;
+  line-height: 0.6;
+  opacity: 0.6;
 }
 
 
@@ -1500,11 +1501,10 @@ body.home-hero .site-header.nav-scrolled {
 
 
 .testimonial-slide p {
-  max-width: 620px;
   margin: 0;
   color: rgba(255, 255, 255, 0.88);
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(18px, 1.5vw, 22px);
+  font-size: clamp(17px, 1.35vw, 20px);
   font-style: italic;
   line-height: 1.65;
 }
@@ -1512,7 +1512,7 @@ body.home-hero .site-header.nav-scrolled {
 
 .testimonial-slide span {
   display: block;
-  margin-top: 28px;
+  margin-top: 26px;
   color: var(--olive-200);
   font-family: "Inter", sans-serif;
   font-size: 11px;
@@ -1526,7 +1526,7 @@ body.home-hero .site-header.nav-scrolled {
 .testimonial-dots {
   display: flex;
   gap: 9px;
-  margin-top: 32px;
+  margin-top: 30px;
 }
 
 
@@ -1546,14 +1546,15 @@ body.home-hero .site-header.nav-scrolled {
 }
 
 
-/* ---------- FOUNDER TEXT ---------- */
+/* ---------- FOUNDER SIDE ---------- */
+
 
 .founder-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 620px;
-  padding: 82px 90px;
+  min-width: 0;
+  padding: 110px max(7vw, 48px) 110px 72px;
   background: var(--stone);
 }
 
@@ -1575,7 +1576,7 @@ body.home-hero .site-header.nav-scrolled {
 
 
 .founder-text h2 {
-  max-width: 620px;
+  max-width: 560px;
   color: var(--olive-900);
   font-size: clamp(30px, 3vw, 42px);
   font-weight: 400;
@@ -1584,7 +1585,7 @@ body.home-hero .site-header.nav-scrolled {
 
 
 .founder-text p {
-  max-width: 520px;
+  max-width: 500px;
   margin-top: 22px;
   color: var(--taupe);
   font-size: 15px;
@@ -1615,6 +1616,7 @@ body.home-hero .site-header.nav-scrolled {
 
 /* ---------- RESPONSIVE ---------- */
 
+
 @media (max-width: 900px) {
 
   .founder-grid {
@@ -1622,43 +1624,59 @@ body.home-hero .site-header.nav-scrolled {
   }
 
 
-  .testimonial-frame-wrap,
-  .testimonial-card,
-  .founder-text {
-    min-height: auto;
+  .testimonial-frame-wrap {
+    justify-content: center;
+    padding: 80px 48px;
+  }
+
+
+  .testimonial-frame {
+    top: 54px;
+    right: 28px;
+    bottom: 54px;
+    left: 28px;
   }
 
 
   .testimonial-card {
-    padding: 64px 48px;
+    max-width: 620px;
   }
 
 
   .founder-text {
-    padding: 64px 48px;
+    padding: 80px 48px;
   }
 }
 
 
 @media (max-width: 560px) {
 
-  .testimonial-frame {
-    top: 18px;
-    right: 18px;
-    bottom: 18px;
-    left: 18px;
+  .testimonial-frame-wrap {
+    padding: 58px 28px;
   }
 
 
-  .testimonial-card,
-  .founder-text {
-    padding: 48px 28px;
+  .testimonial-frame {
+    top: 36px;
+    right: 14px;
+    bottom: 36px;
+    left: 14px;
+  }
+
+
+  .testimonial-card {
+    padding: 30px 22px;
   }
 
 
   .testimonial-slide p {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.6;
+  }
+
+
+  .founder-text {
+    padding: 64px 28px;
   }
 }
 
