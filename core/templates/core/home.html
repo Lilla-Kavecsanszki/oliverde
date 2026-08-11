@@ -315,10 +315,74 @@
 <section class="founder">
   <div class="wrap founder-grid">
 
-    <div class="founder-photo reveal">
-      <div class="frame"></div>
-      <div class="ph"></div>
-    </div>
+    {% if testimonials %}
+
+      <div class="testimonial-frame-wrap reveal">
+
+        <div
+          class="testimonial-frame"
+          aria-hidden="true"
+        ></div>
+
+        <div
+          class="testimonial-card"
+          id="testimonialCard"
+        >
+
+          <p class="eyebrow testimonial-eyebrow">
+            From our homeowners
+          </p>
+
+          <div
+            class="testimonial-bigquote"
+            aria-hidden="true"
+          >
+            “
+          </div>
+
+          {% for t in testimonials %}
+
+            <div
+              class="testimonial-slide {% if forloop.first %}active{% endif %}"
+              data-index="{{ forloop.counter0 }}"
+            >
+
+              <p class="serif">
+                {{ t.quote }}
+              </p>
+
+              <span>
+                — {{ t.author_name }}
+              </span>
+
+            </div>
+
+          {% endfor %}
+
+          {% if testimonials|length > 1 %}
+
+            <div class="testimonial-dots">
+
+              {% for t in testimonials %}
+
+                <button
+                  class="dot {% if forloop.first %}active{% endif %}"
+                  data-index="{{ forloop.counter0 }}"
+                  aria-label="Show testimonial {{ forloop.counter }}"
+                ></button>
+
+              {% endfor %}
+
+            </div>
+
+          {% endif %}
+
+        </div>
+
+      </div>
+
+    {% endif %}
+
 
     <div class="founder-text reveal">
 
@@ -326,7 +390,12 @@
         A personal commitment
       </p>
 
-      <div class="bigquote" aria-hidden="true">"</div>
+      <div
+        class="bigquote"
+        aria-hidden="true"
+      >
+        "
+      </div>
 
       <h2 class="serif">
         I founded Oliverde on one simple belief: your home deserves the same
@@ -344,51 +413,6 @@
       </div>
 
     </div>
-
-    {% if testimonials %}
-
-      <div class="testimonial-card reveal" id="testimonialCard">
-
-        <div class="testimonial-bigquote" aria-hidden="true">"</div>
-
-        {% for t in testimonials %}
-
-          <div
-            class="testimonial-slide {% if forloop.first %}active{% endif %}"
-            data-index="{{ forloop.counter0 }}"
-          >
-            <p class="serif">
-              {{ t.quote }}
-            </p>
-
-            <span>
-              — {{ t.author_name }}
-            </span>
-          </div>
-
-        {% endfor %}
-
-        {% if testimonials|length > 1 %}
-
-          <div class="testimonial-dots">
-
-            {% for t in testimonials %}
-
-              <button
-                class="dot {% if forloop.first %}active{% endif %}"
-                data-index="{{ forloop.counter0 }}"
-                aria-label="Show testimonial {{ forloop.counter }}"
-              ></button>
-
-            {% endfor %}
-
-          </div>
-
-        {% endif %}
-
-      </div>
-
-    {% endif %}
 
   </div>
 </section>

@@ -1421,94 +1421,242 @@ body.home-hero .site-header.nav-scrolled {
   }
 }
 
-/* ---------- FOUNDER ---------- */
+/* ---------- FOUNDER / TESTIMONIAL ---------- */
+
 
 .founder {
+  position: relative;
   background: var(--stone);
-  padding: 130px 0;
+  padding: 120px 0;
 }
+
 
 .founder-grid {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 80px;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 90px;
   align-items: center;
 }
 
-.founder-photo {
+
+/* ---------- TESTIMONIAL FRAME ---------- */
+
+
+.testimonial-frame-wrap {
   position: relative;
+  isolation: isolate;
 }
 
-.founder-photo .ph {
-  aspect-ratio: 3/3.6;
-  background: linear-gradient(160deg, #5c5342 0%, #31331f 100%);
-  width: 100%;
-}
 
-.founder-photo .frame {
+.testimonial-frame {
   position: absolute;
   top: 24px;
-  left: -24px;
   right: 24px;
   bottom: -24px;
-  border: 1px solid var(--olive-400);
+  left: -24px;
   z-index: -1;
+  border: 1px solid var(--olive-400);
 }
 
+
+.testimonial-card {
+  position: relative;
+  z-index: 1;
+  min-height: 430px;
+  padding: 48px 46px 42px;
+  background: var(--cream);
+  box-shadow: 0 20px 46px rgba(35, 42, 23, 0.08);
+}
+
+
+.testimonial-eyebrow {
+  margin-bottom: 22px;
+}
+
+
+.testimonial-bigquote {
+  margin-bottom: 8px;
+  color: var(--rust);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 54px;
+  font-style: italic;
+  line-height: 0.6;
+  opacity: 0.32;
+}
+
+
+.testimonial-slide {
+  display: none;
+}
+
+
+.testimonial-slide.active {
+  display: block;
+}
+
+
+.testimonial-slide p {
+  margin: 0;
+  color: var(--olive-900);
+  font-size: clamp(17px, 1.45vw, 20px);
+  font-style: italic;
+  line-height: 1.65;
+}
+
+
+.testimonial-slide span {
+  display: block;
+  margin-top: 24px;
+  color: var(--taupe);
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+
+.testimonial-dots {
+  display: flex;
+  gap: 9px;
+  margin-top: 30px;
+}
+
+
+.testimonial-dots .dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 1px solid var(--rust);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+
+.testimonial-dots .dot.active {
+  background: var(--rust);
+}
+
+
+/* ---------- FOUNDER TEXT ---------- */
+
+
+.founder-text {
+  max-width: 490px;
+}
+
+
 .founder-text .bigquote {
+  margin-bottom: 6px;
+  color: var(--rust);
   font-family: "Cormorant Garamond", serif;
   font-size: 22px;
   font-style: italic;
   line-height: 1.05;
-  color: var(--rust);
   opacity: 0.4;
-  margin-bottom: 6px;
 }
 
+
 .founder-text h2 {
-  font-size: clamp(24px, 2.8vw, 32px);
-  font-weight: 400;
   color: var(--olive-900);
+  font-size: clamp(26px, 2.8vw, 34px);
+  font-weight: 400;
   line-height: 1.35;
 }
 
+
 .founder-text p {
-  font-size: 15px;
-  color: var(--taupe);
-  line-height: 1.8;
-  margin-top: 18px;
   max-width: 480px;
+  margin-top: 18px;
+  color: var(--taupe);
+  font-size: 15px;
+  line-height: 1.8;
 }
+
 
 .founder-sig {
   margin-top: 26px;
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 19px;
   color: var(--olive-800);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px;
+  font-style: italic;
 }
+
 
 .founder-sig span {
   display: block;
+  margin-top: 4px;
+  color: var(--taupe);
   font-family: "Inter", sans-serif;
-  font-style: normal;
   font-size: 11px;
+  font-style: normal;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--taupe);
-  margin-top: 4px;
 }
 
-@media (max-width:900px) {
+
+/* ---------- RESPONSIVE ---------- */
+
+
+@media (max-width: 900px) {
+
+  .founder {
+    padding: 90px 0;
+  }
+
+
   .founder-grid {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 70px;
   }
 
-  .founder-photo {
-    max-width: 320px;
+
+  .testimonial-frame-wrap {
+    max-width: 680px;
+  }
+
+
+  .founder-text {
+    max-width: 620px;
   }
 }
+
+
+@media (max-width: 560px) {
+
+  .founder {
+    padding: 72px 0;
+  }
+
+
+  .founder-grid {
+    gap: 56px;
+  }
+
+
+  .testimonial-frame {
+    top: 16px;
+    right: 16px;
+    bottom: -16px;
+    left: -10px;
+  }
+
+
+  .testimonial-card {
+    min-height: 0;
+    padding: 36px 28px 32px;
+  }
+
+
+  .testimonial-slide p {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+}
+
 
 /* ---------- SERVICES ---------- */
 
