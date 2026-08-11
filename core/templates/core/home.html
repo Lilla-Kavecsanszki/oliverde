@@ -313,24 +313,57 @@
 </section>
 
 <section class="founder">
-  <div class="founder-grid">
+
+  <div class="wrap founder-grid">
+
+    <!-- FOUNDER / PERSONAL COMMITMENT -->
+
+    <div class="founder-text reveal">
+
+      <p class="eyebrow">
+        A Personal Commitment
+      </p>
+
+      <div
+        class="bigquote"
+        aria-hidden="true"
+      >
+        “
+      </div>
+
+      <h2 class="serif">
+        I founded Oliverde on one simple belief:
+        your home deserves the same care you would give it yourself.
+      </h2>
+
+      <p>
+        Since 2006, we've built lasting relationships with homeowners
+        who trust us to protect what matters most.
+      </p>
+
+      <div class="founder-sig">
+        Oliver Beresford Manussis
+        <span>Founder</span>
+      </div>
+
+    </div>
+
+
+    <!-- TESTIMONIALS -->
 
     {% if testimonials %}
 
-      <div class="testimonial-frame-wrap reveal">
+      <div class="testimonial-stage reveal">
 
         <div
-          class="testimonial-frame"
+          class="testimonial-offset-frame"
           aria-hidden="true"
         ></div>
 
-        <div
-          class="testimonial-card"
-          id="testimonialCard"
-        >
+        <div class="testimonial-card">
 
           <p class="eyebrow testimonial-eyebrow">
-            From our homeowners
+            From Our Homeowners
           </p>
 
           <div
@@ -340,34 +373,44 @@
             “
           </div>
 
-          {% for t in testimonials %}
 
-            <div
-              class="testimonial-slide {% if forloop.first %}active{% endif %}"
-              data-index="{{ forloop.counter0 }}"
-            >
+          <div class="testimonial-slider">
 
-              <p class="serif">
-                {{ t.quote }}
-              </p>
+            {% for t in testimonials %}
 
-              <span>
-                — {{ t.author_name }}
-              </span>
+              <blockquote
+                class="testimonial-slide{% if forloop.first %} active{% endif %}"
+                data-testimonial="{{ forloop.counter0 }}"
+              >
 
-            </div>
+                <div class="testimonial-copy serif">
+                  {{ t.quote|linebreaks }}
+                </div>
 
-          {% endfor %}
+                <footer class="testimonial-author">
+                  — {{ t.author_name }}
+                </footer>
+
+              </blockquote>
+
+            {% endfor %}
+
+          </div>
+
 
           {% if testimonials|length > 1 %}
 
-            <div class="testimonial-dots">
+            <div
+              class="testimonial-dots"
+              aria-label="Choose testimonial"
+            >
 
               {% for t in testimonials %}
 
                 <button
-                  class="dot {% if forloop.first %}active{% endif %}"
-                  data-index="{{ forloop.counter0 }}"
+                  type="button"
+                  class="dot{% if forloop.first %} active{% endif %}"
+                  data-testimonial-dot="{{ forloop.counter0 }}"
                   aria-label="Show testimonial {{ forloop.counter }}"
                 ></button>
 
@@ -383,38 +426,8 @@
 
     {% endif %}
 
-
-    <div class="founder-text reveal">
-
-      <p class="eyebrow">
-        A personal commitment
-      </p>
-
-      <div
-        class="bigquote"
-        aria-hidden="true"
-      >
-        "
-      </div>
-
-      <h2 class="serif">
-        I founded Oliverde on one simple belief: your home deserves the same
-        care you would give it yourself.
-      </h2>
-
-      <p>
-        For nearly two decades, we've built lasting relationships with homeowners
-        who trust us to protect what matters most.
-      </p>
-
-      <div class="founder-sig">
-        Oliver Beresford Manussis
-        <span>Founder</span>
-      </div>
-
-    </div>
-
   </div>
+
 </section>
 
 <section class="why">
