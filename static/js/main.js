@@ -152,11 +152,16 @@ if (mobileNav) {
 // Testimonial Carousel
 // -----------------------------------------------------------------------------
 
-const testimonialCard = document.getElementById("testimonialCard");
+const testimonialCard = document.querySelector(".testimonial-card");
 
 if (testimonialCard) {
-  const slides = testimonialCard.querySelectorAll(".testimonial-slide");
-  const dots = testimonialCard.querySelectorAll(".dot");
+  const slides = Array.from(
+    testimonialCard.querySelectorAll(".testimonial-slide")
+  );
+
+  const dots = Array.from(
+    testimonialCard.querySelectorAll(".testimonial-dots .dot")
+  );
 
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -165,8 +170,26 @@ if (testimonialCard) {
   let current = 0;
   let carouselTimer = null;
 
+  let pointerStartX = 0;
+  let pointerStartY = 0;
+  let pointerCurrentX = 0;
+  let pointerCurrentY = 0;
+  let isPointerDown = false;
+  let isHorizontalDrag = false;
+
+  const swipeThreshold = 50;
+
+
+  // ---------------------------------------------------------------------------
+  // Show testimonial
+  // ---------------------------------------------------------------------------
+
   const showTestimonial = (index) => {
-    current = Number(index);
+    if (!slides.length) {
+      return;
+    }
+
+    current = (Number(index) + slides.length) % slides.length;
 
     slides.forEach((slide, slideIndex) => {
       const active = slideIndex === current;
@@ -179,9 +202,33 @@ if (testimonialCard) {
       const active = dotIndex === current;
 
       dot.classList.toggle("active", active);
-      dot.setAttribute("aria-current", active ? "true" : "false");
+
+      if (active) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
     });
   };
+
+
+  // ---------------------------------------------------------------------------
+  // Previous / next
+  // ---------------------------------------------------------------------------
+
+  const showNextTestimonial = () => {
+    showTestimonial(current + 1);
+  };
+
+
+  const showPreviousTestimonial = () => {
+    showTestimonial(current - 1);
+  };
+
+
+  // ---------------------------------------------------------------------------
+  // Automatic carousel
+  // ---------------------------------------------------------------------------
 
   const startCarousel = () => {
     if (
@@ -193,30 +240,185 @@ if (testimonialCard) {
     }
 
     carouselTimer = window.setInterval(() => {
-      showTestimonial((current + 1) % slides.length);
+      showNextTestimonial();
     }, 6000);
   };
 
-  const stopCarousel = () => {
-    if (!carouselTimer) return;
 
-    clearInterval(carouselTimer);
+  const stopCarousel = () => {
+    if (!carouselTimer) {
+      return;
+    }
+
+    window.clearInterval(carouselTimer);
     carouselTimer = null;
   };
 
+
+  const restartCarousel = () => {
+    stopCarousel();
+    startCarousel();
+  };
+
+
+  // ---------------------------------------------------------------------------
+  // Pagination dots
+  // ---------------------------------------------------------------------------
+
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
-      stopCarousel();
       showTestimonial(index);
-      startCarousel();
+      restartCarousel();
     });
   });
 
-  testimonialCard.addEventListener("mouseenter", stopCarousel);
-  testimonialCard.addEventListener("mouseleave", startCarousel);
 
-  testimonialCard.addEventListener("focusin", stopCarousel);
-  testimonialCard.addEventListener("focusout", startCarousel);
+  // ---------------------------------------------------------------------------
+  // Mouse + touch swipe / drag
+  // ---------------------------------------------------------------------------
+
+  testimonialCard.addEventListener("pointerdown", (event) => {
+    /*
+      Ignore pointer dragging if the visitor is actually clicking
+      one of the carousel controls.
+    */
+    if (event.target.closest(".testimonial-dots")) {
+      return;
+    }
+
+    isPointerDown = true;
+    isHorizontalDrag = false;
+
+    pointerStartX = event.clientX;
+    pointerStartY = event.clientY;
+
+    pointerCurrentX = event.clientX;
+    pointerCurrentY = event.clientY;
+
+    testimonialCard.classList.add("is-dragging");
+
+    stopCarousel();
+
+    if (testimonialCard.setPointerCapture) {
+      testimonialCard.setPointerCapture(event.pointerId);
+    }
+  });
+
+
+  testimonialCard.addEventListener("pointermove", (event) => {
+    if (!isPointerDown) {
+      return;
+    }
+
+    pointerCurrentX = event.clientX;
+    pointerCurrentY = event.clientY;
+
+    const deltaX = pointerCurrentX - pointerStartX;
+    const deltaY = pointerCurrentY - pointerStartY;
+
+    /*
+      Only treat the gesture as a carousel drag when horizontal
+      movement is clearly stronger than vertical movement.
+
+      This means normal vertical page scrolling still works on mobile.
+    */
+    if (
+      Math.abs(deltaX) > 8 &&
+      Math.abs(deltaX) > Math.abs(deltaY)
+    ) {
+      isHorizontalDrag = true;
+    }
+  });
+
+
+  const finishSwipe = () => {
+    if (!isPointerDown) {
+      return;
+    }
+
+    const deltaX = pointerCurrentX - pointerStartX;
+
+    testimonialCard.classList.remove("is-dragging");
+
+    if (
+      isHorizontalDrag &&
+      Math.abs(deltaX) >= swipeThreshold
+    ) {
+      if (deltaX < 0) {
+        /*
+          Swipe / drag left:
+          show the next testimonial.
+        */
+        showNextTestimonial();
+      } else {
+        /*
+          Swipe / drag right:
+          show the previous testimonial.
+        */
+        showPreviousTestimonial();
+      }
+    }
+
+    isPointerDown = false;
+    isHorizontalDrag = false;
+
+    restartCarousel();
+  };
+
+
+  testimonialCard.addEventListener(
+    "pointerup",
+    finishSwipe
+  );
+
+
+  testimonialCard.addEventListener(
+    "pointercancel",
+    finishSwipe
+  );
+
+
+  testimonialCard.addEventListener(
+    "lostpointercapture",
+    finishSwipe
+  );
+
+
+  // ---------------------------------------------------------------------------
+  // Pause while interacting
+  // ---------------------------------------------------------------------------
+
+  testimonialCard.addEventListener(
+    "mouseenter",
+    stopCarousel
+  );
+
+
+  testimonialCard.addEventListener(
+    "mouseleave",
+    () => {
+      if (!isPointerDown) {
+        startCarousel();
+      }
+    }
+  );
+
+
+  testimonialCard.addEventListener(
+    "focusin",
+    stopCarousel
+  );
+
+
+  testimonialCard.addEventListener(
+    "focusout",
+    startCarousel
+  );
+
+
+  // ---------------------------------------------------------------------------
+  // Initialise
+  // ---------------------------------------------------------------------------
 
   showTestimonial(0);
   startCarousel();

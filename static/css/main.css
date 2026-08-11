@@ -1525,6 +1525,7 @@ body.home-hero .site-header.nav-scrolled {
 .testimonial-stage {
   position: relative;
   z-index: 1;
+  isolation: isolate;
 
   width: 100%;
   max-width: 760px;
@@ -1552,7 +1553,7 @@ body.home-hero .site-header.nav-scrolled {
   bottom: 0;
   left: 38px;
 
-  border: 1px solid var(--olive-600);
+  border: 1px solid var(--olive-700);
 
   pointer-events: none;
   z-index: 0;
@@ -3333,102 +3334,6 @@ body.lightbox-open {
   }
 }
 
-/* ---------- FOUNDER (updated to 3-column with testimonial card) ---------- */
-
-.founder-grid {
-  display: grid;
-  grid-template-columns: 0.7fr 1fr 0.65fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.testimonial-card {
-  background: var(--stone);
-  padding: 36px 32px;
-  position: relative;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.testimonial-bigquote {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 44px;
-  font-style: italic;
-  color: var(--rust);
-  opacity: 0.35;
-  line-height: 0.5;
-  margin-bottom: 6px;
-}
-
-.testimonial-slide {
-  display: none;
-}
-
-.testimonial-slide.active {
-  display: block;
-}
-
-.testimonial-slide p {
-  font-size: 17px;
-  font-style: italic;
-  line-height: 1.55;
-  color: var(--olive-900);
-}
-
-.testimonial-slide span {
-  display: block;
-  margin-top: 16px;
-  font-family: "Inter", sans-serif;
-  font-style: normal;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--taupe);
-}
-
-.testimonial-dots {
-  display: flex;
-  gap: 8px;
-  margin-top: 24px;
-}
-
-.testimonial-dots .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  border: none;
-  background: var(--hairline);
-  cursor: pointer;
-  padding: 0;
-}
-
-.testimonial-dots .dot.active {
-  background: var(--rust);
-}
-
-@media (max-width:1100px) {
-  .founder-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-  }
-
-  .testimonial-card {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width:900px) {
-  .founder-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .founder-photo {
-    max-width: 320px;
-  }
-}
 
 /* ---------- ABOUT HERO ---------- */
 
@@ -4550,12 +4455,7 @@ textarea:focus-visible {
   .prop-tag {
     padding: 20px;
   }
-
-  .testimonial-card {
-    padding: 30px 24px;
-  }
-
-  .property-gallery {
+.property-gallery {
     grid-template-columns: 1fr;
   }
 
