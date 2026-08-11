@@ -1577,8 +1577,8 @@ body.home-hero .site-header.nav-scrolled {
   background: var(--olive-900);
 
   box-shadow:
-    0 22px 42px rgba(35, 42, 23, 0.14),
-    0 5px 14px rgba(35, 42, 23, 0.08);
+    0 24px 55px rgba(35, 42, 23, 0.12),
+    0 6px 18px rgba(35, 42, 23, 0.06);
 }
 
 
