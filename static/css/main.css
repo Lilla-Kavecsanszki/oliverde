@@ -2215,64 +2215,156 @@ body.home-hero .site-header.nav-scrolled {
 
 /* ---------- WHY OLIVERDE ---------- */
 
+
 .why {
   background: var(--stone);
-  padding: 90px 0;
+  padding: 100px 0 105px;
 }
+
 
 .why-head {
+  max-width: 620px;
+  margin: 0 auto 60px;
   text-align: center;
-  margin-bottom: 56px;
 }
 
+
 .why-head h2 {
-  font-size: clamp(24px, 2.8vw, 30px);
-  font-weight: 400;
+  margin: 0;
   color: var(--olive-900);
+  font-size: clamp(26px, 2.8vw, 32px);
+  font-weight: 400;
+  line-height: 1.25;
 }
+
 
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
   text-align: center;
 }
 
+
 .why-item {
-  padding: 0 44px;
   position: relative;
+  padding: 0 clamp(30px, 3.5vw, 52px);
 }
+
 
 .why-item:not(:first-child) {
   border-left: 1px solid var(--hairline);
 }
 
+
 .why-item .sprig {
-  margin: 0 auto 16px;
+  display: block;
+  margin: 0 auto 20px;
 }
+
 
 .why-item .eyebrow {
   display: block;
+  max-width: 260px;
+  margin-right: auto;
+  margin-left: auto;
+
   color: var(--olive-900);
   font-weight: 600;
+  line-height: 1.45;
 }
+
 
 .why-item p:not(.eyebrow) {
-  font-size: 13px;
+  max-width: 290px;
+  margin: 0 auto;
+
   color: var(--taupe);
-  line-height: 1.7;
+  font-size: 13px;
+  line-height: 1.75;
 }
 
-@media (max-width:900px) {
-  .why-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+
+/* ---------- TABLET ---------- */
+
+
+@media (max-width: 900px) {
+
+  .why {
+    padding: 80px 0;
   }
 
-  .why-item {
-    border-left: none !important;
-    padding: 0;
+
+  .why-head {
+    margin-bottom: 48px;
   }
+
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+
+  .why-item {
+    padding: 34px 0;
+    border-left: none !important;
+  }
+
+
+  .why-item:first-child {
+    padding-top: 0;
+  }
+
+
+  .why-item:last-child {
+    padding-bottom: 0;
+  }
+
+
+  .why-item:not(:first-child) {
+    border-top: 1px solid var(--hairline);
+  }
+
+
+  .why-item .eyebrow {
+    max-width: 100%;
+  }
+
+
+  .why-item p:not(.eyebrow) {
+    max-width: 400px;
+  }
+
+}
+
+
+/* ---------- MOBILE ---------- */
+
+
+@media (max-width: 560px) {
+
+  .why {
+    padding: 68px 0 72px;
+  }
+
+
+  .why-head {
+    margin-bottom: 38px;
+  }
+
+
+  .why-head h2 {
+    font-size: 27px;
+  }
+
+
+  .why-item {
+    padding: 30px 0;
+  }
+
 }
 
 /* ---------- CTA ---------- */

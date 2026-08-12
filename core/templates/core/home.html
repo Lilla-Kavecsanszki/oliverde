@@ -158,6 +158,52 @@
   </div>
 </section>
 
+<section class="services">
+  <div class="wrap">
+
+    <div class="services-head reveal">
+      <p class="eyebrow">
+        How we care for your home
+      </p>
+
+      <h2 class="serif">
+        A dedicated team, every detail covered
+      </h2>
+    </div>
+
+    <div class="services-grid property-services-grid reveal">
+
+      {% for service in nav_services %}
+
+        <a href="{{ service.get_absolute_url }}" class="service">
+
+          <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
+            <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+          </svg>
+
+          <h3 class="serif">
+            {{ service.title }}
+          </h3>
+
+          <p>
+            {{ service.description|truncatewords:12 }}
+          </p>
+
+        </a>
+
+      {% empty %}
+
+        <p>
+          No services added yet — add some in the admin.
+        </p>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
 <section class="properties">
   <div class="wrap">
 
@@ -257,52 +303,6 @@
         <p class="empty-properties">
           No featured properties yet — mark four properties as featured in the
           admin.
-        </p>
-
-      {% endfor %}
-
-    </div>
-
-  </div>
-</section>
-
-<section class="services">
-  <div class="wrap">
-
-    <div class="services-head reveal">
-      <p class="eyebrow">
-        How we care for your home
-      </p>
-
-      <h2 class="serif">
-        A dedicated team, every detail covered
-      </h2>
-    </div>
-
-    <div class="services-grid property-services-grid reveal">
-
-      {% for service in nav_services %}
-
-        <a href="{{ service.get_absolute_url }}" class="service">
-
-          <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
-            <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
-          </svg>
-
-          <h3 class="serif">
-            {{ service.title }}
-          </h3>
-
-          <p>
-            {{ service.description|truncatewords:12 }}
-          </p>
-
-        </a>
-
-      {% empty %}
-
-        <p>
-          No services added yet — add some in the admin.
         </p>
 
       {% endfor %}
@@ -431,31 +431,21 @@
 </section>
 
 <section class="why">
+
   <div class="wrap">
 
+
     <div class="why-head reveal">
+
       <h2 class="serif">
         Why international owners choose Oliverde
       </h2>
+
     </div>
+
 
     <div class="why-grid reveal">
 
-      <div class="why-item">
-
-        <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
-          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
-        </svg>
-
-        <p class="eyebrow" style="margin-bottom:8px;">
-          Local expertise
-        </p>
-
-        <p>
-          Deep regional knowledge and trusted supplier relationships.
-        </p>
-
-      </div>
 
       <div class="why-item">
 
@@ -464,14 +454,15 @@
         </svg>
 
         <p class="eyebrow" style="margin-bottom:8px;">
-          Transparent reporting
+          Your eyes on the ground
         </p>
 
         <p>
-          Detailed digital updates and financial visibility.
+          Regular photographic reporting and direct oversight while you're away.
         </p>
 
       </div>
+
 
       <div class="why-item">
 
@@ -480,18 +471,39 @@
         </svg>
 
         <p class="eyebrow" style="margin-bottom:8px;">
-          Personal service
+          One trusted point of contact
         </p>
 
         <p>
-          Direct communication and tailored solutions.
+          From tradespeople and utilities to maintenance and unexpected problems.
         </p>
 
       </div>
+
+
+      <div class="why-item">
+
+        <svg class="sprig" viewBox="0 0 22 26" aria-hidden="true">
+          <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+        </svg>
+
+        <p class="eyebrow" style="margin-bottom:8px;">
+          Local knowledge, international expectations
+        </p>
+
+        <p>
+          Italian expertise with the communication and service standards
+          overseas owners expect.
+        </p>
+
+      </div>
+
 
     </div>
 
+
   </div>
+
 </section>
 
 <section class="cta">
