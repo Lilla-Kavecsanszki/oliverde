@@ -3053,8 +3053,8 @@ footer address {
 
 
 /*
-  Ready for later if your name becomes a link
-  to your portfolio.
+  Ready for later if my name becomes a link
+  to my portfolio.
 */
 
 .site-credit a {
@@ -3256,6 +3256,22 @@ footer address {
   .destination-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---------- PORTFOLIO ACTION BUTTONS ---------- */
+
+
+.portfolio-all-properties .btn-outline {
+  color: var(--olive-900);
+  border-color: var(--olive-900);
+  background: transparent;
+}
+
+
+.portfolio-all-properties .btn-outline:hover {
+  color: #fff;
+  background: var(--olive-900);
+  border-color: var(--olive-900);
 }
 
 /* ---------- DESTINATION HERO ---------- */
