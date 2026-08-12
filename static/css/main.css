@@ -661,13 +661,25 @@ body.home-hero .site-header.nav-scrolled {
 
 /* ---------- HERO CONTENT ---------- */
 
-
 .hero-content {
   position: relative;
   z-index: 3;
   padding-top: 40px;
+  padding-left: clamp(20px, 4vw, 64px);
 }
 
+@media (max-width: 900px) {
+  .hero-content {
+    padding-left: 30px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .hero-content {
+    padding: 40px 26px 0;
+  }
+}
 
 .hero h1 {
   max-width: 780px;
