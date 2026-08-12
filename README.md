@@ -1,280 +1,160 @@
 # Oliverde — Property Management Website
 
-Oliverde is a bespoke property-management and editorial portfolio website for a boutique Italian company caring for exceptional homes across Tuscany, Umbria, and Lazio.
+A bespoke Django website designed and developed for Oliverde Property Management Services, a boutique property management company caring for private homes across Tuscany, Umbria and Lazio.
 
-The platform presents Oliverde’s destinations, managed properties, services, journal content, testimonials, and enquiry experience through a custom Django application and administration system.
+The website is designed primarily for international homeowners who need a trusted local presence in Italy. It presents Oliverde's property management, estate and guest services through an understated, editorial visual identity, while showcasing a curated portfolio of homes under the company's care.
 
-## Live Website
+## Live Preview
 
-[View the live Heroku deployment](https://oliverde-property-management-2affa78894a3.herokuapp.com/)
+The project is currently deployed to Heroku as a staging/live preview while final photography, content review and pre-launch testing are completed.
 
-The final Oliverde custom domain will be connected before the official public launch.
+**Staging site:**  
+https://oliverde-property-management-2affa78894a3.herokuapp.com/
+
+**Production domain:**  
+To be connected at final launch.
 
 ---
 
 # Contents
 
-- [Oliverde — Property Management Website](#oliverde--property-management-website)
-  - [Live Website](#live-website)
-- [Contents](#contents)
+- [Project Overview](#project-overview)
 - [User Experience](#user-experience)
-  - [Ideal Client](#ideal-client)
 - [Planning](#planning)
 - [Design](#design)
-  - [Brand Identity](#brand-identity)
-  - [Site Map](#site-map)
-  - [Application Architecture](#application-architecture)
-    - [`accounts`](#accounts)
-    - [`portfolio`](#portfolio)
-    - [`services`](#services)
-    - [`journal`](#journal)
-    - [`core`](#core)
-    - [`config`](#config)
-  - [Colour Palette](#colour-palette)
-  - [Typography](#typography)
-  - [Iconography](#iconography)
-- [Languages](#languages)
-- [Technology](#technology)
-  - [Application](#application)
-  - [Production](#production)
-  - [Media](#media)
-  - [Development](#development)
-  - [Email](#email)
-  - [Security](#security)
+- [Information Architecture](#information-architecture)
+- [App Architecture](#app-architecture)
+- [Technology Stack](#technology-stack)
 - [Features](#features)
-  - [Home](#home)
-  - [Portfolio](#portfolio-1)
-  - [Destination Pages](#destination-pages)
-  - [Property Pages](#property-pages)
-    - [Property Gallery](#property-gallery)
-  - [Services](#services-1)
-  - [Journal](#journal-1)
-  - [About](#about)
-  - [Contact](#contact)
-  - [Site-wide Features](#site-wide-features)
 - [Data Models](#data-models)
-  - [Destination](#destination)
-  - [Property](#property)
-  - [PropertyImage](#propertyimage)
-  - [PropertyAmenity](#propertyamenity)
-  - [Service](#service)
-  - [ServiceFeature](#servicefeature)
-  - [ServiceImage](#serviceimage)
-  - [Testimonial](#testimonial)
-  - [JournalPost](#journalpost)
-  - [User](#user)
-- [Privacy and Property Protection](#privacy-and-property-protection)
-- [Administration](#administration)
-- [SEO](#seo)
-- [Accessibility](#accessibility)
+- [Django Admin](#django-admin)
+- [SEO and Metadata](#seo-and-metadata)
+- [Accessibility and Responsive Design](#accessibility-and-responsive-design)
 - [Deployment](#deployment)
-  - [Production Infrastructure](#production-infrastructure)
-  - [Environment Variables](#environment-variables)
-  - [Local Installation](#local-installation)
 - [Testing](#testing)
-- [Known Limitations](#known-limitations)
+- [Remaining Pre-Launch Work](#remaining-pre-launch-work)
 - [Roadmap](#roadmap)
 - [Credits](#credits)
-  - [Content](#content)
-  - [Design and Development](#design-and-development)
-  - [Photography and Assets](#photography-and-assets)
 
----
+
+# Project Overview
+
+Oliverde Property Management Services provides ongoing care, maintenance, administration, project oversight and guest support for privately owned homes in central Italy.
+
+The website needed to communicate something more specific than a conventional property-services business.
+
+For an overseas homeowner, choosing a property manager means entrusting someone with access to their home, contractors, utilities, maintenance decisions, guest preparation and potentially significant expenditure while they are hundreds or thousands of kilometres away.
+
+The website therefore focuses on:
+
+- trust and discretion;
+- visible evidence of real properties under management;
+- clear communication;
+- local knowledge;
+- continuity of care;
+- personal service rather than corporate scale;
+- and an easy route to start a conversation with Oliverde.
+
+The result is a content-led Django website combining a luxury editorial aesthetic with a database-driven portfolio and practical administration through Django Admin.
+
+[Back to top](#contents)
 
 # User Experience
 
 ## Ideal Client
 
-The principal client is an international homeowner who owns a property in Tuscany, Umbria, or Lazio but does not live there full-time.
+The primary user is an international homeowner who:
 
-They may be based in the United Kingdom, United States, elsewhere in Europe, or further abroad. They typically visit seasonally and need a trusted local team to oversee the property throughout the year.
+- owns or is purchasing a property in Tuscany, Umbria or Lazio;
+- lives abroad or spends significant periods away from the property;
+- wants one trusted local point of contact;
+- values discretion, reliability and long-term relationships;
+- does not want to coordinate gardeners, cleaners, tradespeople, utilities and repairs remotely;
+- expects clear communication and photographic reporting;
+- may occasionally require guest or rental support;
+- and values quality of service over finding the lowest-cost provider.
 
-The ideal Oliverde client:
+A detailed design-thinking client persona was developed during the planning stage to help guide content, hierarchy and UX decisions.
 
-- values discretion, personal relationships, and craftsmanship;
-- wants a dependable local point of contact;
-- expects proactive communication and transparent reporting;
-- needs support coordinating cleaners, gardeners, pool teams, contractors, utilities, and administration;
-- wants their home prepared perfectly for owner or guest arrivals;
-- may require restoration, rental, concierge, or post-purchase support;
-- values long-term stewardship over a low-cost transactional service.
+## User Goals
 
-Visitors to the Oliverde website are seeking:
+Visitors should quickly be able to answer:
 
-- reassurance that their home will be protected and carefully maintained;
-- evidence of the standard and range of properties Oliverde manages;
-- a clear explanation of Oliverde’s services;
-- regional knowledge of Tuscany, Umbria, and Lazio;
-- a discreet and low-pressure way to enquire;
-- confidence that the privacy of owners, guests, and properties is respected.
+1. What does Oliverde do?
+2. Can I trust this company with my home?
+3. Do they understand overseas owners?
+4. Where do they operate?
+5. What kinds of properties do they already manage?
+6. What services can they coordinate?
+7. Can they support a property that is occasionally rented?
+8. How do I contact them?
 
-The website addresses these needs through an editorial property portfolio, destination-led navigation, detailed service pages, carefully controlled property information, and a personal consultation enquiry route.
+The site deliberately avoids aggressive lead-generation patterns. Calls to action are positioned as invitations to discuss a property rather than hard sales funnels.
 
 [Back to top](#contents)
-
----
 
 # Planning
 
-Development followed an iterative, content-led process rather than a fixed template or purchased theme.
+Development has been iterative and content-led.
 
-The site was designed and built as a bespoke Django application. Its structure evolved through repeated review of:
+The site was built page by page around the real operational structure of Oliverde rather than forcing the business into a generic property-management template.
 
-- Oliverde’s actual services and operational workflows;
-- the properties and regions under management;
-- client privacy requirements;
-- luxury hospitality and architectural editorial references;
-- responsive behaviour;
-- accessibility;
-- search-engine structure;
-- content-management requirements;
-- production deployment constraints.
+The process included:
 
-The final primary navigation is:
+- business and audience analysis;
+- client persona development;
+- information architecture;
+- content collection;
+- property and destination structure;
+- service taxonomy;
+- database modelling;
+- brand development;
+- UI design;
+- Django development;
+- admin/CMS configuration;
+- responsive design;
+- SEO implementation;
+- staging deployment;
+- and ongoing browser/device QA.
 
-- Home
-- Portfolio
-- Services
-- Journal
-- About
-- Contact
+The structure and visual system were repeatedly refined in response to client feedback.
 
-The administration system was designed so that Oliverde can manage destinations, properties, services, galleries, amenities, testimonials, and journal articles without editing templates or source code.
+Examples include:
+
+- replacing generic iconography with a bespoke botanical sprig motif;
+- developing a dedicated Oliverde monogram;
+- removing an early client-login concept;
+- replacing a founder portrait section with a more discreet testimonial presentation;
+- introducing separate Portfolio pathways for the complete managed collection and properties available for private rental;
+- and developing stronger privacy conventions for publicly identifying private residences.
 
 [Back to top](#contents)
-
----
 
 # Design
 
 ## Brand Identity
 
-The Oliverde visual identity includes:
+The project includes a wider Oliverde digital identity rather than only the website UI.
 
-- bespoke Oliverde wordmark;
-- “O” monogram with a subtle keyhole motif;
+Brand work includes:
+
+- Oliverde wordmark;
+- bespoke "O" monogram;
+- subtle keyhole motif;
 - favicon suite;
-- restrained natural colour palette;
-- self-hosted typography;
-- botanical line illustrations;
-- editorial property photography;
-- branded social-sharing imagery;
-- consistent visual treatment across website and supporting business assets.
+- email signature branding;
+- LinkedIn assets;
+- colour system;
+- typography;
+- iconography;
+- and reusable website components.
 
-The visual direction combines Italian architectural heritage with understated contemporary luxury.
-
-## Site Map
-
-```mermaid
-flowchart TD
-    Home["Home /"]
-    Portfolio["Portfolio /portfolio/"]
-    AllProperties["All Properties /portfolio/properties/"]
-    Destination["Destination /portfolio/destination/slug/"]
-    Property["Property /portfolio/properties/slug/uuid/"]
-
-    Services["Services /services/"]
-    ServiceDetail["Service /services/slug/"]
-
-    Journal["Journal /journal/"]
-    JournalPost["Article /journal/slug/"]
-
-    About["About /about/"]
-    Contact["Contact /contact/"]
-
-    Privacy["Privacy Policy /privacy-policy/"]
-    Cookies["Cookie Policy /cookie-policy/"]
-    Legal["Legal Notice /legal-notice/"]
-
-    Sitemap["Sitemap /sitemap.xml"]
-    Robots["Robots /robots.txt"]
-
-    Home --> Portfolio
-    Home --> Services
-    Home --> Journal
-    Home --> About
-    Home --> Contact
-    Home -->|"featured properties"| Property
-
-    Portfolio --> Destination
-    Portfolio --> AllProperties
-    Destination --> Property
-    AllProperties --> Property
-
-    Services --> ServiceDetail
-    ServiceDetail -->|"related properties"| Property
-
-    Journal --> JournalPost
-    JournalPost -->|"related properties"| Property
-
-    Property -->|"property enquiry"| Contact
-    Property -->|"related properties"| Property
-```
-
-## Application Architecture
-
-The project is divided into Django apps according to responsibility.
-
-### `accounts`
-
-Owns the custom `User` model and role choices:
-
-- Admin
-- Property Manager
-- Client
-
-The project currently uses Django Admin rather than a public client portal.
-
-### `portfolio`
-
-Owns the core property-management content:
-
-- `Destination`
-- `Property`
-- `PropertyImage`
-- `PropertyAmenity`
-- `Service`
-- `ServiceFeature`
-- `ServiceImage`
-- `Testimonial`
-
-### `services`
-
-Provides the public service index and service detail views while reading service data from the `portfolio` app.
-
-### `journal`
-
-Owns journal articles, publishing controls, cover images, excerpts, rich-text content, related properties, pagination, and sitemap integration.
-
-### `core`
-
-Owns:
-
-- homepage;
-- about page;
-- contact page and enquiry form;
-- privacy policy;
-- cookie policy;
-- legal notice;
-- custom error views;
-- `robots.txt`;
-- shared navigation context;
-- site-wide context processors.
-
-### `config`
-
-Owns project-level configuration:
-
-- Django settings;
-- root URL routing;
-- WSGI and ASGI configuration;
-- sitemap classes;
-- production database configuration.
+The visual direction is deliberately restrained and editorial, taking cues from Italian country estates, architectural publications and high-end hospitality without making the company appear to be a hotel or holiday-rental agency.
 
 ## Colour Palette
 
 | Token | Hex |
-|---|---:|
+|---|---|
 | Cream | `#F7F4EC` |
 | Stone | `#EDE7D9` |
 | Olive 900 | `#232A17` |
@@ -284,493 +164,672 @@ Owns project-level configuration:
 | Taupe | `#6E6759` |
 | Rust | `#A8592E` |
 
-The palette is deliberately restrained. Olive, cream, stone, and charcoal establish the main visual system, while rust is used sparingly for emphasis and interaction.
+Olive, cream and stone form the core palette.
+
+Rust is intentionally used sparingly for selected accents, interactive states and details rather than throughout the interface.
+
 
 ## Typography
 
-- **Cormorant Garamond** — headings, display copy, editorial quotations, and selected italic emphasis.
-- **Inter** — navigation, labels, forms, metadata, and body copy.
+### Cormorant Garamond
 
-The fonts are self-hosted from the project’s static files rather than loaded from an external font service.
+Used for:
 
-## Iconography
+- display headings;
+- editorial statements;
+- property names;
+- quotations;
+- and selected italic emphasis.
 
-The visual system includes:
+### Inter
 
-- the Oliverde keyhole monogram;
-- a custom single-line botanical sprig;
-- lightweight property-fact icons;
-- restrained gallery and navigation controls;
-- minimal interface decoration.
+Used for:
+
+- body copy;
+- navigation;
+- labels;
+- buttons;
+- metadata;
+- and interface elements.
+
+The serif/sans-serif pairing helps balance an editorial, heritage-influenced identity with a modern and readable interface.
 
 [Back to top](#contents)
 
-# Languages
+# Information Architecture
+
+The principal public structure is:
+
+```
+Home
+│
+├── Portfolio
+│   ├── Our Collection
+│   ├── Holiday Rentals
+│   ├── Destination
+│   └── Property Detail
+│
+├── Services
+│   └── Service Detail
+│
+├── About
+│
+├── Journal
+│   └── Article Detail
+│
+└── Contact 
+```
+
+The Portfolio deliberately distinguishes between:
+
+**Our Collection**  
+The broader collection of private residences managed by Oliverde.
+
+**Holiday Rentals**  
+Selected properties under Oliverde's care that are also available for private stays.
+
+This prevents Oliverde from being positioned primarily as a holiday-rental business while still allowing appropriate properties to be marketed for stays.
+
+[Back to top](#contents)
+
+# App Architecture
+
+The Django project is separated according to ownership of data and application responsibility.
+
+### `accounts`
+
+Contains the custom `User` model and role structure.
+
+Current roles include:
+
+- Admin;
+- Property Manager;
+- Client.
+
+Client-facing accounts are not currently exposed publicly.
+
+### `portfolio`
+
+Owns the principal property-management data, including:
+
+- destinations;
+- properties;
+- property imagery;
+- property amenities;
+- services;
+- service features;
+- service imagery;
+- and testimonials.
+
+### `services`
+
+Provides the public service index and individual service views while reading service data from the central `portfolio` models.
+
+### `journal`
+
+Owns the Journal and its publishing functionality, including:
+
+- articles;
+- publication controls;
+- cover imagery;
+- excerpts;
+- rich-text content;
+- related properties;
+- pagination;
+- and sitemap integration.
+
+### `core`
+
+Handles site-wide pages and functionality including:
+
+- homepage;
+- About;
+- Contact and enquiry handling;
+- privacy policy;
+- cookie policy;
+- legal notice;
+- custom error views;
+- `robots.txt`;
+- shared navigation/context;
+- and site-wide context processors.
+
+### `config`
+
+Contains project-level configuration including:
+
+- Django settings;
+- root URL routing;
+- WSGI and ASGI configuration;
+- sitemap configuration;
+- and production database configuration.
+
+The project intentionally uses Django Admin as the content-management interface rather than introducing a separate page-builder CMS such as Wagtail.
+
+
+[Back to top](#contents)
+
+# Technology Stack
+
+## Languages
 
 - Python
 - HTML
-- Django Template Language
 - CSS
 - JavaScript
 - SQL
-
-[Back to top](#contents)
-
----
-
-# Technology
+- Django Template Language
 
 ## Application
 
-- [Django 6](https://www.djangoproject.com/)
-- [PostgreSQL](https://www.postgresql.org/)
+- Django 6
+- PostgreSQL
 - Django Admin
 - Django Sitemaps Framework
-- [django-ckeditor-5](https://pypi.org/project/django-ckeditor-5/)
+- django-ckeditor-5
 
-## Production
+## Production and Infrastructure
 
-- [Heroku](https://www.heroku.com/)
+- Heroku
 - Heroku-26 stack
 - Heroku Postgres
 - Gunicorn
-- `dj-database-url`
+- dj-database-url
 - WhiteNoise
 - Compressed Manifest Static Files Storage
-- Heroku release-phase migrations
+- release-phase database migrations
 
 ## Media
 
-- [Cloudinary](https://cloudinary.com/)
-- [django-cloudinary-storage](https://pypi.org/project/django-cloudinary-storage/)
+- Cloudinary
+- django-cloudinary-storage
 - Pillow
+
+## Front End
+
+- Django Templates
+- custom CSS
+- vanilla JavaScript
+- responsive CSS Grid and Flexbox layouts
+- self-hosted Cormorant Garamond and Inter typography
+
+No front-end framework is required.
 
 ## Development
 
 - Git
-- Private GitHub repository
+- GitHub
 - Visual Studio Code
-- `python-dotenv`
-- Mermaid
-- PostgreSQL local development database
+- python-dotenv
+- local PostgreSQL development database
 
-## Email
+## Email and Security
 
 - Gmail SMTP
 - Google App Password authentication
-
-## Security
-
 - Cloudflare Turnstile
 - Django CSRF protection
-- Database-backed cache rate limiting
+- honeypot spam protection
+- database-backed cache rate limiting
+
 
 [Back to top](#contents)
 
 # Features
 
-## Home
+## Homepage
 
-- Full-width editorial hero.
-- Consultation CTA.
-- Portfolio CTA.
-- Company statistics.
-- Introductory brand statement.
-- Three service pillars.
-- Dynamically selected featured properties.
-- Dynamic services preview.
-- Founder section.
-- Rotating testimonials.
-- Testimonial navigation controls.
-- "Why international owners choose Oliverde" section.
-- Final consultation CTA.
-- Real Estate Agent structured data.
+The homepage acts as the primary introduction to the Oliverde brand and service proposition.
+
+Current features include:
+
+- full-screen photographic hero;
+- animated scroll indicator;
+- primary consultation CTA;
+- portfolio and experience statistics;
+- service/value introduction;
+- dynamically populated featured properties;
+- rental-status indicators where applicable;
+- services preview;
+- rotating testimonial carousel;
+- clickable testimonial navigation;
+- automatic testimonial rotation;
+- mouse and touch/swipe testimonial interaction;
+- "Why international owners choose Oliverde" value proposition;
+- photographic consultation CTA;
+- and responsive navigation.
+
+Featured properties and testimonials are controlled through Django Admin.
+
+[Back to top](#contents)
 
 ## Portfolio
 
-- Portfolio landing page.
-- Destination-led browsing.
-- Dynamic destination cards.
-- Featured properties.
-- All-properties index.
-- Destination filter.
-- Property sorting.
-- Pagination.
-- Reset-filter control.
-- Empty-results state.
-- Privacy and discretion messaging.
-- Privacy-safe public property titles.
-- Published-property filtering.
+The Portfolio is database-driven rather than being a collection of manually coded pages.
 
-## Destination Pages
+### Portfolio Landing Page
 
-- Destination cover image.
-- Destination name and tagline.
-- Destination introduction.
-- Published property listings.
-- Property type and bedroom metadata.
-- Rental labels.
-- Optional destination testimonial.
-- Internal navigation back to the portfolio.
+Provides two principal pathways:
 
-## Property Pages
+- Our Collection
+- Holiday Rentals
 
-- Privacy-safe public property identity.
-- Random UUID-based public URL.
-- Canonical redirect when an editorial slug changes.
-- Cover image.
-- Rental availability banner.
-- Property description.
-- Optional property facts.
-- Bedroom count.
-- Bathroom count.
-- Guest capacity.
-- Land size.
-- Air-conditioning details.
-- Pool and heated-pool information.
-- Property amenities.
-- Rental enquiry introduction.
-- Property-specific enquiry link.
-- Management services.
-- Related properties.
-- Published-property protection.
+It also allows users to browse properties geographically through destination records.
 
-### Property Gallery
+The broader Portfolio browsing experience also supports:
 
-- Ordered property-image administration.
-- Internal editorial image categories.
-- Continuous public gallery presentation.
-- Full-screen lightbox.
-- Previous and next controls.
-- Keyboard arrow navigation.
-- Escape-to-close behaviour.
-- Image caption.
-- Image counter.
-- Reduced-motion support.
-- Responsive presentation.
+- destination filtering;
+- property sorting;
+- pagination;
+- reset-filter controls;
+- empty-results states;
+- featured-property presentation;
+- and published-property filtering.
 
-## Services
+### Our Collection
 
-- Services index.
-- Individual service pages.
-- Ordered service features.
-- Ordered service image galleries.
-- Editorial asymmetric gallery layout.
-- Shared full-screen lightbox.
-- Related properties.
-- Consultation CTA.
-- Sitemap integration.
+Displays published properties currently under Oliverde's care.
 
-The five core services are:
+### Holiday Rentals
 
-1. Post-Purchase Set-Up
-2. Property Maintenance
-3. Restoration Management
-4. Property Administration
-5. Property Rental
+Displays only properties explicitly marked as available for rental.
 
-## Journal
+Rental status is controlled at property level in Django Admin.
 
-- Journal index.
-- Published-post filtering.
-- Cover images.
-- Article excerpts.
-- Article detail pages.
-- Rich-text content using CKEditor 5.
-- Rich-text image upload URL.
-- Related properties.
-- Additional article recommendations.
-- Pagination.
-- Sitemap integration.
-- SEO metadata structure.
+A rental banner is rendered only where the property's rental availability is enabled.
 
-## About
+### Destination Pages
 
-- Company introduction.
-- Founder story.
-- Oliverde values.
-- Regional expertise.
-- Service philosophy.
-- Consultation CTA.
-- Page metadata.
-
-## Contact
-
-- Public enquiry form
-- Property-specific rental enquiries
-- Name, email, phone, enquiry type and message fields
-- International telephone validation
-- Server-side validation
-- Property UUID validation
-- Rental-only property validation
-- Cloudflare Turnstile protection
-- Honeypot spam protection
-- Cache-backed rate limiting
-- Gmail SMTP notifications
-- Database persistence
-- Django Admin integration
-- Accessible validation messages
-- Loading state during submission
-- Privacy Policy notice
-- Direct email and telephone details
-- Regions-served information
-
-## Site-wide Features
-
-- Responsive navigation.
-- Dynamic Portfolio dropdown.
-- Dynamic Services dropdown.
-- Mobile accordion navigation.
-- Active navigation states.
-- Keyboard-accessible controls.
-- Responsive footer.
-- Legal-page links.
-- Self-hosted fonts.
-- Custom favicon suite.
-- Custom 404 page.
-- Custom 500 page.
-- Default Open Graph image.
-- Canonical URLs.
-- XML sitemap.
-- `robots.txt`.
-- Reduced-motion handling.
-- Scroll-reveal interaction.
-- Deferred JavaScript.
-
-[Back to top](#contents)
-
----
-
-# Data Models
-
-## Destination
-
-Represents an Oliverde service region or destination and includes:
+Destination records can contain:
 
 - name;
 - slug;
-- tagline;
-- description;
-- cover image.
-
-A destination can contain multiple properties and testimonials.
-
-## Property
-
-Represents a managed residence.
-
-Key fields include:
-
-- private internal title;
-- privacy-safe public title;
-- publication approval controls;
-- public UUID;
-- privacy-safe slug;
-- destination;
-- property type;
-- description;
+- region;
+- descriptive content;
 - cover image;
+- and associated properties.
+
+The destination structure also supports Oliverde's discretion strategy. Public-facing locations can remain appropriately broad where identifying the exact town of a private residence would reveal too much information.
+
+### Property Detail Pages
+
+Property pages support:
+
+- privacy-safe editorial property titles;
+- property type;
+- destination;
+- cover imagery;
+- descriptive copy;
 - bedrooms;
 - bathrooms;
-- guest capacity;
-- land size;
+- sleeping capacity where relevant;
+- land size where appropriate;
 - air-conditioning information;
-- pool information;
-- rental information;
-- featured status and order;
-- publication status;
-- services;
-- amenities.
+- pool and heated-pool information;
+- reusable property amenities;
+- associated management services;
+- rental status;
+- property-specific enquiry CTA;
+- and related property discovery.
 
-## PropertyImage
+Property galleries support:
 
-Represents an ordered gallery image attached to a property.
+- ordered image administration;
+- internal editorial image categories;
+- continuous public gallery presentation;
+- full-screen lightbox viewing;
+- previous and next controls;
+- keyboard navigation;
+- Escape-to-close behaviour;
+- image captions;
+- image counters;
+- reduced-motion support;
+- and responsive presentation.
 
-Images include:
+Public property pages use a stable random UUID as part of the property's public identity. This allows editorial titles and slugs to change without breaking the underlying property reference, while canonical redirects ensure outdated editorial URLs resolve to the current public URL.
 
-- editorial section;
-- image;
-- caption;
-- alternative text;
-- manual order.
+Not every property is presented as a rental.
 
-The editorial section controls image sequence internally while the public property page presents one continuous gallery.
-
-## PropertyAmenity
-
-Represents a reusable property amenity that may be assigned to multiple properties.
-
-Amenities can be organised by category and manual display order.
-
-## Service
-
-Represents one of Oliverde’s property-management services.
-
-Each service includes:
-
-- title;
-- slug;
-- description;
-- ordered features;
-- ordered service-gallery images;
-- related properties.
-
-## ServiceFeature
-
-Represents an ordered feature or responsibility within a service.
-
-## ServiceImage
-
-Represents an ordered editorial image attached to a service page.
-
-## Testimonial
-
-Represents a client quotation that may optionally be linked to:
-
-- a destination;
-- a property;
-- the homepage.
-
-## JournalPost
-
-Represents a journal article and includes:
-
-- title;
-- slug;
-- publication state;
-- publication date;
-- cover image;
-- excerpt;
-- rich-text body;
-- related properties.
-
-## User
-
-Extends Django's `AbstractUser` and includes a role field.
-
-Current role choices are:
-
-- Admin
-- Property Manager
-- Client
+For private residences, identifying details can be intentionally limited.
 
 [Back to top](#contents)
 
----
+# Services
 
-# Privacy and Property Protection
+Services are managed dynamically rather than hard-coded into individual templates.
 
-Property privacy is a central architectural requirement.
+The service architecture currently covers areas such as:
 
-Public rental enquiries reference properties using their public UUID rather
-than editable slugs or titles. Every submitted enquiry is validated server-side
-to ensure the referenced property is both published and available for private
-rental before it is linked to the enquiry record.
+- post-purchase set-up;
+- ongoing property maintenance;
+- restoration/project oversight;
+- property administration;
+- guest and rental support.
 
-The platform distinguishes between:
+Individual service pages can include:
 
-- an internal property name used by Oliverde staff;
+- introduction;
+- detailed service features;
+- explanatory content;
+- CTA;
+- and relevant properties.
+
+The navigation reads service records dynamically, allowing services to be updated without rewriting the navigation templates.
+
+[Back to top](#contents)
+
+# About
+
+The About page communicates the human and operational structure behind Oliverde.
+
+It includes:
+
+- company history;
+- local expertise;
+- long-standing supplier relationships;
+- Oliverde's own small operational/support team;
+- administrative coordination;
+- on-the-ground property and grounds support;
+- and a wider vetted network of specialist tradespeople and suppliers.
+
+The intention is to communicate that Oliverde is neither a one-person referral service nor an impersonal large agency.
+
+Owners have a consistent point of contact backed by reliable administrative and on-site support, with specialist contractors brought in where appropriate.
+
+Final photography for this page is still being selected.
+
+[Back to top](#contents)
+
+# Journal
+
+A database-driven Journal has been added to support useful editorial content around property ownership and management in Italy.
+
+Journal articles support:
+
+- title;
+- publication metadata;
+- cover imagery;
+- structured article content;
+- headings;
+- lists;
+- images;
+- blockquotes;
+- and responsive long-form typography.
+
+The Journal is intended to provide useful owner-focused content while also strengthening the site's organic search footprint over time.
+
+[Back to top](#contents)
+
+# Contact
+
+The Contact page provides a low-friction route for prospective owners to start a conversation with Oliverde.
+
+Features include:
+
+- photographic hero;
+- enquiry form;
+- name;
+- email;
+- international telephone validation;
+- enquiry type;
+- message;
+- property-specific rental enquiries;
+- server-side validation;
+- property UUID validation;
+- rental-only property validation;
+- Cloudflare Turnstile protection;
+- honeypot spam protection;
+- cache-backed rate limiting;
+- Gmail SMTP notifications;
+- database persistence;
+- Django Admin integration;
+- accessible validation and error states;
+- loading state during submission;
+- Privacy Policy notice;
+- success state;
+- and direct company contact information.
+
+The tone is deliberately consultative rather than transactional.
+
+[Back to top](#contents)
+
+# Site-Wide Features
+
+The site includes:
+
+- fixed responsive navigation;
+- desktop dropdown navigation;
+- full-screen mobile navigation;
+- dynamically populated Portfolio destinations;
+- dynamically populated Services navigation;
+- responsive layouts;
+- touch-friendly controls;
+- reusable CTA components;
+- shared footer;
+- legal links;
+- favicon suite;
+- animated reveal effects;
+- reduced-motion handling;
+- image fallbacks;
+- active navigation states;
+- keyboard-accessible controls;
+- custom 404 and 500 pages;
+- canonical URLs;
+- XML sitemap;
+- `robots.txt`;
+- deferred JavaScript;
+- and reusable design tokens.
+
+[Back to top](#contents)
+
+# Data Models
+
+The site is driven by relational Django models rather than static property pages.
+
+Core relationships include:
+
+```
+Destination
+    │
+    ├── Property
+    └── Testimonial
+
+Property
+    │
+    ├── PropertyImage
+    ├── PropertyAmenity (many-to-many)
+    ├── Service (many-to-many)
+    ├── Testimonial
+    ├── JournalPost (related properties)
+    └── optional rental configuration
+
+Service
+    │
+    ├── ServiceFeature
+    └── ServiceImage
+
+JournalPost
+    │
+    └── related Property records
+
+User
+    │
+    └── role-based administration structure
+```
+
+Property records include publishing and presentation controls so the public site can remain selective even when more information exists internally.
+
+Important property controls include separate internal and public identities, publication approval, rental availability, featured-property ordering and privacy-safe public URLs.
+
+[Back to top](#contents)
+
+# Django Admin
+
+Django Admin acts as the project's CMS.
+
+The admin interface allows Oliverde to manage content without editing templates.
+
+Administrative functionality includes:
+
+- destinations;
+- properties;
+- internal and public property identities;
+- property publishing status;
+- featured-property ordering;
+- property types;
+- rental availability;
+- rental banner text;
+- readonly public UUIDs;
+- property image galleries and ordering;
+- image sections;
+- alternative-text fields;
+- reusable property amenities;
+- property-service assignments;
+- property-amenity assignments;
+- services;
+- service features;
+- service image galleries;
+- testimonials;
+- homepage testimonial selection;
+- Journal publishing;
+- custom user roles;
+- contact enquiry management;
+- and linked rental property enquiries.
+
+Inline administration is used where appropriate, including property image galleries, service features and service imagery.
+
+The admin separates private operational information from public editorial information, reducing the risk of sensitive property details being exposed accidentally.
+
+This approach keeps the project lightweight while still providing a practical content-management system for the business.
+
+[Back to top](#contents)
+
+# Privacy and Discretion
+
+Privacy is a deliberate part of the site's information architecture.
+
+Many homes managed by Oliverde are private family residences rather than commercial accommodation.
+
+The website therefore supports an editorial presentation strategy in which:
+
+- property names may be replaced with editorial titles;
+- exact locations do not need to be published;
+- destination descriptions can remain intentionally broad;
+- identifying details can be omitted;
+- and only properties explicitly marked for rental are presented as available for stays.
+
+This allows the portfolio to demonstrate the quality and range of Oliverde's work without unnecessarily exposing clients' homes.
+
+## Technical Privacy Implementation
+
+The property architecture separates private operational identity from public editorial identity.
+
+A property may therefore have:
+
+- a private internal title used by Oliverde;
 - a public editorial title;
 - a privacy-safe public slug;
 - a random public UUID;
-- owner approval to display a property's real name.
+- and explicit approval controls governing publication.
 
-Public property pages are retrieved using the UUID rather than the slug. The UUID remains stable when an editorial title or slug changes.
+Public property pages are resolved using the UUID rather than relying solely on an editable title or sequential database ID.
 
-An outdated slug redirects to the correct canonical URL while the underlying UUID remains unchanged.
+The UUID remains stable if an editorial title or slug changes. Where a visitor uses an outdated slug, the application redirects to the property's current canonical URL.
 
 This approach:
 
-- prevents internal property names from appearing accidentally;
-- makes public property URLs difficult to enumerate;
-- supports editorial naming;
-- allows titles to change without breaking permanent links;
-- protects client and property privacy more effectively than sequential IDs or internal-name slugs alone.
+- reduces the risk of internal property names appearing publicly;
+- makes property URLs more difficult to enumerate;
+- supports discreet editorial naming;
+- allows public titles to evolve without breaking permanent references;
+- and provides stronger separation between Oliverde's internal records and the public portfolio.
 
-The UUID is not treated as a substitute for authentication. Any future private documents, owner dashboards, or confidential reports will require proper access controls.
-
-[Back to top](#contents)
-
-# Administration
-
-Django Admin functions as the Oliverde content-management system.
-
-Administrative features include:
-
-- property list filters;
-- publication controls;
-- featured-property ordering;
-- privacy guidance;
-- internal and public property identity sections;
-- readonly public UUIDs;
-- inline property-image galleries;
-- image sections and ordering;
-- alternative-text fields;
-- service feature inlines;
-- service image inlines;
-- reusable property amenities;
-- property-service assignment;
-- property-amenity assignment;
-- destination management;
-- testimonials;
-- journal publishing;
-- custom user roles.
-- contact enquiry management
-- linked rental property enquiries;
-
-The admin separates private operational information from public editorial information to reduce the risk of exposing sensitive property details.
+The UUID is not treated as a substitute for authentication. Any future owner dashboards, private documents or confidential reporting would require dedicated access controls.
 
 [Back to top](#contents)
 
----
+# SEO and Metadata
 
-# SEO
+The site includes a technical SEO foundation rather than relying only on visible page copy.
 
-Implemented SEO features include:
+Implemented elements include:
 
-- page-specific titles;
+- page-specific `<title>` support;
 - meta descriptions;
 - canonical URLs;
 - Open Graph metadata;
-- default Open Graph social-sharing image;
-- homepage structured data;
-- property structured data;
-- XML sitemap;
-- static-page sitemap;
-- property sitemap;
-- destination sitemap;
-- service sitemap;
-- journal sitemap;
-- `robots.txt`;
-- semantic headings;
-- descriptive image alternative text;
-- privacy-safe public URLs.
+- Open Graph imagery;
+- Twitter/X large-image metadata;
+- semantic heading structure;
+- descriptive image alternative text where appropriate;
+- crawlable Django URLs;
+- and structured data.
 
-Before the official launch, the custom domain will be connected and the sitemap submitted to Google Search Console and Bing Webmaster Tools.
+The site also provides:
+
+- XML sitemap generation;
+- static-page sitemap entries;
+- property sitemap entries;
+- destination sitemap entries;
+- service sitemap entries;
+- Journal sitemap entries;
+- `robots.txt`;
+- privacy-safe public property URLs;
+- and property-level structured data where applicable.
+
+The homepage includes Schema.org structured data for the Oliverde business, including:
+
+- business name;
+- legal name;
+- telephone;
+- email;
+- VAT ID;
+- service regions;
+- address;
+- and website URL.
+
+A default social-sharing image is also supported.
+
+Further search optimisation can continue once the production domain and final photography are in place.
 
 [Back to top](#contents)
 
----
+# Accessibility and Responsive Design
 
-# Accessibility
+The website has been designed responsively rather than as a desktop-only layout with a single mobile breakpoint.
+
+Current responsive QA covers key layouts across:
+
+- large desktop;
+- small desktop/laptop;
+- tablet;
+- mobile;
+- and small mobile widths.
+
+Responsive work includes:
+
+- fluid page gutters;
+- collapsing grids;
+- responsive typography;
+- mobile navigation;
+- touch targets;
+- mobile footer restructuring;
+- property-gallery behaviour;
+- long-form Journal typography;
+- responsive CTAs;
+- mobile-safe hero layouts;
+- and viewport/safe-area considerations.
 
 Accessibility considerations include:
 
-- keyboard-accessible navigation;
-- keyboard-operable gallery lightboxes;
-- visible focus states;
-- semantic buttons and links;
-- descriptive ARIA labels;
-- alternative image text;
-- reduced-motion media queries;
-- logical heading structure;
-- accessible form labels;
-- form error feedback;
-- responsive text sizing;
-- mobile navigation controls;
-- escape-to-close lightbox behaviour.
+- semantic HTML;
+- keyboard-accessible links and controls;
+- focus states;
+- `aria` attributes where appropriate;
+- decorative-image handling;
+- reduced-motion support;
+- and readable text contrast.
 
-A final production accessibility and Lighthouse review remains on the roadmap.
+Responsive and accessibility QA is still being completed before final launch.
 
 [Back to top](#contents)
 
@@ -789,7 +848,7 @@ The application is deployed to Heroku using:
 - WhiteNoise static-file serving;
 - compressed manifest static files;
 - private GitHub deployment integration;
-- release-phase database migrations.
+- Release-phase database migrations.
 
 The production `Procfile` contains:
 
@@ -970,34 +1029,37 @@ Completed testing includes:
 
 Further work before launch:
 
-- Cross-browser testing
-- Lighthouse audit
-- W3C validation
-- Automated Django tests
-
-- Manual click-through testing of every page and link
-- Form validation testing on the Contact page (including the missing spam protection noted below)
-- Responsive testing at key breakpoints (375px, 768px, 1024px, and desktop) — an initial CSS audit has been done, but not yet confirmed in-browser at every breakpoint
-- HTML/CSS validation (W3C validators)
-- Django system checks / `flake8`
+- cross-browser testing;
+- Lighthouse performance and accessibility audit;
+- W3C HTML/CSS validation;
+- automated Django tests;
+- full manual click-through testing of pages and links;
+- full Contact form regression testing, including validation, Turnstile, honeypot and rate-limiting behaviour;
+- final in-browser responsive testing at key breakpoints;
+- and final Django system checks / `flake8`.
 
 [Back to top](#contents)
 
-# Known Limitations
+# Remaining Pre-Launch Work
 
-- Contact notifications currently use Gmail SMTP. A dedicated transactional email service may be adopted in the future if higher email volumes require it.
-- The production content database is still being populated.
-- The custom Oliverde domain and `www` domain are not yet connected.
-- Automated Certificate Management (ACM) for the custom domain is not yet enabled.
-- HSTS remains intentionally set to `0` until the custom domain is serving HTTPS correctly.
-- Google Search Console and Bing Webmaster Tools are not yet connected.
-- Journal categories are not yet implemented.
-- Automated tests remain to be written.
+## Current Limitations
+
 - No client-facing login or owner portal currently exists.
 - Video content is not currently supported.
+- Journal categories are not yet implemented.
+- Contact notifications currently use Gmail SMTP; a dedicated transactional email service may be adopted if future email volumes require it.
 - The platform intentionally uses Django Admin rather than a page-builder CMS.
-- A final legal review is recommended before the official public launch.
-- A final cross-browser, responsive, accessibility, and Lighthouse audit remains outstanding.
+
+## Before Public Launch
+
+- complete production content population;
+- connect the Oliverde custom domain and `www` domain;
+- enable Automated Certificate Management;
+- enable the final HSTS configuration once HTTPS is confirmed;
+- connect Google Search Console and Bing Webmaster Tools;
+- complete automated test coverage;
+- complete final legal review;
+- and complete cross-browser, responsive, accessibility and Lighthouse QA.
 
 [Back to top](#contents)
 
