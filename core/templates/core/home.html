@@ -31,34 +31,71 @@
 {% block content %}
 
 <section class="hero">
-  <div class="hero-frame"></div>
+
+  <img
+    class="hero-background-image"
+    src="{% static 'images/tester.jpeg' %}"
+    alt=""
+    aria-hidden="true"
+  >
+
+  <div
+    class="hero-background-overlay"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="hero-frame"
+    aria-hidden="true"
+  ></div>
+
 
   <div class="wrap hero-content">
+
     <h1 class="serif">
       Managing Exceptional <br>
       <em>Homes</em> Across Italy.
     </h1>
+
 
     <p>
       Discreet property management, estate and concierge care for international
       homeowners throughout Tuscany, Umbria and Lazio.
     </p>
 
+
     <div class="hero-actions">
-      <a class="btn btn-primary" href="{% url 'contact' %}">
+
+      <a
+        class="btn btn-primary"
+        href="{% url 'contact' %}"
+      >
         Schedule a consultation
       </a>
 
-      <a class="textlink" href="{% url 'portfolio:list' %}">
+
+      <a
+        class="textlink"
+        href="{% url 'portfolio:list' %}"
+      >
         View our portfolio
       </a>
+
     </div>
+
   </div>
 
+
   <div class="scroll-cue">
+
     <div class="line"></div>
-    <span>Scroll</span>
+
+    <span>
+      Scroll
+    </span>
+
   </div>
+
 </section>
 
 <section class="stats">
@@ -507,9 +544,24 @@
 </section>
 
 <section class="cta">
+
+  <img
+    class="cta-background-image"
+    src="{% static 'images/tester.jpeg' %}"
+    alt=""
+    aria-hidden="true"
+  >
+
+  <div
+    class="cta-background-overlay"
+    aria-hidden="true"
+  ></div>
+
+
   <div class="wrap cta-row">
 
-    <div>
+    <div class="cta-copy">
+
       <h2 class="serif">
         Let's discuss your property.
       </h2>
@@ -518,13 +570,19 @@
         Whether you live abroad or visit seasonally, we'll tailor a management
         solution for your home.
       </p>
+
     </div>
 
-    <a class="btn btn-primary" href="{% url 'contact' %}">
+
+    <a
+      class="btn btn-primary"
+      href="{% url 'contact' %}"
+    >
       Schedule a consultation
     </a>
 
   </div>
+
 </section>
 
 {% endblock %}

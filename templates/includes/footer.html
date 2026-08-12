@@ -1,60 +1,150 @@
 <footer>
+
   <div class="wrap footer-main">
+
+
+    <!-- BRAND -->
+
     <div class="footer-col footer-brand">
-      <a href="{% url 'home' %}" class="logo serif">OLIVERDE</a>
-      <p class="footer-tagline">Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.</p>
+
+      <a
+        href="{% url 'home' %}"
+        class="logo serif"
+      >
+        OLIVERDE
+      </a>
+
+      <p class="footer-tagline">
+        Discreet property management and concierge care for international
+        homeowners across Tuscany, Umbria and Lazio.
+      </p>
+
     </div>
 
-    <div class="footer-col">
-      <p class="footer-heading">Explore</p>
-      <a href="{% url 'portfolio:list' %}">Portfolio</a>
-      <a href="{% url 'services:list' %}">Services</a>
-      <a href="{% url 'about' %}">About</a>
-      <a href="{% url 'contact' %}">Contact</a>
-    </div>
+
+    <!-- EXPLORE -->
 
     <div class="footer-col">
-      <p class="footer-heading">Contact</p>
+
+      <p class="footer-heading">
+        Explore
+      </p>
+
+      <a href="{% url 'portfolio:list' %}">
+        Portfolio
+      </a>
+
+      <a href="{% url 'services:list' %}">
+        Services
+      </a>
+
+      <a href="{% url 'about' %}">
+        About
+      </a>
+
+      <a href="{% url 'contact' %}">
+        Contact
+      </a>
+
+    </div>
+
+
+    <!-- CONTACT -->
+
+    <div class="footer-col">
+
+      <p class="footer-heading">
+        Contact
+      </p>
+
       <address>
         Loc. Santa Maria Nuova, Cs. 58<br>
         52044 Cortona (AR), Italy
       </address>
-      <a href="mailto:oliverdepropertyservices@gmail.com">oliverdepropertyservices@gmail.com</a>
-      <a href="tel:+393663174740">+39 366 317 4740</a>
+
+      <a href="mailto:oliverdepropertyservices@gmail.com">
+        oliverdepropertyservices@gmail.com
+      </a>
+
+      <a href="tel:+393663174740">
+        +39 366 317 4740
+      </a>
+
     </div>
 
+
+    <!-- CONNECT -->
+
     <div class="footer-col footer-connect">
-      <p class="footer-heading">Connect</p>
-      <a href="https://www.linkedin.com/company/oliverde-property-management/?viewAsMember=true" class="footer-social" aria-label="LinkedIn">in</a>
-      <a href="{% url 'contact' %}" class="btn btn-outline footer-cta">Schedule a consultation</a>
+
+      <p class="footer-heading">
+        Connect
+      </p>
+
+      <a
+        href="https://www.linkedin.com/company/oliverde-property-management/"
+        class="footer-social"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Oliverde on LinkedIn"
+      >
+        in
+      </a>
+
+      <a
+        href="{% url 'contact' %}"
+        class="btn btn-outline footer-cta"
+      >
+        Schedule a consultation
+      </a>
+
     </div>
+
+
   </div>
+
+
+  <!-- FOOTER BOTTOM -->
 
   <div class="wrap footer-bottom">
 
-  <p>
-    &copy; {% now "Y" %}
-    Oliverde Property Services di Manussis Oliver Beresford
-    &middot;
-    P. IVA IT02366120513
-  </p>
 
-  <nav
-    class="footer-bottom-links"
-    aria-label="Legal information"
-  >
-    <a href="{% url 'privacy_policy' %}">
-      Privacy Policy
-    </a>
+    <div class="footer-bottom-meta">
 
-    <a href="{% url 'cookie_policy' %}">
-      Cookie Policy
-    </a>
+      <p>
+        &copy; {% now "Y" %}
+        Oliverde Property Services di Manussis Oliver Beresford
+        &middot;
+        P. IVA IT02366120513
+      </p>
 
-    <a href="{% url 'legal_notice' %}">
-      Legal Notice
-    </a>
-  </nav>
+      <p class="site-credit">
+        Website design &amp; development by Lilla Kavecsanszki
+      </p>
 
-</div>
+    </div>
+
+
+    <nav
+      class="footer-bottom-links"
+      aria-label="Legal information"
+    >
+
+      <a href="{% url 'privacy_policy' %}">
+        Privacy Policy
+      </a>
+
+      <a href="{% url 'cookie_policy' %}">
+        Cookie Policy
+      </a>
+
+      <a href="{% url 'legal_notice' %}">
+        Legal Notice
+      </a>
+
+    </nav>
+
+
+  </div>
+
 </footer>
