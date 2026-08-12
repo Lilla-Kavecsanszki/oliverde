@@ -236,6 +236,63 @@ This prevents Oliverde from being positioned primarily as a holiday-rental busin
 
 The Django project is separated according to ownership of data and application responsibility.
 
+### Application Structure
+
+                        OLIVERDE DJANGO PROJECT
+                                  │
+       ┌──────────────┬───────────┼───────────┬──────────────┐
+       │              │           │           │              │
+     core         portfolio    services    journal       accounts
+       │              │           │           │              │
+ ContactEnquiry    Property     Public      JournalPost      User
+ Site pages        Destination  service
+ Legal pages       Service      views
+ Contact           Images
+                   Amenities
+                   Testimonials
+       │              │                       │
+       └──────────────┴────── Django ORM ─────┘
+                                  │
+                             PostgreSQL
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                Cloudinary                 Django Admin
+                  Media                    Content CMS
+
+### Infrastructure and Request Flow
+
+Visitor
+   │
+Django / Heroku
+   │
+   ├── Core
+   │     └── ContactEnquiry
+   │
+   ├── Portfolio
+   │     ├── Properties
+   │     ├── Destinations
+   │     ├── Services
+   │     └── Testimonials
+   │
+   ├── Services
+   │
+   ├── Journal
+   │     └── JournalPost
+   │
+   ├── Accounts
+   │     └── User
+   │
+   ├── PostgreSQL
+   ├── Cloudinary
+   │
+   └── Contact pipeline
+         ├── Turnstile
+         ├── Honeypot
+         ├── Rate limiting
+         ├── ContactEnquiry persistence
+         └── SMTP email
+
 ### `accounts`
 
 Contains the custom `User` model and role structure.
@@ -267,14 +324,14 @@ Provides the public service index and individual service views while reading ser
 
 ### `journal`
 
-Owns the Journal and its publishing functionality, including:
+Owns the site's editorial Journal functionality through the `JournalPost` model, including:
 
-- articles;
-- publication controls;
-- cover imagery;
+- article titles and privacy-safe slugs;
 - excerpts;
-- rich-text content;
-- related properties;
+- CKEditor 5 rich-text content;
+- cover imagery;
+- publication dates and publishing controls;
+- optional many-to-many relationships with properties;
 - pagination;
 - and sitemap integration.
 
@@ -285,6 +342,8 @@ Handles site-wide pages and functionality including:
 - homepage;
 - About;
 - Contact and enquiry handling;
+- `ContactEnquiry` persistence;
+- enquiry workflow and email-delivery status tracking;
 - privacy policy;
 - cookie policy;
 - legal notice;
@@ -443,7 +502,7 @@ Destination records can contain:
 
 - name;
 - slug;
-- region;
+- tagline;
 - descriptive content;
 - cover image;
 - and associated properties.
@@ -465,9 +524,11 @@ Property pages support:
 - land size where appropriate;
 - air-conditioning information;
 - pool and heated-pool information;
+- optional public property highlights;
 - reusable property amenities;
 - associated management services;
 - rental status;
+- rental-specific introduction and banner content where applicable;
 - property-specific enquiry CTA;
 - and related property discovery.
 
@@ -572,6 +633,11 @@ Features include:
 - international telephone validation;
 - enquiry type;
 - message;
+- database-backed enquiry records;
+- enquiry workflow status;
+- email-delivery status tracking;
+- internal staff notes;
+- optional property association;
 - property-specific rental enquiries;
 - server-side validation;
 - property UUID validation;
@@ -639,7 +705,8 @@ Property
     ├── PropertyAmenity (many-to-many)
     ├── Service (many-to-many)
     ├── Testimonial
-    ├── JournalPost (related properties)
+    ├── JournalPost (many-to-many)
+    ├── ContactEnquiry (optional relationship)
     └── optional rental configuration
 
 Service
@@ -649,7 +716,11 @@ Service
 
 JournalPost
     │
-    └── related Property records
+    └── Property (many-to-many, optional)
+
+ContactEnquiry
+    │
+    └── Property (foreign key, optional)
 
 User
     │
@@ -693,6 +764,9 @@ Administrative functionality includes:
 - Journal publishing;
 - custom user roles;
 - contact enquiry management;
+- contact enquiry workflow status;
+- email-delivery status tracking;
+- internal enquiry notes;
 - and linked rental property enquiries.
 
 Inline administration is used where appropriate, including property image galleries, service features and service imagery.
