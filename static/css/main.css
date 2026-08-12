@@ -5451,3 +5451,299 @@ textarea:focus-visible {
     padding-top: 56px;
   }
 }
+
+/* ==========================================================
+   FINAL MOBILE RHYTHM / SPACING PASS
+   ========================================================== */
+
+@media (max-width: 720px) {
+
+  /* ---------- GENERAL INNER PAGE RHYTHM ---------- */
+
+  .page-intro {
+    padding: 64px 0 52px;
+  }
+
+  .page-intro h1 {
+    margin-top: 12px;
+    font-size: clamp(38px, 10vw, 48px);
+    line-height: 1.08;
+  }
+
+  .page-intro-text {
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .page-intro-note {
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+
+  /* ---------- PORTFOLIO LANDING ---------- */
+
+  .portfolio-pathways {
+    padding: 58px 0 64px;
+  }
+
+  .portfolio-pathway-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 30px;
+  }
+
+  .portfolio-pathway-card {
+    padding: 30px 26px;
+    border-radius: 12px;
+  }
+
+  .destinations {
+    padding-top: 64px;
+    padding-bottom: 68px;
+  }
+
+  .portfolio-all-properties {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    max-width: 330px;
+    margin: 38px auto 0;
+  }
+
+  .portfolio-all-properties .btn {
+    width: 100%;
+  }
+
+  .portfolio-discretion {
+    padding: 68px 0;
+  }
+
+  .portfolio-discretion-inner {
+    text-align: left;
+  }
+
+  .portfolio-discretion-inner h2 {
+    margin: 12px 0 20px;
+    font-size: clamp(30px, 8.5vw, 38px);
+    line-height: 1.15;
+  }
+
+  .portfolio-discretion-inner p {
+    margin-bottom: 16px;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+
+  /* ---------- PROPERTY DETAIL ---------- */
+
+  .property-detail-wrap {
+    padding-top: 58px;
+  }
+
+  .property-back-link {
+    margin-bottom: 26px;
+  }
+
+  .property-header {
+    gap: 28px;
+  }
+
+  .property-header h1 {
+    font-size: clamp(38px, 10vw, 48px);
+    line-height: 1.06;
+  }
+
+  .property-facts {
+    gap: 26px 18px;
+  }
+
+  .property-enquiry-button {
+    margin-top: 28px;
+  }
+
+  .property-tour {
+    margin-top: 58px;
+  }
+
+  .property-tour-intro {
+    gap: 12px;
+    margin-bottom: 46px;
+  }
+
+  .property-gallery-chapter {
+    margin-bottom: 58px;
+  }
+
+  .property-chapter-heading {
+    margin-bottom: 24px;
+  }
+
+  .property-gallery {
+    gap: 16px;
+  }
+
+
+  /* ---------- JOURNAL ARTICLE ---------- */
+
+  .journal-title {
+    font-size: clamp(38px, 10vw, 48px);
+    line-height: 1.08;
+  }
+
+  .journal-body-wrap {
+    width: 100%;
+    max-width: 760px;
+    padding-top: 38px;
+    padding-bottom: 68px;
+  }
+
+  .journal-body {
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  .journal-body p {
+    margin-bottom: 20px;
+  }
+
+  .journal-body h2 {
+    margin: 34px 0 14px;
+    font-size: 27px;
+    line-height: 1.18;
+  }
+
+  .journal-body h3 {
+    margin: 28px 0 12px;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .journal-body img {
+    margin: 24px 0;
+  }
+
+  .journal-body blockquote {
+    margin: 28px 0;
+    padding-left: 18px;
+    font-size: 20px;
+  }
+
+  .journal-body ul,
+  .journal-body ol {
+    margin-bottom: 20px;
+  }
+
+
+  /* ---------- GENERIC SECTION RHYTHM ---------- */
+
+  .section-heading {
+    margin-bottom: 26px;
+  }
+
+  .why {
+    padding-top: 68px;
+    padding-bottom: 72px;
+  }
+
+
+  /* ---------- MOBILE HERO REFINEMENT ---------- */
+
+  .hero {
+    height: auto;
+    min-height: 100svh;
+    padding: 150px 0 90px;
+    align-items: center;
+  }
+
+  .hero-frame {
+    inset: 16px;
+  }
+
+  .hero-content {
+    padding-top: 30px;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(42px, 12vw, 58px);
+    line-height: 1.02;
+  }
+
+  .hero p {
+    max-width: 34rem;
+    margin-top: 24px;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+    margin-top: 30px;
+  }
+
+  .hero-actions .btn {
+    width: auto;
+    max-width: 100%;
+    padding-inline: 24px;
+  }
+
+  .scroll-cue {
+    display: none;
+  }
+
+
+  /* ---------- MOBILE NAV SAFE AREA ---------- */
+
+  .mobile-nav {
+    min-height: 100dvh;
+    height: 100dvh;
+    padding:
+      max(24px, env(safe-area-inset-top))
+      max(24px, env(safe-area-inset-right))
+      calc(40px + env(safe-area-inset-bottom))
+      max(24px, env(safe-area-inset-left));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-nav-cta {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 28px;
+    margin-bottom: 8px;
+  }
+}
+
+
+@media (max-width: 390px) {
+
+  .page-intro {
+    padding-top: 54px;
+  }
+
+  .page-intro h1,
+  .property-header h1,
+  .journal-title {
+    font-size: 38px;
+  }
+
+  .portfolio-pathway-card {
+    padding: 26px 22px;
+  }
+
+  .journal-body {
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 11.5vw, 50px);
+  }
+}
