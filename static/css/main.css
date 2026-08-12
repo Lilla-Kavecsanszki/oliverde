@@ -2886,7 +2886,6 @@ body.home-hero .site-header.nav-scrolled {
 
 /* ---------- FOOTER ---------- */
 
-
 footer {
   background: var(--olive-900);
   color: rgba(255, 255, 255, 0.75);
@@ -2894,7 +2893,6 @@ footer {
 
 
 /* ---------- MAIN FOOTER ---------- */
-
 
 .footer-main {
   display: grid;
@@ -2939,7 +2937,6 @@ footer {
 
 /* ---------- FOOTER LINKS ---------- */
 
-
 .footer-col a:not(.footer-social):not(.footer-cta) {
   display: block;
 
@@ -2960,7 +2957,6 @@ footer {
 
 /* ---------- ADDRESS ---------- */
 
-
 footer address {
   margin-bottom: 16px;
 
@@ -2973,7 +2969,6 @@ footer address {
 
 
 /* ---------- CONNECT ---------- */
-
 
 .footer-connect {
   display: flex;
@@ -3026,7 +3021,6 @@ footer address {
 
 /* ---------- FOOTER BOTTOM ---------- */
 
-
 .footer-bottom {
   display: flex;
   align-items: flex-end;
@@ -3063,7 +3057,6 @@ footer address {
 
 /* ---------- WEBSITE CREDIT ---------- */
 
-
 .footer-bottom .site-credit {
   margin: 0;
 
@@ -3074,11 +3067,6 @@ footer address {
   line-height: 1.5;
 }
 
-
-/*
-  Ready for later if my name becomes a link
-  to my portfolio.
-*/
 
 .site-credit a {
   color: inherit;
@@ -3093,7 +3081,6 @@ footer address {
 
 
 /* ---------- LEGAL LINKS ---------- */
-
 
 .footer-bottom-links {
   display: flex;
@@ -3122,14 +3109,13 @@ footer address {
 
 /* ---------- TABLET ---------- */
 
-
 @media (max-width: 900px) {
 
   .footer-main {
     grid-template-columns: 1fr 1fr;
-    gap: 44px 30px;
+    gap: 38px 32px;
 
-    padding-top: 68px;
+    padding: 60px 0 46px;
   }
 
 
@@ -3138,34 +3124,60 @@ footer address {
   }
 
 
+  .footer-tagline {
+    max-width: 420px;
+  }
+
+
+  .footer-heading {
+    margin-bottom: 15px;
+  }
+
+
+  .footer-col a:not(.footer-social):not(.footer-cta) {
+    margin-bottom: 10px;
+  }
+
+
+  .footer-connect {
+    grid-column: 1 / -1;
+  }
+
+
+  .footer-social {
+    margin-bottom: 18px !important;
+  }
+
+
   .footer-bottom {
     align-items: flex-start;
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
+
+    padding: 22px 0 24px;
   }
 
 
   .footer-bottom-links {
     justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 18px;
   }
 
 }
 
 
-/* ---------- FOOTER MOBILE ---------- */
+/* ---------- MOBILE ---------- */
 
 @media (max-width: 560px) {
 
   .footer-main {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 34px 26px;
+    gap: 30px 24px;
 
     padding: 46px 0 38px;
   }
 
-
-  /* Brand remains full width */
 
   .footer-brand {
     grid-column: 1 / -1;
@@ -3174,6 +3186,7 @@ footer address {
 
   .footer-col .logo {
     margin-bottom: 12px;
+
     font-size: 20px;
   }
 
@@ -3186,16 +3199,12 @@ footer address {
   }
 
 
-  /* Reduce heading spacing */
-
   .footer-heading {
     margin-bottom: 13px;
 
     font-size: 10px;
   }
 
-
-  /* Smaller, tighter navigation links */
 
   .footer-col a:not(.footer-social):not(.footer-cta) {
     margin-bottom: 9px;
@@ -3204,7 +3213,10 @@ footer address {
   }
 
 
-  /* Contact spans full width because of email/address */
+  /*
+    Contact spans full width because address/email
+    need more horizontal room.
+  */
 
   .footer-main > .footer-col:nth-child(3) {
     grid-column: 1 / -1;
@@ -3219,9 +3231,8 @@ footer address {
   }
 
 
-  /* Connect column */
-
   .footer-connect {
+    grid-column: auto;
     align-items: flex-start;
   }
 
@@ -3241,8 +3252,6 @@ footer address {
     white-space: nowrap;
   }
 
-
-  /* Bottom legal area */
 
   .footer-bottom {
     align-items: flex-start;
@@ -3279,6 +3288,36 @@ footer address {
 
   .footer-bottom-links a {
     font-size: 10.5px;
+  }
+
+}
+
+
+/* ---------- VERY SMALL MOBILE ---------- */
+
+@media (max-width: 390px) {
+
+  .footer-main {
+    gap: 28px 18px;
+
+    padding-top: 42px;
+  }
+
+
+  .footer-tagline {
+    font-size: 11.5px;
+  }
+
+
+  .footer-cta {
+    padding: 9px 12px;
+
+    font-size: 9.5px;
+  }
+
+
+  .footer-bottom-links {
+    gap: 8px 14px;
   }
 
 }
