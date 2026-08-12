@@ -2691,7 +2691,7 @@ body.home-hero .site-header.nav-scrolled {
   position: absolute;
 
   top: -30%;
-  right: -20%;
+  right: -4%;
   z-index: 2;
 
   width: 520px;
@@ -2793,7 +2793,7 @@ body.home-hero .site-header.nav-scrolled {
 
   .cta::before {
     top: -26%;
-    right: -18%;
+    right: -8%;
 
     width: 460px;
     height: 460px;
@@ -2860,7 +2860,7 @@ body.home-hero .site-header.nav-scrolled {
 
   .cta::before {
     top: -18%;
-    right: -42%;
+    right: -30%;
 
     width: 360px;
     height: 360px;
@@ -2899,7 +2899,7 @@ body.home-hero .site-header.nav-scrolled {
 
   .cta::before {
     top: -15%;
-    right: -48%;
+    right: -34%;
 
     width: 330px;
     height: 330px;
