@@ -5695,7 +5695,19 @@ textarea:focus-visible {
   }
 
   .scroll-cue {
-    display: none;
+    display: flex;
+    bottom: 24px;
+    left: 30px;
+    gap: 9px;
+  }
+
+  .scroll-cue .line {
+    height: 34px;
+  }
+
+  .scroll-cue span {
+    font-size: 9px;
+    letter-spacing: 0.18em;
   }
 
 
