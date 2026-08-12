@@ -5069,79 +5069,198 @@ textarea:focus-visible {
 
 /* ---------- JOURNAL ARTICLE ---------- */
 
+
 .journal-title {
+  margin-top: 10px;
+
+  color: var(--olive-900);
+
   font-size: clamp(30px, 4.2vw, 48px);
   font-weight: 400;
   line-height: 1.2;
-  color: var(--olive-900);
-  margin-top: 10px;
 }
+
 
 .journal-cover {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
+
   object-fit: cover;
 }
 
+
 .journal-body-wrap {
+  width: 100%;
   max-width: 760px;
-  padding: 56px 0 100px;
+
+  /*
+    IMPORTANT:
+    Do not use padding: ... shorthand here.
+    The element also uses .wrap, so we must preserve
+    .wrap's responsive left/right gutters.
+  */
+  padding-top: 56px;
+  padding-bottom: 100px;
 }
 
+
 .journal-body {
+  color: var(--charcoal);
+
   font-size: 17px;
   line-height: 1.85;
-  color: var(--charcoal);
 }
+
 
 .journal-body p {
   margin-bottom: 26px;
 }
 
+
 .journal-body h2 {
+  margin: 44px 0 18px;
+
+  color: var(--olive-900);
+
   font-family: "Cormorant Garamond", serif;
   font-size: 28px;
   font-weight: 500;
-  color: var(--olive-900);
-  margin: 44px 0 18px;
+  line-height: 1.2;
 }
 
+
 .journal-body h3 {
+  margin: 34px 0 14px;
+
+  color: var(--olive-900);
+
   font-family: "Cormorant Garamond", serif;
   font-size: 22px;
   font-weight: 500;
-  color: var(--olive-900);
-  margin: 34px 0 14px;
+  line-height: 1.25;
 }
 
+
 .journal-body img {
+  display: block;
+
   width: 100%;
   height: auto;
+
   margin: 32px 0;
 }
 
+
 .journal-body blockquote {
+  margin: 36px 0;
+  padding-left: 24px;
+
+  border-left: 2px solid var(--rust);
+
+  color: var(--olive-900);
+
   font-family: "Cormorant Garamond", serif;
   font-size: 22px;
   font-style: italic;
-  color: var(--olive-900);
-  border-left: 2px solid var(--rust);
-  padding-left: 24px;
-  margin: 36px 0;
+  line-height: 1.5;
 }
+
 
 .journal-body a {
   color: var(--rust);
+
   border-bottom: 1px solid var(--rust-soft);
 }
+
 
 .journal-body ul,
 .journal-body ol {
   margin: 0 0 26px 22px;
 }
 
+
 .journal-body li {
   margin-bottom: 8px;
+}
+
+
+/* ---------- JOURNAL ARTICLE MOBILE ---------- */
+
+
+@media (max-width: 720px) {
+
+  .journal-title {
+    font-size: clamp(38px, 10vw, 48px);
+    line-height: 1.08;
+  }
+
+
+  .journal-body-wrap {
+    padding-top: 38px;
+    padding-bottom: 68px;
+  }
+
+
+  .journal-body {
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+
+  .journal-body p {
+    margin-bottom: 20px;
+  }
+
+
+  .journal-body h2 {
+    margin: 34px 0 14px;
+
+    font-size: 27px;
+    line-height: 1.18;
+  }
+
+
+  .journal-body h3 {
+    margin: 28px 0 12px;
+
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+
+  .journal-body img {
+    margin: 24px 0;
+  }
+
+
+  .journal-body blockquote {
+    margin: 28px 0;
+    padding-left: 18px;
+
+    font-size: 20px;
+  }
+
+
+  .journal-body ul,
+  .journal-body ol {
+    margin-bottom: 20px;
+  }
+
+}
+
+
+@media (max-width: 390px) {
+
+  .journal-title {
+    font-size: 38px;
+  }
+
+
+  .journal-body {
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+
 }
 
 /* RENTAL CSS */
