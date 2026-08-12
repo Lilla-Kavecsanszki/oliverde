@@ -53,9 +53,12 @@
 # ✅ Phase 4 – Portfolio
 
 - [x] Portfolio overview
+- [x] Our Collection pathway
+- [x] Holiday Rentals pathway
 - [x] Destination cards
 - [x] Featured properties
 - [x] All-properties page
+- [x] Holiday-rentals page
 - [x] Pagination
 - [x] Destination filtering
 - [x] Property sorting
@@ -66,6 +69,7 @@
 - [x] Privacy-safe editorial property titles
 - [x] UUID-based public property URLs
 - [x] Canonical redirects for changed property slugs
+- [x] Rental-only property presentation controls
 
 ---
 
@@ -95,15 +99,19 @@
 - [x] Description
 - [x] Property facts
 - [x] Property amenities
+- [x] Optional public property highlights
 - [x] Air-conditioning details
 - [x] Swimming-pool details
 - [x] Rental availability information
+- [x] Rental-specific presentation controls
 - [x] Services
 - [x] Related properties
 - [x] Contact enquiry link
 - [x] Published-property protection
 - [x] Property structured data
 - [x] Privacy-safe public identity controls
+- [x] Stable UUID-based public identity
+- [x] Canonical redirect behaviour
 
 ---
 
@@ -121,27 +129,23 @@
 
 ---
 
-# ✅ Phase 8 – About
+# 🚧 Phase 8 – About
 
 - [x] Company story
-- [x] Founder section
+- [x] Local expertise section
+- [x] Team and operational structure
 - [x] Values
 - [x] CTA
 - [x] About-page metadata
+- [ ] Add final About photography
 
 ---
 
 # 🚧 Phase 9 – Contact ⭐
 
 - [x] Contact page
-- [x] Property-specific enquiry parameters
+- [x] Photographic hero structure
 - [x] Contact form
-- [x] Form validation
-- [x] Django Messages
-- [x] Success and error message styling
-- [x] Privacy Policy notice
-- [x] Gmail SMTP integration
-- [x] Google App Password authentication
 - [x] Property-specific enquiry parameters
 - [x] UUID-based rental property routing
 - [x] Rental-only property validation
@@ -149,10 +153,17 @@
 - [x] International telephone validation
 - [x] Django Messages
 - [x] Success and error message styling
+- [x] Privacy Policy notice
+- [x] Gmail SMTP integration
+- [x] Google App Password authentication
 - [x] Cloudflare Turnstile protection
 - [x] Honeypot spam protection
 - [x] Cache-backed rate limiting
-- [x] Database persistence
+- [x] Database-backed enquiry persistence
+- [x] Enquiry workflow status
+- [x] Email-delivery status tracking
+- [x] Internal enquiry notes
+- [x] Optional property association
 - [x] Django Admin integration
 - [x] Internal email notifications
 - [x] Friendly failed-email handling
@@ -175,6 +186,7 @@
 - [x] Admin excluded from robots.txt
 - [x] Canonical URLs
 - [x] Structured Data (JSON-LD)
+- [x] Property structured data
 - [x] Metadata
 - [x] Open Graph structure
 - [x] Default Open Graph image
@@ -254,13 +266,15 @@
 ## Performance
 
 - [x] Self-hosted fonts
-- [x] Responsive optimisation
+- [x] Responsive layout implementation
+- [x] Mobile spacing and component refinement
 - [x] Accessibility improvements
 - [x] Deferred JavaScript
 - [x] Optimised database queries
 - [x] `select_related` and `prefetch_related`
 - [x] Static-file compression
 - [x] Manifest-based static-file caching
+- [ ] Final responsive QA across physical devices and browsers
 - [ ] Image-size optimisation
 - [ ] Cloudinary image transformations
 - [ ] Hero-image preloading review
@@ -271,6 +285,7 @@
 ## Animation and Interaction
 
 - [x] Scroll reveal
+- [x] Animated homepage scroll cue
 - [x] Hover interactions
 - [x] Page transitions
 - [x] Accessible mobile menu
@@ -299,10 +314,11 @@
 - [x] Journal sitemap
 - [x] SEO structure
 - [x] Pagination
+- [x] Responsive article typography
 - [ ] Categories
 - [ ] Add initial Journal content
 - [ ] Test rich-text image uploads in production
-- [ ] Final article typography review
+- [ ] Final article typography QA with production content
 - [ ] Review article image sizing
 - [ ] Add initial destination and property-management articles
 
@@ -370,16 +386,27 @@
 
 ## Production Content
 
-- [ ] Add destinations
-- [ ] Add five core services
-- [ ] Add property amenities
-- [ ] Add initial properties
-- [ ] Add testimonials
-- [ ] Add service gallery images
-- [ ] Add property gallery images
+- [ ] Finalise destinations
+- [ ] Finalise five core services
+- [ ] Finalise property amenities
+- [ ] Populate approved launch properties
+- [ ] Finalise testimonials
+- [ ] Add final service gallery images
+- [ ] Add final property gallery images
 - [ ] Add initial Journal articles
 - [ ] Review all public titles and privacy-safe slugs
 - [ ] Confirm owner approval for publicly displayed properties
+
+## Final Photography
+
+- [ ] Receive final approved property photography
+- [ ] Replace temporary/staging imagery
+- [ ] Add final About-page photography
+- [ ] Add final Contact hero photography
+- [ ] Review hero crops across desktop, tablet and mobile
+- [ ] Optimise production image sizes
+- [ ] Verify descriptive alt text
+- [ ] Confirm image/publication permissions
 
 ## Launch
 
@@ -397,8 +424,10 @@
 - [ ] Test Journal publishing
 - [ ] Test production 404 page
 - [x] Test production 500 page
-- [ ] Mobile testing
-- [ ] Tablet testing
+- [x] Initial mobile responsive QA
+- [x] Initial tablet responsive QA
+- [ ] Final mobile device testing
+- [ ] Final tablet device testing
 - [ ] Safari testing
 - [ ] Chrome testing
 - [ ] Firefox testing
@@ -453,9 +482,9 @@
 
 ## Documentation
 
-- [ ] Update README deployment instructions
+- [x] Update README deployment instructions
 - [x] Document production environment variables
+- [x] Document property privacy rules
 - [ ] Document content-entry workflow
-- [ ] Document property privacy rules
 - [ ] Document backup and restore process
 - [ ] Document custom-domain configuration
