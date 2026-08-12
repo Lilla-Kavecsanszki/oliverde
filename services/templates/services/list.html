@@ -77,29 +77,45 @@
 </section>
 
 <section class="cta">
-    <div class="wrap cta-row">
 
-        <div>
+  <img
+    class="cta-background-image"
+    src="{% static 'images/tester.jpeg' %}"
+    alt=""
+    aria-hidden="true"
+  >
 
-            <h2 class="serif">
-                Let's discuss your property.
-            </h2>
+  <div
+    class="cta-background-overlay"
+    aria-hidden="true"
+  ></div>
 
-            <p>
-                Whether you live abroad or visit seasonally, we'll tailor a
-                management solution for your home.
-            </p>
 
-        </div>
+  <div class="wrap cta-row">
 
-        <a
-            class="btn btn-primary"
-            href="{% url 'contact' %}"
-        >
-            Schedule a consultation
-        </a>
+    <div class="cta-copy">
+
+      <h2 class="serif">
+        Let's discuss your property.
+      </h2>
+
+      <p>
+        Whether you live abroad or visit seasonally, we'll tailor a management
+        solution for your home.
+      </p>
 
     </div>
+
+
+    <a
+      class="btn btn-primary"
+      href="{% url 'contact' %}"
+    >
+      Schedule a consultation
+    </a>
+
+  </div>
+
 </section>
 
 {% endblock %}

@@ -302,9 +302,23 @@
 
 
 <section class="cta">
+
+  <img
+    class="cta-background-image"
+    src="{% static 'images/tester.jpeg' %}"
+    alt=""
+    aria-hidden="true"
+  >
+
+  <div
+    class="cta-background-overlay"
+    aria-hidden="true"
+  ></div>
+
+
   <div class="wrap cta-row">
 
-    <div>
+    <div class="cta-copy">
 
       <h2 class="serif">
         Let's discuss your property.
@@ -317,6 +331,7 @@
 
     </div>
 
+
     <a
       class="btn btn-primary"
       href="{% url 'contact' %}"
@@ -325,6 +340,7 @@
     </a>
 
   </div>
+
 </section>
 
 
