@@ -2691,13 +2691,13 @@ body.home-hero .site-header.nav-scrolled {
   position: absolute;
 
   top: -30%;
-  right: -8%;
+  right: -20%;
   z-index: 2;
 
   width: 520px;
   height: 520px;
 
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  border: 1.5px solid rgba(255, 255, 255, 0.38);
   border-radius: 50%;
 
   pointer-events: none;
@@ -2798,7 +2798,7 @@ body.home-hero .site-header.nav-scrolled {
     width: 460px;
     height: 460px;
 
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.36);
   }
 
 }
@@ -2865,7 +2865,7 @@ body.home-hero .site-header.nav-scrolled {
     width: 360px;
     height: 360px;
 
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.34);
   }
 
 }
@@ -2904,10 +2904,11 @@ body.home-hero .site-header.nav-scrolled {
     width: 330px;
     height: 330px;
 
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.34);
   }
 
 }
+
 
 /* ---------- FOOTER ---------- */
 
