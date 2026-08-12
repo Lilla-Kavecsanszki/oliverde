@@ -366,7 +366,10 @@ class Property(models.Model):
 
     @property
     def display_rental_banner(self):
-        """Return the selected rental banner or its default wording."""
+        """Return rental banner text only when the property is available for rental."""
+        if not self.available_for_rental:
+            return ""
+
         return (
             self.rental_banner_text.strip()
             or "Available for Private Rental"
