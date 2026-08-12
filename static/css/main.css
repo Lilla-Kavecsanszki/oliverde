@@ -3152,57 +3152,133 @@ footer address {
 }
 
 
-/* ---------- MOBILE ---------- */
-
+/* ---------- FOOTER MOBILE ---------- */
 
 @media (max-width: 560px) {
 
   .footer-main {
-    grid-template-columns: 1fr;
-    gap: 38px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 34px 26px;
 
-    padding: 58px 0 44px;
+    padding: 46px 0 38px;
   }
 
 
+  /* Brand remains full width */
+
   .footer-brand {
-    grid-column: auto;
+    grid-column: 1 / -1;
+  }
+
+
+  .footer-col .logo {
+    margin-bottom: 12px;
+    font-size: 20px;
   }
 
 
   .footer-tagline {
-    max-width: 320px;
+    max-width: 340px;
+
+    font-size: 12px;
+    line-height: 1.65;
   }
 
 
-  .footer-bottom {
-    padding: 22px 0 26px;
-  }
+  /* Reduce heading spacing */
 
+  .footer-heading {
+    margin-bottom: 13px;
 
-  .footer-bottom-meta {
-    gap: 7px;
-  }
-
-
-  .footer-bottom p {
-    font-size: 11px;
-  }
-
-
-  .footer-bottom .site-credit {
     font-size: 10px;
   }
 
 
+  /* Smaller, tighter navigation links */
+
+  .footer-col a:not(.footer-social):not(.footer-cta) {
+    margin-bottom: 9px;
+
+    font-size: 13px;
+  }
+
+
+  /* Contact spans full width because of email/address */
+
+  .footer-main > .footer-col:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+
+  footer address {
+    margin-bottom: 12px;
+
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+
+  /* Connect column */
+
+  .footer-connect {
+    align-items: flex-start;
+  }
+
+
+  .footer-social {
+    width: 34px;
+    height: 34px;
+
+    margin-bottom: 16px !important;
+  }
+
+
+  .footer-cta {
+    padding: 10px 14px;
+
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+
+  /* Bottom legal area */
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+
+    padding: 20px 0 24px;
+  }
+
+
+  .footer-bottom-meta {
+    gap: 5px;
+  }
+
+
+  .footer-bottom p {
+    font-size: 10.5px;
+    line-height: 1.55;
+  }
+
+
+  .footer-bottom .site-credit {
+    font-size: 9.5px;
+  }
+
+
   .footer-bottom-links {
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: 10px 18px;
+    gap: 8px 16px;
   }
 
 
   .footer-bottom-links a {
-    font-size: 11px;
+    font-size: 10.5px;
   }
 
 }
