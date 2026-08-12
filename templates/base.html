@@ -1,29 +1,48 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
 
   <title>
     {% block title %}
-      Oliverde — Property Management Services | Tuscany, Umbria & Lazio
+      Oliverde — Property Management Services | Tuscany, Umbria &amp; Lazio
     {% endblock %}
   </title>
+
 
   <meta
     name="description"
     content="{% block meta_description %}Discreet property management and concierge care for international homeowners across Tuscany, Umbria and Lazio.{% endblock %}"
   >
 
+
   <link
     rel="canonical"
     href="{% block canonical_url %}{{ site_url }}{{ request.path }}{% endblock %}"
   >
 
+
   <!-- Open Graph -->
-  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
-  <meta property="og:site_name" content="Oliverde">
+
+  <meta
+    property="og:type"
+    content="{% block og_type %}website{% endblock %}"
+  >
+
+  <meta
+    property="og:site_name"
+    content="Oliverde"
+  >
 
   <meta
     property="og:title"
@@ -45,8 +64,13 @@
     content="{% block og_url %}{{ site_url }}{{ request.path }}{% endblock %}"
   >
 
+
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
 
   <meta
     name="twitter:title"
@@ -63,58 +87,94 @@
     content="{% block twitter_image %}{{ site_url }}{% static 'images/og-default.png' %}{% endblock %}"
   >
 
-  <meta name="theme-color" content="#232A17">
+
+  <meta
+    name="theme-color"
+    content="#232A17"
+  >
+
 
   <!-- Google Search Console verification -->
+
   <!--
-  <meta name="google-site-verification" content="PASTE_CODE_HERE">
+  <meta
+    name="google-site-verification"
+    content="PASTE_CODE_HERE"
+  >
   -->
 
-  {% block structured_data %}{% endblock %}
 
-<!-- Favicon -->
+  {% block structured_data %}
+  {% endblock %}
 
-<link
-  rel="icon"
-  href="{% static 'favicon/favicon.ico' %}"
-  sizes="any"
->
 
-<link
-  rel="icon"
-  type="image/png"
-  sizes="32x32"
-  href="{% static 'favicon/favicon-32x32.png' %}"
->
+  <!-- Favicon -->
 
-<link
-  rel="icon"
-  type="image/png"
-  sizes="16x16"
-  href="{% static 'favicon/favicon-16x16.png' %}"
->
+  <link
+    rel="icon"
+    href="{% static 'favicon/favicon.ico' %}"
+    sizes="any"
+  >
 
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="{% static 'favicon/apple-touch-icon.png' %}"
->
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="{% static 'favicon/favicon-32x32.png' %}"
+  >
 
-<link
-  rel="manifest"
-  href="{% static 'favicon/site.webmanifest' %}"
->
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="{% static 'favicon/favicon-16x16.png' %}"
+  >
 
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="{% static 'favicon/apple-touch-icon.png' %}"
+  >
+
+  <link
+    rel="manifest"
+    href="{% static 'favicon/site.webmanifest' %}"
+  >
+
+
+  <!-- Main stylesheet -->
+
+  <link
+    rel="stylesheet"
+    href="{% static 'css/main.css' %}"
+  >
+
 </head>
 
+
 <body class="{% block body_class %}{% endblock %}">
+
+
   {% include "includes/nav.html" %}
 
-  {% block content %}{% endblock %}
+
+  <main id="main-content">
+
+    {% block content %}
+    {% endblock %}
+
+  </main>
+
 
   {% include "includes/footer.html" %}
 
-  <script src="{% static 'js/main.js' %}" defer></script>
+
+  <script
+    src="{% static 'js/main.js' %}"
+    defer
+  ></script>
+
+
 </body>
+
 </html>

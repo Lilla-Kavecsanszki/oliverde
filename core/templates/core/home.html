@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block body_class %}home-hero{% endblock %}
+
+{% block body_class %}
+home-hero
+{% endblock %}
+
 
 {% block structured_data %}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -14,8 +19,13 @@
   "email": "oliverdepropertyservices@gmail.com",
   "telephone": "+39 366 317 4740",
   "vatID": "IT02366120513",
-  "areaServed": ["Tuscany", "Umbria", "Lazio"],
   "url": "{{ site_url }}",
+  "logo": "{{ site_url }}{% static 'images/logo.png' %}",
+  "areaServed": [
+    "Tuscany",
+    "Umbria",
+    "Lazio"
+  ],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Loc. Santa Maria Nuova, Cs. 58",
@@ -26,7 +36,9 @@
   }
 }
 </script>
+
 {% endblock %}
+
 
 {% block content %}
 
