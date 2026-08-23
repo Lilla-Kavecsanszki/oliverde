@@ -3609,15 +3609,18 @@ footer address {
   margin-bottom: 34px;
 }
 
+
+/* ---------- PROPERTY HEADER — EDITORIAL FLOW ---------- */
+
 .property-header {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 64px;
-  align-items: start;
+  display: block;
 }
 
 .property-hero-media {
   position: relative;
+  float: left;
+  width: min(52%, 620px);
+  margin: 0 64px 34px 0;
 }
 
 .prop-hero-img {
@@ -3628,6 +3631,8 @@ footer address {
 }
 
 .property-header-content {
+  display: block;
+  width: auto;
   padding-top: 10px;
 }
 
@@ -3643,21 +3648,72 @@ footer address {
 
 .property-description {
   margin-top: 24px;
+  max-width: none;
   color: var(--taupe);
   line-height: 1.8;
 }
 
 .property-description p {
-  margin-bottom: 16px;
+  margin-top: 0;
+  margin-bottom: 22px;
 }
 
 .property-description p:last-child {
   margin-bottom: 0;
 }
 
+.property-header-clear {
+  clear: both;
+}
+
+
+/* ---------- PROPERTY FACTS / RENTAL ---------- */
+
+.property-facts {
+  clear: both;
+}
+
+.property-rental-enquiry {
+  clear: both;
+}
 
 .property-enquiry-button {
   margin-top: 34px;
+}
+
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 900px) {
+
+  .property-hero-media {
+    width: 48%;
+    margin-right: 36px;
+    margin-bottom: 28px;
+  }
+
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 700px) {
+
+  .property-hero-media {
+    float: none;
+    width: 100%;
+    margin: 0 0 28px;
+  }
+
+  .property-header-content {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .property-header-clear {
+    display: none;
+  }
+
 }
 
 /*
