@@ -3828,7 +3828,7 @@ footer address {
 
   color: var(--taupe);
 
-  font-size: 13.5px;
+  font-size: 15px;
   line-height: 1.6;
 
 }
@@ -3922,7 +3922,7 @@ footer address {
 
     padding-left: 17px;
 
-    font-size: 13.5px;
+    font-size: 14.5px;
 
   }
 
@@ -3930,6 +3930,68 @@ footer address {
 
     width: 4px;
     height: 4px;
+
+  }
+
+}
+
+/* ---------- PRIVATE STAYS ---------- */
+
+.property-rental-enquiry {
+
+  clear: both;
+
+  margin-top: 42px;
+  padding-top: 30px;
+
+  border-top: 1px solid var(--hairline);
+
+}
+
+.property-rental-enquiry .eyebrow {
+
+  margin-bottom: 16px;
+
+}
+
+.property-rental-intro {
+
+  max-width: 620px;
+
+  color: var(--taupe);
+
+  font-size: 15px;
+  line-height: 1.7;
+
+}
+
+.property-rental-intro p {
+
+  margin: 0;
+
+}
+
+.property-enquiry-button {
+
+  margin-top: 24px;
+
+}
+
+
+/* ---------- PRIVATE STAYS — MOBILE ---------- */
+
+@media (max-width: 640px) {
+
+  .property-rental-enquiry {
+
+    margin-top: 34px;
+    padding-top: 26px;
+
+  }
+
+  .property-rental-intro {
+
+    font-size: 14.5px;
 
   }
 
