@@ -64,12 +64,6 @@
         {{ destination.tagline }}
       </p>
 
-    {% elif destination.description %}
-
-      <p class="dest-hero-text">
-        {{ destination.description|truncatewords:28 }}
-      </p>
-
     {% endif %}
 
     <p class="destination-note">
@@ -82,6 +76,31 @@
   </div>
 
 </section>
+
+
+{% if destination.description %}
+
+<section class="destination-intro">
+
+  <div class="wrap">
+
+    <div class="destination-intro-inner reveal">
+
+      <p class="eyebrow">
+        About {{ destination.name }}
+      </p>
+
+      <div class="destination-description">
+        {{ destination.description|linebreaks }}
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% endif %}
 
 
 <section class="properties">

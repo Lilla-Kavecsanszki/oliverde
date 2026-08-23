@@ -5658,7 +5658,41 @@ textarea:focus-visible {
     );
 }
 
-.dest-hero + .properties .prop-head {
+
+/* ---------- DESTINATION INTRO ---------- */
+
+.destination-intro {
+    padding: 88px 0 82px;
+    background: var(--cream);
+}
+
+.destination-intro-inner {
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.destination-intro .eyebrow {
+    margin-bottom: 18px;
+}
+
+.destination-description {
+    color: var(--taupe);
+    font-size: 16px;
+    line-height: 1.85;
+}
+
+.destination-description p {
+    margin: 0 0 20px;
+}
+
+.destination-description p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ---------- DESTINATION PROPERTY HEADING ---------- */
+
+.destination-intro + .properties .prop-head {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -5666,12 +5700,15 @@ textarea:focus-visible {
     margin-bottom: 3rem;
 }
 
-.dest-hero + .properties .prop-head-aside {
+.destination-intro + .properties .prop-head-aside {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: .75rem;
 }
+
+
+/* ---------- DESTINATION TESTIMONIAL ---------- */
 
 .destination-testimonial {
     max-width: 700px;
@@ -5701,6 +5738,9 @@ textarea:focus-visible {
     color: var(--taupe);
 }
 
+
+/* ---------- DESTINATION CTA ---------- */
+
 .destination-cta-actions {
     display: flex;
     gap: 1rem;
@@ -5718,16 +5758,25 @@ textarea:focus-visible {
         grid-template-columns: 1fr;
     }
 
-    .dest-hero + .properties .prop-head {
+    .destination-intro {
+        padding: 72px 0 68px;
+    }
+
+    .destination-intro-inner {
+        max-width: 720px;
+    }
+
+    .destination-intro + .properties .prop-head {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .dest-hero + .properties .prop-head-aside {
+    .destination-intro + .properties .prop-head-aside {
         align-items: flex-start;
     }
 
 }
+
 
 @media (max-width: 640px) {
 
@@ -5737,6 +5786,27 @@ textarea:focus-visible {
 
     .collection-switch a {
         width: 100%;
+    }
+
+    .destination-intro {
+        padding: 58px 0 56px;
+    }
+
+    .destination-intro-inner {
+        margin: 0;
+    }
+
+    .destination-intro .eyebrow {
+        margin-bottom: 14px;
+    }
+
+    .destination-description {
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    .destination-description p {
+        margin-bottom: 18px;
     }
 
     .destination-cta-actions {
