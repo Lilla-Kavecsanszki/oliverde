@@ -3775,24 +3775,34 @@ footer address {
 }
 
 
-/* ---------- PROPERTY AMENITIES ---------- */
+/* ==========================================================
+   PROPERTY AMENITIES — EDITORIAL
+========================================================== */
 
 .property-amenities-inline {
 
   clear: both;
 
-  margin-top: 38px;
-  padding-top: 28px;
+  margin-top: 46px;
+  padding-top: 30px;
 
   border-top: 1px solid var(--hairline);
 
 }
 
+
+/* ---------- HEADING ---------- */
+
 .property-amenities-inline .eyebrow {
 
-  margin-bottom: 18px;
+  margin: 0 0 22px;
+
+  color: var(--olive-700);
 
 }
+
+
+/* ---------- AMENITIES GRID ---------- */
 
 .property-amenities-inline-list {
 
@@ -3800,32 +3810,51 @@ footer address {
 
   grid-template-columns: repeat(3, minmax(0, 1fr));
 
-  column-gap: 42px;
-  row-gap: 14px;
+  column-gap: 46px;
+  row-gap: 18px;
 
 }
 
-.property-amenities-inline-list span {
+
+/* ---------- INDIVIDUAL AMENITY ---------- */
+
+.property-amenities-inline-list > span {
 
   position: relative;
 
-  padding-left: 16px;
+  display: block;
+
+  padding-left: 18px;
 
   color: var(--taupe);
 
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 13.5px;
+  line-height: 1.6;
 
 }
 
-.property-amenities-inline-list span::before {
+
+/* Main amenity name */
+
+.property-amenities-inline-list > span strong {
+
+  color: var(--charcoal);
+
+  font-weight: 500;
+
+}
+
+
+/* Rust / orange bullet */
+
+.property-amenities-inline-list > span::before {
 
   content: "";
 
   position: absolute;
 
   left: 0;
-  top: 0.68em;
+  top: 0.7em;
 
   width: 5px;
   height: 5px;
@@ -3837,29 +3866,47 @@ footer address {
 }
 
 
-/* ---------- TABLET ---------- */
+/* ==========================================================
+   TABLET
+========================================================== */
 
 @media (max-width: 900px) {
+
+  .property-amenities-inline {
+
+    margin-top: 40px;
+    padding-top: 28px;
+
+  }
 
   .property-amenities-inline-list {
 
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
-    column-gap: 32px;
+    column-gap: 36px;
+    row-gap: 16px;
 
   }
 
 }
 
 
-/* ---------- MOBILE ---------- */
+/* ==========================================================
+   MOBILE
+========================================================== */
 
 @media (max-width: 640px) {
 
   .property-amenities-inline {
 
-    margin-top: 30px;
-    padding-top: 24px;
+    margin-top: 34px;
+    padding-top: 25px;
+
+  }
+
+  .property-amenities-inline .eyebrow {
+
+    margin-bottom: 18px;
 
   }
 
@@ -3867,7 +3914,22 @@ footer address {
 
     grid-template-columns: 1fr;
 
-    row-gap: 11px;
+    row-gap: 13px;
+
+  }
+
+  .property-amenities-inline-list > span {
+
+    padding-left: 17px;
+
+    font-size: 13.5px;
+
+  }
+
+  .property-amenities-inline-list > span::before {
+
+    width: 4px;
+    height: 4px;
 
   }
 

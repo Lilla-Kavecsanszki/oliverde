@@ -245,7 +245,7 @@
 
         <!-- PROPERTY AMENITIES -->
 
-        {% if property.amenities.all %}
+        {% if property.show_property_highlights %}
 
           <div class="property-amenities-inline reveal">
 
@@ -261,14 +261,12 @@
 
                 <span>
 
-                  {% if property.air_conditioning_details %}
-
-                    {{ property.air_conditioning_details }}
-
-                  {% else %}
-
+                  <strong>
                     {{ property.get_air_conditioning_display }}
+                  </strong>
 
+                  {% if property.air_conditioning_details %}
+                    — {{ property.air_conditioning_details }}
                   {% endif %}
 
                 </span>
@@ -280,18 +278,16 @@
 
                 <span>
 
+                  <strong>
+                    {% if property.pool_heated %}
+                      Heated {{ property.get_pool_display }}
+                    {% else %}
+                      {{ property.get_pool_display }}
+                    {% endif %}
+                  </strong>
+
                   {% if property.pool_details %}
-
-                    {{ property.pool_details }}
-
-                  {% elif property.pool_heated %}
-
-                    Heated {{ property.get_pool_display }}
-
-                  {% else %}
-
-                    {{ property.get_pool_display }}
-
+                    — {{ property.pool_details }}
                   {% endif %}
 
                 </span>
