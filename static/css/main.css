@@ -3666,19 +3666,223 @@ footer address {
   clear: both;
 }
 
+/* ---------- MANAGED BY OLIVERDE ---------- */
+
+.property-management-label {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 12px;
+
+  color: var(--taupe);
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.14em;
+
+  line-height: 1.4;
+
+  text-transform: uppercase;
+
+}
+
+.property-management-label::before {
+
+  content: "";
+
+  width: 24px;
+
+  height: 1px;
+
+  flex: 0 0 24px;
+
+  background: var(--olive-700);
+
+  opacity: 0.7;
+
+}
+
 
 /* ---------- PROPERTY FACTS / RENTAL ---------- */
 
 .property-facts {
+
   clear: both;
+
 }
 
 .property-rental-enquiry {
+
   clear: both;
+
 }
 
 .property-enquiry-button {
+
   margin-top: 34px;
+
+}
+
+
+/* ---------- RENTAL STATUS ---------- */
+
+.property-rental-banner {
+
+  position: static;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 12px;
+
+  color: var(--olive-700);
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  line-height: 1.4;
+
+  text-transform: uppercase;
+
+}
+
+.property-rental-banner::before {
+
+  content: "";
+
+  width: 28px;
+
+  height: 1px;
+
+  flex: 0 0 28px;
+
+  background: currentColor;
+
+  opacity: 0.65;
+
+}
+
+
+/* ==========================================================
+
+   PROPERTY AMENITIES
+
+========================================================== */
+
+.property-amenities {
+
+  clear: both;
+
+  margin-top: 72px;
+
+  padding: 46px 0;
+
+  border-top: 1px solid var(--hairline);
+
+  border-bottom: 1px solid var(--hairline);
+
+}
+
+.property-amenities-head {
+
+  display: grid;
+
+  grid-template-columns: minmax(180px, 0.45fr) minmax(0, 1.55fr);
+
+  gap: 48px;
+
+  align-items: start;
+
+}
+
+.property-amenities-heading {
+
+  padding-top: 2px;
+
+}
+
+.property-amenities-heading .eyebrow {
+
+  margin-bottom: 10px;
+
+}
+
+.property-amenities-title {
+
+  margin: 0;
+
+  color: var(--olive-900);
+
+  font-size: clamp(30px, 3.2vw, 42px);
+
+  font-weight: 400;
+
+  line-height: 1.05;
+
+}
+
+.property-amenities-list {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  column-gap: 32px;
+
+}
+
+.property-amenity {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  min-height: 52px;
+
+  padding: 14px 0 14px 18px;
+
+  border-bottom: 1px solid var(--hairline);
+
+  color: var(--charcoal);
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+}
+
+.property-amenity::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  top: 50%;
+
+  width: 6px;
+
+  height: 1px;
+
+  background: var(--rust);
+
+  transform: translateY(-50%);
+
 }
 
 
@@ -3687,9 +3891,36 @@ footer address {
 @media (max-width: 900px) {
 
   .property-hero-media {
+
     width: 48%;
+
     margin-right: 36px;
+
     margin-bottom: 28px;
+
+  }
+
+
+  .property-amenities {
+
+    margin-top: 60px;
+
+    padding: 42px 0;
+
+  }
+
+  .property-amenities-head {
+
+    grid-template-columns: 1fr;
+
+    gap: 28px;
+
+  }
+
+  .property-amenities-list {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
   }
 
 }
@@ -3700,45 +3931,70 @@ footer address {
 @media (max-width: 700px) {
 
   .property-hero-media {
+
     float: none;
+
     width: 100%;
+
     margin: 0 0 28px;
+
   }
 
   .property-header-content {
+
     width: 100%;
+
     padding-top: 0;
+
   }
 
   .property-header-clear {
+
     display: none;
+
   }
 
 }
 
-.property-rental-banner {
-  position: static;
-  display: flex;
-  align-items: center;
-  gap: 12px;
 
-  margin-top: 12px;
+@media (max-width: 640px) {
 
-  color: var(--olive);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
+  .property-amenities {
 
-.property-rental-banner::before {
-  content: "";
-  width: 28px;
-  height: 1px;
-  flex: 0 0 28px;
-  background: currentColor;
-  opacity: 0.65;
+    margin-top: 48px;
+
+    padding: 36px 0;
+
+  }
+
+  .property-amenities-head {
+
+    gap: 22px;
+
+  }
+
+  .property-amenities-title {
+
+    font-size: 32px;
+
+  }
+
+  .property-amenities-list {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .property-amenity {
+
+    min-height: auto;
+
+    padding-top: 13px;
+
+    padding-bottom: 13px;
+
+  }
+
 }
 
 /*
@@ -3753,24 +4009,33 @@ footer address {
 
 .property-tour-intro {
   display: grid;
-  grid-template-columns: minmax(150px, 0.55fr) minmax(300px, 1.15fr) 1fr;
+  grid-template-columns: minmax(130px, 0.4fr) minmax(340px, 1.4fr) minmax(280px, 1fr);
   gap: 42px;
   align-items: end;
-  margin-bottom: 100px;
+
+  margin-bottom: 88px;
   padding-bottom: 36px;
+
   border-bottom: 1px solid var(--hairline);
 }
 
 .property-tour-intro h2 {
-  max-width: 620px;
-  font-size: clamp(42px, 5vw, 68px);
+  max-width: none;
+
+  color: var(--olive-900);
+
+  font-size: clamp(40px, 4.2vw, 58px);
   font-weight: 400;
-  line-height: 1;
+  line-height: 0.98;
+
+  white-space: nowrap;
 }
 
 .property-tour-intro > p:last-child {
   max-width: 440px;
+
   color: var(--taupe);
+
   line-height: 1.8;
 }
 
@@ -4085,6 +4350,10 @@ body.lightbox-open {
 
   .property-tour-intro {
     grid-template-columns: 0.5fr 1.5fr;
+  }
+
+  .property-tour-intro h2 {
+    white-space: normal;
   }
 
   .property-tour-intro > p:last-child {

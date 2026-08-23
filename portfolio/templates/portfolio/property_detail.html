@@ -13,46 +13,34 @@
 {% endblock %}
 
 
-{% block og_image %}
-  {{ property.cover_image.url|optimize }}
-{% endblock %}
-
-
-{% block og_image_alt %}
-  {{ property.display_title }} in {{ property.destination.name }}
-{% endblock %}
-
-
-{% block twitter_image %}
-  {{ property.cover_image.url|optimize }}
-{% endblock %}
-
-
-{% block twitter_image_alt %}
-  {{ property.display_title }} in {{ property.destination.name }}
-{% endblock %}
-
-
 {% block content %}
+
 
 <section class="property-detail">
 
   <div class="wrap property-detail-wrap">
 
 
+    <!-- BACK LINK -->
+
     <a
+      href="{{ property.destination.get_absolute_url }}"
       class="textlink property-back-link"
-      href="{% url 'portfolio:all_properties' %}"
     >
-      &larr; Back to Our Collection
+      &larr; Back to {{ property.destination.name }}
     </a>
 
 
-    <div class="property-header reveal">
+    <!-- =====================================================
+         PROPERTY HEADER
+    ====================================================== -->
 
+    <div class="property-header">
+
+
+      <!-- HERO IMAGE -->
 
       <div class="property-hero-media">
-
 
         {% if property.cover_image %}
 
@@ -67,8 +55,9 @@
         {% else %}
 
           <div
-            class="prop-hero-img property-hero-placeholder"
-            aria-hidden="true"
+            class="prop-hero-img property-image-placeholder"
+            role="img"
+            aria-label="{{ property.display_title }} in {{ property.destination.name }}"
           ></div>
 
         {% endif %}
@@ -77,24 +66,20 @@
         {% if property.available_for_rental %}
 
           <div class="property-rental-banner">
-
-            <span>
-              {{ property.display_rental_banner }}
-            </span>
-
+            {{ property.display_rental_banner }}
           </div>
 
         {% endif %}
 
-
       </div>
 
 
+      <!-- PROPERTY COPY -->
+
       <div class="property-header-content">
 
-
-        <p class="eyebrow property-location">
-          {{ property.destination.name }}
+        <p class="eyebrow">
+          {{ property.get_property_type_display }}
         </p>
 
 
@@ -103,19 +88,31 @@
         </h1>
 
 
+        <p class="property-location">
+          {{ property.destination.name }}
+        </p>
+
+
         <p class="property-management-label">
           Managed by Oliverde
         </p>
 
 
-        {% if property.description %}
+        <div class="property-description">
+          {{ property.description|linebreaks }}
+        </div>
 
-          <div class="property-description">
-            {{ property.description|linebreaks }}
-          </div>
+
+        {% if property.available_for_rental %}
+
+          <a
+            href="{% url 'contact' %}?property={{ property.public_id }}"
+            class="btn btn-primary property-enquiry-button"
+          >
+            Enquire about this property
+          </a>
 
         {% endif %}
-
 
       </div>
 
@@ -126,153 +123,119 @@
       ></div>
 
 
-      {% if property.show_property_highlights %}
+      <!-- =====================================================
+           CORE PROPERTY FACTS
+      ====================================================== -->
 
-        {% if property.bedrooms or property.bathrooms or property.sleeps or property.land_size_hectares %}
+      {% if property.bedrooms or property.bathrooms or property.sleeps or property.land_size_hectares %}
 
-          <div class="property-facts">
-
-
-            {% if property.bedrooms %}
-
-              <div class="fact">
-
-                <svg
-                  class="fact-icon"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M3 18v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6 M3 18v2 M21 18v2 M5 10V7a2 2 0 0 1 2-2h3v5 M3 14h18"/>
-                </svg>
-
-                <span class="num serif">
-                  {{ property.bedrooms }}
-                </span>
-
-                <span class="label">
-                  Bedroom{{ property.bedrooms|pluralize }}
-                </span>
-
-              </div>
-
-            {% endif %}
+        <div class="property-facts">
 
 
-            {% if property.bathrooms %}
+          {% if property.bedrooms %}
 
-              <div class="fact">
+            <div class="property-fact">
 
-                <svg
-                  class="fact-icon"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-4Z M7 12V6a2 2 0 0 1 3.5-1.3 M2 12h20"/>
-                </svg>
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M3 12h18v7H3z"/>
+                <path d="M5 12V8a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v4"/>
+                <path d="M3 19v2M21 19v2"/>
+              </svg>
 
-                <span class="num serif">
-                  {{ property.bathrooms|floatformat:"-1" }}
-                </span>
+              <strong>
+                {{ property.bedrooms }}
+              </strong>
 
-                <span class="label">
-                  Bathroom{{ property.bathrooms|pluralize }}
-                </span>
+              <span>
+                Bedroom{{ property.bedrooms|pluralize }}
+              </span>
 
-              </div>
-
-            {% endif %}
-
-
-            {% if property.sleeps %}
-
-              <div class="fact">
-
-                <svg
-                  class="fact-icon"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <circle cx="12" cy="7" r="3"/>
-                  <path d="M5 21v-2a7 7 0 0 1 14 0v2"/>
-                </svg>
-
-                <span class="num serif">
-                  {{ property.sleeps }}
-                </span>
-
-                <span class="label">
-                  Sleeps
-                </span>
-
-              </div>
-
-            {% endif %}
-
-
-            {% if property.land_size_hectares %}
-
-              <div class="fact">
-
-                <svg
-                  class="fact-icon"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 20V10 M10 20V4 M16 20v-8 M22 20H2 M2 10h4 M8 4h4 M14 12h4"/>
-                </svg>
-
-                <span class="num serif">
-                  {{ property.land_size_hectares|floatformat:"-2" }}
-                </span>
-
-                <span class="label">
-                  Hectare{{ property.land_size_hectares|pluralize }}
-                </span>
-
-              </div>
-
-            {% endif %}
-
-
-          </div>
-
-        {% endif %}
-
-      {% endif %}
-
-
-      {% if property.available_for_rental %}
-
-        <div class="property-rental-enquiry">
-
-
-          {% if property.rental_intro %}
-
-            <div class="property-rental-intro">
-              {{ property.rental_intro|linebreaks }}
             </div>
-
-          {% else %}
-
-            <p class="property-rental-intro">
-              This home is available for private rental. Every stay is
-              personally arranged by Oliverde to provide a seamless,
-              discreet and memorable experience.
-            </p>
 
           {% endif %}
 
 
-          <a
-            class="btn btn-primary property-enquiry-button"
-            href="{% url 'contact' %}?property={{ property.public_id }}"
-          >
-            Enquire About Staying
-          </a>
+          {% if property.bathrooms %}
+
+            <div class="property-fact">
+
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M4 13h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/>
+                <path d="M7 13V6a3 3 0 0 1 6 0"/>
+                <path d="M4 20v2M20 20v2"/>
+              </svg>
+
+              <strong>
+                {{ property.bathrooms|floatformat:"-1" }}
+              </strong>
+
+              <span>
+                Bathroom{{ property.bathrooms|pluralize }}
+              </span>
+
+            </div>
+
+          {% endif %}
+
+
+          {% if property.sleeps %}
+
+            <div class="property-fact">
+
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <circle cx="12" cy="7" r="3"/>
+                <path d="M6 21v-3a6 6 0 0 1 12 0v3"/>
+              </svg>
+
+              <strong>
+                {{ property.sleeps }}
+              </strong>
+
+              <span>
+                Sleeps
+              </span>
+
+            </div>
+
+          {% endif %}
+
+
+          {% if property.land_size_hectares %}
+
+            <div class="property-fact">
+
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M5 3v18M19 3v18M3 7h8M13 17h8"/>
+                <path d="M9 4v6M15 14v6"/>
+              </svg>
+
+              <strong>
+                {{ property.land_size_hectares|floatformat:"-2" }}
+              </strong>
+
+              <span>
+                Hectare{{ property.land_size_hectares|pluralize }}
+              </span>
+
+            </div>
+
+          {% endif %}
 
 
         </div>
@@ -280,340 +243,346 @@
       {% endif %}
 
 
-    </div>
+      <!-- =====================================================
+           PROPERTY HIGHLIGHTS / AMENITIES
+      ====================================================== -->
 
+      {% if property.show_property_highlights %}
 
-    {% if gallery %}
+        <section class="property-amenities reveal">
 
-      <section class="property-gallery-section">
+          <div class="property-amenities-head">
 
 
-        <div class="property-tour-intro reveal">
+            <div class="property-amenities-heading">
 
-          <p class="eyebrow">
-            A closer look
-          </p>
+              <p class="eyebrow">
+                Property details
+              </p>
 
-          <h2 class="serif">
-            Explore the Estate
-          </h2>
+              <h2 class="serif property-amenities-title">
+                At a Glance
+              </h2>
 
-          <p>
-            A curated collection of spaces, architectural details and
-            landscapes from this exceptional Italian home.
-          </p>
+            </div>
 
-        </div>
 
+            <div class="property-amenities-list">
 
-        <div class="property-gallery">
 
+              <!-- AIR CONDITIONING -->
 
-          {% for img in gallery %}
+              {% if property.air_conditioning != "none" %}
 
-            <figure
-              class="property-gallery-item gallery-reveal"
-              style="--gallery-delay: {{ forloop.counter0 }};"
-            >
+                <div class="property-amenity">
 
+                  {% if property.air_conditioning_details %}
 
-              <button
-                class="property-gallery-trigger"
-                type="button"
-                data-gallery-image="{{ img.image.url|optimize }}"
-                data-gallery-caption="{% firstof img.caption img.alt_text property.display_title %}"
-                aria-label="Enlarge {% firstof img.alt_text img.caption property.display_title %}"
-              >
+                    {{ property.air_conditioning_details }}
 
+                  {% else %}
 
-                <img
-                  src="{{ img.image.url|optimize }}"
-                  alt="{% firstof img.alt_text img.caption property.display_title %}"
-                  loading="lazy"
-                  decoding="async"
-                >
+                    {{ property.get_air_conditioning_display }}
 
+                  {% endif %}
 
-                <span
-                  class="gallery-view-hint"
-                  aria-hidden="true"
-                >
-
-                  <svg viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="6"></circle>
-                    <path d="m16 16 4 4"></path>
-                    <path d="M11 8v6M8 11h6"></path>
-                  </svg>
-
-                  View larger
-
-                </span>
-
-
-              </button>
-
-
-              {% if img.caption %}
-
-                <figcaption>
-                  {{ img.caption }}
-                </figcaption>
-
-              {% endif %}
-
-
-            </figure>
-
-          {% endfor %}
-
-
-        </div>
-
-
-      </section>
-
-
-      <div
-        class="property-lightbox"
-        id="property-lightbox"
-        aria-hidden="true"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Property image viewer"
-      >
-
-
-        <button
-          class="lightbox-close"
-          type="button"
-          aria-label="Close enlarged image"
-        >
-          <span aria-hidden="true">
-            &times;
-          </span>
-        </button>
-
-
-        <button
-          class="lightbox-arrow lightbox-previous"
-          type="button"
-          aria-label="Previous image"
-        >
-          <span aria-hidden="true">
-            &larr;
-          </span>
-        </button>
-
-
-        <div class="lightbox-content">
-
-          <img
-            class="lightbox-image"
-            src=""
-            alt=""
-          >
-
-          <div class="lightbox-meta">
-
-            <p class="lightbox-caption"></p>
-
-            <span class="lightbox-counter"></span>
-
-          </div>
-
-        </div>
-
-
-        <button
-          class="lightbox-arrow lightbox-next"
-          type="button"
-          aria-label="Next image"
-        >
-          <span aria-hidden="true">
-            &rarr;
-          </span>
-        </button>
-
-
-      </div>
-
-
-    {% endif %}
-
-
-  </div>
-
-</section>
-
-
-{% if services %}
-
-<section class="services">
-
-  <div class="wrap">
-
-
-    <div class="services-head reveal">
-
-      <p class="eyebrow">
-        Our management services
-      </p>
-
-      <h2 class="serif">
-        Comprehensive care of your home, so it is always exactly as you expect
-      </h2>
-
-    </div>
-
-
-    <div class="services-grid property-services-grid reveal">
-
-
-      {% for service in services %}
-
-        <a
-          href="{{ service.get_absolute_url }}"
-          class="service property-service-card"
-        >
-
-          <svg
-            class="sprig"
-            viewBox="0 0 22 26"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
-          </svg>
-
-          <h3 class="serif">
-            {{ service.title }}
-          </h3>
-
-          <p>
-            {{ service.description|truncatewords:18 }}
-          </p>
-
-          <span class="textlink">
-            Explore service &rarr;
-          </span>
-
-        </a>
-
-      {% endfor %}
-
-
-    </div>
-
-
-  </div>
-
-</section>
-
-{% endif %}
-
-
-{% if related_properties %}
-
-<section class="properties">
-
-  <div class="wrap">
-
-
-    <div class="prop-head reveal">
-
-      <p class="eyebrow">
-        Continue exploring
-      </p>
-
-      <h2 class="serif">
-        More Homes Under Our Care
-      </h2>
-
-    </div>
-
-
-    <div class="dest-prop-grid reveal">
-
-
-      {% for rp in related_properties %}
-
-        <article class="dest-prop-card">
-
-          <a
-            href="{{ rp.get_absolute_url }}"
-            class="dest-prop-card-link"
-            aria-label="View {{ rp.display_title }}"
-          >
-
-
-            <div class="dest-prop-image">
-
-
-              {% if rp.cover_image %}
-
-                <img
-                  class="ph"
-                  src="{{ rp.cover_image.url|optimize }}"
-                  alt="{{ rp.display_title }} in {{ rp.destination.name }}"
-                  loading="lazy"
-                  decoding="async"
-                >
-
-              {% else %}
-
-                <div
-                  class="ph property-card-placeholder"
-                  aria-hidden="true"
-                ></div>
-
-              {% endif %}
-
-
-              {% if rp.available_for_rental %}
-
-                <div class="rental-card-banner">
-                  {{ rp.display_rental_banner }}
                 </div>
 
               {% endif %}
 
 
+              <!-- SWIMMING POOL -->
+
+              {% if property.pool != "none" %}
+
+                <div class="property-amenity">
+
+                  {% if property.pool_details %}
+
+                    {{ property.pool_details }}
+
+                  {% elif property.pool_heated %}
+
+                    Heated {{ property.get_pool_display }}
+
+                  {% else %}
+
+                    {{ property.get_pool_display }}
+
+                  {% endif %}
+
+                </div>
+
+              {% endif %}
+
+
+              <!-- ADMIN-SELECTED AMENITIES -->
+
+              {% for amenity in property.amenities.all %}
+
+                <div class="property-amenity">
+                  {{ amenity.name }}
+                </div>
+
+              {% endfor %}
+
+
             </div>
 
+          </div>
 
-            <div class="dest-prop-content">
+        </section>
 
-              <p
-                class="eyebrow"
-                style="margin-top:16px;"
+      {% endif %}
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     EDITORIAL PROPERTY TOUR / GALLERY
+========================================================= -->
+
+{% if gallery_sections %}
+
+<section class="property-tour">
+
+  <div class="wrap">
+
+
+    <div class="property-tour-intro reveal">
+
+      <p class="eyebrow">
+        A closer look
+      </p>
+
+      <h2 class="serif">
+        Explore the Estate
+      </h2>
+
+      <p>
+        A curated collection of spaces, architectural details and
+        landscapes from this exceptional Italian home.
+      </p>
+
+    </div>
+
+
+    <div class="property-tour-sections">
+
+
+      {% for section in gallery_sections %}
+
+        <section class="property-gallery-section">
+
+
+          <div class="property-gallery-section-heading reveal">
+
+            <p class="eyebrow">
+              {{ section.label }}
+            </p>
+
+          </div>
+
+
+          <div class="property-gallery-grid">
+
+
+            {% for image in section.images %}
+
+              <figure
+                class="property-gallery-item reveal"
               >
-                {{ rp.destination.name }}
-              </p>
 
-              <h3 class="serif">
-                {{ rp.display_title }}
-              </h3>
+                <button
+                  type="button"
+                  class="property-gallery-trigger"
+                  data-gallery-image="{{ image.image.url|optimize }}"
+                  data-gallery-caption="{{ image.caption|default:image.alt_text|default:property.display_title }}"
+                  aria-label="Open image {{ forloop.counter }} from {{ section.label }}"
+                >
 
-              <p class="property-management-label">
-                Managed by Oliverde
-              </p>
-
-              <span class="textlink">
-                View property &rarr;
-              </span>
-
-            </div>
+                  <img
+                    src="{{ image.image.url|optimize }}"
+                    alt="{{ image.alt_text|default:property.display_title }}"
+                    loading="lazy"
+                    decoding="async"
+                  >
 
 
-          </a>
+                  <span
+                    class="gallery-view-hint"
+                    aria-hidden="true"
+                  >
 
-        </article>
+                    <svg
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        cx="10.5"
+                        cy="10.5"
+                        r="6.5"
+                      />
+                      <path d="M15.5 15.5 21 21"/>
+                    </svg>
+
+                    View
+
+                  </span>
+
+                </button>
+
+
+                {% if image.caption %}
+
+                  <figcaption>
+                    {{ image.caption }}
+                  </figcaption>
+
+                {% endif %}
+
+              </figure>
+
+            {% endfor %}
+
+
+          </div>
+
+        </section>
 
       {% endfor %}
 
 
     </div>
 
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PROPERTY GALLERY LIGHTBOX
+========================================================= -->
+
+<div
+  class="property-lightbox"
+  id="property-lightbox"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="{{ property.display_title }} image gallery"
+>
+
+  <button
+    type="button"
+    class="lightbox-close"
+    aria-label="Close image viewer"
+  >
+    ×
+  </button>
+
+
+  <button
+    type="button"
+    class="lightbox-arrow lightbox-previous"
+    aria-label="Previous image"
+  >
+    ←
+  </button>
+
+
+  <div class="lightbox-content">
+
+    <img
+      class="lightbox-image"
+      src=""
+      alt=""
+    >
+
+
+    <div class="lightbox-meta">
+
+      <p class="lightbox-caption"></p>
+
+      <p class="lightbox-counter"></p>
+
+    </div>
+
+  </div>
+
+
+  <button
+    type="button"
+    class="lightbox-arrow lightbox-next"
+    aria-label="Next image"
+  >
+    →
+  </button>
+
+</div>
+
+{% endif %}
+
+
+
+<!-- =========================================================
+     RENTAL ENQUIRY
+========================================================= -->
+
+{% if property.available_for_rental %}
+
+<section class="property-rental-enquiry">
+
+  <div class="wrap">
+
+    <div class="property-rental-enquiry-inner reveal">
+
+
+      <div>
+
+        <p class="eyebrow">
+          Private stays
+        </p>
+
+        <h2 class="serif">
+          Stay at {{ property.display_title }}
+        </h2>
+
+
+        {% if property.rental_intro %}
+
+          <div class="property-rental-intro">
+            {{ property.rental_intro|linebreaks }}
+          </div>
+
+        {% else %}
+
+          <p>
+            This property is available for selected private stays.
+            Contact Oliverde to discuss availability and arrangements.
+          </p>
+
+        {% endif %}
+
+      </div>
+
+
+      <a
+        class="btn btn-primary"
+        href="{% url 'contact' %}?property={{ property.public_id }}"
+      >
+        Enquire about your stay
+      </a>
+
+
+    </div>
 
   </div>
 
@@ -622,10 +591,104 @@
 {% endif %}
 
 
-<script
-  src="{% static 'js/property-gallery.js' %}"
-  defer
-></script>
+
+<!-- =========================================================
+     TESTIMONIAL
+========================================================= -->
+
+{% if testimonial %}
+
+<section class="intro">
+
+  <div class="wrap">
+
+    <blockquote class="destination-testimonial reveal">
+
+      <span
+        class="destination-testimonial-mark"
+        aria-hidden="true"
+      >
+        “
+      </span>
+
+      <p class="serif">
+        {{ testimonial.quote }}
+      </p>
+
+      <footer>
+        <cite>
+          — {{ testimonial.author_name }}
+        </cite>
+      </footer>
+
+    </blockquote>
+
+  </div>
+
+</section>
+
+{% endif %}
+
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="cta">
+
+  <img
+    class="cta-background-image"
+    src="{% static 'images/tester.jpeg' %}"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    decoding="async"
+  >
+
+  <div
+    class="cta-background-overlay"
+    aria-hidden="true"
+  ></div>
+
+
+  <div class="wrap cta-row">
+
+    <div class="cta-copy">
+
+      <h2 class="serif">
+        Let's discuss your property.
+      </h2>
+
+      <p>
+        Whether you live abroad or visit seasonally, we'll tailor a management
+        solution for your home.
+      </p>
+
+    </div>
+
+
+    <a
+      class="btn btn-primary"
+      href="{% url 'contact' %}"
+    >
+      Schedule a consultation
+    </a>
+
+  </div>
+
+</section>
+
+
+
+{% if gallery_sections %}
+
+  <script
+    src="{% static 'js/property-gallery.js' %}"
+    defer
+  ></script>
+
+{% endif %}
 
 
 {% endblock %}
