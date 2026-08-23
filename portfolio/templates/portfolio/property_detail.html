@@ -242,6 +242,79 @@
 
         {% endif %}
 
+
+        <!-- PROPERTY AMENITIES -->
+
+        {% if property.amenities.all %}
+
+          <div class="property-amenities-inline reveal">
+
+            <p class="eyebrow">
+              Amenities
+            </p>
+
+
+            <div class="property-amenities-inline-list">
+
+
+              {% if property.air_conditioning != "none" %}
+
+                <span>
+
+                  {% if property.air_conditioning_details %}
+
+                    {{ property.air_conditioning_details }}
+
+                  {% else %}
+
+                    {{ property.get_air_conditioning_display }}
+
+                  {% endif %}
+
+                </span>
+
+              {% endif %}
+
+
+              {% if property.pool != "none" %}
+
+                <span>
+
+                  {% if property.pool_details %}
+
+                    {{ property.pool_details }}
+
+                  {% elif property.pool_heated %}
+
+                    Heated {{ property.get_pool_display }}
+
+                  {% else %}
+
+                    {{ property.get_pool_display }}
+
+                  {% endif %}
+
+                </span>
+
+              {% endif %}
+
+
+              {% for amenity in property.amenities.all %}
+
+                <span>
+                  {{ amenity.name }}
+                </span>
+
+              {% endfor %}
+
+
+            </div>
+
+          </div>
+
+        {% endif %}
+
+
       {% endif %}
 
 
