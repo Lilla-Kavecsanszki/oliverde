@@ -2,6 +2,7 @@
 {% load static %}
 {% load cloudinary_extras %}
 
+{% comment %} Preload the hero image {% endcomment %}
 {% block preload %}
 <link rel="preload" as="image" href="{% static 'images/tester.jpeg' %}" fetchpriority="high">
 {% endblock %}
