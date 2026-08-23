@@ -1,66 +1,239 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}{{ post.title }} — Oliverde Journal{% endblock %}
-{% block meta_description %}{{ post.excerpt }}{% endblock %}
-{% block og_type %}article{% endblock %}
-{% block og_image %}{{ site_url }}{{ post.cover_image.url }}{% endblock %}
+{% load cloudinary_extras %}
+
+
+{% block title %}
+  {{ post.title }} — Oliverde Journal
+{% endblock %}
+
+
+{% block meta_description %}
+  {{ post.excerpt }}
+{% endblock %}
+
+
+{% block og_type %}
+  article
+{% endblock %}
+
+
+{% block og_image %}
+  {{ post.cover_image.url|optimize }}
+{% endblock %}
+
+
+{% block og_image_alt %}
+  {{ post.title }}
+{% endblock %}
+
+
+{% block twitter_image %}
+  {{ post.cover_image.url|optimize }}
+{% endblock %}
+
+
+{% block twitter_image_alt %}
+  {{ post.title }}
+{% endblock %}
+
 
 {% block content %}
+
+
 <article class="journal-article">
-  <div class="wrap" style="padding-top:140px; max-width:760px;">
-    <a class="textlink" href="{% url 'journal:list' %}">&larr; Back to Journal</a>
-    <p class="eyebrow" style="margin-top:24px;">{{ post.published_at|date:"F j, Y" }}</p>
-    <h1 class="serif journal-title">{{ post.title }}</h1>
+
+
+  <div
+    class="wrap"
+    style="padding-top:140px; max-width:760px;"
+  >
+
+    <a
+      class="textlink"
+      href="{% url 'journal:list' %}"
+    >
+      &larr; Back to Journal
+    </a>
+
+
+    <p
+      class="eyebrow"
+      style="margin-top:24px;"
+    >
+      {{ post.published_at|date:"F j, Y" }}
+    </p>
+
+
+    <h1 class="serif journal-title">
+      {{ post.title }}
+    </h1>
+
   </div>
 
-  <div class="wrap" style="max-width:900px; margin-top:40px;">
-    <img class="journal-cover" src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+
+  <div
+    class="wrap"
+    style="max-width:900px; margin-top:40px;"
+  >
+
+    <img
+      class="journal-cover"
+      src="{{ post.cover_image.url|optimize }}"
+      alt="{{ post.title }}"
+      fetchpriority="high"
+      decoding="async"
+    >
+
   </div>
+
 
   <div class="wrap journal-body-wrap">
+
     <div class="journal-body">
       {{ post.body|safe }}
     </div>
+
   </div>
+
+
 </article>
 
+
 {% if related_properties %}
+
 <section class="properties">
+
   <div class="wrap">
+
+
     <div class="prop-head reveal">
-      <h2 class="serif">Featured in this story</h2>
+
+      <h2 class="serif">
+        Featured in this story
+      </h2>
+
     </div>
+
+
     <div class="dest-prop-grid reveal">
+
+
       {% for property in related_properties %}
-        <a href="{{ property.get_absolute_url }}" class="dest-prop-card">
-          <img class="ph" src="{{ property.cover_image.url }}" alt="{{ property.title }}">
-          <p class="eyebrow" style="margin-top:16px;">{{ property.destination.name }}</p>
-          <h3 class="serif">{{ property.title }}</h3>
+
+        <a
+          href="{{ property.get_absolute_url }}"
+          class="dest-prop-card"
+        >
+
+          {% if property.cover_image %}
+
+            <img
+              class="ph"
+              src="{{ property.cover_image.url|optimize }}"
+              alt="{{ property.display_title }}, {{ property.destination.name }}"
+              loading="lazy"
+              decoding="async"
+            >
+
+          {% endif %}
+
+
+          <p
+            class="eyebrow"
+            style="margin-top:16px;"
+          >
+            {{ property.destination.name }}
+          </p>
+
+
+          <h3 class="serif">
+            {{ property.display_title }}
+          </h3>
+
         </a>
+
       {% endfor %}
+
+
     </div>
+
+
   </div>
+
 </section>
+
 {% endif %}
 
+
 {% if more_posts %}
-<section class="properties" style="padding-top:0;">
+
+<section
+  class="properties"
+  style="padding-top:0;"
+>
+
   <div class="wrap">
+
+
     <div class="prop-head reveal">
-      <h2 class="serif">More from the Journal</h2>
+
+      <h2 class="serif">
+        More from the Journal
+      </h2>
+
     </div>
+
+
     <div class="journal-grid reveal">
+
+
       {% for p in more_posts %}
-        <a href="{{ p.get_absolute_url }}" class="journal-card">
-          <img class="ph" src="{{ p.cover_image.url }}" alt="{{ p.title }}">
-          <p class="eyebrow" style="margin-top:16px;">{{ p.published_at|date:"F Y" }}</p>
-          <h3 class="serif">{{ p.title }}</h3>
+
+        <a
+          href="{{ p.get_absolute_url }}"
+          class="journal-card"
+        >
+
+          {% if p.cover_image %}
+
+            <img
+              class="ph"
+              src="{{ p.cover_image.url|optimize }}"
+              alt="{{ p.title }}"
+              loading="lazy"
+              decoding="async"
+            >
+
+          {% endif %}
+
+
+          <p
+            class="eyebrow"
+            style="margin-top:16px;"
+          >
+            {{ p.published_at|date:"F Y" }}
+          </p>
+
+
+          <h3 class="serif">
+            {{ p.title }}
+          </h3>
+
         </a>
+
       {% endfor %}
+
+
     </div>
+
+
   </div>
+
 </section>
+
 {% endif %}
+
 
 <section class="cta">
 
@@ -71,6 +244,7 @@
     aria-hidden="true"
   >
 
+
   <div
     class="cta-background-overlay"
     aria-hidden="true"
@@ -79,11 +253,13 @@
 
   <div class="wrap cta-row">
 
+
     <div class="cta-copy">
 
       <h2 class="serif">
         Let's discuss your property.
       </h2>
+
 
       <p>
         Whether you live abroad or visit seasonally, we'll tailor a management
@@ -100,7 +276,10 @@
       Schedule a consultation
     </a>
 
+
   </div>
 
 </section>
+
+
 {% endblock %}

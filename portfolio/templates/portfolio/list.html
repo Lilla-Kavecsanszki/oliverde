@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary_extras %}
+
 
 {% block title %}
   Portfolio — Oliverde
 {% endblock %}
 
+
+{% block meta_description %}
+  Explore Oliverde's portfolio of private estates, villas and country homes managed across Tuscany, Umbria and Lazio.
+{% endblock %}
+
+
 {% block content %}
 
+
 <section class="page-intro">
+
   <div class="wrap">
 
     <p class="eyebrow reveal">
@@ -32,10 +42,12 @@
     </p>
 
   </div>
+
 </section>
 
 
 <section class="portfolio-pathways">
+
   <div class="wrap">
 
     <div class="section-heading reveal">
@@ -118,10 +130,12 @@
     </div>
 
   </div>
+
 </section>
 
 
 <section class="destinations">
+
   <div class="wrap">
 
     <div class="section-heading reveal">
@@ -156,9 +170,10 @@
 
             <img
               class="ph"
-              src="{{ destination.cover_image.url }}"
+              src="{{ destination.cover_image.url|optimize }}"
               alt="Landscape and properties in {{ destination.name }}"
               loading="lazy"
+              decoding="async"
             >
 
           {% else %}
@@ -227,10 +242,12 @@
     </div>
 
   </div>
+
 </section>
 
 
 <section class="portfolio-discretion">
+
   <div class="wrap">
 
     <div class="portfolio-discretion-inner reveal">
@@ -258,10 +275,12 @@
     </div>
 
   </div>
+
 </section>
 
 
 <section class="why">
+
   <div class="wrap">
 
 
@@ -363,6 +382,8 @@
 
 
   </div>
+
 </section>
+
 
 {% endblock %}

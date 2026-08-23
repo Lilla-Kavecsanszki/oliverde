@@ -1,18 +1,43 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary_extras %}
+
 
 {% block title %}
   {{ service.title }} — Oliverde
 {% endblock %}
+
 
 {% block meta_description %}
   {{ service.description|truncatewords:25 }}
 {% endblock %}
 
 
+{% if service.gallery.all %}
+  {% with service_image=service.gallery.all.0 %}
+    {% block og_image %}
+      {{ service_image.image.url|optimize }}
+    {% endblock %}
+
+    {% block og_image_alt %}
+      {{ service_image.alt_text|default:service.title }}
+    {% endblock %}
+
+    {% block twitter_image %}
+      {{ service_image.image.url|optimize }}
+    {% endblock %}
+
+    {% block twitter_image_alt %}
+      {{ service_image.alt_text|default:service.title }}
+    {% endblock %}
+  {% endwith %}
+{% endif %}
+
+
 {% block content %}
 
 <section class="page-intro">
+
   <div class="wrap">
 
     <a
@@ -36,6 +61,7 @@
     </p>
 
   </div>
+
 </section>
 
 
@@ -78,7 +104,9 @@
 
 
 {% if service.gallery.all %}
+
 <section class="service-gallery">
+
   <div class="wrap">
 
     <div class="service-gallery-heading reveal">
@@ -92,6 +120,7 @@
       </h2>
 
     </div>
+
 
     <div class="service-gallery-layout">
 
@@ -117,21 +146,23 @@
                 service-gallery-trigger
                 property-gallery-trigger
               "
-              data-gallery-image="{{ image.image.url }}"
+              data-gallery-image="{{ image.image.url|optimize }}"
               data-gallery-caption="{{ image.caption|default:image.alt_text|default:service.title }}"
               aria-label="Open image {{ forloop.counter }}"
             >
 
               <img
-                src="{{ image.image.url }}"
+                src="{{ image.image.url|optimize }}"
                 alt="{{ image.alt_text|default:service.title }}"
                 loading="lazy"
+                decoding="async"
               >
 
               <span
                 class="gallery-view-hint"
                 aria-hidden="true"
               >
+
                 <svg
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -145,16 +176,20 @@
                 </svg>
 
                 View
+
               </span>
 
             </button>
 
           {% endif %}
 
+
           {% if image.caption %}
+
             <figcaption>
               {{ image.caption }}
             </figcaption>
+
           {% endif %}
 
         </figure>
@@ -164,6 +199,7 @@
     </div>
 
   </div>
+
 </section>
 
 
@@ -181,7 +217,9 @@
     class="lightbox-close"
     aria-label="Close image viewer"
   >
-    ×
+    <span aria-hidden="true">
+      ×
+    </span>
   </button>
 
   <button
@@ -189,7 +227,9 @@
     class="lightbox-arrow lightbox-previous"
     aria-label="Previous image"
   >
-    ←
+    <span aria-hidden="true">
+      ←
+    </span>
   </button>
 
   <div class="lightbox-content">
@@ -215,18 +255,23 @@
     class="lightbox-arrow lightbox-next"
     aria-label="Next image"
   >
-    →
+    <span aria-hidden="true">
+      →
+    </span>
   </button>
 
 </div>
+
 {% endif %}
 
 
 {% if related_properties %}
+
 <section
   class="properties"
   style="padding-top:0;"
 >
+
   <div class="wrap">
 
     <div class="prop-head reveal">
@@ -245,6 +290,7 @@
 
     </div>
 
+
     <div class="dest-prop-grid reveal">
 
       {% for property in related_properties %}
@@ -252,15 +298,17 @@
         <a
           href="{{ property.get_absolute_url }}"
           class="dest-prop-card"
+          aria-label="View {{ property.display_title }}"
         >
 
           {% if property.cover_image %}
 
             <img
               class="ph"
-              src="{{ property.cover_image.url }}"
+              src="{{ property.cover_image.url|optimize }}"
               alt="{{ property.display_title }}, {{ property.destination.name }}"
               loading="lazy"
+              decoding="async"
             >
 
           {% else %}
@@ -273,11 +321,15 @@
 
           {% endif %}
 
+
           {% if property.display_rental_banner %}
+
             <p class="property-rental-label">
               {{ property.rental_banner_text|default:"Available for private rental" }}
             </p>
+
           {% endif %}
+
 
           <p
             class="eyebrow"
@@ -297,7 +349,9 @@
     </div>
 
   </div>
+
 </section>
+
 {% endif %}
 
 
@@ -345,10 +399,13 @@
 
 
 {% if service.gallery.all %}
+
   <script
     src="{% static 'js/property-gallery.js' %}"
     defer
   ></script>
+
 {% endif %}
+
 
 {% endblock %}

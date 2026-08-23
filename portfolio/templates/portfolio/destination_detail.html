@@ -1,11 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary_extras %}
+
 
 {% block title %}
   {{ destination.name }} — Oliverde
 {% endblock %}
 
+
+{% block meta_description %}
+  Discover homes under Oliverde's care in {{ destination.name }}, with discreet property management and local support across central Italy.
+{% endblock %}
+
+
 {% block content %}
+
 
 <section class="dest-hero">
 
@@ -13,8 +22,10 @@
 
     <img
       class="ph"
-      src="{{ destination.cover_image.url }}"
+      src="{{ destination.cover_image.url|optimize }}"
       alt="Landscape and homes in {{ destination.name }}"
+      fetchpriority="high"
+      decoding="async"
     >
 
   {% else %}
@@ -96,6 +107,7 @@
 
       </div>
 
+
       <div class="prop-head-aside">
 
         <a
@@ -135,9 +147,10 @@
 
                 <img
                   class="ph"
-                  src="{{ property.cover_image.url }}"
+                  src="{{ property.cover_image.url|optimize }}"
                   alt="{{ property.display_title }} in {{ destination.name }}"
                   loading="lazy"
+                  decoding="async"
                 >
 
               {% else %}
@@ -266,7 +279,7 @@
       </p>
 
       <footer>
-        — {{ testimonial.author_name }}
+        <cite>— {{ testimonial.author_name }}</cite>
       </footer>
 
     </blockquote>
@@ -316,5 +329,6 @@
   </div>
 
 </section>
+
 
 {% endblock %}

@@ -1,80 +1,98 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Services — Oliverde{% endblock %}
+{% block title %}
+  Services — Oliverde
+{% endblock %}
+
+{% block meta_description %}
+  Explore Oliverde's property management, maintenance, restoration, administration and guest support services across Tuscany, Umbria and Lazio.
+{% endblock %}
+
 
 {% block content %}
 
 <section class="page-intro">
-    <div class="wrap">
 
-        <p class="eyebrow reveal">
-            Services
-        </p>
+  <div class="wrap">
 
-        <h1 class="serif reveal">
-            Comprehensive Care for Your Home
-        </h1>
+    <p class="eyebrow reveal">
+      Services
+    </p>
 
-        <p class="page-intro-text reveal">
-            Relying on a professional property management service offers peace of
-            mind, particularly if you live abroad or have limited time to oversee
-            your home yourself.
-        </p>
+    <h1 class="serif reveal">
+      Comprehensive Care for Your Home
+    </h1>
 
-    </div>
+    <p class="page-intro-text reveal">
+      Relying on a professional property management service offers peace of
+      mind, particularly if you live abroad or have limited time to oversee
+      your home yourself.
+    </p>
+
+  </div>
+
 </section>
 
-<section class="services-detail" style="padding-top:0;">
-    <div class="wrap">
 
-        {% for service in services %}
+<section
+  class="services-detail"
+  style="padding-top:0;"
+>
 
-            <a
-                href="{{ service.get_absolute_url }}"
-                class="service-block service-block-link reveal"
-            >
+  <div class="wrap">
 
-                <div class="service-block-icon">
+    {% for service in services %}
 
-                    <svg
-                        class="sprig"
-                        viewBox="0 0 22 26"
-                        aria-hidden="true"
-                    >
-                        <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
-                    </svg>
+      <a
+        href="{{ service.get_absolute_url }}"
+        class="service-block service-block-link reveal"
+      >
 
-                </div>
+        <div class="service-block-icon">
 
-                <div>
+          <svg
+            class="sprig"
+            viewBox="0 0 22 26"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M11 24 V4 M11 8 Q7 6 5 2 M11 12 Q15 10 17 6 M11 16 Q6.5 14.5 4 11"/>
+          </svg>
 
-                    <h2 class="serif">
-                        {{ service.title }}
-                    </h2>
+        </div>
 
-                    <p class="service-block-desc">
-                        {{ service.description|truncatewords:26 }}
-                    </p>
 
-                    <span class="textlink">
-                        Learn more →
-                    </span>
+        <div>
 
-                </div>
+          <h2 class="serif">
+            {{ service.title }}
+          </h2>
 
-            </a>
+          <p class="service-block-desc">
+            {{ service.description|truncatewords:26 }}
+          </p>
 
-        {% empty %}
+          <span class="textlink">
+            Learn more →
+          </span>
 
-            <p>
-                No services have been added yet.
-            </p>
+        </div>
 
-        {% endfor %}
+      </a>
 
-    </div>
+    {% empty %}
+
+      <p>
+        No services have been added yet.
+      </p>
+
+    {% endfor %}
+
+  </div>
+
 </section>
+
 
 <section class="cta">
 
@@ -117,5 +135,6 @@
   </div>
 
 </section>
+
 
 {% endblock %}

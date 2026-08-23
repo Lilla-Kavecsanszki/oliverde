@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary_extras %}
 
+{% block preload %}
+<link rel="preload" as="image" href="{% static 'images/tester.jpeg' %}" fetchpriority="high">
+{% endblock %}
 
 {% block body_class %}
 home-hero
@@ -43,12 +47,13 @@ home-hero
 {% block content %}
 
 <section class="hero">
-
+  
   <img
-    class="hero-background-image"
-    src="{% static 'images/tester.jpeg' %}"
-    alt=""
-    aria-hidden="true"
+  class="hero-background-image"
+  src="{% static 'images/tester.jpeg' %}"
+  alt=""
+  aria-hidden="true"
+  fetchpriority="high"
   >
 
   <div
@@ -312,8 +317,10 @@ home-hero
           {% if property.cover_image %}
             <img
               class="ph"
-              src="{{ property.cover_image.url }}"
+              src="{{ property.cover_image.url|optimize }}"
               alt="{{ property.display_title }}, {{ property.destination.name }}"
+              loading="lazy"
+              decoding="async"
             >
           {% else %}
             <div
@@ -562,6 +569,8 @@ home-hero
     src="{% static 'images/tester.jpeg' %}"
     alt=""
     aria-hidden="true"
+    loading="lazy"
+    decoding="async"
   >
 
   <div

@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary_extras %}
+
 
 {% block title %}
   {{ page_title }} — Oliverde
 {% endblock %}
+
+
+{% block meta_description %}
+  {{ page_description }}
+{% endblock %}
+
 
 {% block content %}
 
@@ -212,9 +220,10 @@
 
                 <img
                   class="ph"
-                  src="{{ property.cover_image.url }}"
+                  src="{{ property.cover_image.url|optimize }}"
                   alt="{{ property.display_title }} in {{ property.destination.name }}"
                   loading="lazy"
+                  decoding="async"
                 >
 
               {% else %}
@@ -329,12 +338,10 @@
 
         {% endif %}
 
-
         <span>
           Page {{ page_obj.number }}
           of {{ page_obj.paginator.num_pages }}
         </span>
-
 
         {% if page_obj.has_next %}
 
