@@ -1539,149 +1539,6 @@ body.home-hero .site-header.nav-scrolled {
   }
 }
 
-/*
-==========================================================
-   PROPERTY FILTERS
-==========================================================
-*/
-
-.property-filters {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
-  margin-bottom: 56px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--hairline);
-}
-
-.property-results {
-  color: var(--taupe);
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-.property-results strong {
-  color: var(--charcoal);
-  font-weight: 600;
-}
-
-.property-filter-group {
-  display: flex;
-  align-items: flex-end;
-  gap: 24px;
-  margin-left: auto;
-}
-
-.filter-item {
-  display: flex;
-  flex-direction: column;
-  min-width: 220px;
-}
-
-.filter-item label {
-  margin-bottom: 10px;
-  color: var(--taupe);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-
-.filter-item select {
-  width: 100%;
-  padding: 10px 2px;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--hairline);
-  color: var(--charcoal);
-  font-family: "Inter", sans-serif;
-  font-size: 15px;
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  transition: border-color .25s ease;
-}
-
-.filter-item select:focus {
-  outline: none;
-  border-bottom-color: var(--rust);
-}
-
-.filter-reset {
-  color: var(--taupe);
-  font-size: 14px;
-  text-decoration: none;
-  transition: color .25s ease;
-}
-
-.filter-reset:hover {
-  color: var(--olive-700);
-}
-
-.empty-properties {
-  grid-column: 1 / -1;
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.empty-properties h2 {
-  margin-bottom: 16px;
-}
-
-.empty-properties p {
-  max-width: 460px;
-  margin: 0 auto 28px;
-  color: var(--taupe);
-  line-height: 1.7;
-}
-
-/* ---------- Responsive ---------- */
-
-@media (max-width: 900px) {
-  .property-filters {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 28px;
-  }
-
-  .property-filter-group {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .filter-item {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .filter-reset {
-    align-self: flex-start;
-  }
-}
-
-@media (max-width: 640px) {
-  .property-filter-group {
-    flex-direction: column;
-    gap: 22px;
-  }
-
-  .filter-item {
-    width: 100%;
-  }
-
-  .property-results {
-    font-size: 13px;
-  }
-
-  .property-filters {
-    margin-bottom: 40px;
-  }
-
-  .empty-properties {
-    padding: 60px 10px;
-  }
-}
 
 /* =========================================================
    FOUNDER / TESTIMONIAL
@@ -3651,6 +3508,395 @@ footer address {
   background: currentColor;
 
   opacity: 0.65;
+
+}
+
+/* PROPERTY LIST */
+
+/* ==========================================================
+   PROPERTY FILTERS
+========================================================== */
+
+.property-filters {
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+
+  margin-bottom: 48px;
+  padding-bottom: 28px;
+
+  border-bottom: 1px solid var(--hairline);
+
+}
+
+.property-filter-group {
+
+  display: flex;
+  align-items: flex-end;
+  gap: 34px;
+
+}
+
+.filter-item {
+
+  position: relative;
+
+  min-width: 220px;
+
+}
+
+
+/* ---------- RESULTS ---------- */
+
+.property-results {
+
+  color: var(--taupe);
+
+  font-size: 13px;
+  line-height: 1.5;
+
+}
+
+.property-results strong {
+
+  color: var(--charcoal);
+
+  font-weight: 500;
+
+}
+
+
+/* ---------- RESET ---------- */
+
+.filter-reset {
+
+  color: var(--olive-700);
+
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+}
+
+
+/* ==========================================================
+   OLIVERDE CUSTOM SELECTS
+========================================================== */
+
+/* ---------- LABEL ---------- */
+
+.filter-label {
+
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--taupe);
+
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+
+}
+
+
+/* ---------- SELECT WRAPPER ---------- */
+
+.custom-select {
+
+  position: relative;
+
+}
+
+
+/* ---------- TRIGGER ---------- */
+
+.custom-select-trigger {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  width: 100%;
+
+  padding: 0 2px 11px 0;
+
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  border-radius: 0;
+
+  background: transparent;
+
+  color: var(--charcoal);
+
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: border-color 150ms ease;
+
+}
+
+.custom-select-trigger:hover,
+.custom-select.open .custom-select-trigger {
+
+  border-bottom-color: var(--olive-700);
+
+}
+
+.custom-select-trigger:focus-visible {
+
+  outline: 1px solid var(--olive-700);
+  outline-offset: 5px;
+
+}
+
+
+/* ---------- ARROW ---------- */
+
+.custom-select-arrow {
+
+  width: 7px;
+  height: 7px;
+
+  margin-right: 3px;
+
+  border-right: 1px solid var(--olive-700);
+  border-bottom: 1px solid var(--olive-700);
+
+  transform: rotate(45deg);
+
+  transition: transform 180ms ease;
+
+  flex: 0 0 auto;
+
+}
+
+.custom-select.open .custom-select-arrow {
+
+  transform: rotate(225deg);
+
+}
+
+
+/* ==========================================================
+   CUSTOM SELECT MENU
+========================================================== */
+
+.custom-select-menu {
+
+  position: absolute;
+  z-index: 30;
+
+  top: calc(100% + 9px);
+  left: 0;
+
+  width: 100%;
+  min-width: 240px;
+
+  padding: 8px;
+
+  border: 1px solid var(--hairline);
+
+  background: var(--cream);
+
+  box-shadow:
+    0 14px 35px rgba(35, 42, 23, 0.10),
+    0 3px 10px rgba(35, 42, 23, 0.05);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateY(-5px);
+
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease,
+    visibility 150ms ease;
+
+}
+
+.custom-select.open .custom-select-menu {
+
+  opacity: 1;
+  visibility: visible;
+
+  transform: translateY(0);
+
+}
+
+
+/* ---------- OPTIONS ---------- */
+
+.custom-select-option {
+
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  padding: 11px 13px 11px 27px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--charcoal);
+
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.35;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+
+}
+
+.custom-select-option:hover,
+.custom-select-option:focus-visible {
+
+  background: rgba(76, 87, 48, 0.07);
+
+  outline: none;
+
+}
+
+
+/* ---------- SELECTED OPTION ---------- */
+
+.custom-select-option.selected {
+
+  color: var(--olive-700);
+
+  font-weight: 500;
+
+}
+
+.custom-select-option.selected::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 12px;
+  top: 50%;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--rust);
+
+  transform: translateY(-50%);
+
+}
+
+
+/* ==========================================================
+   PROPERTY FILTERS — TABLET
+========================================================== */
+
+@media (max-width: 900px) {
+
+  .property-filters {
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+
+  }
+
+  .property-filter-group {
+
+    width: 100%;
+
+  }
+
+  .filter-item {
+
+    flex: 1;
+
+    min-width: 0;
+
+  }
+
+}
+
+
+/* ==========================================================
+   PROPERTY FILTERS — MOBILE
+========================================================== */
+
+@media (max-width: 640px) {
+
+  .property-filters {
+
+    margin-bottom: 36px;
+    padding-bottom: 24px;
+
+  }
+
+  .property-filter-group {
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+
+  }
+
+  .filter-item {
+
+    width: 100%;
+
+  }
+
+  .custom-select-menu {
+
+    min-width: 100%;
+
+  }
+
+}
+
+/* ---------- EMPTY PROPERTY RESULTS ---------- */
+
+.empty-properties {
+  grid-column: 1 / -1;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.empty-properties h2 {
+  margin-bottom: 16px;
+}
+
+.empty-properties p {
+  max-width: 460px;
+  margin: 0 auto 28px;
+  color: var(--taupe);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+
+  .empty-properties {
+    padding: 60px 10px;
+  }
 
 }
 

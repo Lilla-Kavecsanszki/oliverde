@@ -16,6 +16,7 @@
 {% block content %}
 
 <section class="page-intro">
+
   <div class="wrap">
 
     <p class="eyebrow reveal">
@@ -61,6 +62,7 @@
     </div>
 
   </div>
+
 </section>
 
 
@@ -68,6 +70,7 @@
   class="properties"
   style="padding-top:0;"
 >
+
   <div class="wrap">
 
     <form
@@ -75,6 +78,7 @@
       method="get"
       action="{{ request.path }}"
     >
+
 
       <div class="property-results">
 
@@ -99,91 +103,214 @@
 
       <div class="property-filter-group">
 
+
+        <!-- DESTINATION -->
+
         <div class="filter-item">
 
-          <label for="destination">
+          <span class="filter-label">
             Destination
-          </label>
+          </span>
 
-          <select
-            id="destination"
-            name="destination"
-            onchange="this.form.submit()"
+          <div
+            class="custom-select"
+            data-custom-select
           >
 
-            <option value="">
-              All Destinations
-            </option>
+            <button
+              type="button"
+              class="custom-select-trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
 
-            {% for destination in destinations %}
+              <span class="custom-select-value">
 
-              <option
-                value="{{ destination.slug }}"
-                {% if destination.slug == selected_destination %}
-                  selected
+                {% if selected_destination %}
+
+                  {% for destination in destinations %}
+
+                    {% if destination.slug == selected_destination %}
+                      {{ destination.name }}
+                    {% endif %}
+
+                  {% endfor %}
+
+                {% else %}
+
+                  All Destinations
+
                 {% endif %}
+
+              </span>
+
+
+              <span
+                class="custom-select-arrow"
+                aria-hidden="true"
+              ></span>
+
+            </button>
+
+
+            <div
+              class="custom-select-menu"
+              role="listbox"
+            >
+
+              <button
+                type="button"
+                class="custom-select-option {% if not selected_destination %}selected{% endif %}"
+                data-value=""
+                role="option"
+                aria-selected="{% if not selected_destination %}true{% else %}false{% endif %}"
               >
-                {{ destination.name }}
-              </option>
+                All Destinations
+              </button>
 
-            {% endfor %}
 
-          </select>
+              {% for destination in destinations %}
+
+                <button
+                  type="button"
+                  class="custom-select-option {% if destination.slug == selected_destination %}selected{% endif %}"
+                  data-value="{{ destination.slug }}"
+                  role="option"
+                  aria-selected="{% if destination.slug == selected_destination %}true{% else %}false{% endif %}"
+                >
+                  {{ destination.name }}
+                </button>
+
+              {% endfor %}
+
+            </div>
+
+
+            <input
+              type="hidden"
+              name="destination"
+              value="{{ selected_destination }}"
+              data-custom-select-input
+            >
+
+          </div>
 
         </div>
 
+
+        <!-- SORT -->
 
         <div class="filter-item">
 
-          <label for="sort">
+          <span class="filter-label">
             Sort
-          </label>
+          </span>
 
-          <select
-            id="sort"
-            name="sort"
-            onchange="this.form.submit()"
+          <div
+            class="custom-select"
+            data-custom-select
           >
 
-            <option
-              value="featured"
-              {% if selected_sort == "featured" %}
-                selected
-              {% endif %}
+            <button
+              type="button"
+              class="custom-select-trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
             >
-              Featured First
-            </option>
 
-            <option
-              value="name"
-              {% if selected_sort == "name" %}
-                selected
-              {% endif %}
+              <span class="custom-select-value">
+
+                {% if selected_sort == "name" %}
+
+                  Property Name (A–Z)
+
+                {% elif selected_sort == "-name" %}
+
+                  Property Name (Z–A)
+
+                {% elif selected_sort == "destination" %}
+
+                  Destination (A–Z)
+
+                {% else %}
+
+                  Featured First
+
+                {% endif %}
+
+              </span>
+
+
+              <span
+                class="custom-select-arrow"
+                aria-hidden="true"
+              ></span>
+
+            </button>
+
+
+            <div
+              class="custom-select-menu"
+              role="listbox"
             >
-              Property Name (A–Z)
-            </option>
 
-            <option
-              value="-name"
-              {% if selected_sort == "-name" %}
-                selected
-              {% endif %}
+              <button
+                type="button"
+                class="custom-select-option {% if selected_sort == 'featured' or not selected_sort %}selected{% endif %}"
+                data-value="featured"
+                role="option"
+                aria-selected="{% if selected_sort == 'featured' or not selected_sort %}true{% else %}false{% endif %}"
+              >
+                Featured First
+              </button>
+
+
+              <button
+                type="button"
+                class="custom-select-option {% if selected_sort == 'name' %}selected{% endif %}"
+                data-value="name"
+                role="option"
+                aria-selected="{% if selected_sort == 'name' %}true{% else %}false{% endif %}"
+              >
+                Property Name (A–Z)
+              </button>
+
+
+              <button
+                type="button"
+                class="custom-select-option {% if selected_sort == '-name' %}selected{% endif %}"
+                data-value="-name"
+                role="option"
+                aria-selected="{% if selected_sort == '-name' %}true{% else %}false{% endif %}"
+              >
+                Property Name (Z–A)
+              </button>
+
+
+              <button
+                type="button"
+                class="custom-select-option {% if selected_sort == 'destination' %}selected{% endif %}"
+                data-value="destination"
+                role="option"
+                aria-selected="{% if selected_sort == 'destination' %}true{% else %}false{% endif %}"
+              >
+                Destination (A–Z)
+              </button>
+
+            </div>
+
+
+            <input
+              type="hidden"
+              name="sort"
+              value="{{ selected_sort|default:'featured' }}"
+              data-custom-select-input
             >
-              Property Name (Z–A)
-            </option>
 
-            <option
-              value="destination"
-              {% if selected_sort == "destination" %}
-                selected
-              {% endif %}
-            >
-              Destination (A–Z)
-            </option>
-
-          </select>
+          </div>
 
         </div>
+
 
       </div>
 
@@ -199,10 +326,12 @@
 
       {% endif %}
 
+
     </form>
 
 
     <div class="dest-prop-grid reveal">
+
 
       {% for property in properties %}
 
@@ -214,7 +343,9 @@
             aria-label="View {{ property.display_title }}"
           >
 
+
             <div class="dest-prop-image">
+
 
               {% if property.cover_image %}
 
@@ -235,6 +366,7 @@
 
               {% endif %}
 
+
               {% if property.available_for_rental %}
 
                 <div class="rental-card-banner">
@@ -242,6 +374,7 @@
                 </div>
 
               {% endif %}
+
 
             </div>
 
@@ -265,13 +398,17 @@
 
             </div>
 
+
           </a>
 
         </article>
 
+
       {% empty %}
 
+
         <div class="empty-properties">
+
 
           {% if collection_type == "rentals" %}
 
@@ -289,6 +426,7 @@
             >
               View Our Collection
             </a>
+
 
           {% else %}
 
@@ -309,9 +447,12 @@
 
           {% endif %}
 
+
         </div>
 
+
       {% endfor %}
+
 
     </div>
 
@@ -322,6 +463,7 @@
         class="pagination"
         aria-label="Property portfolio pages"
       >
+
 
         {% if page_obj.has_previous %}
 
@@ -334,10 +476,12 @@
 
         {% endif %}
 
+
         <span>
           Page {{ page_obj.number }}
           of {{ page_obj.paginator.num_pages }}
         </span>
+
 
         {% if page_obj.has_next %}
 
@@ -350,11 +494,21 @@
 
         {% endif %}
 
+
       </nav>
 
     {% endif %}
 
+
   </div>
+
 </section>
+
+
+<script
+  src="{% static 'js/custom-select.js' %}"
+  defer
+></script>
+
 
 {% endblock %}
