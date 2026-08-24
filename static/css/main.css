@@ -3598,6 +3598,25 @@ footer address {
   }
 }
 
+/* Destination Detail */
+
+.dest-prop-content {
+  padding-top: 18px;
+}
+
+.dest-prop-content h3 {
+  margin: 0;
+}
+
+.dest-prop-meta {
+  margin-top: 8px;
+}
+
+.dest-prop-content .textlink {
+  display: inline-block;
+  margin-top: 14px;
+}
+
 /* ---------- PROPERTY DETAIL ---------- */
 
 .property-detail-wrap {

@@ -195,20 +195,9 @@
 
             <div class="dest-prop-content">
 
-              <p
-                class="eyebrow"
-                style="margin-top:16px;"
-              >
-                {{ property.get_property_type_display }}
-              </p>
-
               <h3 class="serif">
                 {{ property.display_title }}
               </h3>
-
-              <p class="property-management-label">
-                Managed by Oliverde
-              </p>
 
               {% if property.show_property_highlights %}
 
@@ -217,10 +206,8 @@
                   <p class="dest-prop-meta">
 
                     {% if property.bedrooms %}
-
                       {{ property.bedrooms }}
                       Bedroom{{ property.bedrooms|pluralize }}
-
                     {% endif %}
 
                     {% if property.bedrooms and property.sleeps %}
