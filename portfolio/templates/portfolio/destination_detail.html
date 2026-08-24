@@ -267,7 +267,7 @@
 
 {% if testimonial %}
 
-<section class="intro">
+<section class="destination-testimonial-section">
 
   <div class="wrap">
 
@@ -284,9 +284,9 @@
         {{ testimonial.quote|linebreaks }}
       </div>
 
-      <footer>
-        <cite>— {{ testimonial.author_name }}</cite>
-      </footer>
+      <div class="destination-testimonial-author">
+        — {{ testimonial.author_name }}
+      </div>
 
     </blockquote>
 
