@@ -280,9 +280,9 @@
         “
       </span>
 
-      <p class="serif">
-        {{ testimonial.quote }}
-      </p>
+      <div class="destination-testimonial-copy serif">
+        {{ testimonial.quote|linebreaks }}
+      </div>
 
       <footer>
         <cite>— {{ testimonial.author_name }}</cite>

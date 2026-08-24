@@ -6355,31 +6355,161 @@ textarea:focus-visible {
 /* ---------- DESTINATION TESTIMONIAL ---------- */
 
 .destination-testimonial {
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
+
     position: relative;
+
+    max-width: 820px;
+
+    margin: 0 auto;
+
+    text-align: center;
+
 }
+
+
+/* ---------- QUOTATION MARK ---------- */
 
 .destination-testimonial-mark {
+
     display: block;
-    font-size: 4rem;
-    line-height: 1;
+
+    margin-bottom: 24px;
+
     color: var(--olive-400);
-    margin-bottom: .5rem;
+
+    font-family: Georgia, serif;
+    font-size: 52px;
+    font-style: normal;
+    line-height: 0.75;
+
 }
 
-.destination-testimonial p {
-    font-size: 1.35rem;
+
+/* ---------- TESTIMONIAL COPY ---------- */
+
+.destination-testimonial-copy {
+
+    color: var(--charcoal);
+
+    font-size: clamp(16px, 1.35vw, 19px);
     font-style: italic;
-    margin-bottom: 1.5rem;
+    font-weight: 400;
+    line-height: 1.6;
+
 }
+
+.destination-testimonial-copy p {
+
+    margin: 0 auto 20px;
+
+}
+
+.destination-testimonial-copy p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* ---------- AUTHOR ---------- */
 
 .destination-testimonial footer {
-    font-size: .8rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    margin-top: 30px;
+
+    color: var(--olive-700);
+
+}
+
+.destination-testimonial footer::before,
+.destination-testimonial footer::after {
+
+    content: "";
+
+    width: 28px;
+    height: 1px;
+
+    background: var(--olive-700);
+
+    opacity: 0.45;
+
+}
+
+.destination-testimonial cite {
+
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
     text-transform: uppercase;
-    letter-spacing: .08em;
-    color: var(--taupe);
+
+}
+
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 900px) {
+
+    .destination-testimonial {
+
+        max-width: 720px;
+
+    }
+
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 640px) {
+
+    .destination-testimonial {
+
+        text-align: left;
+
+    }
+
+    .destination-testimonial-mark {
+
+        margin-bottom: 20px;
+
+        font-size: 44px;
+
+    }
+
+    .destination-testimonial-copy {
+
+        font-size: 16px;
+        line-height: 1.65;
+
+    }
+
+    .destination-testimonial-copy p {
+
+        margin-bottom: 18px;
+
+    }
+
+    .destination-testimonial footer {
+
+        justify-content: flex-start;
+
+        margin-top: 26px;
+
+    }
+
+    .destination-testimonial footer::after {
+
+        display: none;
+
+    }
+
 }
 
 
