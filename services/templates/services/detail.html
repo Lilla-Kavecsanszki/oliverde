@@ -322,11 +322,11 @@
           {% endif %}
 
 
-          {% if property.display_rental_banner %}
+          {% if property.available_for_rental %}
 
-            <p class="property-rental-label">
-              {{ property.rental_banner_text|default:"Available for private rental" }}
-            </p>
+            <div class="rental-card-banner">
+              {{ property.display_rental_banner }}
+            </div>
 
           {% endif %}
 
