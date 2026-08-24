@@ -3617,6 +3617,43 @@ footer address {
   margin-top: 14px;
 }
 
+/* ---------- RENTAL LABEL — PROPERTY CARDS ---------- */
+
+.rental-card-banner {
+
+  position: static;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 14px;
+
+  color: var(--olive-700);
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+
+}
+
+.rental-card-banner::before {
+
+  content: "";
+
+  width: 24px;
+  height: 1px;
+
+  flex: 0 0 24px;
+
+  background: currentColor;
+
+  opacity: 0.65;
+
+}
+
 /* ---------- PROPERTY DETAIL ---------- */
 
 .property-detail-wrap {
