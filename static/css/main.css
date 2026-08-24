@@ -3519,6 +3519,9 @@ footer address {
 
 .property-filters {
 
+  position: relative;
+  z-index: 20;
+
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -3579,6 +3582,15 @@ footer address {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 
+  transition: color 150ms ease;
+
+}
+
+.filter-reset:hover,
+.filter-reset:focus-visible {
+
+  color: var(--rust);
+
 }
 
 
@@ -3613,6 +3625,12 @@ footer address {
 
 }
 
+.custom-select.open {
+
+  z-index: 40;
+
+}
+
 
 /* ---------- TRIGGER ---------- */
 
@@ -3642,12 +3660,21 @@ footer address {
 
   cursor: pointer;
 
-  transition: border-color 150ms ease;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
 
 }
 
-.custom-select-trigger:hover,
+.custom-select-trigger:hover {
+
+  border-bottom-color: var(--olive-700);
+
+}
+
 .custom-select.open .custom-select-trigger {
+
+  color: var(--olive-700);
 
   border-bottom-color: var(--olive-700);
 
@@ -3695,7 +3722,7 @@ footer address {
 .custom-select-menu {
 
   position: absolute;
-  z-index: 30;
+  z-index: 50;
 
   top: calc(100% + 9px);
   left: 0;
@@ -3705,18 +3732,19 @@ footer address {
 
   padding: 8px;
 
-  border: 1px solid var(--hairline);
+  border: 1px solid rgba(76, 87, 48, 0.18);
 
   background: var(--cream);
 
   box-shadow:
-    0 14px 35px rgba(35, 42, 23, 0.10),
-    0 3px 10px rgba(35, 42, 23, 0.05);
+    0 2px 4px rgba(35, 42, 23, 0.06),
+    0 10px 24px rgba(35, 42, 23, 0.10),
+    0 24px 48px rgba(35, 42, 23, 0.08);
 
   opacity: 0;
   visibility: hidden;
 
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 
   transition:
     opacity 150ms ease,
@@ -3730,12 +3758,14 @@ footer address {
   opacity: 1;
   visibility: visible;
 
-  transform: translateY(0);
+  transform: translateY(2px);
 
 }
 
 
-/* ---------- OPTIONS ---------- */
+/* ==========================================================
+   OPTIONS
+========================================================== */
 
 .custom-select-option {
 
@@ -3745,7 +3775,7 @@ footer address {
 
   width: 100%;
 
-  padding: 11px 13px 11px 27px;
+  padding: 12px 14px 12px 30px;
 
   border: 0;
 
@@ -3761,15 +3791,21 @@ footer address {
   cursor: pointer;
 
   transition:
-    background-color 120ms ease,
-    color 120ms ease;
+    background-color 140ms ease,
+    color 140ms ease,
+    box-shadow 140ms ease;
 
 }
+
+
+/* ---------- HOVER / KEYBOARD FOCUS ---------- */
 
 .custom-select-option:hover,
 .custom-select-option:focus-visible {
 
-  background: rgba(76, 87, 48, 0.07);
+  background: rgba(76, 87, 48, 0.10);
+
+  color: var(--olive-900);
 
   outline: none;
 
@@ -3780,11 +3816,32 @@ footer address {
 
 .custom-select-option.selected {
 
-  color: var(--olive-700);
+  background: var(--olive-700);
+
+  color: var(--cream);
 
   font-weight: 500;
 
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 2px 6px rgba(35, 42, 23, 0.12);
+
 }
+
+
+/* ---------- SELECTED OPTION — HOVER ---------- */
+
+.custom-select-option.selected:hover,
+.custom-select-option.selected:focus-visible {
+
+  background: var(--olive-900);
+
+  color: var(--cream);
+
+}
+
+
+/* ---------- RUST MARKER ---------- */
 
 .custom-select-option.selected::before {
 
@@ -3792,7 +3849,7 @@ footer address {
 
   position: absolute;
 
-  left: 12px;
+  left: 13px;
   top: 50%;
 
   width: 5px;
@@ -3873,29 +3930,45 @@ footer address {
 
 }
 
-/* ---------- EMPTY PROPERTY RESULTS ---------- */
+
+/* ==========================================================
+   EMPTY PROPERTY RESULTS
+========================================================== */
 
 .empty-properties {
+
   grid-column: 1 / -1;
+
   padding: 80px 20px;
+
   text-align: center;
+
 }
 
 .empty-properties h2 {
+
   margin-bottom: 16px;
+
 }
 
 .empty-properties p {
+
   max-width: 460px;
+
   margin: 0 auto 28px;
+
   color: var(--taupe);
+
   line-height: 1.7;
+
 }
 
 @media (max-width: 640px) {
 
   .empty-properties {
+
     padding: 60px 10px;
+
   }
 
 }
