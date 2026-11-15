@@ -31,6 +31,34 @@
         <li class="has-submenu">
 
           <a
+            href="{% url 'services:list' %}"
+            {% if request.resolver_match.namespace == "services" %}
+              class="active"
+              aria-current="page"
+            {% endif %}
+          >
+            Services
+          </a>
+
+          <div class="submenu">
+
+            <a href="{% url 'services:list' %}">
+              Services Overview
+            </a>
+
+            {% for service in nav_services %}
+              <a href="{{ service.get_absolute_url }}">
+                {{ service.title }}
+              </a>
+            {% endfor %}
+
+          </div>
+
+        </li>
+
+        <li class="has-submenu">
+
+          <a
             href="{% url 'portfolio:list' %}"
             {% if request.resolver_match.namespace == "portfolio" %}
               class="active"
@@ -53,34 +81,6 @@
             <a href="{% url 'portfolio:holiday_rentals' %}">
               Holiday Rentals
             </a>
-
-          </div>
-
-        </li>
-
-        <li class="has-submenu">
-
-          <a
-            href="{% url 'services:list' %}"
-            {% if request.resolver_match.namespace == "services" %}
-              class="active"
-              aria-current="page"
-            {% endif %}
-          >
-            Services
-          </a>
-
-          <div class="submenu">
-
-            <a href="{% url 'services:list' %}">
-              Services Overview
-            </a>
-
-            {% for service in nav_services %}
-              <a href="{{ service.get_absolute_url }}">
-                {{ service.title }}
-              </a>
-            {% endfor %}
 
           </div>
 
@@ -185,6 +185,45 @@
         <button
           class="
             mobile-submenu-toggle
+            {% if request.resolver_match.namespace == 'services' %}
+              active
+            {% endif %}
+          "
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobileServicesSubmenu"
+        >
+          Services
+
+          <span aria-hidden="true">
+            +
+          </span>
+        </button>
+
+        <div
+          class="mobile-submenu"
+          id="mobileServicesSubmenu"
+        >
+
+          <a href="{% url 'services:list' %}">
+            Services Overview
+          </a>
+
+          {% for service in nav_services %}
+            <a href="{{ service.get_absolute_url }}">
+              {{ service.title }}
+            </a>
+          {% endfor %}
+
+        </div>
+
+      </li>
+
+      <li class="mobile-has-submenu">
+
+        <button
+          class="
+            mobile-submenu-toggle
             {% if request.resolver_match.namespace == 'portfolio' %}
               active
             {% endif %}
@@ -216,45 +255,6 @@
           <a href="{% url 'portfolio:holiday_rentals' %}">
             Holiday Rentals
           </a>
-
-        </div>
-
-      </li>
-
-      <li class="mobile-has-submenu">
-
-        <button
-          class="
-            mobile-submenu-toggle
-            {% if request.resolver_match.namespace == 'services' %}
-              active
-            {% endif %}
-          "
-          type="button"
-          aria-expanded="false"
-          aria-controls="mobileServicesSubmenu"
-        >
-          Services
-
-          <span aria-hidden="true">
-            +
-          </span>
-        </button>
-
-        <div
-          class="mobile-submenu"
-          id="mobileServicesSubmenu"
-        >
-
-          <a href="{% url 'services:list' %}">
-            Services Overview
-          </a>
-
-          {% for service in nav_services %}
-            <a href="{{ service.get_absolute_url }}">
-              {{ service.title }}
-            </a>
-          {% endfor %}
 
         </div>
 
