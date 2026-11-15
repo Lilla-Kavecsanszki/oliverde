@@ -33,6 +33,16 @@ COMMON_FAQS = [
         ),
     },
     {
+        "question": "How will I stay informed about my property?",
+        "answer": (
+            "You receive regular reports, including a weekly email report, "
+            "along with photographic updates. You also have a dedicated "
+            "online dashboard, shared through Google Drive, which gathers "
+            "all the information about your property in one place and can "
+            "be viewed from anywhere, at any time."
+        ),
+    },
+    {
         "question": "Do I need to be in Italy while you look after my home?",
         "answer": (
             "No. Many of our owners live abroad. We act on your behalf "
@@ -132,8 +142,9 @@ SERVICE_CONTENT = {
 
             "Together we agree what the house needs, and then we organise "
             "regular inspections, coordinate the people who look after "
-            "the house, grounds and swimming pool, and send you "
-            "photographic updates, so you always know how things stand.",
+            "the house, grounds and swimming pool, and keep you informed "
+            "with photographic updates and weekly email reports, so you "
+            "always know how things stand.",
         ],
         "who_for": (
             "Owners who spend part of the year away, or who would simply "
@@ -165,8 +176,10 @@ SERVICE_CONTENT = {
             {
                 "title": "Updates you can rely on",
                 "text": (
-                    "You receive photographic updates and have a single "
-                    "point of contact for anything you need."
+                    "You receive photographic updates and a weekly email "
+                    "report. Your dedicated online dashboard keeps "
+                    "everything in one place, and one point of contact is "
+                    "there for anything you need."
                 ),
             },
         ],
