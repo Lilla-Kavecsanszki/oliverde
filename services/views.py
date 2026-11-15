@@ -1,7 +1,7 @@
 from django.views.generic import DetailView, ListView
 
 from journal.models import JournalPost
-from portfolio.models import Service
+from portfolio.models import Service, ServiceImage
 
 from .content import COMMON_FAQS, SERVICE_CONTENT
 
@@ -16,6 +16,18 @@ class ServiceListView(ListView):
             "features",
             "gallery",
         )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # One combined gallery for every service photo.
+        context["gallery_images"] = (
+            ServiceImage.objects
+            .select_related("service")
+            .order_by("order", "pk")
+        )
+
+        return context
 
 
 class ServiceDetailView(DetailView):

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary_extras %}
 
 {% block title %}
   Services — Oliverde
@@ -94,6 +95,168 @@
 </section>
 
 
+{% if gallery_images %}
+
+<section class="service-gallery">
+
+  <div class="wrap">
+
+    <div class="service-gallery-heading reveal">
+
+      <p class="eyebrow">
+        A closer look
+      </p>
+
+      <h2 class="serif">
+        Our services in practice
+      </h2>
+
+    </div>
+
+
+    <div class="service-gallery-layout">
+
+      {% for image in gallery_images %}
+
+        <figure
+          class="
+            service-gallery-item
+            reveal
+            {% if forloop.first %}
+              service-gallery-main
+            {% else %}
+              service-gallery-secondary
+            {% endif %}
+          "
+        >
+
+          {% if image.image %}
+
+            <button
+              type="button"
+              class="
+                service-gallery-trigger
+                property-gallery-trigger
+              "
+              data-gallery-image="{{ image.image.url|optimize }}"
+              data-gallery-caption="{{ image.caption|default:image.alt_text|default:image.service.title }}"
+              aria-label="Open image {{ forloop.counter }}"
+            >
+
+              <img
+                src="{{ image.image.url|optimize }}"
+                alt="{{ image.alt_text|default:image.service.title }}"
+                loading="lazy"
+                decoding="async"
+              >
+
+              <span
+                class="gallery-view-hint"
+                aria-hidden="true"
+              >
+
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="10.5"
+                    cy="10.5"
+                    r="6.5"
+                  />
+                  <path d="M15.5 15.5 21 21" />
+                </svg>
+
+                View
+
+              </span>
+
+            </button>
+
+          {% endif %}
+
+
+          {% if image.caption %}
+
+            <figcaption>
+              {{ image.caption }}
+            </figcaption>
+
+          {% endif %}
+
+        </figure>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div
+  class="property-lightbox"
+  id="property-lightbox"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Services image gallery"
+>
+
+  <button
+    type="button"
+    class="lightbox-close"
+    aria-label="Close image viewer"
+  >
+    <span aria-hidden="true">
+      ×
+    </span>
+  </button>
+
+  <button
+    type="button"
+    class="lightbox-arrow lightbox-previous"
+    aria-label="Previous image"
+  >
+    <span aria-hidden="true">
+      ←
+    </span>
+  </button>
+
+  <div class="lightbox-content">
+
+    <img
+      class="lightbox-image"
+      src=""
+      alt=""
+    >
+
+    <div class="lightbox-meta">
+
+      <p class="lightbox-caption"></p>
+
+      <p class="lightbox-counter"></p>
+
+    </div>
+
+  </div>
+
+  <button
+    type="button"
+    class="lightbox-arrow lightbox-next"
+    aria-label="Next image"
+  >
+    <span aria-hidden="true">
+      →
+    </span>
+  </button>
+
+</div>
+
+{% endif %}
+
+
 {% include "includes/how_it_works.html" %}
 {% include "includes/dashboard.html" %}
 
@@ -139,6 +302,16 @@
   </div>
 
 </section>
+
+
+{% if gallery_images %}
+
+  <script
+    src="{% static 'js/property-gallery.js' %}"
+    defer
+  ></script>
+
+{% endif %}
 
 
 {% endblock %}
