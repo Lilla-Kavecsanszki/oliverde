@@ -111,6 +111,14 @@ class SitePageTests(TestCase):
             html = self.client.get(reverse(name)).content.decode()
             self.assertIn("https://wa.me/393663174740", html)
 
+    def test_every_call_to_action_uses_the_same_background(self):
+        for name in ("home", "about", "services:list", "portfolio:list"):
+            with self.subTest(page=name):
+                html = self.client.get(reverse(name)).content.decode()
+
+                self.assertEqual(html.count("cta-background-image"), 1)
+                self.assertIn("images/cta.jpeg", html)
+
     def test_about_page_describes_the_team(self):
         html = self.client.get(reverse("about")).content.decode()
 

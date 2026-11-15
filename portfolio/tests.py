@@ -115,6 +115,20 @@ class PortfolioPageTests(TestCase):
             with self.subTest(url=url):
                 self.assertIn(OWNER_CTA, self.get_html(url))
 
+    def test_call_to_action_background_is_shared_on_every_page(self):
+        urls = [
+            reverse("portfolio:all_properties"),
+            self.destination.get_absolute_url(),
+            self.property.get_absolute_url(),
+        ]
+
+        for url in urls:
+            with self.subTest(url=url):
+                html = self.get_html(url)
+
+                self.assertEqual(html.count("cta-background-image"), 1)
+                self.assertIn("images/cta.jpeg", html)
+
     def test_call_to_action_mentions_optional_rental_management(self):
         html = self.get_html(reverse("portfolio:list"))
 

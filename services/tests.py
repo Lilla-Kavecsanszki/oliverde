@@ -135,6 +135,12 @@ class ServiceDetailTests(TestCase):
                 self.assertIn("Every plan is tailored to your home", html)
                 self.assertIn(f"?service={slug}", html)
 
+    def test_call_to_action_uses_the_shared_background(self):
+        html = self.get_html()
+
+        self.assertEqual(html.count("cta-background-image"), 1)
+        self.assertIn("images/cta.jpeg", html)
+
     def test_service_without_content_still_renders(self):
         make_service(title="Concierge", slug="concierge")
 

@@ -1,17 +1,7 @@
 {% load static %}
 <section class="cta">
 
-  <img
-    class="cta-background-image"
-    src="{% static 'images/tester.jpeg' %}"
-    alt=""
-    aria-hidden="true"
-  >
-
-  <div
-    class="cta-background-overlay"
-    aria-hidden="true"
-  ></div>
+  {% include "includes/cta_background.html" %}
 
   <div class="wrap cta-row">
 
