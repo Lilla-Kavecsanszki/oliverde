@@ -33,7 +33,7 @@ class ContactForm(forms.Form):
     )
 
     phone = forms.CharField(
-        label="Phone",
+        label="Phone / WhatsApp",
         max_length=30,
         required=False,
         widget=forms.TextInput(
