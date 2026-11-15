@@ -203,14 +203,14 @@ The principal public structure is:
 ```
 Home
 │
+├── Services
+│   └── Service Detail
+│
 ├── Portfolio
 │   ├── Our Collection
 │   ├── Holiday Rentals
 │   ├── Destination
 │   └── Property Detail
-│
-├── Services
-│   └── Service Detail
 │
 ├── About
 │
@@ -219,6 +219,8 @@ Home
 │
 └── Contact 
 ```
+
+Services precedes Portfolio in the navigation because the website's purpose is to win new management clients. The Portfolio exists to demonstrate the standard of Oliverde's care, not to market the houses themselves.
 
 The Portfolio deliberately distinguishes between:
 
@@ -321,6 +323,8 @@ Owns the principal property-management data, including:
 ### `services`
 
 Provides the public service index and individual service views while reading service data from the central `portfolio` models.
+
+Longer editorial copy (overviews, "who it is for", four-step explanations, shared FAQs and related Journal articles) is held in `services/content.py` rather than the database, so wording can be changed without a migration. A service without an entry there still renders its database content.
 
 ### `journal`
 
@@ -482,7 +486,8 @@ The broader Portfolio browsing experience also supports:
 - reset-filter controls;
 - empty-results states;
 - featured-property presentation;
-- and published-property filtering.
+- published-property filtering;
+- and an owner-focused call to action ("Would you like us to look after your home?") at the end of every Portfolio page, which also mentions optional rental management.
 
 ### Our Collection
 
@@ -536,7 +541,7 @@ Property galleries support:
 
 - ordered image administration;
 - internal editorial image categories;
-- continuous public gallery presentation;
+- continuous public gallery presentation on property pages;
 - full-screen lightbox viewing;
 - previous and next controls;
 - keyboard navigation;
@@ -566,15 +571,35 @@ The service architecture currently covers areas such as:
 - property administration;
 - guest and rental support.
 
-Individual service pages can include:
+Every service is tailored and arranged only on request. The site avoids implying a fixed package.
+
+The Services page includes:
+
+- the service index;
+- one combined "Our services in practice" gallery, built from every service image. Three tiles are shown, with a "+N" tile that opens the full set in the lightbox;
+- a "How it works" section (also used on the homepage);
+- a "Your dashboard" section describing the private client dashboard;
+- and a consultation CTA.
+
+Individual service pages include:
 
 - introduction;
 - detailed service features;
-- explanatory content;
-- CTA;
-- and relevant properties.
+- an overview and "who it is for" panel;
+- a four-step explanation of what to expect;
+- shared FAQs;
+- related Journal articles where relevant;
+- and a CTA that pre-selects the matching enquiry type on the contact form.
+
+The "Properties with this service" block is currently hidden in the template until final property photography is available.
 
 The navigation reads service records dynamically, allowing services to be updated without rewriting the navigation templates.
+
+## Client dashboard
+
+Each owner receives a private dashboard, shared through Google Drive with the email address they authorise. It is maintained by Oliverde and holds property details, emergency contacts, inspection checklists, servicing history, costs, taxes, bookings and an archive of photographs, quotes and invoices, alongside weekly email reports.
+
+The dashboard lives in Google Drive, not in this website. The website only describes it, and no client dashboard content or link is published on the site.
 
 [Back to top](#contents)
 
@@ -584,13 +609,13 @@ The About page communicates the human and operational structure behind Oliverde.
 
 It includes:
 
-- company history;
+- company history (founded in 2009);
 - local expertise;
 - long-standing supplier relationships;
-- Oliverde's own small operational/support team;
-- administrative coordination;
-- on-the-ground property and grounds support;
-- and a wider vetted network of specialist tradespeople and suppliers.
+- the founder, Oliver Beresford Manussis;
+- Oliverde's own team of three for grounds, pool and weekly maintenance;
+- an in-house administrator for paperwork, reporting and the dashboard;
+- and trusted partners, including housekeepers, subcontractors and an accountant.
 
 The intention is to communicate that Oliverde is neither a one-person referral service nor an impersonal large agency.
 
@@ -670,7 +695,8 @@ The site includes:
 - responsive layouts;
 - touch-friendly controls;
 - reusable CTA components;
-- shared footer;
+- shared footer with LinkedIn and WhatsApp links;
+- WhatsApp contact links across the contact page and mobile menu;
 - legal links;
 - favicon suite;
 - animated reveal effects;
@@ -758,7 +784,7 @@ Administrative functionality includes:
 - property-amenity assignments;
 - services;
 - service features;
-- service image galleries;
+- service images (shown together in one combined gallery on the Services page);
 - testimonials;
 - homepage testimonial selection;
 - Journal publishing;
@@ -768,6 +794,8 @@ Administrative functionality includes:
 - email-delivery status tracking;
 - internal enquiry notes;
 - and linked rental property enquiries.
+
+Image uploads are checked against Cloudinary's 10 MB limit (`core/validators.py`), so an oversized photo produces a clear message instead of a server error.
 
 Inline administration is used where appropriate, including property image galleries, service features and service imagery.
 
@@ -1118,7 +1146,7 @@ Further work before launch:
 
 ## Current Limitations
 
-- No client-facing login or owner portal currently exists.
+- No client-facing login or owner portal exists on the website. Owners use a private Google Drive dashboard instead.
 - Video content is not currently supported.
 - Journal categories are not yet implemented.
 - Contact notifications currently use Gmail SMTP; a dedicated transactional email service may be adopted if future email volumes require it.
