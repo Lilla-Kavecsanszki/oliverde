@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 
+from core.validators import validate_image_size
+
 
 class Destination(models.Model):
     """A geographic area represented in the public portfolio."""
@@ -12,7 +14,10 @@ class Destination(models.Model):
     slug = models.SlugField(unique=True)
     tagline = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
-    cover_image = models.ImageField(upload_to="destinations/")
+    cover_image = models.ImageField(
+        upload_to="destinations/",
+        validators=[validate_image_size],
+    )
 
     class Meta:
         ordering = ["name"]
@@ -74,6 +79,7 @@ class ServiceImage(models.Model):
 
     image = models.ImageField(
         upload_to="services/gallery/",
+        validators=[validate_image_size],
     )
 
     caption = models.CharField(
@@ -280,7 +286,10 @@ class Property(models.Model):
     )
 
     # Portfolio presentation.
-    cover_image = models.ImageField(upload_to="properties/covers/")
+    cover_image = models.ImageField(
+        upload_to="properties/covers/",
+        validators=[validate_image_size],
+    )
     featured = models.BooleanField(default=False)
     featured_order = models.PositiveSmallIntegerField(
         default=0,
@@ -407,7 +416,10 @@ class PropertyImage(models.Model):
         on_delete=models.CASCADE,
         related_name="gallery",
     )
-    image = models.ImageField(upload_to="properties/gallery/")
+    image = models.ImageField(
+        upload_to="properties/gallery/",
+        validators=[validate_image_size],
+    )
     section = models.CharField(
         max_length=20,
         choices=Section.choices,

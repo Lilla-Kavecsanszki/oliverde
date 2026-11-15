@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
 
+from core.validators import validate_image_size
+
 
 class JournalPost(models.Model):
     title = models.CharField(max_length=200)
@@ -22,6 +24,7 @@ class JournalPost(models.Model):
 
     cover_image = models.ImageField(
         upload_to="journal/covers/",
+        validators=[validate_image_size],
     )
 
     related_properties = models.ManyToManyField(
