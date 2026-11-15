@@ -99,6 +99,12 @@
       What we do
     </p>
 
+    {% if extra %}
+      <p class="service-tailored-note">
+        Every plan is tailored to your home. We arrange only what you ask for.
+      </p>
+    {% endif %}
+
     <div class="service-feature-grid">
 
       {% for feature in service.features.all %}
@@ -315,6 +321,8 @@
 {% endif %}
 
 
+{# HIDDEN FOR NOW: "Properties with this service" (property photos are still placeholders). To restore it, delete the comment and endcomment lines that wrap the block below, ideally keeping it on the Property Rental page only. #}
+{% comment %}
 {% if related_properties %}
 
 <section
@@ -403,6 +411,7 @@
 </section>
 
 {% endif %}
+{% endcomment %}
 
 
 {% if faqs %}
