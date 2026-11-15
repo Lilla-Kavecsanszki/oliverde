@@ -1110,6 +1110,30 @@ python manage.py collectstatic --noinput
 
 # Testing
 
+## Automated tests
+
+The project has 48 automated Django tests, run with:
+
+```
+python manage.py test
+```
+
+They use a temporary database and do not touch Cloudinary or live data (shared helpers are in `core/test_helpers.py`). They cover:
+
+- the Cloudinary image-size validator;
+- contact-form labels and service-to-enquiry-type pre-selection;
+- site-wide checks: menu order, an identical stats banner on Home and About, the founding year and the WhatsApp links;
+- service content integrity, British spelling and FAQs;
+- the Services page: the combined gallery limit and its "+N" tile, the dashboard section, and the hidden "Properties with this service" block;
+- property privacy: internal names and URLs are never public;
+- property validation rules in the model;
+- the owner call to action on every Portfolio page;
+- rental-only features, and unpublished properties being hidden.
+
+Run the tests before every push.
+
+## Manual and integration testing
+
 Completed testing includes:
 
 - Django system checks
@@ -1134,7 +1158,7 @@ Further work before launch:
 - cross-browser testing;
 - Lighthouse performance and accessibility audit;
 - W3C HTML/CSS validation;
-- automated Django tests;
+- automated tests for the contact form, Turnstile, rate limiting and the Journal (not yet covered);
 - full manual click-through testing of pages and links;
 - full Contact form regression testing, including validation, Turnstile, honeypot and rate-limiting behaviour;
 - final in-browser responsive testing at key breakpoints;
