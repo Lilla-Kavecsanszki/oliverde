@@ -25,6 +25,14 @@ ENQUIRY_TYPES = {
 # Questions that apply to every service.
 COMMON_FAQS = [
     {
+        "question": "Do I have to take everything you offer?",
+        "answer": (
+            "No. Every plan is tailored to your home and to how you use "
+            "it. We arrange only the services you ask for, and you can add "
+            "more whenever you wish."
+        ),
+    },
+    {
         "question": "Do I need to be in Italy while you look after my home?",
         "answer": (
             "No. Many of our owners live abroad. We act on your behalf "
@@ -63,13 +71,15 @@ SERVICE_CONTENT = {
             "Buying a home in Italy is the beginning of a long list of "
             "practical tasks, many of them in a language and an "
             "administrative system you may not know. We take you through "
-            "the first weeks and months so that the house is registered, "
-            "connected, staffed and secure, and ready for you to enjoy.",
+            "the first weeks and months, arranging whatever you would like "
+            "help with, so that the house is registered, connected, "
+            "staffed and secure, and ready for you to enjoy.",
 
-            "Our team works alongside your accountant, the local council "
-            "and utility providers, and introduces trusted specialists "
-            "wherever you need them, so you deal with one point of contact "
-            "rather than many.",
+            "Our team works alongside the local council and utility "
+            "providers, and can suggest and introduce an Italian "
+            "accountant and other trusted specialists wherever you need "
+            "them, so you deal with one point of contact rather than "
+            "many.",
         ],
         "who_for": (
             "New owners, and anyone who has bought in Italy from abroad."
@@ -78,31 +88,34 @@ SERVICE_CONTENT = {
             {
                 "title": "Review your purchase",
                 "text": (
-                    "We go through what you have bought and what needs "
-                    "arranging, so that nothing is missed."
+                    "We go through what you have bought and which tasks you "
+                    "would like help with, so that we arrange what you "
+                    "need and nothing is missed."
                 ),
             },
             {
                 "title": "Registrations and tax",
                 "text": (
                     "Council (IMU) and waste (TARI) registrations are "
-                    "arranged, and we introduce an accountant for your "
-                    "annual filing."
+                    "arranged, and we can suggest and introduce an "
+                    "Italian accountant for your annual filing."
                 ),
             },
             {
                 "title": "Bank, utilities and security",
                 "text": (
-                    "An Italian bank account and your gas, electricity, "
-                    "water and internet are set up, with security and "
-                    "surveillance arranged to suit the house."
+                    "We help you open an Italian bank account and set up "
+                    "your gas, electricity, water and internet, and can "
+                    "arrange security and surveillance if you would like "
+                    "it."
                 ),
             },
             {
                 "title": "Your team in place",
                 "text": (
-                    "We introduce trusted housekeeping and grounds staff, "
-                    "so the house is looked after from the first day."
+                    "If you wish, we introduce trusted housekeeping and "
+                    "grounds staff, so the house is looked after from the "
+                    "first day."
                 ),
             },
         ],
@@ -117,8 +130,9 @@ SERVICE_CONTENT = {
             "expensive ones, and keeps the house, garden and pool looking "
             "just as you left them.",
 
-            "We organise regular inspections, coordinate the people who "
-            "look after the house, grounds and swimming pool, and send you "
+            "Together we agree what the house needs, and then we organise "
+            "regular inspections, coordinate the people who look after "
+            "the house, grounds and swimming pool, and send you "
             "photographic updates, so you always know how things stand.",
         ],
         "who_for": (
@@ -136,8 +150,9 @@ SERVICE_CONTENT = {
             {
                 "title": "Regular inspections",
                 "text": (
-                    "We visit the property regularly and check security, "
-                    "utilities, housekeeping and the grounds."
+                    "We visit the property at a frequency agreed with you "
+                    "and check security, utilities, housekeeping and the "
+                    "grounds."
                 ),
             },
             {
