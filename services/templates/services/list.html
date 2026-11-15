@@ -128,6 +128,7 @@
               service-gallery-secondary
             {% endif %}
           "
+          {% if forloop.counter > 3 %}hidden{% endif %}
         >
 
           {% if image.image %}
@@ -140,7 +141,7 @@
               "
               data-gallery-image="{{ image.image.url|optimize }}"
               data-gallery-caption="{{ image.caption|default:image.alt_text|default:image.service.title }}"
-              aria-label="Open image {{ forloop.counter }}"
+              aria-label="{% if forloop.counter == 3 and gallery_images|length > 3 %}View all {{ gallery_images|length }} photos{% else %}Open image {{ forloop.counter }}{% endif %}"
             >
 
               <img
@@ -149,6 +150,17 @@
                 loading="lazy"
                 decoding="async"
               >
+
+              {% if forloop.counter == 3 and gallery_images|length > 3 %}
+                <span class="gallery-more" aria-hidden="true">
+                  <span class="gallery-more-count serif">
+                    +{{ gallery_images|length|add:"-3" }}
+                  </span>
+                  <span class="gallery-more-label">
+                    View all photos
+                  </span>
+                </span>
+              {% endif %}
 
               <span
                 class="gallery-view-hint"
