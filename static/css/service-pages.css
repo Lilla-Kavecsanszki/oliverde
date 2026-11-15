@@ -1,0 +1,198 @@
+/* ---------- SERVICE DETAIL PAGES ---------- */
+
+/* Give the intro text room above "What we do" (was pulled tight). */
+.service-detail-features {
+  margin-top: 0;
+  padding-top: 8px;
+}
+
+.page-intro + .service-detail-features {
+  margin-top: -24px;
+}
+
+/* Overview */
+.service-overview {
+  padding: 8px 0 72px;
+  background: var(--cream);
+}
+
+.service-overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(220px, 0.8fr);
+  gap: 72px;
+  align-items: start;
+}
+
+.service-overview-text p {
+  max-width: 62ch;
+  color: var(--charcoal);
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.service-overview-text p + p {
+  margin-top: 18px;
+}
+
+.service-overview-aside {
+  padding-left: 32px;
+  border-left: 1px solid var(--hairline);
+}
+
+.service-overview-aside p:last-child {
+  margin-top: 12px;
+  color: var(--taupe);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Steps reuse .how-it-works; keep them on the stone background here. */
+.service-steps {
+  background: var(--stone);
+}
+
+/* Centre the "A closer look" heading, as on the property pages. */
+.service-gallery-heading {
+  display: block;
+  text-align: center;
+}
+
+.service-gallery-heading .eyebrow {
+  margin-bottom: 18px;
+}
+
+.service-gallery-heading h2 {
+  margin-inline: auto;
+}
+
+/* FAQ */
+.service-faq {
+  padding: 96px 0;
+  background: var(--cream);
+}
+
+.service-faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+  border-top: 1px solid var(--hairline);
+}
+
+.service-faq-item {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.service-faq-item summary {
+  position: relative;
+  padding: 22px 40px 22px 0;
+  color: var(--olive-900);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  line-height: 1.3;
+  cursor: pointer;
+  list-style: none;
+}
+
+.service-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.service-faq-item summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  color: var(--rust);
+  font-family: "Inter", sans-serif;
+  font-size: 22px;
+}
+
+.service-faq-item[open] summary::after {
+  content: "\2212";
+}
+
+.service-faq-item summary:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 2px;
+}
+
+.service-faq-item p {
+  padding: 0 40px 24px 0;
+  color: var(--taupe);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Related journal articles */
+.service-articles {
+  padding: 0 0 96px;
+  background: var(--cream);
+}
+
+.service-article-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-article-list a {
+  display: block;
+  height: 100%;
+  padding: 28px;
+  border: 1px solid var(--hairline);
+  transition: border-color 0.2s ease;
+}
+
+.service-article-list a:hover {
+  border-color: var(--rust-soft);
+}
+
+.service-article-title {
+  display: block;
+  color: var(--olive-900);
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.service-article-excerpt {
+  display: block;
+  margin-top: 12px;
+  color: var(--taupe);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.service-article-more {
+  display: block;
+  margin-top: 16px;
+  color: var(--rust);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 900px) {
+  .service-overview-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .service-overview-aside {
+    padding-left: 0;
+    padding-top: 28px;
+    border-left: 0;
+    border-top: 1px solid var(--hairline);
+  }
+}
+
+@media (max-width: 640px) {
+  .service-faq {
+    padding: 72px 0;
+  }
+
+  .service-faq-item summary {
+    font-size: 20px;
+  }
+}

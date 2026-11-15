@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
 from portfolio.models import Property, Testimonial
+from services.content import ENQUIRY_TYPES
 
 from .email import (
     ContactEmailError,
@@ -161,6 +162,14 @@ class ContactView(FormView):
                     ),
                 }
             )
+        else:
+            # Arriving from a service page: preselect the matching option.
+            # Only known service slugs are accepted.
+            service_slug = self.request.GET.get("service", "").strip()
+            enquiry_type = ENQUIRY_TYPES.get(service_slug)
+
+            if enquiry_type:
+                initial["enquiry_type"] = enquiry_type
 
         return initial
 

@@ -65,6 +65,30 @@
 </section>
 
 
+{% if extra %}
+
+<section class="service-overview">
+
+  <div class="wrap service-overview-grid">
+
+    <div class="service-overview-text reveal">
+      {% for paragraph in extra.overview %}
+        <p>{{ paragraph }}</p>
+      {% endfor %}
+    </div>
+
+    <aside class="service-overview-aside reveal">
+      <p class="eyebrow">Who it is for</p>
+      <p>{{ extra.who_for }}</p>
+    </aside>
+
+  </div>
+
+</section>
+
+{% endif %}
+
+
 {% if service.features.all %}
 
 <section class="service-detail-features reveal">
@@ -98,6 +122,32 @@
 
   </div>
 
+</section>
+
+{% endif %}
+
+
+{% if extra %}
+
+<section class="how-it-works service-steps">
+  <div class="wrap">
+
+    <div class="how-head reveal">
+      <p class="eyebrow">What to expect</p>
+      <h2 class="serif">How {{ service.title }} works</h2>
+    </div>
+
+    <ol class="how-steps reveal">
+      {% for step in extra.steps %}
+        <li class="how-step">
+          <span class="how-number serif" aria-hidden="true">0{{ forloop.counter }}</span>
+          <h3 class="serif">{{ step.title }}</h3>
+          <p>{{ step.text }}</p>
+        </li>
+      {% endfor %}
+    </ol>
+
+  </div>
 </section>
 
 {% endif %}
@@ -355,6 +405,59 @@
 {% endif %}
 
 
+{% if faqs %}
+
+<section class="service-faq">
+  <div class="wrap">
+
+    <div class="how-head reveal">
+      <p class="eyebrow">Questions</p>
+      <h2 class="serif">Good to know</h2>
+    </div>
+
+    <div class="service-faq-list reveal">
+      {% for faq in faqs %}
+        <details class="service-faq-item">
+          <summary>{{ faq.question }}</summary>
+          <p>{{ faq.answer }}</p>
+        </details>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% endif %}
+
+
+{% if related_articles %}
+
+<section class="service-articles">
+  <div class="wrap">
+
+    <div class="how-head reveal">
+      <p class="eyebrow">From the Journal</p>
+      <h2 class="serif">Further reading</h2>
+    </div>
+
+    <ul class="service-article-list reveal">
+      {% for article in related_articles %}
+        <li>
+          <a href="{{ article.get_absolute_url }}">
+            <span class="service-article-title serif">{{ article.title }}</span>
+            <span class="service-article-excerpt">{{ article.excerpt }}</span>
+            <span class="service-article-more">Read more &rarr;</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </div>
+</section>
+
+{% endif %}
+
+
 <section class="cta">
 
   <img
@@ -388,7 +491,7 @@
 
     <a
       class="btn btn-primary"
-      href="{% url 'contact' %}"
+      href="{% url 'contact' %}?service={{ service.slug }}"
     >
       Schedule a consultation
     </a>
