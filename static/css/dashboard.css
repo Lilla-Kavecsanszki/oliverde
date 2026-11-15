@@ -1,0 +1,24 @@
+.dashboard-section {
+  background: var(--stone);
+  padding: clamp(72px, 9vw, 120px) 0;
+}
+.dashboard-section .how-head { text-align: center; max-width: 760px; margin: 0 auto clamp(40px, 6vw, 64px); }
+.dashboard-lead { margin-top: 20px; color: var(--taupe); line-height: 1.7; }
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 48px;
+}
+.dashboard-item { border-top: 1px solid var(--hairline); padding-top: 22px; }
+.dashboard-item h3 { font-size: 24px; font-weight: 500; margin-bottom: 10px; }
+.dashboard-item p { color: var(--taupe); line-height: 1.7; font-size: 15px; }
+.dashboard-note {
+  max-width: 680px;
+  margin: clamp(40px, 6vw, 64px) auto 0;
+  text-align: center;
+  color: var(--taupe);
+  font-size: 14px;
+  line-height: 1.7;
+}
+@media (max-width: 900px) { .dashboard-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .dashboard-grid { grid-template-columns: 1fr; gap: 28px; } }

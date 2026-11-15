@@ -43,6 +43,15 @@ COMMON_FAQS = [
         ),
     },
     {
+        "question": "Is my dashboard private?",
+        "answer": (
+            "Yes. It is shared only with the email address you authorise, "
+            "not through an open link, and it cannot be found by search "
+            "engines. We keep it up to date for you, and can change who has "
+            "access whenever you ask."
+        ),
+    },
+    {
         "question": "Do I need to be in Italy while you look after my home?",
         "answer": (
             "No. Many of our owners live abroad. We act on your behalf "
