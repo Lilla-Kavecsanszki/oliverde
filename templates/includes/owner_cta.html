@@ -1,0 +1,39 @@
+{% load static %}
+<section class="cta">
+
+  <img
+    class="cta-background-image"
+    src="{% static 'images/tester.jpeg' %}"
+    alt=""
+    aria-hidden="true"
+  >
+
+  <div
+    class="cta-background-overlay"
+    aria-hidden="true"
+  ></div>
+
+  <div class="wrap cta-row">
+
+    <div class="cta-copy">
+
+      <h2 class="serif">
+        {{ cta_heading|default:"Would you like us to look after your home?" }}
+      </h2>
+
+      <p>
+        Whether you live abroad or visit seasonally, we will tailor a
+        management plan to your property, arranging only what you ask for.
+        If you would like to let your home, we can manage rentals and
+        guests too.
+      </p>
+
+    </div>
+
+    <a class="btn btn-primary" href="{% url 'contact' %}">
+      Schedule a consultation
+    </a>
+
+  </div>
+
+</section>
