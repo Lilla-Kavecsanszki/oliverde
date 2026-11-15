@@ -209,6 +209,16 @@ else:
             "PORT": os.environ.get("DATABASE_PORT", "5432"),
         },
     }
+    
+    
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "loggers": {
+        "django.request": {"handlers": ["console"], "level": "ERROR", "propagate": False},
+    },
+}
 
 # -------------------------------------------------------------------
 # Authentication
