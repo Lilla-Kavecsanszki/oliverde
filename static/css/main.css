@@ -6853,6 +6853,24 @@ textarea:focus-visible {
     gap: 16px;
   }
 
+  /* Gallery section: spacing and centred heading */
+.property-gallery-section {
+  margin-top: clamp(72px, 9vw, 120px);
+}
+
+.property-tour-intro {
+  display: block;
+  text-align: center;
+}
+
+.property-tour-intro .eyebrow {
+  margin-bottom: 18px;
+}
+
+.property-tour-intro h2 {
+  margin-inline: auto;
+}
+
 
   /* ---------- JOURNAL ARTICLE ---------- */
 
