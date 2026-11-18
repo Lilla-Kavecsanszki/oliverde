@@ -7273,3 +7273,42 @@ textarea:focus-visible {
 
   .scroll-cue .line::after { top: 0; height: 100%; opacity: 0.6; }
 }
+
+/* ---------- DESTINATION HERO: clearer white text ---------- */
+
+.dest-hero::before {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(20, 24, 12, 0.58) 0%,
+      rgba(20, 24, 12, 0.34) 48%,
+      rgba(20, 24, 12, 0.06) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(20, 24, 12, 0.82) 0%,
+      rgba(20, 24, 12, 0.46) 48%,
+      rgba(20, 24, 12, 0.16) 100%
+    );
+}
+
+.dest-hero-content {
+  text-shadow: 0 1px 14px rgba(20, 24, 12, 0.45);
+}
+
+.dest-hero-content .eyebrow {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.dest-hero-content .textlink-dark {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+}
+
+.dest-hero-content .dest-hero-text {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.dest-hero-content .destination-note {
+  opacity: 0.92;
+}
