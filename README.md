@@ -1232,7 +1232,7 @@ Third-party photography, illustrations, icons, or other creative assets must not
 
 ### Pexels photography
 
-Some placeholder and atmospheric images (for example the homepage hero and destination or region covers) come from [Pexels](https://www.pexels.com/license/). The Pexels Licence allows free use, including commercial use, without attribution. Credit to the photographer is appreciated but not required.
+Some placeholder and atmospheric images (for example the destination or region covers) come from [Pexels](https://www.pexels.com/license/). The Pexels Licence allows free use, including commercial use, without attribution. Credit to the photographer is appreciated but not required.
 
 The licence does **not** allow:
 
@@ -1251,13 +1251,18 @@ Rules for this project:
 
 The Pexels Licence can change, so check the current terms at https://www.pexels.com/license/ when adding new images.
 
+### Own and AI-generated images
+
+- **Homepage hero (`hero_vnkz5u` on Cloudinary):** an AI-generated image created in Canva from the owner's own reference photograph (a pool seen through a stone arch). It is an atmospheric image and is never presented as a property managed by Oliverde. Replace it with a sharp original photograph when one is available.
+- **CTA background (`cta_oaimgv` on Cloudinary):** see the Pexels register or the owner's own files; record its source here once confirmed.
+- Images served from Cloudinary use `f_auto,q_auto` and several widths, so each device downloads a suitably sized file.
+
 #### Pexels image register
 
 Add one row for each Pexels image used on the site.
 
 | Where it is used | Photographer | Pexels page URL | Date added |
 |---|---|---|---|
-| Homepage hero | _to be completed_ | _to be completed_ | _to be completed_ |
 | Tuscany destination cover | _to be completed_ | _to be completed_ | _to be completed_ |
 | Umbria destination cover | _to be completed_ | _to be completed_ | _to be completed_ |
 | Lazio destination cover | _to be completed_ | _to be completed_ | _to be completed_ |
