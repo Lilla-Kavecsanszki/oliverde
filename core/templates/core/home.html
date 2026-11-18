@@ -4,7 +4,7 @@
 
 {% comment %} Preload the hero image {% endcomment %}
 {% block preload %}
-<link rel="preload" as="image" href="{% static 'images/tester.jpeg' %}" fetchpriority="high">
+<link rel="preload" as="image" href="{% static 'images/hero.jpg' %}" fetchpriority="high">
 {% endblock %}
 
 {% block body_class %}
@@ -51,7 +51,7 @@ home-hero
   
   <img
   class="hero-background-image"
-  src="{% static 'images/tester.jpeg' %}"
+  src="{% static 'images/hero.jpg' %}"
   alt=""
   aria-hidden="true"
   fetchpriority="high"
