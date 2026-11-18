@@ -133,6 +133,12 @@ class SitePageTests(TestCase):
         self.assertIn('href="#after-hero"', html)
         self.assertIn('id="after-hero"', html)
 
+    def test_contact_hero_uses_the_same_cloudinary_image_as_the_cta(self):
+        html = self.client.get(reverse("contact")).content.decode()
+
+        self.assertIn("cta_oaimgv.jpg", html)
+        self.assertNotIn("images/tester.jpeg", html)
+
     def test_spacing_stylesheet_loads_last(self):
         html = self.client.get(reverse("home")).content.decode()
 
