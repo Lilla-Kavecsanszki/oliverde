@@ -127,6 +127,12 @@ class SitePageTests(TestCase):
         self.assertIn("f_auto,q_auto", html)
         self.assertNotIn("images/tester.jpeg", html)
 
+    def test_home_scroll_cue_links_to_the_next_section(self):
+        html = self.client.get(reverse("home")).content.decode()
+
+        self.assertIn('href="#after-hero"', html)
+        self.assertIn('id="after-hero"', html)
+
     def test_spacing_stylesheet_loads_last(self):
         html = self.client.get(reverse("home")).content.decode()
 

@@ -128,17 +128,25 @@ home-hero
   </div>
 
 
-  <div class="scroll-cue">
+  <a
+    class="scroll-cue"
+    href="#after-hero"
+    aria-label="Scroll down to the next section"
+  >
 
-    <div class="line"></div>
-
-    <span>
+    <span class="scroll-cue-label">
       Scroll
     </span>
 
-  </div>
+    <span class="line" aria-hidden="true"></span>
+
+    <span class="scroll-cue-arrow" aria-hidden="true"></span>
+
+  </a>
 
 </section>
+
+<div id="after-hero" tabindex="-1"></div>
 
 {% include "includes/stats.html" %}
 

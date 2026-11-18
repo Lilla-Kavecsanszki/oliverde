@@ -7110,4 +7110,129 @@ textarea:focus-visible {
 .property-amenities-inline-list > span strong {
   color: inherit;
   font-weight: inherit;
+}/* ---------- HERO SCROLL CUE (centred, animated) ---------- */
+/* Add at the very end of main.css, after the hero overlay block. */
+
+.scroll-cue {
+  position: absolute;
+  bottom: 46px;
+  left: 50%;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  transform: translateX(-50%);
+
+  color: #fff;
+  text-decoration: none;
+}
+
+.scroll-cue .scroll-cue-label,
+.scroll-cue span:not(.line):not(.scroll-cue-arrow) {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em; /* keeps the word optically centred */
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(20, 24, 12, 0.55);
+}
+
+.scroll-cue .line {
+  position: relative;
+  display: block;
+
+  width: 1px;
+  height: 54px;
+
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.scroll-cue .line::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: 0;
+
+  width: 100%;
+  height: 50%;
+
+  background: #fff;
+
+  animation: scrollcue-drop 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.scroll-cue-arrow {
+  display: block;
+  width: 9px;
+  height: 9px;
+  margin-top: -6px;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+
+  transform: rotate(45deg);
+  animation: scrollcue-bob 2s ease-in-out infinite;
+}
+
+.scroll-cue:hover .line::after,
+.scroll-cue:focus-visible .line::after {
+  animation-duration: 1.2s;
+}
+
+.scroll-cue:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 8px;
+}
+
+@keyframes scrollcue-drop {
+  0%   { top: -50%; }
+  70%  { top: 100%; }
+  100% { top: 100%; }
+}
+
+@keyframes scrollcue-bob {
+  0%, 100% { opacity: 0.45; transform: translateY(0) rotate(45deg); }
+  50%      { opacity: 1;    transform: translateY(5px) rotate(45deg); }
+}
+
+@media (max-width: 900px) {
+  .scroll-cue {
+    bottom: 34px;
+    left: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .scroll-cue {
+    bottom: 30px;
+    left: 50%;
+    gap: 9px;
+  }
+
+  .scroll-cue .line {
+    height: 34px;
+  }
+
+  .scroll-cue .scroll-cue-label,
+  .scroll-cue span:not(.line):not(.scroll-cue-arrow) {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue .line::after,
+  .scroll-cue-arrow {
+    animation: none;
+  }
+
+  .scroll-cue .line::after {
+    top: 0;
+    height: 100%;
+    opacity: 0.6;
+  }
 }
