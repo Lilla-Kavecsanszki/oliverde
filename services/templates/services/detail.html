@@ -159,7 +159,7 @@
 {% endif %}
 
 
-{% if service.gallery.all %}
+{% if gallery_images %}
 
 <section class="service-gallery">
 
@@ -172,7 +172,7 @@
       </p>
 
       <h2 class="serif">
-        The service in practice
+        Our services in practice
       </h2>
 
     </div>
@@ -180,7 +180,7 @@
 
     <div class="service-gallery-layout">
 
-      {% for image in service.gallery.all %}
+      {% for image in gallery_images %}
 
         <figure
           class="
@@ -204,21 +204,21 @@
                 property-gallery-trigger
               "
               data-gallery-image="{{ image.image.url|optimize }}"
-              data-gallery-caption="{{ image.caption|default:image.alt_text|default:service.title }}"
-              aria-label="{% if forloop.counter == 3 and service.gallery.all|length > 3 %}View all {{ service.gallery.all|length }} photos{% else %}Open image {{ forloop.counter }}{% endif %}"
+              data-gallery-caption="{{ image.caption|default:image.alt_text|default:image.service.title }}"
+              aria-label="{% if forloop.counter == 3 and gallery_images|length > 3 %}View all {{ gallery_images|length }} photos{% else %}Open image {{ forloop.counter }}{% endif %}"
             >
 
               <img
                 src="{{ image.image.url|optimize }}"
-                alt="{{ image.alt_text|default:service.title }}"
+                alt="{{ image.alt_text|default:image.service.title }}"
                 loading="lazy"
                 decoding="async"
               >
 
-              {% if forloop.counter == 3 and service.gallery.all|length > 3 %}
+              {% if forloop.counter == 3 and gallery_images|length > 3 %}
                 <span class="gallery-more" aria-hidden="true">
                   <span class="gallery-more-count serif">
-                    +{{ service.gallery.all|length|add:"-3" }}
+                    +{{ gallery_images|length|add:"-3" }}
                   </span>
                   <span class="gallery-more-label">
                     View all photos
@@ -277,7 +277,7 @@
   aria-hidden="true"
   role="dialog"
   aria-modal="true"
-  aria-label="{{ service.title }} image gallery"
+  aria-label="Services image gallery"
 >
 
   <button
@@ -512,7 +512,7 @@
 </section>
 
 
-{% if service.gallery.all %}
+{% if gallery_images %}
 
   <script
     src="{% static 'js/property-gallery.js' %}"

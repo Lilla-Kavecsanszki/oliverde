@@ -155,12 +155,12 @@ class ServiceDetailTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
 
-    def test_no_gallery_when_the_service_has_no_photos(self):
+    def test_no_gallery_when_no_service_has_photos(self):
         html = self.get_html()
 
         self.assertNotIn("service-gallery-layout", html)
 
-    def test_service_page_shows_only_its_own_photos(self):
+    def test_service_page_shows_photos_from_every_service(self):
         other = Service.objects.create(
             title="Property Rental",
             slug="property-rental",
@@ -171,9 +171,9 @@ class ServiceDetailTests(TestCase):
 
         html = self.get_html()
 
-        self.assertEqual(html.count("<figure"), 1)
+        self.assertEqual(html.count("<figure"), 2)
         self.assertIn("mine.jpg", html)
-        self.assertNotIn("theirs.jpg", html)
+        self.assertIn("theirs.jpg", html)
 
     def test_service_gallery_shows_three_tiles_and_a_count(self):
         for index in range(6):

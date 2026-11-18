@@ -6,6 +6,15 @@ from portfolio.models import Service, ServiceImage
 from .content import COMMON_FAQS, SERVICE_CONTENT
 
 
+def combined_gallery():
+    """One gallery holding every service photo, shown on all service pages."""
+    return (
+        ServiceImage.objects
+        .select_related("service")
+        .order_by("order", "pk")
+    )
+
+
 class ServiceListView(ListView):
     model = Service
     template_name = "services/list.html"
@@ -20,12 +29,7 @@ class ServiceListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # One combined gallery for every service photo.
-        context["gallery_images"] = (
-            ServiceImage.objects
-            .select_related("service")
-            .order_by("order", "pk")
-        )
+        context["gallery_images"] = combined_gallery()
 
         return context
 
@@ -43,6 +47,8 @@ class ServiceDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        context["gallery_images"] = combined_gallery()
 
         context["related_properties"] = (
             self.object.properties
