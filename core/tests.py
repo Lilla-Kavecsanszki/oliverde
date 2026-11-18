@@ -119,6 +119,15 @@ class SitePageTests(TestCase):
                 self.assertEqual(html.count("cta-background-image"), 1)
                 self.assertIn("images/cta.jpeg", html)
 
+    def test_spacing_stylesheet_loads_last(self):
+        html = self.client.get(reverse("home")).content.decode()
+
+        self.assertIn("css/spacing.css", html)
+        self.assertGreater(
+            html.index("css/spacing.css"),
+            html.index("css/service-pages.css"),
+        )
+
     def test_about_page_describes_the_team(self):
         html = self.client.get(reverse("about")).content.decode()
 

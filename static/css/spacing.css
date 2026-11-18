@@ -1,0 +1,84 @@
+/* ==========================================================
+   Vertical rhythm: one spacing scale for every page.
+
+   Loaded after all other stylesheets, so these values replace
+   the older per-section paddings. To make the whole site airier
+   or tighter, change the three tokens below and nothing else.
+   ========================================================== */
+
+:root {
+  /* Padding above and below an ordinary content section.
+     Two stacked sections therefore sit 2x apart (about 96px on a
+     phone, 144px on a wide desktop). */
+  --section-pad: clamp(48px, 5.5vw, 72px);
+
+  /* The closing call-to-action band is slightly roomier. */
+  --section-pad-cta: clamp(56px, 6.5vw, 88px);
+
+  /* Space under a page title block before the first content. */
+  --intro-pad-bottom: clamp(32px, 4vw, 56px);
+}
+
+
+/* ---------- Ordinary content sections ---------- */
+
+main > section.intro,
+main > section.pillars,
+main > section.services,
+main > section.founder,
+main > section.why,
+main > section.how-it-works,
+main > section.about-story,
+main > section.dashboard-section,
+main > section.portfolio-pathways,
+main > section.portfolio-discretion,
+main > section.service-faq,
+main > section.service-gallery,
+main > section.properties {
+  padding-top: var(--section-pad);
+  padding-bottom: var(--section-pad);
+}
+
+/* Sections that follow a page title keep no top padding of their own. */
+main > .page-intro + section.properties,
+main > .page-intro + section.services-detail {
+  padding-top: 0;
+}
+
+main > section.services-detail,
+main > section.service-articles,
+main > section.service-overview,
+main > section.service-detail-features,
+main > section.contact-body {
+  padding-bottom: var(--section-pad);
+}
+
+main > section.destinations {
+  padding-top: 16px;
+  padding-bottom: var(--section-pad);
+}
+
+
+/* ---------- Page headers ---------- */
+
+main > section.page-intro,
+main > section.contact-hero {
+  padding-bottom: var(--intro-pad-bottom);
+}
+
+main > section.about-hero {
+  padding-bottom: var(--section-pad);
+}
+
+
+/* ---------- Closing call-to-action band ---------- */
+
+main > section.cta {
+  padding-top: var(--section-pad-cta);
+  padding-bottom: var(--section-pad-cta);
+}
+
+/* The gallery heading already adds its own space. */
+main > section.service-gallery .service-gallery-heading {
+  margin-bottom: clamp(28px, 3.5vw, 44px);
+}
