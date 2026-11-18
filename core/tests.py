@@ -119,6 +119,14 @@ class SitePageTests(TestCase):
                 self.assertEqual(html.count("cta-background-image"), 1)
                 self.assertIn("cta_oaimgv.jpg", html)
 
+    def test_home_hero_is_served_from_cloudinary_and_preloaded(self):
+        html = self.client.get(reverse("home")).content.decode()
+
+        self.assertEqual(html.count("hero_aycabx.jpg"), 10)  # preload + image, 5 each
+        self.assertIn('rel="preload"', html)
+        self.assertIn("f_auto,q_auto", html)
+        self.assertNotIn("images/tester.jpeg", html)
+
     def test_spacing_stylesheet_loads_last(self):
         html = self.client.get(reverse("home")).content.decode()
 
