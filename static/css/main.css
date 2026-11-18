@@ -6977,6 +6977,55 @@ textarea:focus-visible {
   }
 
 
+  /* ---------- HERO IMAGE OVERLAY (lighter, text-focused) ---------- */
+/* Add at the very end of main.css, after the existing hero rules. */
+
+.hero-background-overlay {
+  background:
+    /* extra shade behind the headline and buttons only */
+    radial-gradient(
+      ellipse 60% 55% at 20% 62%,
+      rgba(20, 24, 12, 0.34) 0%,
+      rgba(20, 24, 12, 0) 100%
+    ),
+    /* left to right: strong at the text, clear on the view */
+    linear-gradient(
+      90deg,
+      rgba(20, 24, 12, 0.42) 0%,
+      rgba(20, 24, 12, 0.22) 40%,
+      rgba(20, 24, 12, 0.04) 70%,
+      rgba(20, 24, 12, 0) 100%
+    ),
+    /* top edge for the logo and menu, bottom edge for the frame */
+    linear-gradient(
+      180deg,
+      rgba(20, 24, 12, 0.50) 0%,
+      rgba(20, 24, 12, 0.14) 16%,
+      rgba(20, 24, 12, 0) 38%,
+      rgba(20, 24, 12, 0.10) 75%,
+      rgba(20, 24, 12, 0.34) 100%
+    );
+}
+
+@media (max-width: 600px) {
+  .hero-background-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(20, 24, 12, 0.50) 0%,
+        rgba(20, 24, 12, 0.32) 70%,
+        rgba(20, 24, 12, 0.20) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(20, 24, 12, 0.46) 0%,
+        rgba(20, 24, 12, 0.10) 25%,
+        rgba(20, 24, 12, 0.10) 55%,
+        rgba(20, 24, 12, 0.50) 100%
+      );
+  }
+}
+
   /* ---------- MOBILE NAV SAFE AREA ---------- */
 
   .mobile-nav {
