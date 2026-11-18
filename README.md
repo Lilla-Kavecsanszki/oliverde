@@ -1230,4 +1230,36 @@ Where applicable, selected stock photography is sourced from **Pexels** in accor
 
 Third-party photography, illustrations, icons, or other creative assets must not be used without the appropriate licence or explicit permission.
 
+### Pexels photography
+
+Some placeholder and atmospheric images (for example the homepage hero and destination or region covers) come from [Pexels](https://www.pexels.com/license/). The Pexels Licence allows free use, including commercial use, without attribution. Credit to the photographer is appreciated but not required.
+
+The licence does **not** allow:
+
+- selling unaltered copies of the photos, or reselling them on other stock or wallpaper sites;
+- using a photo in a trademark, logo, business name or service mark;
+- implying that a person or brand shown in a photo endorses Oliverde;
+- showing identifiable people in an unflattering or offensive light.
+
+Rules for this project:
+
+- Pexels images are used for atmosphere and as placeholders. They are never presented as photographs of a specific Oliverde-managed property.
+- A recognisable landmark must match the place it is used for (for example, a Lazio image must show Lazio).
+- Photos of identifiable people should be avoided, because the licence does not guarantee a model release.
+- Pexels photography is replaced by Oliverde's own photography wherever possible, and the real property photographs always take priority.
+- Each Pexels image is recorded in the register below, so its source can be shown on request.
+
+The Pexels Licence can change, so check the current terms at https://www.pexels.com/license/ when adding new images.
+
+#### Pexels image register
+
+Add one row for each Pexels image used on the site.
+
+| Where it is used | Photographer | Pexels page URL | Date added |
+|---|---|---|---|
+| Homepage hero | _to be completed_ | _to be completed_ | _to be completed_ |
+| Tuscany destination cover | _to be completed_ | _to be completed_ | _to be completed_ |
+| Umbria destination cover | _to be completed_ | _to be completed_ | _to be completed_ |
+| Lazio destination cover | _to be completed_ | _to be completed_ | _to be completed_ |
+
 [Back to top](#contents)
