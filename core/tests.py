@@ -117,7 +117,7 @@ class SitePageTests(TestCase):
                 html = self.client.get(reverse(name)).content.decode()
 
                 self.assertEqual(html.count("cta-background-image"), 1)
-                self.assertIn("images/cta.jpeg", html)
+                self.assertIn("cta_oaimgv.jpg", html)
 
     def test_spacing_stylesheet_loads_last(self):
         html = self.client.get(reverse("home")).content.decode()

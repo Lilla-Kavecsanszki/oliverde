@@ -127,7 +127,7 @@ class PortfolioPageTests(TestCase):
                 html = self.get_html(url)
 
                 self.assertEqual(html.count("cta-background-image"), 1)
-                self.assertIn("images/cta.jpeg", html)
+                self.assertIn("cta_oaimgv.jpg", html)
 
     def test_call_to_action_mentions_optional_rental_management(self):
         html = self.get_html(reverse("portfolio:list"))

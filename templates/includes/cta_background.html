@@ -1,13 +1,23 @@
-{% load static %}
-{# The one background for every call-to-action band. Change the file here only. #}
+{# The one background for every call-to-action band. Change the image here only. #}
+{# Served from Cloudinary: f_auto picks WebP/AVIF per browser, q_auto tunes quality. #}
+{% with base="https://res.cloudinary.com/ac7wgjsn/image/upload" tail="v1795030830/cta_oaimgv.jpg" %}
 <img
   class="cta-background-image"
-  src="{% static 'images/cta.jpeg' %}"
+  src="{{ base }}/f_auto,q_auto,c_limit,w_1024/{{ tail }}"
+  srcset="
+    {{ base }}/f_auto,q_auto,c_limit,w_640/{{ tail }} 640w,
+    {{ base }}/f_auto,q_auto,c_limit,w_1024/{{ tail }} 1024w,
+    {{ base }}/f_auto,q_auto,c_limit,w_1600/{{ tail }} 1600w
+  "
+  sizes="100vw"
+  width="1600"
+  height="903"
   alt=""
   aria-hidden="true"
   loading="lazy"
   decoding="async"
 >
+{% endwith %}
 
 <div
   class="cta-background-overlay"

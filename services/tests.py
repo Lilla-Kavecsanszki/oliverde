@@ -139,7 +139,7 @@ class ServiceDetailTests(TestCase):
         html = self.get_html()
 
         self.assertEqual(html.count("cta-background-image"), 1)
-        self.assertIn("images/cta.jpeg", html)
+        self.assertIn("cta_oaimgv.jpg", html)
 
     def test_service_without_content_still_renders(self):
         make_service(title="Concierge", slug="concierge")
