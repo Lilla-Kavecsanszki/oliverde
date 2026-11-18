@@ -52,6 +52,24 @@ COMMON_FAQS = [
         ),
     },
     {
+        "question": "Can you hold the keys and act for me while I am away?",
+        "answer": (
+            "Yes, if you would like us to. We can keep a set of keys, be "
+            "the local contact for staff, suppliers and tradespeople, and "
+            "deal with them and with the local offices on your behalf, so "
+            "you do not need to be there."
+        ),
+    },
+    {
+        "question": "Can you pay the bills and staff for the house?",
+        "answer": (
+            "Yes, where you would like us to. We can pay staff and "
+            "suppliers on your behalf, keep clear records of what the "
+            "house costs, and work with your accountant on the figures "
+            "for your tax return."
+        ),
+    },
+    {
         "question": "Do I need to be in Italy while you look after my home?",
         "answer": (
             "No. Many of our owners live abroad. We act on your behalf "
