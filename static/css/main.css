@@ -7110,129 +7110,74 @@ textarea:focus-visible {
 .property-amenities-inline-list > span strong {
   color: inherit;
   font-weight: inherit;
-}/* ---------- HERO SCROLL CUE (centred, animated) ---------- */
-/* Add at the very end of main.css, after the hero overlay block. */
+}
+
+/* ---------- SCROLL CUE: quieter label, clearer arrow ---------- */
 
 .scroll-cue {
-  position: absolute;
-  bottom: 46px;
-  left: 50%;
-  z-index: 3;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-
-  transform: translateX(-50%);
-
-  color: #fff;
-  text-decoration: none;
+  gap: 10px;
 }
 
 .scroll-cue .scroll-cue-label,
 .scroll-cue span:not(.line):not(.scroll-cue-arrow) {
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-indent: 0.28em; /* keeps the word optically centred */
-  text-transform: uppercase;
-  text-shadow: 0 1px 8px rgba(20, 24, 12, 0.55);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 9.5px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  text-shadow: 0 1px 6px rgba(20, 24, 12, 0.45);
 }
 
 .scroll-cue .line {
-  position: relative;
-  display: block;
-
-  width: 1px;
-  height: 54px;
-
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.4);
-}
-
-.scroll-cue .line::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: 0;
-
-  width: 100%;
-  height: 50%;
-
-  background: #fff;
-
-  animation: scrollcue-drop 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .scroll-cue-arrow {
-  display: block;
-  width: 9px;
-  height: 9px;
-  margin-top: -6px;
+  width: 14px;
+  height: 14px;
+  margin-top: -9px;
 
-  border-right: 1px solid rgba(255, 255, 255, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
 
-  transform: rotate(45deg);
-  animation: scrollcue-bob 2s ease-in-out infinite;
-}
-
-.scroll-cue:hover .line::after,
-.scroll-cue:focus-visible .line::after {
-  animation-duration: 1.2s;
-}
-
-.scroll-cue:focus-visible {
-  outline: 1px solid rgba(255, 255, 255, 0.8);
-  outline-offset: 8px;
-}
-
-@keyframes scrollcue-drop {
-  0%   { top: -50%; }
-  70%  { top: 100%; }
-  100% { top: 100%; }
+  filter: drop-shadow(0 1px 5px rgba(20, 24, 12, 0.6));
 }
 
 @keyframes scrollcue-bob {
-  0%, 100% { opacity: 0.45; transform: translateY(0) rotate(45deg); }
-  50%      { opacity: 1;    transform: translateY(5px) rotate(45deg); }
-}
-
-@media (max-width: 900px) {
-  .scroll-cue {
-    bottom: 34px;
-    left: 50%;
-  }
+  0%, 100% { opacity: 0.6; transform: translateY(0) rotate(45deg); }
+  50%      { opacity: 1;   transform: translateY(7px) rotate(45deg); }
 }
 
 @media (max-width: 600px) {
-  .scroll-cue {
-    bottom: 30px;
-    left: 50%;
-    gap: 9px;
+  .scroll-cue .scroll-cue-label,
+  .scroll-cue span:not(.line):not(.scroll-cue-arrow) {
+    font-size: 9px;
   }
 
   .scroll-cue .line {
-    height: 34px;
+    height: 32px;
   }
 
-  .scroll-cue .scroll-cue-label,
-  .scroll-cue span:not(.line):not(.scroll-cue-arrow) {
-    font-size: 10px;
+  .scroll-cue-arrow {
+    width: 12px;
+    height: 12px;
+    margin-top: -8px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .scroll-cue .line::after,
-  .scroll-cue-arrow {
-    animation: none;
+/* Very short phones: keep only the line and arrow */
+@media (max-width: 600px) and (max-height: 700px) {
+  .scroll-cue {
+    bottom: 22px;
+    gap: 6px;
   }
 
-  .scroll-cue .line::after {
-    top: 0;
-    height: 100%;
-    opacity: 0.6;
+  .scroll-cue .scroll-cue-label {
+    display: none;
+  }
+
+  .scroll-cue .line {
+    height: 22px;
   }
 }
