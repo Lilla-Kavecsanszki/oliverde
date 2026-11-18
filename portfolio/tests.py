@@ -178,6 +178,21 @@ class PortfolioPageTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
 
+    def test_empty_results_use_a_button_that_is_visible_on_light_background(self):
+        # The white "outline" button is only for dark bands; on the cream
+        # empty-state background it would be invisible.
+        self.property.published = False
+        self.property.save()
+
+        for name in ("portfolio:all_properties", "portfolio:holiday_rentals"):
+            with self.subTest(page=name):
+                html = self.get_html(reverse(name))
+                start = html.index('class="empty-properties"')
+                block = html[start:start + 900]
+
+                self.assertIn("btn btn-primary", block)
+                self.assertNotIn("btn-outline", block)
+
     def test_holiday_rentals_lists_only_rental_homes(self):
         make_property(
             slug="rental-house",
