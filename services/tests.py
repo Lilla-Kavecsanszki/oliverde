@@ -155,13 +155,48 @@ class ServiceDetailTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
 
-    def test_gallery_is_not_shown_on_service_pages(self):
-        ServiceImage.objects.create(service=self.service, image="a.jpg")
-
+    def test_no_gallery_when_the_service_has_no_photos(self):
         html = self.get_html()
 
         self.assertNotIn("service-gallery-layout", html)
-        self.assertNotIn("property-lightbox", html)
+
+    def test_service_page_shows_only_its_own_photos(self):
+        other = Service.objects.create(
+            title="Property Rental",
+            slug="property-rental",
+            description="Guests.",
+        )
+        ServiceImage.objects.create(service=self.service, image="mine.jpg")
+        ServiceImage.objects.create(service=other, image="theirs.jpg")
+
+        html = self.get_html()
+
+        self.assertEqual(html.count("<figure"), 1)
+        self.assertIn("mine.jpg", html)
+        self.assertNotIn("theirs.jpg", html)
+
+    def test_service_gallery_shows_three_tiles_and_a_count(self):
+        for index in range(6):
+            ServiceImage.objects.create(
+                service=self.service,
+                image=f"services/gallery/{index}.jpg",
+                order=index,
+            )
+
+        html = self.get_html()
+
+        self.assertEqual(html.count("<figure"), 6)
+        self.assertEqual(len(re.findall(r"^\s*hidden\s*$", html, re.M)), 3)
+        self.assertIn("+3", html)
+        self.assertIn("property-lightbox", html)
+
+    def test_gallery_comes_after_the_steps_and_before_the_faq(self):
+        ServiceImage.objects.create(service=self.service, image="a.jpg")
+
+        html = self.get_html("property-maintenance")
+
+        self.assertLess(html.index("What to expect"), html.index("service-gallery-layout"))
+        self.assertLess(html.index("service-gallery-layout"), html.index("Good to know"))
 
     def test_properties_block_is_hidden_for_now(self):
         prop = make_property()
