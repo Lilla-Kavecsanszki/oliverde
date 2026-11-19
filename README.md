@@ -1266,8 +1266,8 @@ Add one row for each Pexels image used on the site.
 
 | Where it is used | Photographer | Pexels page URL | Date added |
 |---|---|---|---|
-| Tuscany destination cover | _to be completed_ | _to be completed_ | _to be completed_ |
-| Umbria destination cover | _to be completed_ | _to be completed_ | _to be completed_ |
-| Lazio destination cover | _to be completed_ | _to be completed_ | _to be completed_ |
+| Tuscany destination cover | YIYANG LIU | https://www.pexels.com/photo/the-landscape-of-tuscany-with-cypress-trees-27659795/ | 19 November 2026 |
+| Umbria destination cover | Mehmet Turgut Kirkgoz | https://www.pexels.com/photo/landscape-of-croplands-and-forests-of-todi-umbria-italy-16789149/ | 19 November 2026 |
+| Lazio destination cover | Luigi Cataldi | https://www.pexels.com/photo/view-of-a-town-on-a-hill-6511591/ | 19 November 2026 |
 
 [Back to top](#contents)
