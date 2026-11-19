@@ -137,7 +137,7 @@
 - [x] Values
 - [x] CTA
 - [x] About-page metadata
-- [ ] Add final About photography
+- [x] Add final About photography
 
 ---
 
@@ -275,10 +275,10 @@
 - [x] Static-file compression
 - [x] Manifest-based static-file caching
 - [ ] Final responsive QA across physical devices and browsers
-- [ ] Image-size optimisation
-- [ ] Cloudinary image transformations
-- [ ] Hero-image preloading review
-- [ ] Lighthouse audit
+- [x] Image-size optimisation
+- [x] Cloudinary image transformations
+- [x] Hero-image preloading review
+- [x] Lighthouse audit (mobile 100 / 96 / 100 / 100; fix remaining contrast items)
 - [ ] Production performance testing
 - [ ] Core Web Vitals review
 

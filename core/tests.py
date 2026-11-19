@@ -154,3 +154,20 @@ class SitePageTests(TestCase):
         self.assertIn("Oliver Beresford Manussis", html)
         self.assertIn("team of three", html)
         self.assertIn("accountant", html)
+
+    def test_about_page_photos_come_from_cloudinary(self):
+        html = self.client.get(reverse("about")).content.decode()
+
+        self.assertIn("slavko_rghtns.jpg", html)
+        self.assertIn("dario_ryvqz1.jpg", html)
+        self.assertNotIn("images/tester", html)
+
+    def test_stats_numbers_can_count_up_and_keep_their_final_value(self):
+        html = self.client.get(reverse("home")).content.decode()
+
+        self.assertIn('data-count="27"', html)
+        self.assertIn('data-count="18"', html)
+        self.assertIn('data-count="3"', html)
+        # The final text is already in the page, for visitors without JavaScript.
+        self.assertIn("€27M+</div>", html)
+        self.assertIn(">18+</div>", html)

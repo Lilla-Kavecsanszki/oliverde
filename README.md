@@ -1112,7 +1112,7 @@ python manage.py collectstatic --noinput
 
 ## Automated tests
 
-The project has 48 automated Django tests, run with:
+The project has 61 automated Django tests, run with:
 
 ```
 python manage.py test
@@ -1124,11 +1124,13 @@ They use a temporary database and do not touch Cloudinary or live data (shared h
 - contact-form labels and service-to-enquiry-type pre-selection;
 - site-wide checks: menu order, an identical stats banner on Home and About, the founding year and the WhatsApp links;
 - service content integrity, British spelling and FAQs;
+- the homepage hero (served from Cloudinary, preloaded) and its scroll cue, the shared Contact-page hero and the shared call-to-action background;
+- the About page photographs and the stats count-up markup;
 - the Services page: the combined gallery limit and its "+N" tile, the dashboard section, and the hidden "Properties with this service" block;
 - property privacy: internal names and URLs are never public;
 - property validation rules in the model;
 - the owner call to action on every Portfolio page;
-- rental-only features, and unpublished properties being hidden.
+- rental-only features, empty-state buttons and unpublished properties being hidden.
 
 Run the tests before every push.
 
@@ -1156,7 +1158,7 @@ Completed testing includes:
 Further work before launch:
 
 - cross-browser testing;
-- Lighthouse performance and accessibility audit;
+- Lighthouse accessibility follow-up (performance, best practice and SEO already score 96–100 on mobile; the remaining item is colour contrast);
 - W3C HTML/CSS validation;
 - automated tests for the contact form, Turnstile, rate limiting and the Journal (not yet covered);
 - full manual click-through testing of pages and links;
@@ -1255,6 +1257,7 @@ The Pexels Licence can change, so check the current terms at https://www.pexels.
 
 - **Homepage hero (`hero_vnkz5u` on Cloudinary):** an AI-generated image created in Canva from the owner's own reference photograph (a pool seen through a stone arch). It is an atmospheric image and is never presented as a property managed by Oliverde. Replace it with a sharp original photograph when one is available.
 - **CTA background (`cta_oaimgv` on Cloudinary):** see the Pexels register or the owner's own files; record its source here once confirmed.
+- **About page photographs (`slavko_rghtns` and `dario_ryvqz1` on Cloudinary):** Oliverde's own photographs.
 - Images served from Cloudinary use `f_auto,q_auto` and several widths, so each device downloads a suitably sized file.
 
 #### Pexels image register
