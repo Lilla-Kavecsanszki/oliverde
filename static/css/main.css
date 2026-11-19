@@ -5816,3 +5816,29 @@ textarea:focus-visible {
     transform: none;
   }
 }
+
+/* ============================================================
+   EXTRA MOTION: stats stagger and service-card hover.
+   Append at the very end of main.css.
+   Switched off for reduced-motion users. The hero is not animated.
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .stat {
+    transition: transform 0.4s ease;
+  }
+
+  .stats-row .stat:nth-child(2) { transition-delay: 0.08s; }
+  .stats-row .stat:nth-child(3) { transition-delay: 0.16s; }
+  .stats-row .stat:nth-child(4) { transition-delay: 0.24s; }
+
+  @media (hover: hover) {
+    .service {
+      transition: transform 0.35s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-4px);
+    }
+  }
+}

@@ -423,3 +423,49 @@ if (testimonialCard) {
   showTestimonial(0);
   startCarousel();
 }
+
+
+// -----------------------------------------------------------------------------
+// Stats count-up (runs once, when the numbers scroll into view)
+// -----------------------------------------------------------------------------
+
+const countItems = document.querySelectorAll(".stat .num[data-count]");
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+if (countItems.length && "IntersectionObserver" in window && !prefersReducedMotion) {
+  const runCount = (el) => {
+    const target = Number(el.dataset.count);
+    const prefix = el.dataset.prefix || "";
+    const suffix = el.dataset.suffix || "";
+    const duration = 1600;
+    const start = performance.now();
+
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      el.textContent = prefix + Math.round(target * eased) + suffix;
+
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+
+    el.textContent = prefix + "0" + suffix;
+    requestAnimationFrame(tick);
+  };
+
+  const countObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        runCount(entry.target);
+        countObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  countItems.forEach((el) => countObserver.observe(el));
+}
