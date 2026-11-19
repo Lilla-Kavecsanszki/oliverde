@@ -4797,6 +4797,40 @@ footer address {
   }
 }
 
+/* Property page on phones and small tablets: stack photo, then text */
+@media (max-width: 720px) {
+  .property-hero-media {
+    float: none;
+    width: 100%;
+    margin: 0 0 8px;
+  }
+
+  .property-header-content {
+    padding-top: 22px;
+  }
+
+  .property-header h1 {
+    font-size: clamp(36px, 10.5vw, 46px);
+    line-height: 1.08;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .property-rental-banner {
+    margin-top: 16px;
+  }
+
+  .property-management-label {
+    margin-top: 10px;
+  }
+
+  .property-description {
+    margin-top: 22px;
+    line-height: 1.7;
+  }
+}
+
 /* Gallery section: spacing and centred heading */
 .property-gallery-section {
   margin-top: clamp(72px, 9vw, 120px);
