@@ -162,6 +162,27 @@ class SitePageTests(TestCase):
         self.assertIn("dario_ryvqz1.jpg", html)
         self.assertNotIn("images/tester", html)
 
+    def test_about_and_contact_have_their_own_search_descriptions(self):
+        expected = {
+            "about": "founded in 2009",
+            "contact": "WhatsApp",
+        }
+
+        for name, phrase in expected.items():
+            html = self.client.get(reverse(name)).content.decode()
+            start = html.index('name="description"')
+            tag = html[start:html.index(">", start)]
+
+            self.assertIn(phrase, tag)
+            self.assertEqual(html.count('name="description"'), 1)
+
+    def test_home_structured_data_does_not_claim_to_sell_property(self):
+        html = self.client.get(reverse("home")).content.decode()
+
+        self.assertIn('"@type": "ProfessionalService"', html)
+        self.assertNotIn("RealEstateAgent", html)
+        self.assertIn('"foundingDate": "2009"', html)
+
     def test_stats_numbers_can_count_up_and_keep_their_final_value(self):
         html = self.client.get(reverse("home")).content.decode()
 

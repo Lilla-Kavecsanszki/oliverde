@@ -1112,7 +1112,7 @@ python manage.py collectstatic --noinput
 
 ## Automated tests
 
-The project has 61 automated Django tests, run with:
+The project has 63 automated Django tests, run with:
 
 ```
 python manage.py test
@@ -1125,7 +1125,7 @@ They use a temporary database and do not touch Cloudinary or live data (shared h
 - site-wide checks: menu order, an identical stats banner on Home and About, the founding year and the WhatsApp links;
 - service content integrity, British spelling and FAQs;
 - the homepage hero (served from Cloudinary, preloaded) and its scroll cue, the shared Contact-page hero and the shared call-to-action background;
-- the About page photographs and the stats count-up markup;
+- the About page photographs, the About and Contact search descriptions, the homepage structured data and the stats count-up markup;
 - the Services page: the combined gallery limit and its "+N" tile, the dashboard section, and the hidden "Properties with this service" block;
 - property privacy: internal names and URLs are never public;
 - property validation rules in the model;
